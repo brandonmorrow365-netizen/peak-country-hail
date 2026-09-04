@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LeadForm from '../components/LeadForm.astro';
+import {submitLead} from '../lib/leads';
+import {env} from 'cloudflare:workers';
+const result=Astro.request.method==='POST'?await submitLead(Astro.request,env):null;
+if(result)Astro.response.status=result.status;
+Astro.response.headers.set('Cache-Control','no-store');
+---
+<Layout title="Contact Peak Country" description="Ask about auto hail repair or paintless dent repair in Northern Colorado."><div class="page-head"><h1>Let’s take a closer look.</h1><p>Tell us about your vehicle and the damage. Service availability and repair options are confirmed individually.</p></div><section class="section narrow">{result&&<div role="status" class={result.ok?'success':'error'}>{result.message}{!result.ok&&<p>For your privacy, form entries are not retained on this page. Re-enter them before trying again.</p>}</div>}{!result?.ok&&<LeadForm source="/contact/" />}</section></Layout>

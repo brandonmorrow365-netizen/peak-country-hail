@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LeadForm from '../components/LeadForm.astro';
+import {submitLead} from '../lib/leads';
+import {env} from 'cloudflare:workers';
+const result=Astro.request.method==='POST'?await submitLead(Astro.request,env):null;
+if(result)Astro.response.status=result.status;
+Astro.response.headers.set('Cache-Control','no-store');
+---
+<Layout title="Request a free hail inspection" description="Request an inspection to discuss automotive hail damage and paintless dent repair options."><div class="page-head"><div class="eyebrow">Start with an inspection</div><h1>What does your<br />vehicle need?</h1><p>Request a free hail inspection. We’ll need to confirm your location, availability, and the condition of your vehicle before arranging an appointment.</p></div><section class="section narrow">{result&&<div role="status" class={result.ok?'success':'error'}>{result.message}{!result.ok&&<p>For your privacy, form entries are not retained on this page. Re-enter them before trying again.</p>}</div>}{!result?.ok&&<LeadForm source="/free-hail-inspection/" />}</section></Layout>

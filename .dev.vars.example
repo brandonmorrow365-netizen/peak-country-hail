@@ -1,0 +1,6 @@
+SITE_STAGE=preview
+FORMS_ENABLED=false
+WEATHER_ENABLED=false
+# Add actual keys locally. Never commit .dev.vars.
+# TURNSTILE_SITE_KEY=
+# TURNSTILE_SECRET_KEY=

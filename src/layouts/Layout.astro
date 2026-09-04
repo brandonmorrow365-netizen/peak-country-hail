@@ -1,0 +1,24 @@
+---
+import { site } from '../data/site';
+import '../styles/global.css';
+interface Props { title: string; description: string; noindex?: boolean; }
+const { title, description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const preview = Astro.url.hostname !== 'peakcountryhail.com';
+const schema = { '@context': 'https://schema.org', '@type': 'Organization', '@id': site.url + '/#business', name: site.name, url: site.url, description: site.experience + '. Auto hail repair and paintless dent repair focused on Northern Colorado.' };
+---
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" />
+<title>{title} | Peak Country</title><meta name="description" content={description} />
+<link rel="canonical" href={canonical} /><meta name="robots" content={preview || noindex ? 'noindex, follow' : 'index, follow'} />
+<meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} /><meta property="og:type" content="website" />
+<meta name="theme-color" content="#102536" />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+{preview && <div class="preview">Preview · Business details and online requests are being prepared</div>}
+<header><a class="wordmark" href="/" aria-label="Peak Country home">PEAK COUNTRY<span>AUTO HAIL REPAIR &amp; PAINTLESS DENT REPAIR</span></a>
+<nav aria-label="Main navigation"><a href="/auto-hail-repair/">Hail repair</a><a href="/paintless-dent-repair/">PDR</a><a href="/hail-tracker/">Hail tracker</a><a href="/about/">About</a><a class="button small" href="/free-hail-inspection/">Request an inspection</a></nav></header>
+<main id="main"><slot /></main>
+<footer><div><strong>{site.name}</strong><p>{site.focus}</p><p>Careful repair. Clear information.</p></div><nav aria-label="Footer navigation"><a href="/contact/">Contact</a><a href="/service-area/">Service area</a><a href="/resources/">Resources</a><a href="/data-sources/">Weather data sources</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav><p class="fine">Weather reports describe reported conditions, not confirmed damage to an individual vehicle. For urgent weather information, follow the National Weather Service and local emergency officials.</p></footer>
+</body></html>

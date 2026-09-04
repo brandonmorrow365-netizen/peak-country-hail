@@ -1,0 +1,22 @@
+---
+import {env} from 'cloudflare:workers';
+const {source}=Astro.props;
+const ready=env.FORMS_ENABLED==='true'&&!!env.DB&&!!env.TURNSTILE_SITE_KEY&&!!env.TURNSTILE_SECRET_KEY;
+---
+{!ready&&<div class="callout">Online requests are not available yet. Contact details will be published when confirmed. Please do not enter personal information in this preview.</div>}
+<form method="post" action={source}>
+<fieldset disabled={!ready} style="border:0;padding:0;margin:0"><legend class="fine">All fields are required unless marked optional. Provide the email or phone you want us to use.</legend><div class="form-grid">
+<label>Your name<input name="name" autocomplete="name" maxlength="100" required /></label>
+<label>Preferred contact<select name="preferred_contact"><option value="email">Email</option><option value="phone">Phone</option></select></label>
+<label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" /></label>
+<label>Phone number<input name="phone" type="tel" autocomplete="tel" maxlength="40" /></label>
+<label>City or ZIP<input name="location" autocomplete="address-level2" maxlength="120" required /></label>
+<label>Vehicle year, make &amp; model<input name="vehicle" maxlength="160" required /></label>
+<label>Damage type<select name="damage_type"><option value="hail">Hail damage</option><option value="door-ding">Door ding</option><option value="crease">Crease</option><option value="other">Other dent</option></select></label>
+<label class="full">Message (optional)<textarea name="message" maxlength="4000"></textarea></label>
+<label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label><input type="hidden" name="source_page" value={source} />
+<label class="check full"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about this request and acknowledge the <a href="/privacy/">privacy notice</a>. This does not sign me up for marketing.</span></label>
+{ready&&<div class="cf-turnstile full" data-sitekey={env.TURNSTILE_SITE_KEY} data-action="lead"></div>}
+<div class="full"><button class="button dark" type="submit" disabled={!ready}>Send request</button></div>
+</div></fieldset></form>
+{ready&&<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
