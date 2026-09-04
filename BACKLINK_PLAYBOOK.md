@@ -31,3 +31,9 @@ The goal is not “get as many backlinks as possible.” The goal is to make Pea
 
 ## Local citations
 After business identity/contact details are finalized, keep NAP/business details consistent across legitimate profiles. Because this is a service-area business, do not invent a storefront address for citation consistency.
+
+## Publication gate and measurement
+- Do not begin outreach until the resource has real data, visible source/freshness labels, and a stable canonical URL.
+- For a storm summary, record source URLs, dataset version, report time window, geographic coverage, and limitations before drafting outreach.
+- Keep an outreach ledger with recipient, editorial relevance, resource URL, date, reply, and any earned link. Contact others only with the owner's explicit authorization.
+- Measure useful referral visits and relevant citations, not link volume. Correct outdated reports promptly and preserve source notes.

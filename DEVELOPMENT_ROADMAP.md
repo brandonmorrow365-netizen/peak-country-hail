@@ -1,23 +1,27 @@
 # Development Roadmap
 
 ## Milestone 0 — Repository bootstrap
-- [ ] Install dependencies and generate lockfile.
-- [ ] Confirm `npm run build` succeeds.
-- [ ] Confirm local `npm run dev` works.
-- [ ] Replace any package APIs that changed since this starter was generated.
-- [ ] Do not change canonical domain.
+- [x] Install dependencies and generate lockfile.
+- [x] Confirm `npm run build` succeeds.
+- [x] Confirm local `npm run dev` works.
+- [x] Replace any package APIs that changed since this starter was generated.
+- [x] Do not change canonical domain.
+
+Completed 2026-09-04. Uploaded repository lacked application folders; implemented the missing Astro application from the specification. Current compatible versions are pinned in package.json/package-lock.json. Local development required polling for filesystem watchers in the Codex environment.
 
 ## Milestone 1 — Cloudflare development deployment
 - [ ] Authenticate Wrangler / Cloudflare.
 - [ ] Create Worker preview deployment on `workers.dev`.
 - [ ] Connect GitHub repository to Cloudflare Workers Builds if not already connected.
-- [ ] Keep `peakcountryhail.com` disconnected from the app until launch-ready.
+- [x] Keep `peakcountryhail.com` disconnected from the app until launch-ready.
+
+Worker build and Wrangler deployment dry run pass. Account OAuth authorization and GitHub push authentication remain pending. No hosted preview has been deployed.
 
 ## Milestone 2 — D1
 - [ ] Run `npx wrangler d1 create peak-country-hail-db`.
 - [ ] Add returned D1 binding as `DB` in `wrangler.jsonc`.
 - [ ] Apply `migrations/0001_initial.sql` locally and remotely.
-- [ ] Test lead insert and hail report query.
+- [x] Test lead insert and hail parser/validation locally; remote D1 integration remains pending.
 - [ ] Update `SETUP_STATE.md`.
 
 ## Milestone 3 — Core content/design
@@ -32,18 +36,20 @@
 
 ## Milestone 4 — Lead capture
 - [ ] Enable D1 contact form storage.
-- [ ] Add Cloudflare Turnstile to all public forms.
+- [x] Implement Turnstile widget and server verification, hostname/action checking, and fail-closed forms. Real keys and launch activation remain pending.
 - [ ] Configure reliable email notifications.
-- [ ] Add spam/rate protections.
+- [x] Add honeypot, bounded streaming input, origin checks, consent checks, and per-contact rate protection. Edge rate rule remains a launch task.
 - [ ] Test mobile forms and validation.
 
 ## Milestone 5 — Hail Tracker Phase 1
 - [ ] NWS active-alert ingestion every 5 minutes.
 - [ ] Verify SPC current hail CSV endpoint/schema and enable ingestion every 10 minutes.
 - [ ] Filter/report Northern Colorado data correctly.
-- [ ] Display source/freshness/preliminary labels.
-- [ ] Add empty/error states that never mislead users.
-- [ ] Add `/data-sources/` methodology page.
+- [x] Display source/freshness/preliminary labels.
+- [x] Add empty/error states that never mislead users.
+- [x] Add `/data-sources/` methodology page.
+
+NWS/SPC scheduled ingestion is implemented but disabled until D1 is bound. SPC live CSV schema and units/report-day semantics verified 2026-09-04. Historical implementation plan: HISTORICAL_IMPORT_PLAN.md.
 
 ## Milestone 6 — Historical data
 - [ ] Build NCEI bulk importer for Colorado hail records.
@@ -60,12 +66,12 @@
 - [ ] Add address geocoder only after privacy/cost/provider review.
 
 ## Milestone 8 — SEO / launch
-- [ ] Validate titles/descriptions/canonicals.
-- [ ] Validate JSON-LD.
-- [ ] Sitemap and robots.
+- [x] Validate titles/descriptions/canonicals.
+- [x] Validate JSON-LD.
+- [x] Sitemap and robots.
 - [ ] Accessibility audit.
 - [ ] Performance audit.
-- [ ] Broken-link audit.
+- [x] Broken-link audit.
 - [ ] Preview on major mobile/desktop sizes.
 - [ ] Attach `peakcountryhail.com` custom domain.
 - [ ] Import/enable secondary-domain redirects from `DOMAIN_REDIRECTS.csv`.

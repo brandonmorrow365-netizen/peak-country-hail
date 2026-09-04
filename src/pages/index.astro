@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Auto hail repair in Northern Colorado" description="Careful paintless dent repair with approximately 20 years of experience. Explore Northern Colorado hail information and request a vehicle inspection.">
+<section class="hero"><div><div class="eyebrow">Greeley &amp; Northern Colorado</div><h1>Hail happens.<br />Protect your<br />factory finish.</h1><p>Careful paintless dent repair for hail damage, door dings, and repairable creases. Built on approximately 20 years of PDR experience.</p><div class="actions"><a class="button" href="/free-hail-inspection/">Request a hail inspection →</a><a href="/process/">How repair works</a></div></div><aside class="weather-card"><span class="status">Northern Colorado weather</span><h2>Know what’s<br />been reported.</h2><p>Check the hail tracker for official sources, report times, and clear explanations of what the data can tell you.</p><p class="fine">A nearby report does not confirm damage to your vehicle.</p><a href="/hail-tracker/">Open the hail tracker →</a></aside></section>
+<div class="band"><span>{site.experience}</span><span>Factory paint preservation when appropriate</span><span>Hail repair &amp; everyday dents</span></div>
+<section class="section"><div class="section-head"><div><div class="eyebrow">The right repair starts with a closer look</div><h2>Small details.<br />A careful approach.</h2></div><a href="/why-pdr/">Is PDR right for your vehicle? →</a></div><div class="grid">{[
+['01', 'Auto hail repair', 'An inspection helps identify the dents, access points, and paint condition that determine the repair approach.', '/auto-hail-repair/'],
+['02', 'Paintless dent repair', 'When the paint and metal condition allow, PDR reshapes the panel while preserving its existing finish.', '/paintless-dent-repair/'],
+['03', 'Door dings & creases', 'Everyday dents deserve attention too. Location, depth, and access determine what can be repaired.', '/door-ding-repair/']
+].map(([number,title,body,url])=><article class="card"><span class="number">{number} / REPAIR</span><h3>{title}</h3><p>{body}</p><a href={url}>Explore this service →</a></article>)}</div></section>
+<section class="section narrow"><div class="eyebrow">After the storm</div><h2>Start with information.<br />Then inspect the damage.</h2><p>Weather reports can help put a storm in context. A vehicle inspection determines whether there is damage and which repair options fit.</p><div class="links"><a href="/after-a-hailstorm/">What to do after hail</a><a href="/hail-size-guide/">Understanding hail size</a><a href="/data-sources/">Our weather sources</a></div></section>
+</Layout>
