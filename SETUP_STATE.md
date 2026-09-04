@@ -38,7 +38,7 @@ Last reviewed: 2026-09-04
 - [ ] Google Business Profile URL
 - [ ] Verified reviews
 - [ ] Gallery photos + rights/approval
-- [ ] Official master logo asset added to repo
+- [x] Official master logo supplied by owner and added unchanged at `public/brand/peak-country-logo.png`; used in site header
 - [ ] Any warranties/guarantees stated in writing (if offered)
 - [ ] Insurance-process wording approved
 

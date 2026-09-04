@@ -25,7 +25,7 @@ Worker deployed at https://peak-country-hail-preview.peak-country-hail.workers.d
 - [ ] Update `SETUP_STATE.md`.
 
 ## Milestone 3 — Core content/design
-- [ ] Replace temporary logo with owner-approved master logo asset.
+- [x] Replace temporary logo with owner-approved master logo asset.
 - [ ] Confirm color system with logo.
 - [ ] Finalize homepage copy.
 - [ ] Finalize services copy.

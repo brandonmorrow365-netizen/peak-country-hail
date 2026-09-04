@@ -1,0 +1,6 @@
+---
+interface Props { scene?: string; label?: string; }
+const { scene, label = 'Interactive vehicle scene' } = Astro.props;
+---
+<div class="spline-fallback" data-spline-scene={scene} role="img" aria-label={label}><slot /></div>
+<!-- Spline MCP unavailable 2026-09-04. A production scene URL may be attached here later and lazy-loaded. -->

@@ -1,0 +1,12 @@
+---
+interface Props { class?: string; }
+const { class: className = '' } = Astro.props;
+---
+<div class:list={['scroll-animation', className]} data-scroll-reveal><slot /></div>
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) import('gsap').then(({ gsap }) => import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+    gsap.registerPlugin(ScrollTrigger);
+    document.querySelectorAll('[data-scroll-reveal]').forEach((node) => gsap.from(node, { opacity: 0, y: 24, duration: .6, scrollTrigger: { trigger: node, start: 'top 88%', once: true } }));
+  }));
+</script>
