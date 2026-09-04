@@ -10,17 +10,17 @@
 Completed 2026-09-04. Uploaded repository lacked application folders; implemented the missing Astro application from the specification. Current compatible versions are pinned in package.json/package-lock.json. Local development required polling for filesystem watchers in the Codex environment.
 
 ## Milestone 1 — Cloudflare development deployment
-- [ ] Authenticate Wrangler / Cloudflare.
-- [ ] Create Worker preview deployment on `workers.dev`.
+- [x] Authenticate Wrangler / Cloudflare.
+- [x] Create Worker preview deployment on `workers.dev`.
 - [ ] Connect GitHub repository to Cloudflare Workers Builds if not already connected.
 - [x] Keep `peakcountryhail.com` disconnected from the app until launch-ready.
 
-Worker build and Wrangler deployment dry run pass. Account OAuth authorization and GitHub push authentication remain pending. No hosted preview has been deployed.
+Worker deployed at https://peak-country-hail-preview.peak-country-hail.workers.dev and all 30 hosted route checks passed. GitHub CLI authorization/push and Workers Builds connection remain pending.
 
 ## Milestone 2 — D1
-- [ ] Run `npx wrangler d1 create peak-country-hail-db`.
-- [ ] Add returned D1 binding as `DB` in `wrangler.jsonc`.
-- [ ] Apply `migrations/0001_initial.sql` locally and remotely.
+- [x] Run `npx wrangler d1 create peak-country-hail-db`.
+- [x] Add returned D1 binding as `DB` in `wrangler.jsonc`.
+- [x] Apply `migrations/0001_initial.sql` locally and remotely.
 - [x] Test lead insert and hail parser/validation locally; remote D1 integration remains pending.
 - [ ] Update `SETUP_STATE.md`.
 
@@ -49,7 +49,7 @@ Worker build and Wrangler deployment dry run pass. Account OAuth authorization a
 - [x] Add empty/error states that never mislead users.
 - [x] Add `/data-sources/` methodology page.
 
-NWS/SPC scheduled ingestion is implemented but disabled until D1 is bound. SPC live CSV schema and units/report-day semantics verified 2026-09-04. Historical implementation plan: HISTORICAL_IMPORT_PLAN.md.
+NWS/SPC scheduled ingestion is implemented and enabled on the bound preview Worker. First scheduled results remain under verification. SPC live CSV schema and units/report-day semantics verified 2026-09-04. Historical implementation plan: HISTORICAL_IMPORT_PLAN.md.
 
 ## Milestone 6 — Historical data
 - [ ] Build NCEI bulk importer for Colorado hail records.

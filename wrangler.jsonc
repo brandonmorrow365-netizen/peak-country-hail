@@ -12,14 +12,12 @@
   "observability": {
     "enabled": true
   },
-  "vars": { "SITE_STAGE": "preview", "FORMS_ENABLED": "false", "WEATHER_ENABLED": "false" },
-  "triggers": { "crons": ["*/5 * * * *"] }
-  // After creating D1, add the binding returned by Wrangler, for example:
-  // ,"d1_databases": [
-  //   {
-  //     "binding": "DB",
-  //     "database_name": "peak-country-hail-db",
-  //     "database_id": "REPLACE_WITH_REAL_UUID"
-  //   }
-  // ]
+  "vars": { "SITE_STAGE": "preview", "FORMS_ENABLED": "false", "WEATHER_ENABLED": "true" },
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "peak-country-hail-db",
+    "database_id": "8ad357b0-1dae-468d-bb3a-fe39b939428a",
+    "migrations_dir": "migrations"
+  }]
 }

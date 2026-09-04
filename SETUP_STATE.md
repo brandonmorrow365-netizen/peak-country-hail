@@ -9,7 +9,7 @@ Last reviewed: 2026-09-04
 - [x] Seven automated tests cover CSV schema/rollover, stale/error handling, lead validation, disabled forms and prepared database inserts with mocked Turnstile.
 - [x] Local D1 migration applied; preview deployment dry run passes.
 - [x] Custom Worker fetch/scheduled handlers, source logging and truthful weather states implemented.
-- [x] Forms fail closed without D1 and Turnstile; live forms and weather ingestion remain disabled.
+- [x] Forms fail closed without D1 and Turnstile; live forms remain disabled. Weather ingestion enabled on the preview Worker.
 - [x] Mobile/desktop overflow checks at 390px and 1440px passed. Full accessibility/performance audit remains a launch gate.
 - [x] Business name chosen: Peak Country Auto Hail Repair & Paintless Dent Repair
 - [x] Six domains purchased
@@ -20,7 +20,7 @@ Last reviewed: 2026-09-04
 - [x] GitHub repository created/imported
 - [x] Codex has a local Git checkout; push authentication is not available yet
 - [ ] Cloudflare Worker project connected to repository
-- [ ] D1 database created
+- [x] D1 database created, bound as DB, and migration applied remotely
 - [ ] Primary domain connected to Worker (do only at launch milestone)
 - [ ] Secondary redirects enabled
 - [ ] Turnstile keys created
@@ -44,8 +44,12 @@ Last reviewed: 2026-09-04
 
 ## Preview and credentials
 - Worker name: `peak-country-hail-preview`; workers.dev enabled, no custom routes.
-- Cloudflare browser account is accessible, but Wrangler OAuth authorization is pending.
+- Cloudflare Wrangler OAuth authorized successfully using device login. Scope limited to account/user read, Workers scripts write and D1 write (plus OAuth background access).
+- Preview deployed: https://peak-country-hail-preview.peak-country-hail.workers.dev
+- Version: b5a28834-0911-4230-aecc-aee04de71bd3. Remote D1 migration/query checks and 30-page hosted smoke validation passed.
+- Database ID: 8ad357b0-1dae-468d-bb3a-fe39b939428a. No customer leads stored.
+- NWS/SPC scheduled ingestion enabled; first scheduled source results still under verification.
 - No production domain or secondary redirect was connected.
-- Local preview served at http://localhost:4321/ during development; not a public deployment.
+- Local preview served at http://localhost:4321/ during development; use the workers.dev preview for owner review.
 - Tool runtime on this computer uses bundled Node 24 and Git. Wrangler config/cache is under the task's work/tool-config (outside the repository). Do not archive that directory or include credentials in Git.
 - Historical importer, MapLibre/address search, real gallery/reviews, email notifications, business facts, privacy retention/contact, and final launch audits remain pending.
