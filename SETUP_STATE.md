@@ -19,7 +19,7 @@ Last reviewed: 2026-09-04
 ## Owner/account actions still required at some point
 - [x] GitHub repository created/imported
 - [x] Codex authenticated to GitHub and pushed codex/foundation-preview; draft PR #1 created
-- [ ] Cloudflare Worker project connected to repository (GitHub app authorization prepared for this repository only)
+- [x] Cloudflare Worker connected to GitHub repository; owner approved Connect and build token creation
 - [x] D1 database created, bound as DB, and migration applied remotely
 - [ ] Primary domain connected to Worker (do only at launch milestone)
 - [ ] Secondary redirects enabled
@@ -43,6 +43,7 @@ Last reviewed: 2026-09-04
 - [ ] Insurance-process wording approved
 
 ## Preview and credentials
+- Workers Builds connected to `codex/foundation-preview`, with `npm run build` and `npx wrangler deploy`. First automatic build verification in progress.
 - Worker name: `peak-country-hail-preview`; workers.dev enabled, no custom routes.
 - Cloudflare Wrangler OAuth authorized successfully using device login. Scope limited to account/user read, Workers scripts write and D1 write (plus OAuth background access).
 - Preview deployed: https://peak-country-hail-preview.peak-country-hail.workers.dev
