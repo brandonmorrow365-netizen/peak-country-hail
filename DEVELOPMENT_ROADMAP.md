@@ -15,7 +15,7 @@ Completed 2026-09-04. Uploaded repository lacked application folders; implemente
 - [ ] Connect GitHub repository to Cloudflare Workers Builds if not already connected.
 - [x] Keep `peakcountryhail.com` disconnected from the app until launch-ready.
 
-Worker deployed at https://peak-country-hail-preview.peak-country-hail.workers.dev and all 30 hosted route checks passed. GitHub CLI authorization/push and Workers Builds connection remain pending.
+Worker deployed at https://peak-country-hail-preview.peak-country-hail.workers.dev and all 30 hosted route checks passed. GitHub push completed and Linux CI passed. Draft PR #1 created. Workers Builds connection awaits repository-scoped GitHub app authorization.
 
 ## Milestone 2 — D1
 - [x] Run `npx wrangler d1 create peak-country-hail-db`.
@@ -49,7 +49,7 @@ Worker deployed at https://peak-country-hail-preview.peak-country-hail.workers.d
 - [x] Add empty/error states that never mislead users.
 - [x] Add `/data-sources/` methodology page.
 
-NWS/SPC scheduled ingestion is implemented and enabled on the bound preview Worker. First scheduled results remain under verification. SPC live CSV schema and units/report-day semantics verified 2026-09-04. Historical implementation plan: HISTORICAL_IMPORT_PLAN.md.
+NWS/SPC scheduled ingestion is implemented and enabled on the bound preview Worker. Manual scheduled-handler invocation against remote D1 succeeded for both sources at 13:37 UTC on 2026-09-04; automatic Cron Trigger delivery still needs observation. SPC live CSV schema and units/report-day semantics verified 2026-09-04. Historical implementation plan: HISTORICAL_IMPORT_PLAN.md.
 
 ## Milestone 6 — Historical data
 - [ ] Build NCEI bulk importer for Colorado hail records.

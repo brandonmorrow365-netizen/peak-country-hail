@@ -18,7 +18,7 @@ With `npm run dev` or `npm run preview` serving on port 4321, run `npm run test:
 On environments with restricted native filesystem watchers, use `CHOKIDAR_USEPOLLING=true npm run dev`.
 
 ## Account-owned preview deployment
-Status: completed 2026-09-04 at https://peak-country-hail-preview.peak-country-hail.workers.dev. D1 is bound and migrated; weather scheduling is enabled. GitHub push/Builds connection remains pending.
+Status: completed 2026-09-04 at https://peak-country-hail-preview.peak-country-hail.workers.dev. D1 is bound and migrated; weather scheduling is enabled. GitHub branch pushed with passing Linux CI; draft PR #1 created. Cloudflare GitHub app authorization/Builds connection remains pending.
 
 1. Authorize Wrangler with account/user read, Workers scripts write, and D1 write. Browser login alone does not authorize the command-line deployment tool.
 2. Create `peak-country-hail-db` and add its real DB binding to wrangler.jsonc. Never deploy the local-only database ID.
