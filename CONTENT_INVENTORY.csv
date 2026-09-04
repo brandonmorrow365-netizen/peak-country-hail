@@ -1,0 +1,26 @@
+url,page,intent,target_topics,indexing,notes
+https://peakcountryhail.com/,Home,commercial+weather,Greeley auto hail repair; Northern Colorado hail tracker,index,Core landing page
+/auto-hail-repair/,Auto Hail Repair,commercial,auto hail repair Greeley; hail damage repair,index,Primary money page
+/paintless-dent-repair/,Paintless Dent Repair,commercial,PDR Greeley; paintless dent repair Northern Colorado,index,Primary service page
+/door-ding-repair/,Door Ding Repair,commercial,door ding repair Greeley,index,Secondary service
+/why-pdr/,Why PDR,educational,paintless dent repair benefits,index,Decision support
+/insurance-claims/,Insurance & Hail,educational+commercial,hail insurance claim repair,index,No deductible-saving offers
+/process/,Process,trust,PDR process,index,Trust/education
+/gallery/,Gallery,trust,hail repair before after; PDR gallery,index after real photos,No stock repair claims
+/reviews/,Reviews,trust,Peak Country reviews,index after real reviews,Never fabricate
+/about/,About,entity,Peak Country Auto Hail Repair,index,Entity clarity
+/service-area/,Service Area,local,Greeley Weld County PDR service area,index after approval,Confirm communities
+/contact/,Contact,conversion,contact Peak Country,index,Turnstile before launch
+/free-hail-inspection/,Hail Inspection,conversion,hail damage inspection Greeley,index,Lead page
+/hail-tracker/,Hail Tracker,weather,Northern Colorado hail today; hail tracker,index,Flagship linkable asset
+/hail-tracker/greeley/,Greeley Hail Tracker,weather+local,Greeley hail today,index when data populated,Unique local data
+/hail-tracker/weld-county/,Weld County Hail Tracker,weather+local,Weld County hail today,index when data populated,Unique county data
+/hail-tracker/northern-colorado/,Northern Colorado Hail,weather+local,Northern Colorado hail reports,index when data populated,Regional data
+/hail-history/,Hail History,weather+evergreen,Northern Colorado hail history,index,Historical hub
+/hail-history/greeley/,Greeley Hail History,weather+local,Greeley hail history,index when data populated,NCEI data
+/hail-history/weld-county/,Weld County Hail History,weather+local,Weld County hail history,index when data populated,NCEI data
+/did-it-hail/,Did It Hail,tool,did it hail near me,index after feature complete,Careful location language
+/hail-size-guide/,Hail Size Guide,educational,hail size chart vehicle damage,index,Linkable guide
+/after-a-hailstorm/,After Hailstorm,educational,what to do after car hail damage,index,Post-storm funnel
+/data-sources/,Data Sources,trust,hail tracker methodology,index,Source transparency
+/storms/,Storm Archive,weather,Northern Colorado hail storms,index when populated,Only meaningful event pages
