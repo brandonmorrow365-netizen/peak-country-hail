@@ -12,10 +12,10 @@ Completed 2026-09-04. Uploaded repository lacked application folders; implemente
 ## Milestone 1 — Cloudflare development deployment
 - [x] Authenticate Wrangler / Cloudflare.
 - [x] Create Worker preview deployment on `workers.dev`.
-- [ ] Connect GitHub repository to Cloudflare Workers Builds if not already connected.
+- [x] Connect GitHub repository to Cloudflare Workers Builds.
 - [x] Keep `peakcountryhail.com` disconnected from the app until launch-ready.
 
-Worker deployed at https://peak-country-hail-preview.peak-country-hail.workers.dev and all 30 hosted route checks passed. GitHub push completed and Linux CI passed. Draft PR #1 created. Workers Builds connection awaits repository-scoped GitHub app authorization.
+Worker deployed at https://peak-country-hail-preview.peak-country-hail.workers.dev and all 30 hosted route checks passed. GitHub push completed and Linux CI passed. Draft PR #1 created. Workers Builds connected and first automatic deployment passed. Public access subsequently withdrawn at owner request; keep workers.dev and version preview URLs disabled until explicit launch approval.
 
 ## Milestone 2 — D1
 - [x] Run `npx wrangler d1 create peak-country-hail-db`.
