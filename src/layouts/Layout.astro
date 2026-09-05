@@ -1,11 +1,13 @@
 ---
 import { site } from '../data/site';
+import {isProductionHostname, robotsMeta} from '../lib/seo';
 import StormHeader from '../components/StormHeader.astro';
 import '../styles/global.css';
 interface Props { title: string; description: string; noindex?: boolean; exactTitle?: boolean; pageSchema?: Record<string, unknown>; }
 const { title, description, noindex = false, exactTitle = false, pageSchema } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
-const preview = Astro.url.hostname !== new URL(site.url).hostname;
+const robots = robotsMeta(Astro.url.hostname, noindex);
+const preview = !isProductionHostname(Astro.url.hostname);
 const documentTitle = exactTitle ? title : `${title} | Peak Country`;
 const schema = {
   '@context': 'https://schema.org',
@@ -35,7 +37,7 @@ const schema = {
 <!doctype html>
 <html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" />
 <title>{documentTitle}</title><meta name="description" content={description} />
-<link rel="canonical" href={canonical} /><meta name="robots" content={preview || noindex ? 'noindex, follow' : 'index, follow'} />
+<link rel="canonical" href={canonical} /><meta name="robots" content={robots} />
 <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} /><meta property="og:type" content="website" />
 <meta property="og:image" content={new URL(site.logo, site.url).href} /><meta property="og:image:alt" content={site.name} />
 <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={new URL(site.logo, site.url).href} />

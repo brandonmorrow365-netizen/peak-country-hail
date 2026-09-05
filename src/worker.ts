@@ -1,7 +1,19 @@
 import { handle } from '@astrojs/cloudflare/handler';
 import { ingestWeather } from './lib/weather';
+import { getCanonicalRedirect } from './lib/domain-routing';
 export default {
   async fetch(request, env, ctx) {
+    const redirect = getCanonicalRedirect(request.url);
+    if (redirect) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': redirect,
+          'Cache-Control': 'public, max-age=3600',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      });
+    }
     const response = await handle(request, env, ctx);
     const headers = new Headers(response.headers);
     if (env.SITE_STAGE !== 'production') headers.set('X-Robots-Tag', 'noindex, nofollow');
