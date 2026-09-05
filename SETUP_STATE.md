@@ -29,9 +29,9 @@ Last reviewed: 2026-09-04
 - [ ] Bing Webmaster Tools verified
 
 ## Business facts still needed
-- [ ] Public business phone
+- [x] Public business phone: (720) 445-6246
 - [ ] Business email confirmed/activated
-- [ ] Final exact service-area list
+- [x] Final service-area list supplied for Greeley, Evans, Windsor, Eaton, Severance, Johnstown, Milliken, LaSalle and Platteville, with a primary focus on Weld County and Northern Colorado
 - [ ] Business hours / appointment policy
 - [ ] Final owner/business bio wording
 - [ ] Social profile URLs

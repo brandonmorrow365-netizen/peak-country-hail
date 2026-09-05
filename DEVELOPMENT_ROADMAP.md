@@ -29,8 +29,8 @@ Worker deployed at https://peak-country-hail-preview.peak-country-hail.workers.d
 - [ ] Confirm color system with logo.
 - [ ] Finalize homepage copy.
 - [ ] Finalize services copy.
-- [ ] Finalize actual service-area list.
-- [ ] Add owner-approved phone/email and social links.
+- [x] Finalize actual service-area list.
+- [ ] Add owner-approved email and social links. Public phone added.
 - [ ] Add actual gallery images.
 - [ ] Add only verified reviews.
 
