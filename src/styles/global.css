@@ -21,3 +21,12 @@ header{border-bottom:3px solid #1975d1;box-shadow:0 8px 28px #06172d1c}
 @media(max-width:900px){.hero-art{grid-row:1}.hero-copy{grid-row:2}}
 .storm-scene{--storm-x:0px;--storm-y:0px;position:relative;aspect-ratio:1942/809;overflow:hidden;background:#07182c;cursor:crosshair;isolation:isolate}.hero-art .storm-scene>img{position:absolute;inset:-10px;width:calc(100% + 20px);height:calc(100% + 20px);max-width:none;object-fit:cover;transform:translate(var(--storm-x),var(--storm-y)) scale(1.025);transition:transform .18s ease-out}.storm-scene canvas,.storm-flash{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.storm-scene canvas{z-index:2}.storm-flash{z-index:3;opacity:0;background:radial-gradient(circle at 47% 20%,#fff 0,#d8edff88 22%,transparent 65%);mix-blend-mode:screen}.storm-hint{position:absolute;z-index:4;right:12px;bottom:8px;margin:0;padding:5px 9px;color:#d9eaff;background:#06172dcc;font-size:.68rem;letter-spacing:.04em}@media(prefers-reduced-motion:reduce){.hero-art .storm-scene>img{transform:none;transition:none}.storm-scene{cursor:default}}
 .hero .storm-hint{position:absolute;z-index:4;right:10px;bottom:8px;margin:0;max-width:none;padding:4px 8px;color:#d9eaff;background:#06172dcc;font-size:.65rem;line-height:1.25;letter-spacing:.04em}
+
+/* The interactive panorama now fills the masthead above the main content. */
+.hero--intro{grid-template-columns:minmax(0,1fr);gap:38px;padding-top:52px;padding-bottom:52px}
+.hero--intro .hero-copy{grid-row:auto;max-width:1020px}
+.hero--intro h1{font-size:clamp(2.6rem,5vw,4.4rem)}
+.hero--intro .weather-card{grid-template-columns:auto 1.2fr 2fr;gap:18px 25px}
+.hero--intro .weather-card>.fine{grid-column:2/4}
+.hero--intro .weather-card>a{grid-column:2/4}
+@media(max-width:900px){.hero--intro{grid-template-columns:minmax(0,1fr);padding:38px 24px}.hero--intro .weather-card{display:block}}

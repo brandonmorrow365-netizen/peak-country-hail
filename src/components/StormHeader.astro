@@ -1,0 +1,130 @@
+---
+import { site } from '../data/site';
+---
+
+<header class="storm-header" data-storm-header>
+  <div class="storm-masthead" data-storm-surface>
+    <div class="storm-landscape" aria-hidden="true">
+      <img src="/brand/hero-storm-background.png" width="1942" height="809" alt="" fetchpriority="high" />
+      <div class="storm-cloud-layer"></div>
+      <div class="storm-shade"></div>
+      <canvas data-storm-canvas></canvas>
+    </div>
+
+    <div class="storm-brand-layer">
+      <a class="brand-logo storm-logo" href="/" aria-label="Peak Country home">
+        <img src={site.logo} width="1448" height="1086" alt={site.name} fetchpriority="high" />
+      </a>
+      <div class="storm-location">
+        <span>Greeley · Weld County</span>
+        <strong>Northern Colorado</strong>
+      </div>
+    </div>
+
+    <div class="storm-tools" data-storm-tools hidden>
+      <button type="button" data-lightning aria-label="Create a lightning strike in the mountain scene">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 2-9 12h6l-1 8 9-12h-6l1-8Z" /></svg>
+        Lightning
+      </button>
+      <button type="button" data-storm-pause>Pause motion</button>
+    </div>
+  </div>
+
+  <div class="storm-nav-wrap">
+    <nav class="storm-nav" aria-label="Main navigation">
+      <a href="/auto-hail-repair/">Hail repair</a>
+      <a href="/paintless-dent-repair/">PDR</a>
+      <a href="/hail-tracker/">Hail tracker</a>
+      <a href="/about/">About</a>
+      <a class="button small" href="/free-hail-inspection/">Request an inspection <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  import { initHeaderStorm } from '../scripts/header-storm';
+  document.querySelectorAll<HTMLElement>('[data-storm-header]').forEach(initHeaderStorm);
+</script>
+
+<style>
+  .storm-header {
+    display: block; position: relative; max-width: none; width: 100%; margin: 0; padding: 0;
+    color: #f0f5fc; background: #041122; border-bottom: 2px solid #399cdf;
+    box-shadow: 0 14px 35px #02102440; isolation: isolate;
+  }
+  .storm-masthead { position: relative; min-height: 410px; overflow: hidden; }
+  .storm-landscape { position: absolute; inset: 0; overflow: hidden; background: #0b1b2b; }
+  .storm-landscape > img, .storm-cloud-layer {
+    position: absolute; inset: -18px; width: calc(100% + 36px); height: calc(100% + 36px);
+    object-fit: cover; object-position: 50% 48%; max-width: none;
+    transform: translate(var(--header-x, 0px), var(--header-y, 0px)) scale(1.02);
+    transition: transform 800ms ease-out;
+  }
+  .storm-cloud-layer {
+    background: url('/brand/hero-storm-background.png') center 48% / cover;
+    mask-image: linear-gradient(#000 0%, #000b 30%, transparent 63%);
+    opacity: .75; animation: cloud-drift 28s ease-in-out infinite alternate;
+  }
+  .storm-shade { position: absolute; inset: 0; background: linear-gradient(90deg,#02102070,transparent 43%,#02102018),linear-gradient(0deg,#031122c9,transparent 23%,transparent 80%,#03112244); }
+  [data-storm-canvas] { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+  .storm-brand-layer {
+    position: relative; z-index: 2; max-width: 1280px; min-height: 410px; margin: auto;
+    padding: 35px 48px 58px; display: flex; align-items: center; justify-content: space-between; gap: 36px;
+    pointer-events: none;
+  }
+  .storm-logo {
+    position: relative; display: block; flex: 0 0 auto; width: 302px; padding: 13px 14px 19px;
+    background: linear-gradient(155deg,#fff 20%,#f1f4f8 75%,#ccd6e2);
+    border: 2px solid #f9fcff; border-radius: 18px 18px 54px 54px;
+    box-shadow: 0 2px 0 #bac9d8, 0 8px 0 -1px #718297, 0 12px 0 -2px #233b53, 0 28px 38px #000c, 0 0 42px #a0d3ff2e;
+    transform: translateY(-5px); pointer-events: auto; transition: transform 220ms ease,box-shadow 220ms ease;
+  }
+  .storm-logo:hover { transform: translateY(-9px); box-shadow: 0 2px 0 #e0edf9,0 8px 0 -1px #8198ad,0 12px 0 -2px #233b53,0 34px 46px #000d,0 0 55px #a0d3ff44; }
+  .storm-logo img { display: block; width: 100%; max-width: 100%; height: auto; border-radius: 9px; }
+  .storm-location { align-self: flex-start; padding-top: 17px; text-align: right; text-shadow: 0 2px 12px #000; }
+  .storm-location span { display: block; color: #cad8e7; text-transform: uppercase; font-size: .68rem; letter-spacing: .23em; }
+  .storm-location strong { display: block; margin-top: 5px; color: #fff; text-transform: uppercase; letter-spacing: .12em; font-size: clamp(.95rem,1.65vw,1.3rem); }
+  .storm-tools { position: absolute; z-index: 3; bottom: 18px; right: max(24px,calc((100% - 1184px)/2)); display: flex; gap: 9px; }
+  .storm-tools[hidden] { display: none; }
+  .storm-tools button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #bbd7ed50; border-radius: 30px; padding: 9px 13px; color: #edf6ff; background: #031325c9; font: 500 .7rem/1.2 Arial,sans-serif; cursor: pointer; }
+  .storm-tools button:hover { background: #183956; border-color: #b8dcfa; }
+  .storm-tools button:disabled { opacity: .5; cursor: default; }
+  .storm-tools svg { width: 13px; height: 15px; fill: none; stroke: #a0d7ff; stroke-width: 1.5; }
+  .storm-nav-wrap { position: relative; z-index: 4; border-top: 1px solid #84c7fa45; background: linear-gradient(110deg,#091b30,#112c46); box-shadow: 0 -8px 24px #03102140; }
+  .storm-nav { max-width: 1280px; min-height: 76px; margin: auto; padding: 14px 48px; gap: clamp(20px,4vw,58px); flex-wrap: nowrap; }
+  .storm-nav > a:not(.button) { color: #e7eef8; white-space: nowrap; font-weight: 600; font-size: .91rem; padding: 8px 0; }
+  .storm-nav > a:not(.button):hover { color: #8ed2ff; }
+  .storm-nav .button { margin-left: auto; white-space: nowrap; padding: 12px 19px; font-size: .76rem; }
+  .storm-nav .button span { margin-left: 14px; }
+  [data-motion-paused="true"] .storm-cloud-layer { animation-play-state: paused; }
+  @keyframes cloud-drift { from { transform: translate(-12px,-3px) scale(1.045); } to { transform: translate(15px,4px) scale(1.09); } }
+  @media (max-width: 900px) {
+    .storm-masthead,.storm-brand-layer { min-height: 365px; }
+    .storm-brand-layer { padding: 28px 28px 60px; align-items: center; }
+    .storm-logo { width: 242px; padding: 10px 11px 16px; border-radius: 16px 16px 46px 46px; }
+    .storm-location { padding-top: 15px; max-width: 190px; }
+    .storm-location span { font-size: .57rem; letter-spacing: .16em; }
+    .storm-location strong { font-size: .85rem; letter-spacing: .12em; }
+    .storm-nav { padding: 15px 25px; gap: 25px; flex-wrap: wrap; justify-content: center; }
+    .storm-nav .button { margin-left: 0; }
+  }
+  @media (max-width: 520px) {
+    .storm-masthead,.storm-brand-layer { min-height: 390px; }
+    .storm-brand-layer { padding: 56px 22px 60px; align-items: center; }
+    .storm-logo { width: 216px; }
+    .storm-location { position: absolute; top: 17px; left: 24px; right: 24px; max-width: none; padding: 0; text-align: left; }
+    .storm-location span { display: none; }
+    .storm-location strong { font-size: .67rem; letter-spacing: .22em; }
+    .storm-landscape > img { object-position: 57% 50%; }
+    .storm-cloud-layer { background-position: 57% 50%; }
+    .storm-tools { bottom: 16px; right: 18px; }
+    .storm-tools button { padding: 9px 12px; font-size: .65rem; }
+    .storm-nav { gap: 8px 25px; padding: 13px 20px 16px; }
+    .storm-nav > a:not(.button) { font-size: .8rem; }
+    .storm-nav .button { flex-basis: 100%; text-align: center; margin-top: 4px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .storm-cloud-layer { animation: none; }
+    .storm-landscape > img,.storm-logo,.storm-logo:hover { transform: none; transition: none; }
+  }
+</style>

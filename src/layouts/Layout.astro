@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import StormHeader from '../components/StormHeader.astro';
 import '../styles/global.css';
 interface Props { title: string; description: string; noindex?: boolean; }
 const { title, description, noindex = false } = Astro.props;
@@ -20,8 +21,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'Organization', '@id
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
 {preview && <div class="preview">Preview · Business details and online requests are being prepared</div>}
-<header><a class="brand-logo" href="/" aria-label="Peak Country home"><img src={site.logo} width="1448" height="1086" alt={site.name} fetchpriority="high" /></a>
-<nav aria-label="Main navigation"><a href="/auto-hail-repair/">Hail repair</a><a href="/paintless-dent-repair/">PDR</a><a href="/hail-tracker/">Hail tracker</a><a href="/about/">About</a><a class="button small" href="/free-hail-inspection/">Request an inspection</a></nav></header>
+<StormHeader />
 <main id="main"><slot /></main>
 <footer><div><strong>{site.name}</strong><p>{site.focus}</p><p>Careful repair. Clear information.</p></div><nav aria-label="Footer navigation"><a href="/contact/">Contact</a><a href="/service-area/">Service area</a><a href="/resources/">Resources</a><a href="/data-sources/">Weather data sources</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav><p class="fine">Weather reports describe reported conditions, not confirmed damage to an individual vehicle. For urgent weather information, follow the National Weather Service and local emergency officials.</p></footer>
 </body></html>
