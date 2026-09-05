@@ -46,7 +46,7 @@ Do not publish a claim that every listed community is served until the owner app
 
 ## 3. Experience and positioning
 Known business positioning from planning conversations:
-- Approximately 20 years of PDR experience.
+- 20+ years of hands-on Paintless Dent Repair experience.
 - Hail repair is the primary target service.
 - Door dings, dents, and repairable creases are secondary PDR services.
 - Emphasize preserving original/factory paint when PDR is appropriate.

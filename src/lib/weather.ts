@@ -28,7 +28,7 @@ export function parseHail(text: string, day: string) {
   }).filter(r=>r.state==='CO');
 }
 async function digest(s:string) { return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s))),b=>b.toString(16).padStart(2,'0')).join(''); }
-async function fetchSource(url:string){const r=await fetch(url,{headers:{'User-Agent':'PeakCountryHail/0.1 (https://peakcountryhail.com/data-sources/)','Accept':url===NWS?'application/geo+json':'text/csv'},signal:AbortSignal.timeout(15000)});if(!r.ok)throw new Error('upstream_http_'+r.status);return r;}
+async function fetchSource(url:string){const r=await fetch(url,{headers:{'User-Agent':`PeakCountryHail/0.1 (${site.url}/data-sources/)`,'Accept':url===NWS?'application/geo+json':'text/csv'},signal:AbortSignal.timeout(15000)});if(!r.ok)throw new Error('upstream_http_'+r.status);return r;}
 async function logged(db:D1Database,source:string,url:string,job:()=>Promise<number>){
   const started=new Date().toISOString();let count=0,status='success',error:string|null=null;
   try{count=await job();}catch{status='error';error='ingestion_failed';}
@@ -67,3 +67,4 @@ export async function readWeather(db?:D1Database){
  }catch{return null;}
 }
 export function fresh(status:FeedStatus|null|undefined,minutes:number){return !!status&&status.status==='success'&&Date.now()-Date.parse(status.completed_at)<minutes*60000;}
+import {site} from '../data/site.ts';

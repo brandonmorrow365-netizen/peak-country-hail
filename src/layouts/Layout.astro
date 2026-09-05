@@ -5,19 +5,30 @@ import '../styles/global.css';
 interface Props { title: string; description: string; noindex?: boolean; exactTitle?: boolean; pageSchema?: Record<string, unknown>; }
 const { title, description, noindex = false, exactTitle = false, pageSchema } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
-const preview = Astro.url.hostname !== 'peakcountryhail.com';
+const preview = Astro.url.hostname !== new URL(site.url).hostname;
 const documentTitle = exactTitle ? title : `${title} | Peak Country`;
 const schema = {
   '@context': 'https://schema.org',
-  '@type': ['AutoRepair', 'LocalBusiness'],
+  '@type': 'AutoRepair',
   '@id': site.url + '/#business',
   name: site.name,
   url: site.url,
   logo: new URL(site.logo, site.url).href,
   image: new URL(site.logo, site.url).href,
-  description: `${site.experience}. Mobile auto hail repair and paintless dent repair serving Greeley, Weld County, and Northern Colorado.`,
+  description: `${site.experience}. Technician-led mobile auto hail repair and paintless dent repair serving ${site.serviceRegion}.`,
   telephone: site.phone,
-  areaServed: site.approvedCommunities.map(name => ({ '@type': 'City', name })),
+  areaServed: [
+    { '@type': 'City', name: site.primaryLocation },
+    { '@type': 'AdministrativeArea', name: 'Weld County, Colorado' },
+    { '@type': 'Place', name: 'Northern Colorado' },
+    ...site.approvedCommunities.filter(name => name !== 'Greeley').map(name => ({ '@type': 'City', name: `${name}, Colorado` })),
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Vehicle dent repair services',
+    itemListElement: site.primaryServices.map(name => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
+  },
+  ...(site.ownerName ? { founder: { '@type': 'Person', name: site.ownerName } } : {}),
   sameAs: site.socialProfiles,
 };
 ---

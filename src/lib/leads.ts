@@ -1,3 +1,5 @@
+import {site} from '../data/site.ts';
+
 export function validateLead(form:FormData){
  const read=(key:string,max:number,required=false)=>{const value=form.get(key);if(typeof value!=='string'||value.length>max||(required&&!value.trim()))throw new Error('Please check the '+key.replaceAll('_',' ')+' field.');return value.trim();};
  const name=read('name',100,true),email=read('email',254),phone=read('phone',40),location=read('location',120,true),vehicle=read('vehicle',160,true),damage=read('damage_type',40,true),message=read('message',4000),preferred=read('preferred_contact',10,true),source=read('source_page',100,true);
@@ -12,7 +14,7 @@ export function validateLead(form:FormData){
  return {name,email,phone,location,vehicle,damage,message,preferred,source};
 }
 export async function submitLead(request:Request,env:Cloudflare.Env):Promise<{status:number;message:string;ok?:boolean}>{
- if(env.FORMS_ENABLED!=='true'||!env.DB||!env.TURNSTILE_SECRET_KEY||!env.TURNSTILE_SITE_KEY)return {status:503,message:'Online requests are not available yet. Please return when contact details are published.'};
+ if(env.FORMS_ENABLED!=='true'||!env.DB||!env.TURNSTILE_SECRET_KEY||!env.TURNSTILE_SITE_KEY)return {status:503,message:`Online requests are not available yet. Call or text ${site.phoneDisplay} to contact Peak Country.`};
  const url=new URL(request.url);
  if(request.headers.get('origin')!==url.origin)return {status:403,message:'Please submit the form from this website.'};
  if(!request.headers.get('content-type')?.startsWith('application/x-www-form-urlencoded'))return {status:415,message:'Unsupported form format.'};

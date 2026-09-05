@@ -1,9 +1,10 @@
 ---
 import {env} from 'cloudflare:workers';
+import {site} from '../data/site';
 const {source}=Astro.props;
 const ready=env.FORMS_ENABLED==='true'&&!!env.DB&&!!env.TURNSTILE_SITE_KEY&&!!env.TURNSTILE_SECRET_KEY;
 ---
-{!ready&&<div class="callout">Online requests are not available yet. Contact details will be published when confirmed. Please do not enter personal information in this preview.</div>}
+{!ready&&<div class="callout">Online requests are not available yet. Call or text <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> to contact Peak Country. Please do not enter personal information in this preview.</div>}
 <form method="post" action={source}>
 <fieldset disabled={!ready} style="border:0;padding:0;margin:0"><legend class="fine">All fields are required unless marked optional. Provide the email or phone you want us to use.</legend><div class="form-grid">
 <label>Your name<input name="name" autocomplete="name" maxlength="100" required /></label>
