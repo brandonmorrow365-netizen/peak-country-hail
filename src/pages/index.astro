@@ -1,14 +1,146 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
+
+const services = [
+  ['Hail damage', 'Dents across roofs, hoods, rails, doors, and quarter panels require careful lighting and a panel-by-panel inspection.', '/auto-hail-repair/'],
+  ['Door dings', 'Small parking-lot dents may be good candidates for PDR when the paint is intact and the metal remains workable.', '/door-ding-repair/'],
+  ['Creases', 'Repairability depends on the crease depth, length, panel location, finish condition, and access behind the metal.', '/door-ding-repair/'],
+  ['Minor dents', 'Everyday dents deserve the same measured assessment as storm damage before a repair method is recommended.', '/paintless-dent-repair/'],
+  ['Complex panel damage', 'Body lines, limited access, trim, and panel construction all affect how a skilled repair is planned.', '/repair-standards/']
+];
+
+const faq = [
+  ['What is paintless dent repair?', 'Paintless dent repair, or PDR, carefully reshapes suitable vehicle panels while retaining the existing paint. It avoids sanding, filler, and repainting when the damage and finish make that approach appropriate.'],
+  ['Can every hail dent be repaired with PDR?', 'No. Paint condition, dent depth, stretched metal, panel location, previous repairs, and access all affect suitability. A hands-on inspection is the best way to identify an appropriate repair plan.'],
+  ['Do you provide mobile service?', 'Yes. Peak Country is a mobile PDR service focused on Greeley, Weld County, and nearby Northern Colorado communities. The service location and appointment details are confirmed before repair.'],
+  ['Does a nearby hail report prove my vehicle was damaged?', 'No. A report documents an observation at a place and time. It does not confirm that a particular vehicle was exposed or damaged. Inspect the vehicle in good light or request an evaluation.'],
+  ['Should I contact my insurance company first?', 'Follow the requirements in your policy and ask your insurer what documentation it needs. Peak Country can inspect the visible damage and discuss repair scope, but your insurer makes coverage and claim decisions.'],
+  ['How do I request a free hail inspection?', `Call or text ${site.phoneDisplay}, or use the inspection request page. Include your city, vehicle year, make and model, and a short description of the damage.`]
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(([name, text]) => ({
+    '@type': 'Question',
+    name,
+    acceptedAnswer: { '@type': 'Answer', text }
+  }))
+};
 ---
-<Layout title="Auto hail repair in Northern Colorado" description={`${site.experience}. Explore Northern Colorado hail information and request a careful vehicle inspection.`}>
-<section class="hero hero--intro"><div class="hero-copy"><div class="eyebrow">Greeley &amp; Northern Colorado</div><h1>Hail happens.<br />Protect your<br />factory finish.</h1><p>Careful paintless dent repair for hail damage, door dings, and repairable creases. Built on {site.experience.toLowerCase()}.</p><div class="actions"><a class="button" href="/free-hail-inspection/">Request a hail inspection →</a><a href="/process/">How repair works</a></div></div><aside class="weather-card"><span class="status">Northern Colorado weather</span><h2>Know what’s<br />been reported.</h2><p>Check the hail tracker for official sources, report times, and clear explanations of what the data can tell you.</p><p class="fine">A nearby report does not confirm damage to your vehicle.</p><a href="/hail-tracker/">Open the hail tracker →</a></aside></section>
-<div class="band"><span>{site.experience}</span><span>Factory paint preservation when appropriate</span><span>Hail repair &amp; everyday dents</span></div>
-<section class="section"><div class="section-head"><div><div class="eyebrow">The right repair starts with a closer look</div><h2>Small details.<br />A careful approach.</h2></div><a href="/why-pdr/">Is PDR right for your vehicle? →</a></div><div class="grid">{[
-['01', 'Auto hail repair', 'An inspection helps identify the dents, access points, and paint condition that determine the repair approach.', '/auto-hail-repair/'],
-['02', 'Paintless dent repair', 'When the paint and metal condition allow, PDR reshapes the panel while preserving its existing finish.', '/paintless-dent-repair/'],
-['03', 'Door dings & creases', 'Everyday dents deserve attention too. Location, depth, and access determine what can be repaired.', '/door-ding-repair/']
-].map(([number,title,body,url])=><article class="card"><span class="number">{number} / REPAIR</span><h3>{title}</h3><p>{body}</p><a href={url}>Explore this service →</a></article>)}</div></section>
-<section class="section narrow"><div class="eyebrow">After the storm</div><h2>Start with information.<br />Then inspect the damage.</h2><p>Weather reports can help put a storm in context. A vehicle inspection determines whether there is damage and which repair options fit.</p><div class="links"><a href="/after-a-hailstorm/">What to do after hail</a><a href="/hail-size-guide/">Understanding hail size</a><a href="/data-sources/">Our weather sources</a></div></section>
+<Layout
+  title="Auto Hail Repair & PDR in Greeley, Colorado"
+  description={`Professional auto hail repair and paintless dent repair in Greeley, Weld County, and Northern Colorado, backed by ${site.experience.toLowerCase()}.`}
+  pageSchema={faqSchema}
+>
+  <section class="hero home-hero">
+    <div class="home-hero__progressive-layer" data-future-vehicle-3d aria-hidden="true"></div>
+    <div class="hero-copy">
+      <div class="eyebrow">Greeley · Weld County · Northern Colorado</div>
+      <h1>Auto Hail Repair &amp; Paintless Dent Repair in Greeley, Colorado</h1>
+      <p class="hero-statement"><span>Hail happens.</span><strong>Protect your factory finish.</strong></p>
+      <p class="hero-support">Professional auto hail repair and paintless dent repair for Greeley, Weld County, and Northern Colorado, backed by {site.experience.toLowerCase()}.</p>
+      <div class="actions">
+        <a class="button" href="/free-hail-inspection/">Request a Free Hail Inspection →</a>
+        <a href="/paintless-dent-repair/">See How Paintless Dent Repair Works →</a>
+      </div>
+    </div>
+    <aside class="weather-card home-weather-card">
+      <span class="status">Northern Colorado Hail Tracker</span>
+      <h2>Know what has been reported.</h2>
+      <p>Review current National Weather Service alerts and preliminary Storm Prediction Center hail reports for Weld and Larimer counties.</p>
+      <p class="fine">Weather data can be delayed or incomplete. A nearby report does not confirm damage to your vehicle.</p>
+      <a class="weather-card-link" href="/hail-tracker/">Open the Hail Tracker →</a>
+    </aside>
+  </section>
+
+  <div class="band">
+    <span>{site.experience}</span>
+    <span>Mobile service in Northern Colorado</span>
+    <span>Factory finish preservation when appropriate</span>
+  </div>
+
+  <section class="section home-why">
+    <div class="home-section-head">
+      <div><div class="eyebrow">Why Peak Country</div><h2>Experienced judgment before the first repair move.</h2></div>
+      <p>The right result begins with understanding the panel, the paint, and the limits of the damage.</p>
+    </div>
+    <div class="trust-grid">
+      <article><span>01</span><h3>20+ years of PDR experience</h3><p>Hands-on experience helps identify the access points, metal movement, and repair sequence that each vehicle requires.</p></article>
+      <article><span>02</span><h3>Factory finish focused</h3><p>When the paint and metal condition allow, PDR restores the panel without sanding, body filler, or repainting.</p></article>
+      <article><span>03</span><h3>Local mobile service</h3><p>Peak Country serves vehicle owners in Greeley, Weld County, and nearby Northern Colorado communities by appointment.</p></article>
+    </div>
+  </section>
+
+  <section class="section home-services">
+    <div class="home-section-head">
+      <div><div class="eyebrow">What We Repair</div><h2>From widespread hail dents to everyday damage.</h2></div>
+      <p>An inspection determines what can be repaired with PDR and where another method may be more appropriate.</p>
+    </div>
+    <div class="service-card-grid">
+      {services.map(([title, body, url], index) => <article class="service-card"><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p><a href={url}>Learn more →</a></article>)}
+    </div>
+  </section>
+
+  <section class="section vehicle-care">
+    <div class="vehicle-care-copy">
+      <div class="eyebrow">The Entire Vehicle Matters</div>
+      <h2>Careful access, protection, and reassembly are part of the repair.</h2>
+      <p>A dent is only one part of the job. Proper PDR may require access behind a panel, removal of trim or interior components, protection of finished surfaces, and exact reassembly. Peak Country evaluates how the vehicle is built before deciding how to reach the damage.</p>
+      <p>The goal is a considered repair plan that protects the whole vehicle.</p>
+      <a href="/repair-standards/">Read Peak Country’s repair standards →</a>
+    </div>
+    <div class="photo-feature" role="img" aria-label="Reserved space for a genuine Peak Country technician repair photograph"><span>Future genuine photography</span><strong>Technician at work</strong></div>
+  </section>
+
+  <section class="section hail-intelligence">
+    <div class="home-section-head">
+      <div><div class="eyebrow">Northern Colorado Hail Information</div><h2>Storm context from named official sources.</h2></div>
+      <p>Useful weather information should make its source, freshness, and limitations clear.</p>
+    </div>
+    <div class="hail-intelligence-grid">
+      <div>
+        <p>Peak Country’s Hail Tracker uses National Weather Service alerts and preliminary NOAA Storm Prediction Center reports to add regional context after a storm.</p>
+        <p>Reports are observations with varying coverage and location precision. They may be delayed, corrected, or incomplete. They do not prove that a specific vehicle was struck, and this website is not an emergency alerting service. Follow official warnings during severe weather, then inspect your vehicle safely after the storm.</p>
+      </div>
+      <nav class="hail-resource-links" aria-label="Hail information resources">
+        <a href="/hail-tracker/"><span>Live regional view</span><strong>Hail Tracker →</strong></a>
+        <a href="/hail-size-guide/"><span>Understand reported diameter</span><strong>Hail Size Guide →</strong></a>
+        <a href="/after-a-hailstorm/"><span>Practical next steps</span><strong>After a Hailstorm →</strong></a>
+        <a href="/hail-history/"><span>Historical resource in development</span><strong>Hail History →</strong></a>
+        <a href="/data-sources/"><span>Methods and limitations</span><strong>Data Sources →</strong></a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section local-service">
+    <div class="eyebrow">Local Mobile Service</div>
+    <h2>Built around Greeley and Weld County drivers.</h2>
+    <p>Peak Country provides mobile paintless dent repair by appointment in Greeley, Evans, Windsor, Eaton, Severance, Johnstown, Milliken, LaSalle, Platteville, and nearby Northern Colorado communities. Call or text to discuss the vehicle’s location and arrange an inspection.</p>
+    <a href="/service-area/">View the mobile service area →</a>
+  </section>
+
+  <section class="section photo-plan" aria-labelledby="photo-plan-title">
+    <div class="home-section-head"><div><div class="eyebrow">Genuine Work, Coming Into View</div><h2 id="photo-plan-title">Ready for real Peak Country photography.</h2></div><p>Reserved for owner-approved project photographs.</p></div>
+    <div class="photo-slot-grid">
+      {['Hail-damaged vehicle', 'Inspection lighting', 'Technician repair', 'Panel detail', 'Completed vehicle'].map((label, index) => <div class="photo-slot"><span>0{index + 1}</span><strong>{label}</strong></div>)}
+    </div>
+  </section>
+
+  <section class="section home-faq">
+    <div class="home-section-head"><div><div class="eyebrow">Common Questions</div><h2>Before you schedule an inspection.</h2></div><a href="/faq/">More answers →</a></div>
+    <div class="home-faq-list">
+      {faq.map(([question, answer], index) => <details open={index === 0}><summary>{question}</summary><p>{answer}</p></details>)}
+    </div>
+  </section>
+
+  <section class="section home-final-cta">
+    <div><div class="eyebrow">Start With a Clear Look</div><h2>Concerned about hail damage?</h2><p>Request a free inspection or call Peak Country to discuss your vehicle and location.</p></div>
+    <div class="actions"><a class="button" href="/free-hail-inspection/">Request a Free Hail Inspection →</a><a href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a></div>
+  </section>
+
+  <nav class="mobile-conversion" aria-label="Quick contact">
+    <a href={`tel:${site.phone}`}>Call</a><a href={`sms:${site.phone}`}>Text</a><a href="/free-hail-inspection/">Free Inspection</a>
+  </nav>
 </Layout>
