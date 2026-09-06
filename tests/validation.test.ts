@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {parseHail,reportDay,csvRows,fresh} from '../src/lib/weather.ts';
+import {parseHail,reportDay,csvRows,fresh,distanceMiles,geometryDistanceMiles,alertLocality,feedState} from '../src/lib/weather.ts';
 import {validateLead,submitLead} from '../src/lib/leads.ts';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
@@ -23,6 +23,26 @@ test('report day changes at noon UTC',()=>{
 test('failed and stale source checks are not fresh',()=>{
  assert.equal(fresh({status:'error',completed_at:new Date().toISOString()},15),false);
  assert.equal(fresh({status:'success',completed_at:'2000-01-01T00:00:00Z'},15),false);
+});
+test('Greeley-radius filtering uses coordinate distance',()=>{
+ assert.ok(distanceMiles(40.5853,-105.0844)<50); // Fort Collins
+ assert.ok(distanceMiles(38.8339,-104.8214)>50); // Colorado Springs
+ assert.equal(distanceMiles(40.41566,-104.7721515),0);
+});
+test('warning polygons use intersection distance before area fallback',()=>{
+ const local={type:'Polygon',coordinates:[[[-104.9,40.3],[-104.6,40.3],[-104.6,40.5],[-104.9,40.5],[-104.9,40.3]]]};
+ const far={type:'Polygon',coordinates:[[[-106,38.8],[-105.8,38.8],[-105.8,39],[-106,39],[-106,38.8]]]};
+ assert.equal(geometryDistanceMiles(local),0);
+ assert.equal(alertLocality(local,'Elsewhere').local,true);
+ assert.equal(alertLocality(far,'Weld County').local,false);
+ assert.deepEqual(alertLocality(null,'Weld County'),{local:true,distance:null,basis:'area description'});
+});
+test('feed states distinguish live, empty-cache, failed-cache and stale-cache',()=>{
+ const now=Date.parse('2026-09-05T20:00:00Z'),recent={status:'success',completed_at:'2026-09-05T19:55:00Z'},old={status:'success',completed_at:'2026-09-05T18:00:00Z'};
+ assert.equal(feedState(recent,recent,15,now),'current');
+ assert.equal(feedState(null,null,15,now),'unavailable');
+ assert.equal(feedState({status:'error',completed_at:'2026-09-05T19:59:00Z'},recent,15,now),'cached-error');
+ assert.equal(feedState(old,old,15,now),'stale');
 });
 function form(){const f=new FormData();for(const[k,v]of Object.entries({name:'Test',email:'test@example.com',phone:'',location:'Greeley',vehicle:'Test vehicle',damage_type:'hail',message:'',preferred_contact:'email',source_page:'/contact/',consent:'yes'}))f.set(k,v);return f;}
 test('lead validation enforces consent, preferred contact, bounds and source',()=>{
