@@ -14,7 +14,8 @@
     "test:site": "node scripts/check-site.mjs",
     "hail-history:update": "node scripts/update-hail-history.mjs",
     "dev:private": "node scripts/preview-local.mjs",
-    "hail-history:validate": "node scripts/validate-hail-history.mjs"
+    "hail-history:validate": "node scripts/validate-hail-history.mjs",
+    "hero:validate": "node scripts/validate-hero-assets.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "14.3.0",

@@ -71,3 +71,6 @@ h1,h2,h3{font-family:"Avenir Next Condensed","Segoe UI Variable",InterVariable,I
 
 /* Photography-ready homepage layout without public placeholders. */
 .vehicle-care{display:block;max-width:980px}.vehicle-care-copy{max-width:840px}
+/* Reuse the sharp responsive storm asset in the homepage hero without scaling a duplicate layer. */
+.home-hero:after{background-image:linear-gradient(90deg,#06172d 0%,#06172de8 46%,#06172d66 100%),url('/brand/hero-storm-background-1942.webp')}
+@media(max-width:620px){.home-hero:after{background-image:linear-gradient(90deg,#06172d 0%,#06172de8 46%,#06172d66 100%),url('/brand/hero-storm-background-960.webp');background-position:57% 50%}}

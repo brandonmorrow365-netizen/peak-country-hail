@@ -5,8 +5,11 @@ import { site } from '../data/site';
 <header class="storm-header" data-storm-header>
   <div class="storm-masthead" data-storm-surface>
     <div class="storm-landscape" aria-hidden="true">
-      <img src="/brand/hero-storm-background.png" width="1942" height="809" alt="" fetchpriority="high" />
-      <div class="storm-cloud-layer"></div>
+      <picture class="storm-picture">
+        <source type="image/webp" srcset="/brand/hero-storm-background-960.webp 960w, /brand/hero-storm-background-1942.webp 1942w" sizes="100vw" />
+        <img src="/brand/hero-storm-background.png" width="1942" height="809" alt="" fetchpriority="high" decoding="async" />
+      </picture>
+      <div class="storm-illumination"></div>
       <div class="storm-shade"></div>
       <canvas data-storm-canvas></canvas>
     </div>
@@ -22,10 +25,6 @@ import { site } from '../data/site';
     </div>
 
     <div class="storm-tools" data-storm-tools hidden>
-      <button type="button" data-lightning aria-label="Create a lightning strike in the mountain scene">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 2-9 12h6l-1 8 9-12h-6l1-8Z" /></svg>
-        Lightning
-      </button>
       <button type="button" data-storm-pause>Pause motion</button>
     </div>
   </div>
@@ -54,18 +53,10 @@ import { site } from '../data/site';
   }
   .storm-masthead { position: relative; min-height: 410px; overflow: hidden; }
   .storm-landscape { position: absolute; inset: 0; overflow: hidden; background: #0b1b2b; }
-  .storm-landscape > img, .storm-cloud-layer {
-    position: absolute; inset: -18px; width: calc(100% + 36px); height: calc(100% + 36px);
-    object-fit: cover; object-position: 50% 48%; max-width: none;
-    transform: translate(var(--header-x, 0px), var(--header-y, 0px)) scale(1.02);
-    transition: transform 800ms ease-out;
-  }
-  .storm-cloud-layer {
-    background: url('/brand/hero-storm-background.png') center 48% / cover;
-    mask-image: linear-gradient(#000 0%, #000b 30%, transparent 63%);
-    opacity: .75; animation: cloud-drift 28s ease-in-out infinite alternate;
-  }
-  .storm-shade { position: absolute; inset: 0; background: linear-gradient(90deg,#02102070,transparent 43%,#02102018),linear-gradient(0deg,#031122c9,transparent 23%,transparent 80%,#03112244); }
+  .storm-picture,.storm-picture img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+  .storm-picture img { object-fit: cover; object-position: 50% 48%; max-width: none; }
+  .storm-illumination { position:absolute; inset:0; opacity:var(--storm-light,0); background:radial-gradient(ellipse at 44% 20%,#dceaff50 0,#9dc4e526 26%,transparent 58%); mix-blend-mode:screen; pointer-events:none; }
+  .storm-shade { position: absolute; inset: 0; background: linear-gradient(90deg,#02102082,transparent 40%,#02102012),linear-gradient(0deg,#031122a8,transparent 25%,transparent 82%,#03112230); }
   [data-storm-canvas] { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
   .storm-brand-layer {
     position: relative; z-index: 2; max-width: 1280px; min-height: 410px; margin: auto;
@@ -96,8 +87,6 @@ import { site } from '../data/site';
   .storm-nav > a:not(.button):hover { color: #8ed2ff; }
   .storm-nav .button { margin-left: auto; white-space: nowrap; padding: 12px 19px; font-size: .76rem; }
   .storm-nav .button span { margin-left: 14px; }
-  [data-motion-paused="true"] .storm-cloud-layer { animation-play-state: paused; }
-  @keyframes cloud-drift { from { transform: translate(-12px,-3px) scale(1.045); } to { transform: translate(15px,4px) scale(1.09); } }
   @media (max-width: 900px) {
     .storm-masthead,.storm-brand-layer { min-height: 365px; }
     .storm-brand-layer { padding: 28px 28px 60px; align-items: center; }
@@ -115,8 +104,7 @@ import { site } from '../data/site';
     .storm-location { position: absolute; top: 17px; left: 24px; right: 24px; max-width: none; padding: 0; text-align: left; }
     .storm-location span { display: none; }
     .storm-location strong { font-size: .67rem; letter-spacing: .22em; }
-    .storm-landscape > img { object-position: 57% 50%; }
-    .storm-cloud-layer { background-position: 57% 50%; }
+    .storm-picture img { object-position: 57% 50%; }
     .storm-tools { bottom: 16px; right: 18px; }
     .storm-tools button { padding: 9px 12px; font-size: .65rem; }
     .storm-nav { gap: 8px 25px; padding: 13px 20px 16px; }
@@ -124,7 +112,7 @@ import { site } from '../data/site';
     .storm-nav .button { flex-basis: 100%; text-align: center; margin-top: 4px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .storm-cloud-layer { animation: none; }
-    .storm-landscape > img,.storm-logo,.storm-logo:hover { transform: none; transition: none; }
+    .storm-illumination { display:none; }
+    .storm-logo,.storm-logo:hover { transform: none; transition: none; }
   }
 </style>

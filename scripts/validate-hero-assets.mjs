@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readFileSync,statSync} from 'node:fs';
+const component=readFileSync('src/components/StormHeader.astro','utf8');
+const effect=readFileSync('src/scripts/header-storm.ts','utf8');
+const styles=readFileSync('src/styles/global.css','utf8');
+const png=readFileSync('public/brand/hero-storm-background.png');
+assert.equal(png.toString('ascii',1,4),'PNG','Hero fallback must be PNG');
+assert.equal(png.readUInt32BE(16),1942,'Unexpected original hero width');
+assert.equal(png.readUInt32BE(20),809,'Unexpected original hero height');
+assert.ok(statSync('public/brand/hero-storm-background-1942.webp').size<300_000,'Desktop WebP exceeds 300 KB');
+assert.ok(statSync('public/brand/hero-storm-background-960.webp').size<100_000,'Mobile WebP exceeds 100 KB');
+assert.match(component,/hero-storm-background-960\.webp 960w, \/brand\/hero-storm-background-1942\.webp 1942w/);
+assert.match(component,/width="1942" height="809"/);
+assert.doesNotMatch(component,/data-lightning|storm-cloud-layer/);
+assert.doesNotMatch(effect,/lineTo\(point\.x|strokeStyle = '#68a8ed'|pathBetween/);
+assert.match(effect,/prefers-reduced-motion: reduce/);
+assert.match(styles,/hero-storm-background-960\.webp/);
+console.log('Validated 1942×809 PNG fallback, 1942px/960px WebP selection, payload limits, bolt removal, and reduced-motion handling.');
