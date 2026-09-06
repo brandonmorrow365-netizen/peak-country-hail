@@ -2,7 +2,7 @@ export interface ServicePage { title:string; description:string; h1:string; intr
 
 export const servicePages:Record<string,ServicePage> = {
   'auto-hail-repair': {
-    title:'Auto Hail Repair in Greeley & Northern Colorado',
+    title:'Auto Hail Repair in Greeley, CO | Peak Country',
     description:'Understand professional auto hail repair, PDR repairability, inspections, insurance claims, and repair expectations in Greeley and Northern Colorado.',
     h1:'Auto Hail Repair in Greeley and Northern Colorado',
     intro:'Hail damage can affect nearly every upward-facing and side panel on a vehicle. Peak Country inspects the complete vehicle, explains which dents may qualify for paintless dent repair, and builds the repair plan around the actual damage.',
@@ -44,7 +44,7 @@ export const servicePages:Record<string,ServicePage> = {
     related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/hail-tracker/',label:'Northern Colorado Hail Tracker'},{href:'/northern-colorado-hail-history/',label:'Historical Hail'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/free-hail-inspection/',label:'Free Hail Inspection'}]
   },
   'paintless-dent-repair': {
-    title:'Paintless Dent Repair in Greeley, Colorado',
+    title:'Paintless Dent Repair Greeley, CO | Peak Country',
     description:'Learn how paintless dent repair works, which dents may qualify, and why technician judgment matters for PDR in Greeley and Northern Colorado.',
     h1:'Paintless Dent Repair in Greeley, Colorado',
     intro:'Paintless dent repair is a skilled method for reshaping suitable vehicle panels while retaining the existing finish. Peak Country brings 20+ years of hands-on Paintless Dent Repair experience to mobile inspections and repairs across Greeley, Weld County, and Northern Colorado.',
@@ -86,7 +86,7 @@ export const servicePages:Record<string,ServicePage> = {
     related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/about/',label:'About Peak Country'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/process/',label:'Repair Process'},{href:'/free-hail-inspection/',label:'Free Inspection'}]
   },
   'door-ding-repair': {
-    title:'Door Ding Repair in Greeley & Northern Colorado',
+    title:'Door Ding Repair in Greeley, CO | Peak Country',
     description:'Understand PDR options for parking-lot door dings, minor dents, creases, and body-line damage in Greeley, Weld County, and Northern Colorado.',
     h1:'Door Ding Repair in Greeley and Northern Colorado',
     intro:'Parking-lot door dings and everyday dents may look simple, but their location, depth, paint condition, and access determine the right repair. Peak Country evaluates each panel before recommending paintless dent repair.',

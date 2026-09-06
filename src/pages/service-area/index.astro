@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { site } from '../../data/site';
-const title='Mobile PDR Service Area | Greeley & Weld County';
+const title='PDR Service Area | Greeley & Northern Colorado';
 const description='Peak Country provides mobile auto hail repair and paintless dent repair by appointment in Greeley, Weld County, and nearby Northern Colorado communities.';
 const pageSchema={ '@context':'https://schema.org','@type':'Service','@id':`${site.url}/service-area/#service`,name:'Mobile Paintless Dent Repair Service',description,url:`${site.url}/service-area/`,provider:{'@id':`${site.url}/#business`},areaServed:[{ '@type':'City',name:'Greeley, Colorado'},{'@type':'AdministrativeArea',name:'Weld County, Colorado'},...site.approvedCommunities.filter(name=>name!=='Greeley').map(name=>({'@type':'City',name:`${name}, Colorado`})),{'@type':'Place',name:'Northern Colorado'}] };
 ---

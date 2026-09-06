@@ -30,8 +30,9 @@ const faqSchema = {
 };
 ---
 <Layout
-  title="Auto Hail Repair & PDR in Greeley, Colorado"
-  description={`Professional auto hail repair and paintless dent repair in Greeley, Weld County, and Northern Colorado, backed by ${site.experience.toLowerCase()}.`}
+  title="Auto Hail Repair & PDR | Greeley, CO | Peak Country"
+  description={`Mobile auto hail repair and paintless dent repair by appointment in Greeley and Northern Colorado, backed by ${site.experience.toLowerCase()}.`}
+  exactTitle
   pageSchema={faqSchema}
 >
   <section class="hero home-hero">
@@ -91,7 +92,6 @@ const faqSchema = {
       <p>The goal is a considered repair plan that protects the whole vehicle.</p>
       <a href="/repair-standards/">Read Peak Country’s repair standards →</a>
     </div>
-    <div class="photo-feature" role="img" aria-label="Reserved space for a genuine Peak Country technician repair photograph"><span>Future genuine photography</span><strong>Technician at work</strong></div>
   </section>
 
   <section class="section hail-intelligence">
@@ -119,13 +119,6 @@ const faqSchema = {
     <h2>Built around Greeley and Weld County drivers.</h2>
     <p>Peak Country provides mobile paintless dent repair by appointment in Greeley, Evans, Windsor, Eaton, Severance, Johnstown, Milliken, LaSalle, Platteville, and nearby Northern Colorado communities. Call or text to discuss the vehicle’s location and arrange an inspection.</p>
     <a href="/service-area/">View the mobile service area →</a>
-  </section>
-
-  <section class="section photo-plan" aria-labelledby="photo-plan-title">
-    <div class="home-section-head"><div><div class="eyebrow">Genuine Work, Coming Into View</div><h2 id="photo-plan-title">Ready for real Peak Country photography.</h2></div><p>Reserved for owner-approved project photographs.</p></div>
-    <div class="photo-slot-grid">
-      {['Hail-damaged vehicle', 'Inspection lighting', 'Technician repair', 'Panel detail', 'Completed vehicle'].map((label, index) => <div class="photo-slot"><span>0{index + 1}</span><strong>{label}</strong></div>)}
-    </div>
   </section>
 
   <section class="section home-faq">
