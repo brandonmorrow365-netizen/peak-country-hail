@@ -1,5 +1,5 @@
 import { createReadStream, createWriteStream } from 'node:fs';
-import { mkdir, rename, stat, unlink } from 'node:fs/promises';
+import { mkdir, rename, stat, unlink, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
@@ -97,4 +97,23 @@ export async function inspectArchive(archive,cacheDirectory){
  await parseCsvFile(csv,(row,line)=>{if(line===1)header=row;else rows++;});
  if(!header?.includes('EVENT_TYPE')||!header.includes('BEGIN_LAT')||!header.includes('EVENT_ID'))throw new Error(`Unexpected NOAA details schema for ${archive.filename}`);
  return {...archive,compressed,csv,rowCount:rows,columnCount:header.length,header};
+}
+
+export async function processArchives(archives,cacheDirectory,onProgress=()=>{}){
+ const records=[],seenEventIds=new Set();
+ for(const archive of archives){
+  const compressed=await downloadArchive(archive,cacheDirectory),csv=await decompressArchive(compressed,cacheDirectory);let index=null,sourceRows=0,retained=0;
+  await parseCsvFile(csv,(row,line)=>{if(line===1){index=headerIndex(row);return;}sourceRows++;const record=normalizeNoaaRecord(row,index,archive);if(!record||seenEventIds.has(record.event_id))return;seenEventIds.add(record.event_id);records.push(record);retained++;});
+  onProgress({archive,sourceRows,retained});
+ }
+ return records.sort((a,b)=>a.year-b.year||String(a.begin_date_time).localeCompare(String(b.begin_date_time))||Number(a.event_id)-Number(b.event_id));
+}
+export const REPORT_FIELDS=Object.freeze(['year','month_name','begin_date_time','end_date_time','state','cz_name','begin_location','event_type','magnitude','magnitude_type','source','begin_lat','begin_lon','episode_id','event_id','event_narrative','distance_from_greeley_miles','noaa_archive_year','noaa_archive_filename','noaa_archive_url','noaa_event_url']);
+const csvCell=value=>{const text=value===null||value===undefined?'':String(value);return /[",\r\n]/.test(text)?`"${text.replaceAll('"','""')}"`:text;};
+export async function writeReportOutputs(records,outputDirectory){
+ await mkdir(outputDirectory,{recursive:true});
+ const jsonPath=join(outputDirectory,'hail-reports-2016-2025.json'),csvPath=join(outputDirectory,'hail-reports-2016-2025.csv');
+ const csv=[REPORT_FIELDS.join(','),...records.map(record=>REPORT_FIELDS.map(field=>csvCell(record[field])).join(','))].join('\n')+'\n';
+ await Promise.all([writeFile(jsonPath,JSON.stringify(records,null,2)+'\n'),writeFile(csvPath,csv)]);
+ return {jsonPath,csvPath};
 }

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {discoverNewestArchives,parseCsvFile,haversineMiles,validCoordinate,headerIndex,normalizeNoaaRecord,filterNormalizeRecords,HISTORY_RADIUS_MILES} from '../scripts/hail-history-lib.mjs';
+import {discoverNewestArchives,parseCsvFile,haversineMiles,validCoordinate,headerIndex,normalizeNoaaRecord,filterNormalizeRecords,HISTORY_RADIUS_MILES,writeReportOutputs} from '../scripts/hail-history-lib.mjs';
 
 test('NOAA discovery selects the newest corrected archive for each year',()=>{
  const html=['StormEvents_details-ftp_v1.0_d2016_c20200101.csv.gz','StormEvents_details-ftp_v1.0_d2016_c20240715.csv.gz','StormEvents_details-ftp_v1.0_d2017_c20240715.csv.gz'].join('\n');
@@ -42,4 +42,8 @@ test('coordinate, year, event type, radius, and magnitude are validated conserva
 test('only accidental duplicate EVENT_ID ingestion is removed',()=>{
  const records=filterNormalizeRecords([row(),row(),row({EVENT_ID:'21',BEGIN_LOCATION:'EVANS'})],header,archive);
  assert.equal(records.length,2);assert.deepEqual(records.map(record=>record.event_id),['20','21']);
+});
+test('report JSON and CSV outputs retain null magnitudes and quote narratives safely',async()=>{
+ const directory=await mkdtemp(join(tmpdir(),'peak-hail-output-'));
+ try{const record=normalizeNoaaRecord(row({MAGNITUDE:'',EVENT_NARRATIVE:'Hail, then "wind"'}),headerIndex(header),archive);const paths=await writeReportOutputs([record],directory);const json=JSON.parse(await (await import('node:fs/promises')).readFile(paths.jsonPath,'utf8'));const csv=await (await import('node:fs/promises')).readFile(paths.csvPath,'utf8');assert.equal(json[0].magnitude,null);assert.match(csv,/"Hail, then ""wind"""/);}finally{await rm(directory,{recursive:true,force:true});}
 });

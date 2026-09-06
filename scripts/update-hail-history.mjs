@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { resolve } from 'node:path';
-import { fetchArchiveManifest,inspectArchive } from './hail-history-lib.mjs';
+import { fetchArchiveManifest,inspectArchive,processArchives,writeReportOutputs } from './hail-history-lib.mjs';
 
 const cacheDirectory=resolve('work/hail-history-cache');
 const args=new Set(process.argv.slice(2));
@@ -11,5 +11,7 @@ if(args.has('--discover-only')){
  process.exit(0);
 }
 const requestedYear=[...args].find(arg=>arg.startsWith('--year='));
-const archives=requestedYear?manifest.filter(item=>item.year===Number(requestedYear.split('=')[1])):manifest;
-for(const archive of archives){const result=await inspectArchive(archive,cacheDirectory);console.log(`${result.year}: parsed ${result.rowCount.toLocaleString()} rows from ${result.filename}`);}
+if(requestedYear){const archive=manifest.find(item=>item.year===Number(requestedYear.split('=')[1]));if(!archive)throw new Error('Requested year is outside 2016-2025');const result=await inspectArchive(archive,cacheDirectory);console.log(`${result.year}: parsed ${result.rowCount.toLocaleString()} rows from ${result.filename}`);process.exit(0);}
+const records=await processArchives(manifest,cacheDirectory,({archive,sourceRows,retained})=>console.log(`${archive.year}: retained ${retained.toLocaleString()} of ${sourceRows.toLocaleString()} NOAA detail rows`));
+const outputs=await writeReportOutputs(records,resolve('data/hail-history'));
+console.log(`Wrote ${records.length.toLocaleString()} verified hail reports to ${outputs.jsonPath} and ${outputs.csvPath}.`);
