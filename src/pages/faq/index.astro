@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../data/site';
+
+const title='Paintless Dent Repair & Hail Repair FAQ | Peak Country';
+const description='Straight answers about paintless dent repair, auto hail damage, inspections, insurance claims, mobile service, and hail reports in Northern Colorado.';
+const faqs=[
+['What is Paintless Dent Repair?','Paintless Dent Repair, or PDR, is a method of gradually reshaping suitable dented metal while retaining the existing paint. A technician reads the panel under reflection lighting and uses controlled push or glue-pull techniques based on the dent, finish, material, and access.'],
+['Can hail damage be repaired without repainting?','Yes, many hail dents can be repaired without repainting when the paint is intact and the metal remains suitable for PDR. Cracked paint, excessive stretch, severe impacts, or other conditions may require conventional repair.'],
+['Does PDR preserve factory paint?','Yes, preserving the existing finish is a central benefit of PDR when the damage qualifies. Because the panel is reshaped without sanding, filler, or refinishing, the original paint remains in place.'],
+['Can every hail dent be repaired with PDR?','No, not every hail dent qualifies for PDR. Paint condition, depth, sharpness, metal stretch, body-line location, panel material, previous repair, and safe access all affect repairability.'],
+['Can PDR repair aluminum panels?','Yes, some aluminum-panel dents can be repaired with PDR. Aluminum behaves differently from steel, so the technician must evaluate the panel construction, damage, paint, and access before recommending the method.'],
+['Can dents on body lines be repaired?','Yes, some body-line dents can be repaired with PDR. Formed character lines often carry more tension, which makes the dent’s depth, sharpness, finish condition, and location especially important.'],
+['Can sharp dents or creases be repaired?','Sometimes, depending on the damage. Minor creases and certain sharp dents may respond to PDR, while pinched centers, excessive stretch, edge damage, or compromised paint can limit the result or require another method.'],
+['Does cracked paint affect whether PDR can be used?','Yes, cracked paint can make a paintless repair inappropriate. PDR moves metal but does not restore a damaged coating, and further movement could affect an already compromised finish.'],
+['How long does hail repair take?','The repair time varies with dent count, severity, affected panels, access, disassembly, parts or trim needs, insurer requirements, and scheduling. Peak Country discusses a realistic range after inspecting the vehicle and defining the scope.'],
+['How do I know if my vehicle has hail damage?','Inspect the vehicle safely in clean, bright conditions and look for changes in reflected lines across the hood, roof, rails, doors, and other panels. Shallow dents are easy to miss, so professional reflection lighting provides a more reliable assessment.'],
+['Should I have my vehicle inspected after a hailstorm?','Yes, an inspection is reasonable if the vehicle was exposed or you notice possible damage. A direct assessment can distinguish hail dents from unrelated wear and determine whether PDR is appropriate.'],
+['Does Peak Country work with insurance hail claims?','Yes, Peak Country can work with insurance hail-repair documentation and scope review. The insurer and policy control coverage, deductible, authorization, and payment decisions.'],
+['Do I need an insurance claim before requesting an inspection?','No, you can request an inspection before deciding whether to file a claim. If you plan to involve insurance, ask the insurer what reporting and approval steps your policy requires.'],
+['What happens if additional hail damage is discovered during the repair?','Legitimate additional damage or required operations can be documented for discussion with the vehicle owner and, when applicable, insurer review. A supplement should describe supported changes in scope rather than function as an automatic increase.'],
+['Does Peak Country repair door dings?','Yes, Peak Country evaluates parking-lot door dings, minor dents, and repairable creases for PDR. Paint condition, depth, body-line involvement, and access determine whether a paintless approach makes sense.'],
+['What areas does Peak Country serve?','Peak Country is a mobile service based around Greeley and serving Weld County and nearby Northern Colorado communities by appointment. Location and suitable working conditions are confirmed when scheduling.'],
+['How much PDR experience does Peak Country have?','Peak Country is built around 20+ years of hands-on Paintless Dent Repair experience. That experience supports repairability decisions, access planning, controlled metal work, and realistic customer communication.'],
+['Does a nearby NOAA hail report prove my vehicle was damaged?','No, a nearby NOAA or Storm Prediction Center report does not prove that a specific vehicle was struck or damaged. Reports describe observations at a place and time and may have limited coverage or location precision.'],
+['What size hail can damage a vehicle?','There is no single hail size that predicts damage to every vehicle. Diameter matters, but wind, impact angle, storm duration, vehicle exposure, panel shape, material, and finish condition also affect the outcome.'],
+['What happens when trim or a headliner needs to be removed for PDR?','Approved components may be handled or removed carefully when necessary to create safe access behind a panel. Reassembly includes attention to applicable clips, fasteners, connections, trim fit, and the surrounding area.']
+];
+const pageSchema={ '@context':'https://schema.org','@type':'FAQPage','@id':`${site.url}/faq/#faq`,mainEntity:faqs.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}})) };
+---
+<Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
+  <header class="page-head faq-head"><div class="eyebrow">Straight answers from a technician-led service</div><h1>Paintless Dent Repair and Auto Hail Repair FAQ</h1><p>Practical answers about repairability, factory paint, inspections, insurance context, mobile service, and Northern Colorado hail information.</p></header>
+  <section class="section faq-directory"><nav aria-label="FAQ topics"><a href="#pdr-questions">PDR &amp; repairability</a><a href="#inspection-questions">Inspection &amp; timing</a><a href="#insurance-questions">Insurance &amp; documentation</a><a href="#local-questions">Local service &amp; hail data</a></nav></section>
+  <article class="section faq-expanded">
+    <section id="pdr-questions"><div class="eyebrow">PDR &amp; Repairability</div><h2>How paintless repair works</h2><div class="faq-list">{faqs.slice(0,8).map(([question,answer])=><details><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+    <section id="inspection-questions"><div class="eyebrow">Inspection &amp; Timing</div><h2>Understanding the vehicle first</h2><div class="faq-list">{faqs.slice(8,11).map(([question,answer])=><details><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+    <section id="insurance-questions"><div class="eyebrow">Insurance &amp; Documentation</div><h2>Keeping claim context clear</h2><div class="faq-list">{faqs.slice(11,14).map(([question,answer])=><details><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+    <section id="local-questions"><div class="eyebrow">Local Service &amp; Hail Data</div><h2>Peak Country and Northern Colorado</h2><div class="faq-list">{faqs.slice(14).map(([question,answer])=><details><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+  </article>
+  <section class="section faq-links"><a href="/process/">Peak Country Repair Process →</a><a href="/repair-standards/">PDR Repair Standards →</a><a href="/hail-tracker/">Northern Colorado Hail Tracker →</a><a href="/free-hail-inspection/">Request a Free Inspection →</a></section>
+</Layout>
