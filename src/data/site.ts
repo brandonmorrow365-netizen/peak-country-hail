@@ -14,7 +14,7 @@ export const site = {
   mobileService: true,
   ownerName: null,
   ownerPhoto: null,
-  approvedCommunities: ['Greeley', 'Evans', 'Windsor', 'Eaton', 'Severance', 'Johnstown', 'Milliken', 'LaSalle', 'Platteville'],
+  approvedCommunities: ['Greeley', 'Evans', 'Windsor', 'Severance', 'Eaton', 'Milliken', 'Johnstown', 'LaSalle', 'Kersey', 'Loveland', 'Fort Collins', 'Platteville'],
   primaryServices: [
     'Auto Hail Repair',
     'Paintless Dent Repair (PDR)',

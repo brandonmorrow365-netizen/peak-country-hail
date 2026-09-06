@@ -9,6 +9,15 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 const robots = robotsMeta(Astro.url.hostname, noindex);
 const preview = !isProductionHostname(Astro.url.hostname);
 const documentTitle = exactTitle ? title : `${title} | Peak Country`;
+const websiteSchema = Astro.url.pathname === '/' ? {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: `${site.url}/`,
+  name: site.name,
+  publisher: { '@id': `${site.url}/#business` },
+  inLanguage: 'en-US',
+} : null;
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'AutoRepair',
@@ -45,6 +54,7 @@ const schema = {
 <link rel="manifest" href="/manifest.webmanifest" />
 <meta name="theme-color" content="#102536" />
 <script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+{websiteSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema).replace(/</g, '\\u003c')} />}
 {pageSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(pageSchema).replace(/</g, '\\u003c')} />}
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
