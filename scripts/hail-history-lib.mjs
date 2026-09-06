@@ -1,6 +1,6 @@
 import { createReadStream, createWriteStream } from 'node:fs';
 import { mkdir, rename, stat, unlink, writeFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { createGunzip } from 'node:zlib';
@@ -116,4 +116,23 @@ export async function writeReportOutputs(records,outputDirectory){
  const csv=[REPORT_FIELDS.join(','),...records.map(record=>REPORT_FIELDS.map(field=>csvCell(record[field])).join(','))].join('\n')+'\n';
  await Promise.all([writeFile(jsonPath,JSON.stringify(records,null,2)+'\n'),writeFile(csvPath,csv)]);
  return {jsonPath,csvPath};
+}
+
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+export function hailDate(record){const match=String(record.begin_date_time||'').match(/^(\d{2})-([A-Z]{3})-\d{2}/i),monthIndex=match?MONTHS.findIndex(month=>month.slice(0,3).toLowerCase()===match[2].toLowerCase()):-1;if(!match||monthIndex<0)throw new Error(`Invalid NOAA BEGIN_DATE_TIME for EVENT_ID ${record.event_id}`);return `${record.year}-${String(monthIndex+1).padStart(2,'0')}-${match[1]}`;}
+function metrics(records){
+ const days=new Set(),byMonth=Object.fromEntries(MONTHS.map(month=>[month,0])),byLocation={};let largest=null,closest=null,onePlus=0,twoPlus=0;
+ for(const record of records){days.add(hailDate(record));if(record.month_name in byMonth)byMonth[record.month_name]++;if(record.begin_location)byLocation[record.begin_location]=(byLocation[record.begin_location]||0)+1;if(record.magnitude!==null){largest=largest===null?record.magnitude:Math.max(largest,record.magnitude);if(record.magnitude>=1)onePlus++;if(record.magnitude>=2)twoPlus++;}closest=closest===null?record.distance_from_greeley_miles:Math.min(closest,record.distance_from_greeley_miles);}
+ const mostActiveMonth=MONTHS.reduce((best,month)=>byMonth[month]>byMonth[best]?month:best,MONTHS[0]);
+ return {report_count:records.length,hail_day_count:days.size,largest_reported_hail_inches:largest,hail_report_count_1in_plus:onePlus,hail_report_count_2in_plus:twoPlus,closest_report_distance:closest,most_active_month:records.length?mostActiveMonth:null,reports_by_month:byMonth,reports_by_location_or_community:Object.fromEntries(Object.entries(byLocation).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])))};
+}
+export function summarizeRecords(records,years=TARGET_YEARS){return {completed_seasons:{start_year:years[0],end_year:years.at(-1),year_count:years.length,current_provisional_year_excluded:2026},overall:metrics(records),annual:Object.fromEntries(years.map(year=>[year,metrics(records.filter(record=>record.year===year))]))};}
+export function sourceManifest(archives,ingestedAt=new Date().toISOString()){return {processing_format_version:FORMAT_VERSION,generated_at:ingestedAt,canonical_source:{name:'NOAA/NCEI Storm Events Database bulk data',base_url:NOAA_BASE_URL,archive_family:'StormEvents_details-ftp_v1.0_dYYYY_*.csv.gz'},archives:archives.map(({year,filename,url,correctionDate})=>({year,filename,url,correction_date:correctionDate})),completed_seasons:TARGET_YEARS,current_provisional_year:{year:2026,included_in_completed_totals:false},geographic_filter:{anchor_name:'Greeley, Colorado city reference point',latitude:GREELEY_ANCHOR.latitude,longitude:GREELEY_ANCHOR.longitude,radius_statute_miles:HISTORY_RADIUS_MILES,method:'Haversine great-circle distance using Earth radius 3,958.7613 statute miles'},filtering_rules:['EVENT_TYPE equals Hail','YEAR is 2016 through 2025 inclusive','BEGIN_LAT and BEGIN_LON are present, numeric, and within valid coordinate ranges','Calculated Haversine distance from the Greeley city reference point is less than or equal to 50.0 statute miles'],deduplication:'Exact repeated NOAA EVENT_ID records are retained once; separate event IDs are retained.',magnitude_policy:'NOAA MAGNITUDE is preserved numerically when supplied and remains null when blank. No descriptive-to-numeric conversion is performed.'};}
+export function validateHistory(records,summary,manifest){
+ const ids=new Set();for(const record of records){if(record.event_type!=='Hail')throw new Error(`Non-Hail EVENT_ID ${record.event_id}`);if(record.year<2016||record.year>2025)throw new Error(`Out-of-range EVENT_ID ${record.event_id}`);if(!validCoordinate(record.begin_lat,record.begin_lon))throw new Error(`Invalid coordinate EVENT_ID ${record.event_id}`);if(record.distance_from_greeley_miles>HISTORY_RADIUS_MILES)throw new Error(`Outside radius EVENT_ID ${record.event_id}`);if(ids.has(record.event_id))throw new Error(`Duplicate EVENT_ID ${record.event_id}`);ids.add(record.event_id);}
+ const calculated=summarizeRecords(records);if(JSON.stringify(calculated)!==JSON.stringify(summary))throw new Error('Summary does not match filtered records');if(manifest.archives.length!==TARGET_YEARS.length||manifest.archives.some((archive,index)=>archive.year!==TARGET_YEARS[index]))throw new Error('Source manifest does not cover every completed season');return true;
+}
+export async function writeSummaryOutputs(records,archives,outputDirectory,ingestedAt=new Date().toISOString()){
+ const summary=summarizeRecords(records),manifest=sourceManifest(archives,ingestedAt);validateHistory(records,summary,manifest);await mkdir(outputDirectory,{recursive:true});
+ const summaryPath=join(outputDirectory,'hail-history-summary.json'),manifestPath=join(outputDirectory,'source-manifest.json');await Promise.all([writeFile(summaryPath,JSON.stringify(summary,null,2)+'\n'),writeFile(manifestPath,JSON.stringify(manifest,null,2)+'\n')]);return {summary,manifest,summaryPath,manifestPath};
 }

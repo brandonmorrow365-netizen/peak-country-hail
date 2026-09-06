@@ -1,0 +1,102 @@
+{
+  "processing_format_version": "1.0.0",
+  "generated_at": "2026-09-06T02:25:09.820Z",
+  "canonical_source": {
+    "name": "NOAA/NCEI Storm Events Database bulk data",
+    "base_url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/",
+    "archive_family": "StormEvents_details-ftp_v1.0_dYYYY_*.csv.gz"
+  },
+  "archives": [
+    {
+      "year": 2016,
+      "filename": "StormEvents_details-ftp_v1.0_d2016_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2016_c20260323.csv.gz",
+      "correction_date": "20260323"
+    },
+    {
+      "year": 2017,
+      "filename": "StormEvents_details-ftp_v1.0_d2017_c20260519.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2017_c20260519.csv.gz",
+      "correction_date": "20260519"
+    },
+    {
+      "year": 2018,
+      "filename": "StormEvents_details-ftp_v1.0_d2018_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2018_c20260323.csv.gz",
+      "correction_date": "20260323"
+    },
+    {
+      "year": 2019,
+      "filename": "StormEvents_details-ftp_v1.0_d2019_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2019_c20260323.csv.gz",
+      "correction_date": "20260323"
+    },
+    {
+      "year": 2020,
+      "filename": "StormEvents_details-ftp_v1.0_d2020_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2020_c20260323.csv.gz",
+      "correction_date": "20260323"
+    },
+    {
+      "year": 2021,
+      "filename": "StormEvents_details-ftp_v1.0_d2021_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2021_c20260323.csv.gz",
+      "correction_date": "20260323"
+    },
+    {
+      "year": 2022,
+      "filename": "StormEvents_details-ftp_v1.0_d2022_c20260625.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2022_c20260625.csv.gz",
+      "correction_date": "20260625"
+    },
+    {
+      "year": 2023,
+      "filename": "StormEvents_details-ftp_v1.0_d2023_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2023_c20260323.csv.gz",
+      "correction_date": "20260323"
+    },
+    {
+      "year": 2024,
+      "filename": "StormEvents_details-ftp_v1.0_d2024_c20260728.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2024_c20260728.csv.gz",
+      "correction_date": "20260728"
+    },
+    {
+      "year": 2025,
+      "filename": "StormEvents_details-ftp_v1.0_d2025_c20260819.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2025_c20260819.csv.gz",
+      "correction_date": "20260819"
+    }
+  ],
+  "completed_seasons": [
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "current_provisional_year": {
+    "year": 2026,
+    "included_in_completed_totals": false
+  },
+  "geographic_filter": {
+    "anchor_name": "Greeley, Colorado city reference point",
+    "latitude": 40.41566,
+    "longitude": -104.7721515,
+    "radius_statute_miles": 50,
+    "method": "Haversine great-circle distance using Earth radius 3,958.7613 statute miles"
+  },
+  "filtering_rules": [
+    "EVENT_TYPE equals Hail",
+    "YEAR is 2016 through 2025 inclusive",
+    "BEGIN_LAT and BEGIN_LON are present, numeric, and within valid coordinate ranges",
+    "Calculated Haversine distance from the Greeley city reference point is less than or equal to 50.0 statute miles"
+  ],
+  "deduplication": "Exact repeated NOAA EVENT_ID records are retained once; separate event IDs are retained.",
+  "magnitude_policy": "NOAA MAGNITUDE is preserved numerically when supplied and remains null when blank. No descriptive-to-numeric conversion is performed."
+}
