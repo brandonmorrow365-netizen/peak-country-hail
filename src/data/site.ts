@@ -8,7 +8,7 @@ export const site = {
   focus: 'Greeley · Weld County · Northern Colorado',
   phone: '+17204456246',
   phoneDisplay: '(720) 445-6246',
-  email: null,
+  email: 'info@peakcountryhail.com',
   hours: null,
   logo: '/brand/peak-country-logo.png',
   mobileService: true,
