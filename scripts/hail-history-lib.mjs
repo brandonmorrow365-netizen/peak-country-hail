@@ -8,6 +8,27 @@ import { createGunzip } from 'node:zlib';
 export const NOAA_BASE_URL='https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/';
 export const TARGET_YEARS=Object.freeze(Array.from({length:10},(_,index)=>2016+index));
 export const ARCHIVE_PATTERN=/StormEvents_details-ftp_v1\.0_d(\d{4})_c(\d{8})\.csv\.gz/g;
+export const GREELEY_ANCHOR=Object.freeze({latitude:40.41566,longitude:-104.7721515});
+export const HISTORY_RADIUS_MILES=50;
+export const FORMAT_VERSION='1.0.0';
+
+export function haversineMiles(latitude,longitude,origin=GREELEY_ANCHOR){
+ const earthRadiusMiles=3958.7613,toRadians=Math.PI/180,dLat=(latitude-origin.latitude)*toRadians,dLon=(longitude-origin.longitude)*toRadians;
+ const a=Math.sin(dLat/2)**2+Math.cos(origin.latitude*toRadians)*Math.cos(latitude*toRadians)*Math.sin(dLon/2)**2;
+ return 2*earthRadiusMiles*Math.asin(Math.sqrt(a));
+}
+export function validCoordinate(latitude,longitude){return Number.isFinite(latitude)&&latitude>=-90&&latitude<=90&&Number.isFinite(longitude)&&longitude>=-180&&longitude<=180;}
+export function headerIndex(header){const index=new Map(header.map((name,position)=>[name.replace(/^\uFEFF/,''),position]));for(const required of ['YEAR','EVENT_TYPE','BEGIN_LAT','BEGIN_LON','EVENT_ID'])if(!index.has(required))throw new Error(`NOAA details schema missing ${required}`);return index;}
+const nullable=value=>value===''?null:value;
+const numericOrNull=value=>value===''||!Number.isFinite(Number(value))?null:Number(value);
+export function normalizeNoaaRecord(row,index,archive){
+ const get=name=>String(row[index.get(name)]??'').trim(),year=Number(get('YEAR')),latitude=Number(get('BEGIN_LAT')),longitude=Number(get('BEGIN_LON'));
+ if(get('EVENT_TYPE')!=='Hail'||year<2016||year>2025||year!==archive.year||!validCoordinate(latitude,longitude))return null;
+ const distance=haversineMiles(latitude,longitude);if(distance>HISTORY_RADIUS_MILES)return null;
+ const eventId=get('EVENT_ID');if(!eventId)throw new Error(`NOAA Hail record missing EVENT_ID in ${archive.filename}`);
+ return {year,month_name:nullable(get('MONTH_NAME')),begin_date_time:nullable(get('BEGIN_DATE_TIME')),end_date_time:nullable(get('END_DATE_TIME')),state:nullable(get('STATE')),cz_name:nullable(get('CZ_NAME')),begin_location:nullable(get('BEGIN_LOCATION')),event_type:'Hail',magnitude:numericOrNull(get('MAGNITUDE')),magnitude_type:nullable(get('MAGNITUDE_TYPE')),source:nullable(get('SOURCE')),begin_lat:latitude,begin_lon:longitude,episode_id:nullable(get('EPISODE_ID')),event_id:eventId,event_narrative:nullable(get('EVENT_NARRATIVE')),distance_from_greeley_miles:Number(distance.toFixed(3)),noaa_archive_year:archive.year,noaa_archive_filename:archive.filename,noaa_archive_url:archive.url,noaa_event_url:`https://www.ncdc.noaa.gov/stormevents/eventdetails.jsp?id=${encodeURIComponent(eventId)}`};
+}
+export function filterNormalizeRecords(rows,header,archive){const index=headerIndex(header),seen=new Set(),records=[];for(const row of rows){const record=normalizeNoaaRecord(row,index,archive);if(!record||seen.has(record.event_id))continue;seen.add(record.event_id);records.push(record);}return records;}
 
 export function discoverNewestArchives(html,years=TARGET_YEARS){
  const requested=new Set(years),found=new Map();
