@@ -4,6 +4,7 @@ export function validateLead(form:FormData){
  const read=(key:string,max:number,required=false)=>{const value=form.get(key);if(typeof value!=='string'||value.length>max||(required&&!value.trim()))throw new Error('Please check the '+key.replaceAll('_',' ')+' field.');return value.trim();};
  const name=read('name',100,true),email=read('email',254),phone=read('phone',40),location=read('location',120,true),vehicle=read('vehicle',160,true),damage=read('damage_type',40,true),message=read('message',4000),preferred=read('preferred_contact',10,true),source=read('source_page',100,true);
  if(!['email','phone'].includes(preferred))throw new Error('Choose a contact method.');
+ if(/[\r\n\x00-\x1f\x7f]/.test(name)||/[\r\n\x00-\x1f\x7f]/.test(email))throw new Error('Please remove invalid characters.');
  if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))throw new Error('Enter a valid email address.');
  if(phone&&(phone.replace(/\D/g,'').length<7||phone.replace(/\D/g,'').length>15))throw new Error('Enter a valid phone number.');
  if(preferred==='email'&&!email||preferred==='phone'&&!phone)throw new Error('Provide your preferred contact details.');
@@ -13,8 +14,10 @@ export function validateLead(form:FormData){
  if(form.get('website'))throw new Error('Unable to accept this request.');
  return {name,email,phone,location,vehicle,damage,message,preferred,source};
 }
-export async function submitLead(request:Request,env:Cloudflare.Env):Promise<{status:number;message:string;ok?:boolean}>{
- if(env.FORMS_ENABLED!=='true'||!env.DB||!env.TURNSTILE_SECRET_KEY||!env.TURNSTILE_SITE_KEY)return {status:503,message:`Online requests are not available yet. Call or text ${site.phoneDisplay} to contact Peak Country.`};
+const htmlEscape=(value:string)=>value.replace(/[&<>"']/g,(character)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]!));
+const textLine=(label:string,value:string)=>`${label}: ${value||'Not provided'}`;
+export async function submitLead(request:Request,env:Cloudflare.Env):Promise<{status:number;message:string;ok?:boolean;leadId?:string;messageId?:string}>{
+ if(env.FORMS_ENABLED!=='true'||!env.DB||!env.TURNSTILE_SECRET_KEY||!env.TURNSTILE_SITE_KEY||!env.CONTACT_EMAIL||!env.CONTACT_EMAIL_RECIPIENT)return {status:503,message:`Online requests are not available yet. Call or text ${site.phoneDisplay} to contact Peak Country.`};
  const url=new URL(request.url);
  if(request.headers.get('origin')!==url.origin)return {status:403,message:'Please submit the form from this website.'};
  if(!request.headers.get('content-type')?.startsWith('application/x-www-form-urlencoded'))return {status:415,message:'Unsupported form format.'};
@@ -33,7 +36,21 @@ export async function submitLead(request:Request,env:Cloudflare.Env):Promise<{st
   if(!verification.success||verification.hostname!==url.hostname||verification.action!=='lead')return {status:400,message:'Spam verification expired or failed. Reload the form and try again.'};
   const recent=await env.DB.prepare('SELECT COUNT(*) AS count FROM leads WHERE created_at>? AND (email=? AND email<>\'\' OR phone=? AND phone<>\'\')').bind(new Date(Date.now()-3600000).toISOString(),lead.email,lead.phone).first<{count:number}>();
   if((recent?.count||0)>=3)return {status:429,message:'Several requests have already been received for these contact details. Please try again later.'};
-  await env.DB.prepare('INSERT INTO leads(id,created_at,name,email,phone,location,vehicle,damage_type,message,preferred_contact,source_page,consent_version) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(crypto.randomUUID(),new Date().toISOString(),lead.name,lead.email,lead.phone,lead.location,lead.vehicle,lead.damage,lead.message,lead.preferred,lead.source,'contact-v1').run();
-  return {status:200,ok:true,message:'Your request has been saved. This is not an appointment confirmation.'};
+  const leadId=crypto.randomUUID(),createdAt=new Date().toISOString();
+  await env.DB.prepare('INSERT INTO leads(id,created_at,name,email,phone,location,vehicle,damage_type,message,preferred_contact,source_page,consent_version,notification_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(leadId,createdAt,lead.name,lead.email,lead.phone,lead.location,lead.vehicle,lead.damage,lead.message,lead.preferred,lead.source,'contact-v1','pending').run();
+  const fields=[['Name',lead.name],['Email',lead.email],['Phone',lead.phone],['Service requested',lead.damage],['Vehicle',lead.vehicle],['Location',lead.location],['Message',lead.message],['Lead timestamp',createdAt],['Lead ID',leadId],['Source page',lead.source]] as const;
+  const text=fields.map(([label,value])=>textLine(label,value)).join('\n');
+  const html=`<h1>New Peak Country website lead</h1><dl>${fields.map(([label,value])=>`<dt><strong>${htmlEscape(label)}</strong></dt><dd>${htmlEscape(value||'Not provided').replace(/\n/g,'<br>')}</dd>`).join('')}</dl>`;
+  try{
+   const sent=await env.CONTACT_EMAIL.send({to:env.CONTACT_EMAIL_RECIPIENT,from:{email:'website@peakcountryhail.com',name:'Peak Country Website'},subject:`New Peak Country Website Lead — ${lead.name}`,replyTo:lead.email||undefined,text,html});
+   await env.DB.prepare('UPDATE leads SET notification_status=?,notification_message_id=?,notified_at=? WHERE id=?').bind('sent',sent.messageId,new Date().toISOString(),leadId).run();
+   console.log('Contact notification accepted',{leadId,messageId:sent.messageId});
+   return {status:200,ok:true,message:'Thanks — your request has been received. We’ll be in touch soon.',leadId,messageId:sent.messageId};
+  }catch(error){
+   const code=typeof error==='object'&&error&&'code' in error?String(error.code):'send_failed';
+   await env.DB.prepare('UPDATE leads SET notification_status=?,notification_error=? WHERE id=?').bind('failed',code.slice(0,120),leadId).run();
+   console.error('Contact notification failed',{leadId,code});
+   return {status:202,ok:true,message:`Your request was saved, but the automatic notification was delayed. Please call or text ${site.phoneDisplay} if your request is urgent.`,leadId};
+  }
  }catch{return {status:503,message:'We could not confirm that your request was saved. Please try again later.'};}
 }

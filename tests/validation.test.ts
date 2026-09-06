@@ -51,7 +51,7 @@ test('lead validation enforces consent, preferred contact, bounds and source',()
 });
 test('unconfigured forms refuse submissions',async()=>{assert.equal((await submitLead(new Request('https://example.com/contact/',{method:'POST'}),{})).status,503);});
 test('verified submission writes through prepared statements and rejects wrong host',async()=>{
- const sqlite=new DatabaseSync(':memory:');sqlite.exec(readFileSync(new URL('../migrations/0001_initial.sql',import.meta.url),'utf8'));
+ const sqlite=new DatabaseSync(':memory:');sqlite.exec(readFileSync(new URL('../migrations/0001_initial.sql',import.meta.url),'utf8'));sqlite.exec(readFileSync(new URL('../migrations/0002_lead_notifications.sql',import.meta.url),'utf8'));
  const db={
   prepare(sql:string){
    return {bind(...values:unknown[]){
@@ -59,16 +59,41 @@ test('verified submission writes through prepared statements and rejects wrong h
    }};
   }
  } as unknown as D1Database;
- const env={DB:db,FORMS_ENABLED:'true',TURNSTILE_SITE_KEY:'test',TURNSTILE_SECRET_KEY:'test'};
+ let message:EmailMessageBuilder|undefined;
+ const env={DB:db,FORMS_ENABLED:'true',TURNSTILE_SITE_KEY:'test',TURNSTILE_SECRET_KEY:'test',CONTACT_EMAIL_RECIPIENT:'owner@example.com',CONTACT_EMAIL:{async send(value:EmailMessageBuilder){message=value;return {messageId:'message-1'};}} as SendEmail};
  const original=globalThis.fetch;
  try{
   globalThis.fetch=async()=>Response.json({success:true,hostname:'example.com',action:'lead'});
   const body=new URLSearchParams(Array.from(form().entries()) as [string,string][]);body.set('cf-turnstile-response','test-token');
   const request=()=>new Request('https://example.com/contact/',{method:'POST',headers:{Origin:'https://example.com','Content-Type':'application/x-www-form-urlencoded'},body});
-  assert.equal((await submitLead(request(),env)).ok,true);
+  const submitted=await submitLead(request(),env);assert.equal(submitted.ok,true);assert.equal(submitted.messageId,'message-1');
   assert.equal((sqlite.prepare('SELECT COUNT(*) AS count FROM leads').get() as {count:number}).count,1);
+  assert.equal((sqlite.prepare('SELECT notification_status FROM leads').get() as {notification_status:string}).notification_status,'sent');
+  assert.equal(message?.replyTo,'test@example.com');assert.match(message?.html||'',/Test vehicle/);
   globalThis.fetch=async()=>Response.json({success:true,hostname:'attacker.example',action:'lead'});
   assert.equal((await submitLead(request(),env)).status,400);
   assert.equal((sqlite.prepare('SELECT COUNT(*) AS count FROM leads').get() as {count:number}).count,1);
  }finally{globalThis.fetch=original;sqlite.close();}
+});
+test('submission requires Turnstile and retains the lead when email sending fails',async()=>{
+ const sqlite=new DatabaseSync(':memory:');sqlite.exec(readFileSync(new URL('../migrations/0001_initial.sql',import.meta.url),'utf8'));sqlite.exec(readFileSync(new URL('../migrations/0002_lead_notifications.sql',import.meta.url),'utf8'));
+ const db={
+  prepare(sql:string){
+   return {bind(...values:unknown[]){
+    return {async first(){return sqlite.prepare(sql).get(...values as never[]);},async run(){return sqlite.prepare(sql).run(...values as never[]);}};
+   }};
+  }
+ } as unknown as D1Database;
+ const env={DB:db,FORMS_ENABLED:'true',TURNSTILE_SITE_KEY:'test',TURNSTILE_SECRET_KEY:'test',CONTACT_EMAIL_RECIPIENT:'owner@example.com',CONTACT_EMAIL:{async send(){throw Object.assign(new Error('private detail'),{code:'E_DELIVERY_FAILED'});}} as unknown as SendEmail};
+ const original=globalThis.fetch;globalThis.fetch=async()=>Response.json({success:true,hostname:'example.com',action:'lead'});
+ try{
+  const missing=new URLSearchParams(Array.from(form().entries()) as [string,string][]);
+  assert.equal((await submitLead(new Request('https://example.com/contact/',{method:'POST',headers:{Origin:'https://example.com','Content-Type':'application/x-www-form-urlencoded'},body:missing}),env)).status,400);
+  missing.set('cf-turnstile-response','test-token');const result=await submitLead(new Request('https://example.com/contact/',{method:'POST',headers:{Origin:'https://example.com','Content-Type':'application/x-www-form-urlencoded'},body:missing}),env);
+  assert.equal(result.status,202);assert.equal(result.ok,true);
+  const saved=sqlite.prepare('SELECT notification_status,notification_error FROM leads').get() as {notification_status:string;notification_error:string};assert.equal(saved.notification_status,'failed');assert.equal(saved.notification_error,'E_DELIVERY_FAILED');
+ }finally{globalThis.fetch=original;sqlite.close();}
+});
+test('email fields reject header injection and HTML content is escaped',async()=>{
+ const injected=form();injected.set('name','Customer\r\nBcc: attacker@example.com');assert.throws(()=>validateLead(injected));
 });
