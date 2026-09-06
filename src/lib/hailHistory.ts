@@ -1,0 +1,8 @@
+export interface HistoricalHailReport {year:number;month_name:string|null;begin_date_time:string|null;state:string|null;cz_name:string|null;begin_location:string|null;magnitude:number|null;source:string|null;begin_lat:number;begin_lon:number;episode_id:string|null;event_id:string;event_narrative:string|null;distance_from_greeley_miles:number;noaa_event_url:string}
+export const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'] as const;
+export function reportDate(report:HistoricalHailReport){const match=String(report.begin_date_time).match(/^(\d{2})-([A-Z]{3})-(\d{2})/i);if(!match)return '';const month=MONTHS.findIndex(value=>value.slice(0,3).toLowerCase()===match[2].toLowerCase())+1;return `${report.year}-${String(month).padStart(2,'0')}-${match[1]}`;}
+export function subsetSummary(records:HistoricalHailReport[]){
+ const days=new Set(records.map(reportDate)),sizes=records.map(r=>r.magnitude).filter((v):v is number=>v!==null),months=Object.fromEntries(MONTHS.map(month=>[month,records.filter(r=>r.month_name===month).length]));
+ const locations=Object.entries(records.reduce<Record<string,number>>((all,r)=>{if(r.begin_location)all[r.begin_location]=(all[r.begin_location]??0)+1;return all;},{})).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
+ return {report_count:records.length,hail_day_count:days.size,largest_reported_hail_inches:sizes.length?Math.max(...sizes):null,hail_report_count_1in_plus:sizes.filter(v=>v>=1).length,hail_report_count_2in_plus:sizes.filter(v=>v>=2).length,closest_report_distance:records.length?Math.min(...records.map(r=>r.distance_from_greeley_miles)):null,most_active_month:records.length?Object.entries(months).sort((a,b)=>b[1]-a[1])[0][0]:null,locations};
+}

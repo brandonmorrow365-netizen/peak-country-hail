@@ -31,7 +31,7 @@ export const servicePages:Record<string,ServicePage> = {
       {heading:'What happens during a Peak Country hail inspection',paragraphs:[
         'The inspection starts with the vehicle’s year, make, model, storm context, location, and any concerns you have noticed. Under appropriate lighting, the visible exterior panels are reviewed for dent patterns, paint damage, prior repairs, access constraints, and other conditions that could affect the approach. Peak Country then explains which areas appear suitable for PDR, which may need another method, and what additional access may be necessary.',
         'Weather data can help establish regional context, but a nearby NOAA or Storm Prediction Center report does not prove that a specific vehicle was struck. Reports describe observations at a place and time, with varying coverage and precision. The vehicle itself must be inspected before damage or repairability is determined.'
-      ],links:[{href:'/hail-tracker/',label:'Review the Northern Colorado Hail Tracker'},{href:'/hail-history/',label:'Explore historical hail information'},{href:'/free-hail-inspection/',label:'Request a free hail inspection'}]}
+      ],links:[{href:'/hail-tracker/',label:'Review the Northern Colorado Hail Tracker'},{href:'/northern-colorado-hail-history/',label:'Explore historical hail information'},{href:'/free-hail-inspection/',label:'Request a free hail inspection'}]}
     ],
     faqs:[
       {question:'Can all hail damage be repaired with PDR?',answer:'No. PDR suitability depends on paint condition, dent depth and location, metal stretch, panel material, prior repairs, and access. Some vehicles need a combination of PDR and conventional repair.'},
@@ -41,7 +41,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Does a hail report near Greeley prove my car was hit?',answer:'No. A report confirms an observation near a location, not exposure or damage to a particular vehicle. Inspection lighting and a direct vehicle assessment are needed.'},
       {question:'Do you provide mobile hail inspections?',answer:'Yes. Peak Country provides mobile service by appointment in Greeley, Weld County, and nearby Northern Colorado communities, subject to location and working conditions.'}
     ],
-    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/hail-tracker/',label:'Northern Colorado Hail Tracker'},{href:'/hail-history/',label:'Historical Hail'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/free-hail-inspection/',label:'Free Hail Inspection'}]
+    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/hail-tracker/',label:'Northern Colorado Hail Tracker'},{href:'/northern-colorado-hail-history/',label:'Historical Hail'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/free-hail-inspection/',label:'Free Hail Inspection'}]
   },
   'paintless-dent-repair': {
     title:'Paintless Dent Repair in Greeley, Colorado',

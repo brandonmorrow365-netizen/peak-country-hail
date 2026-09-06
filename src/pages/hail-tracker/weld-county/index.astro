@@ -1,0 +1,7 @@
+---
+import LocalHailPage from '../../../components/LocalHailPage.astro';
+import reportsJson from '../../../../data/hail-history/hail-reports-2016-2025.json';
+import type {HistoricalHailReport} from '../../../lib/hailHistory';
+const records=(reportsJson as HistoricalHailReport[]).filter(report=>report.cz_name==='WELD');
+---
+<LocalHailPage title="Weld County Hail Tracker | NOAA Reports & Live Context" description="Verified NOAA/NCEI hail observations attributed to Weld County plus current official Northern Colorado weather-source status." h1="Weld County Hail Reports and Weather Context" eyebrow="NOAA-attributed Weld County observations" intro="Historical figures on this page include only records whose NOAA/NCEI CZ_NAME field identifies Weld. Proximity alone is not used to label a report as Weld County." scopeNote="The historical totals use qualifying 2016–2025 NOAA/NCEI Hail records within 50 miles of Greeley that are explicitly attributed to WELD in the source CZ_NAME field. Locations represented reflect NOAA source text and can include communities, airports, or directional location descriptions." interpretation="County attribution provides a useful Weld County view, but individual reports still have varying coordinate precision and coverage. A report documents an observation, not the extent of hail across the county or damage to a specific vehicle." liveContext="Current warnings can cross county boundaries, so the live tracker prioritizes official warning geometry around Greeley rather than relying only on county names." records={records} />

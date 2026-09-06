@@ -1,0 +1,7 @@
+---
+import LocalHailPage from '../../../components/LocalHailPage.astro';
+import reportsJson from '../../../../data/hail-history/hail-reports-2016-2025.json';
+import type {HistoricalHailReport} from '../../../lib/hailHistory';
+const records=(reportsJson as HistoricalHailReport[]).filter(report=>report.distance_from_greeley_miles<=10);
+---
+<LocalHailPage title="Greeley Hail Tracker | Live Reports & 2016–2025 History" description="Official live hail context and verified NOAA/NCEI observations nearest Greeley, Colorado, with clear distance and damage limitations." h1="Greeley Hail Reports and Historical Context" eyebrow="Nearest to the Greeley geographic anchor" intro="A focused view of official weather information and verified historical hail observations within 10 miles of the Greeley city reference coordinate." scopeNote="This page’s historical figures use the verified 2016–2025 NOAA/NCEI dataset and include only qualifying observations calculated within 10 statute miles of the Greeley geographic anchor. The radius describes proximity to the city reference point; it is not a city-boundary claim." interpretation="Reports nearest Greeley provide local context about when and where hail was officially recorded. They do not establish that every neighborhood received hail, identify damage at an address, or prove that a particular vehicle was struck." liveContext="Recent Greeley-area activity is shown only when official NWS or SPC data is available and current." records={records} />

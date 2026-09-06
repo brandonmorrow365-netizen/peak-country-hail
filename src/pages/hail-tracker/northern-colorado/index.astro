@@ -1,0 +1,7 @@
+---
+import LocalHailPage from '../../../components/LocalHailPage.astro';
+import reportsJson from '../../../../data/hail-history/hail-reports-2016-2025.json';
+import type {HistoricalHailReport} from '../../../lib/hailHistory';
+const records=reportsJson as HistoricalHailReport[];
+---
+<LocalHailPage title="Northern Colorado Hail Tracker | Live & Historical Reports" description="Official live Northern Colorado weather context and the verified 2016–2025 NOAA hail archive within 50 miles of Greeley." h1="Northern Colorado Live and Historical Hail Reports" eyebrow="50-mile regional view centered on Greeley" intro="The broad regional view connects current NWS and preliminary SPC information with ten completed seasons of verified NOAA/NCEI hail observations." scopeNote="The decade figures include every qualifying NOAA/NCEI Hail observation from 2016 through 2025 with a valid coordinate no more than 50 statute miles from the Greeley geographic anchor. The radius crosses county and municipal boundaries and is calculated from coordinates rather than approximated with place names." interpretation="This broader Northern Colorado context shows how report activity varies by year, month, location, distance, and recorded magnitude. Live preliminary data remains separate from the reviewed historical archive, and 2026 is excluded from the completed-decade totals." liveContext="The regional live tracker prioritizes NWS warning polygons and SPC reports within approximately 50 miles while keeping broader Colorado alerts secondary." records={records} />
