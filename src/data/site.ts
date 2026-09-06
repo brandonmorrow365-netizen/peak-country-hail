@@ -13,6 +13,7 @@ export const site = {
   logo: '/brand/peak-country-logo.png',
   mobileService: true,
   ownerName: null,
+  ownerPhoto: null,
   approvedCommunities: ['Greeley', 'Evans', 'Windsor', 'Eaton', 'Severance', 'Johnstown', 'Milliken', 'LaSalle', 'Platteville'],
   primaryServices: [
     'Auto Hail Repair',

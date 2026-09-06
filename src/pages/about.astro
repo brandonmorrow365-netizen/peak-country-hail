@@ -11,11 +11,23 @@ const faq = [
   ['Does Peak Country work with insurance hail claims?', 'Yes. Peak Country works with insurance hail damage claims as well as customer-pay paintless dent repairs.'],
   ['What areas does Peak Country serve?', 'Peak Country is a mobile service serving Greeley and surrounding Northern Colorado communities including Evans, Windsor, Eaton, Severance, Johnstown, Milliken, LaSalle and Platteville, with a primary service focus on Weld County.'],
 ];
-const pageSchema = {
+const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faq.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
 };
+const pageSchema = site.ownerName ? {
+  '@context': 'https://schema.org',
+  '@graph': [faqSchema, {
+    '@type': 'Person',
+    '@id': `${site.url}/about/#owner`,
+    name: site.ownerName,
+    jobTitle: 'Owner / Paintless Dent Repair Technician',
+    worksFor: { '@id': `${site.url}/#business` },
+    knowsAbout: ['Auto Hail Repair', 'Paintless Dent Repair', 'Door Ding Repair', 'Crease Repair'],
+    ...(site.ownerPhoto ? { image: new URL(site.ownerPhoto, site.url).href } : {})
+  }]
+} : faqSchema;
 ---
 <Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
   <div class="page-head about-head">
@@ -37,18 +49,15 @@ const pageSchema = {
       <p>I built Peak Country around a simple idea: do the repair correctly, take care of the vehicle and give the customer straight answers.</p>
     </div>
     <aside class="technician-card" aria-label="Peak Country technician profile">
-      <div class="technician-photo" role="img" aria-label="Technician photograph will be added when an owner-approved image is supplied">
-        <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="43" r="22"/><path d="M20 112c3-27 18-42 40-42s37 15 40 42"/></svg>
-        <span>Owner photo coming soon</span>
-      </div>
+      {site.ownerPhoto ? <img class="technician-photo technician-photo--real" src={site.ownerPhoto} alt={`${site.ownerName ?? 'Peak Country owner'} performing paintless dent repair`} /> : <div class="technician-photo technician-photo--prepared" role="img" aria-label="Decorative paintless dent repair reflection-line graphic"><span aria-hidden="true">PDR</span></div>}
       <div class="technician-details">
-        <span class="profile-label">Peak Country technician</span>
+        <span class="profile-label">Technician-led service</span>
         <h3>Owner / Paintless Dent Repair Technician</h3>
         <dl>
-          <div><dt>Experience</dt><dd>{site.experience}</dd></div>
-          <div><dt>Based in</dt><dd>Greeley / Northern Colorado</dd></div>
+          <div><dt>Experience</dt><dd>20+ Years of Hands-On PDR Experience</dd></div>
+          <div><dt>Location</dt><dd>Greeley / Northern Colorado</dd></div>
           <div><dt>Service</dt><dd>Mobile, by appointment</dd></div>
-          <div><dt>Specialties</dt><dd>Auto hail repair, paintless dent repair, door dings and creases</dd></div>
+          <div><dt>Specialties</dt><dd>Auto Hail Repair · Paintless Dent Repair · Door Dings · Creases</dd></div>
         </dl>
       </div>
     </aside>
@@ -76,6 +85,7 @@ const pageSchema = {
       <h2>The Entire Vehicle Matters</h2>
       <p>Good paintless dent repair involves more than simply making a dent disappear. Accessing hail damage can require the careful removal of trim, interior panels, headliners, lights or other vehicle components. Those parts need to be handled properly and reinstalled correctly when the repair is complete.</p>
       <p>I pay attention to the entire vehicle throughout that process—not just the damaged panel. That attention to detail is especially important on newer vehicles, where owners expect their vehicle to look, feel and function the same way it did before the damage occurred.</p>
+      <p><a href="/repair-standards/">Read the Peak Country PDR repair standards</a> for the inspection, access, protection and final-review principles behind this approach.</p>
     </article>
     <article class="principle-card">
       <span class="principle-number">02</span>
