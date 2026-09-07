@@ -14,9 +14,6 @@ export default {
         },
       });
     }
-    if (new URL(request.url).pathname === '/googled120b1844348bc47.html') {
-      return env.ASSETS.fetch(request);
-    }
     const response = await handle(request, env, ctx);
     const headers = new Headers(response.headers);
     if (env.SITE_STAGE !== 'production') headers.set('X-Robots-Tag', 'noindex, nofollow');
