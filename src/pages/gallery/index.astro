@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { galleryImage, portfolioRepairs } from '../../data/gallery';
+import { site } from '../../data/site';
+
+const title = 'Paintless Dent Repair Before & After Gallery | Peak Country';
+const description = 'View real historical Paintless Dent Repair before-and-after examples from Peak Country, organized by vehicle and repair view.';
+const canonical = new URL('/gallery/', site.url).href;
+const photos = portfolioRepairs.flatMap((repair) => repair.photos.map((photo) => ({ repair, photo })));
+const imageNodes = photos.map(({repair,photo}) => ({
+  '@type':'ImageObject',
+  '@id':`${canonical}#${repair.slug}-${photo.state}-${photo.angle}`,
+  contentUrl:new URL(galleryImage(repair,photo,1200,'jpg'),site.url).href,
+  thumbnailUrl:new URL(galleryImage(repair,photo,720,'webp'),site.url).href,
+  name:`${repair.vehicle} ${photo.state} paintless dent repair angle ${photo.angle}`,
+  caption:photo.caption,
+  description:photo.alt,
+  width:photo.width,
+  height:photo.height,
+  about:{'@id':`${site.url}/paintless-dent-repair/#service`},
+  isPartOf:{'@id':`${canonical}#webpage`},
+}));
+const pageSchema = {'@context':'https://schema.org','@graph':[
+  {'@type':'ItemList','@id':`${canonical}#portfolio`,name:'Peak Country historical Paintless Dent Repair portfolio',numberOfItems:imageNodes.length,mainEntityOfPage:{'@id':`${canonical}#webpage`},itemListElement:imageNodes.map((image,index)=>({'@type':'ListItem',position:index+1,item:{'@id':image['@id']}}))},
+  ...imageNodes,
+]};
+---
+<Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
+  <header class="page-head gallery-head"><div class="eyebrow">Real prior repair work</div><h1>Paintless Dent Repair Before &amp; After Gallery</h1><p>These photographs document previous Peak Country PDR work. Each vehicle is grouped as one repair so the before, after, and additional context views stay together.</p></header>
+
+  <section class="section gallery-intro">
+    <div><div class="eyebrow">Repair proof, organized clearly</div><h2>See the same repair from more than one angle.</h2></div>
+    <div><p>Different lighting and viewing angles can reveal different parts of a dent. The photographs below preserve those views and place paired before-and-after angles next to each other where both are available. An unmatched image remains visible as additional context rather than being discarded or presented as a pair.</p><p>Peak Country currently provides mobile <a href="/paintless-dent-repair/">Paintless Dent Repair</a> for Greeley, Weld County, and nearby Northern Colorado communities. The historical repair locations shown here are not claimed.</p></div>
+  </section>
+
+  <nav class="section gallery-jump" aria-label="Repair portfolio"><span>View a repair:</span>{portfolioRepairs.map(repair=><a href={`#${repair.slug}`}>{repair.vehicle}</a>)}</nav>
+
+  <div class="portfolio-list">
+    {portfolioRepairs.map((repair,index) => <article class="section portfolio-case" id={repair.slug}>
+      <header class="portfolio-case-head"><div><div class="eyebrow">Previous PDR repair example · {repair.photos.length} photographs</div><h2>{repair.title}</h2></div><p>{repair.summary}</p></header>
+      <div class="portfolio-grid">
+        {repair.photos.map(photo => <figure class:list={['portfolio-photo',`portfolio-photo--${photo.state}`]}>
+          <a href={galleryImage(repair,photo,1200,'jpg')} aria-label={`View larger image: ${photo.alt}`}>
+            <picture>
+              <source type="image/avif" srcset={`${galleryImage(repair,photo,720,'avif')} 720w, ${galleryImage(repair,photo,1200,'avif')} 1200w`} sizes="(max-width: 760px) calc(100vw - 48px), 560px" />
+              <source type="image/webp" srcset={`${galleryImage(repair,photo,720,'webp')} 720w, ${galleryImage(repair,photo,1200,'webp')} 1200w`} sizes="(max-width: 760px) calc(100vw - 48px), 560px" />
+              <img src={galleryImage(repair,photo,1200,'jpg')} width={photo.width} height={photo.height} alt={photo.alt} loading="lazy" decoding="async" />
+            </picture>
+          </a>
+          <figcaption><span>{photo.state === 'before' ? 'Before' : 'After'}</span>{photo.caption.replace(/^(Before|After) · Angle \d — /,'')}</figcaption>
+        </figure>)}
+      </div>
+      {index < portfolioRepairs.length - 1 && <a class="portfolio-back" href="#main">Back to gallery introduction ↑</a>}
+    </article>)}
+  </div>
+
+  <section class="section gallery-explain"><div><div class="eyebrow">What these examples show</div><h2>PDR results begin with the vehicle in front of the technician.</h2></div><div><p>These images demonstrate prior dent repairs on real vehicles, but they do not establish that another dent will respond the same way. Paint condition, dent depth, panel location, metal stretch, body lines, and tool access all affect repairability.</p><p>Learn <a href="/auto-hail-repair/">how automotive hail damage is evaluated</a>, review the <a href="/paintless-dent-repair/">Paintless Dent Repair process</a>, or <a href="/free-hail-inspection/">request a free dent or hail inspection</a> for your vehicle.</p></div></section>
+</Layout>

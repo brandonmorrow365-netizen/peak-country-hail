@@ -23,6 +23,7 @@ export const contentMeta: ContentMeta[] = [
   { path: '/door-ding-repair/', lastmod: '2026-09-08' },
   { path: '/faq/', lastmod: '2026-09-08' },
   { path: '/free-hail-inspection/', lastmod: '2026-09-08' },
+  { path: '/gallery/', lastmod: '2026-09-09' },
   { path: '/hail-damage-guide/', lastmod: '2026-09-05' },
   { path: '/hail-size-guide/', lastmod: '2026-09-08', feed: { title: 'Hail Size Guide for Vehicle Owners', description: 'Common hail-size comparisons and the factors that affect vehicle damage risk.', published: '2026-09-05' } },
   { path: '/hail-tracker/', lastmod: '2026-09-08' },
