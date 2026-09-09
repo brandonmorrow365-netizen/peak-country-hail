@@ -5,19 +5,37 @@ import { site } from '../data/site';
 interface Link { href: string; label: string }
 interface Section { heading: string; paragraphs: string[]; links?: Link[] }
 interface FAQ { question: string; answer: string }
-interface Props { title: string; description: string; h1: string; intro: string; serviceType: string; sections: Section[]; faqs: FAQ[]; related: Link[] }
-const { title, description, h1, intro, serviceType, sections, faqs, related } = Astro.props;
+interface EducationalFeature {
+  eyebrow: string;
+  heading: string;
+  paragraphs: string[];
+  image: { src: string; smallSrc: string; width: number; height: number; alt: string; caption: string; name: string; description: string };
+  links: Link[];
+  cta: Link;
+}
+interface Props { title: string; description: string; h1: string; intro: string; serviceType: string; sections: Section[]; faqs: FAQ[]; related: Link[]; educationalFeature?: EducationalFeature }
+const { title, description, h1, intro, serviceType, sections, faqs, related, educationalFeature } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
+const serviceId = `${canonical}#service`;
+const featureImageId = educationalFeature ? `${canonical}#reflection-light-image` : null;
 const pageSchema = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'Service', '@id': `${canonical}#service`, name: serviceType, description, url: canonical, mainEntityOfPage: { '@id': `${canonical}#webpage` }, provider: { '@id': `${site.url}/#business` }, areaServed: [{ '@type':'City', name:'Greeley, Colorado' }, { '@type':'AdministrativeArea', name:'Weld County, Colorado' }, { '@type':'Place', name:'Northern Colorado' }] },
-    { '@type': 'FAQPage', '@id': `${canonical}#faq`, mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) }
+    { '@type': 'Service', '@id': serviceId, name: serviceType, description, url: canonical, mainEntityOfPage: { '@id': `${canonical}#webpage` }, provider: { '@id': `${site.url}/#business` }, areaServed: [{ '@type':'City', name:'Greeley, Colorado' }, { '@type':'AdministrativeArea', name:'Weld County, Colorado' }, { '@type':'Place', name:'Northern Colorado' }], ...(featureImageId ? { image: { '@id': featureImageId } } : {}) },
+    { '@type': 'FAQPage', '@id': `${canonical}#faq`, mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
+    ...(educationalFeature && featureImageId ? [{ '@type':'ImageObject', '@id':featureImageId, contentUrl:new URL(educationalFeature.image.src,site.url).href, url:new URL(educationalFeature.image.src,site.url).href, name:educationalFeature.image.name, caption:educationalFeature.image.caption, description:educationalFeature.image.description, width:educationalFeature.image.width, height:educationalFeature.image.height, about:{ '@id':serviceId }, isPartOf:{ '@id':`${canonical}#webpage` } }] : [])
   ]
 };
 ---
 <Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
   <header class="page-head service-head"><div class="eyebrow">Peak Country · Greeley · Northern Colorado</div><h1>{h1}</h1><p>{intro}</p><div class="service-head-actions"><a class="button" href="/free-hail-inspection/">Request a Free Hail Inspection →</a><a href="/process/">Review the repair process →</a></div></header>
+  {educationalFeature && <section class="section service-education" aria-labelledby="service-education-heading">
+    <figure class="service-education-media">
+      <img src={educationalFeature.image.src} srcset={`${educationalFeature.image.smallSrc} 640w, ${educationalFeature.image.src} ${educationalFeature.image.width}w`} sizes="(max-width: 900px) calc(100vw - 48px), 470px" width={educationalFeature.image.width} height={educationalFeature.image.height} alt={educationalFeature.image.alt} loading="lazy" decoding="async" />
+      <figcaption>{educationalFeature.image.caption}</figcaption>
+    </figure>
+    <div class="service-education-copy"><div class="eyebrow">{educationalFeature.eyebrow}</div><h2 id="service-education-heading">{educationalFeature.heading}</h2>{educationalFeature.paragraphs.map((paragraph,index)=><p class:list={{'direct-answer':index===0}}>{paragraph}</p>)}<p class="service-education-links">{educationalFeature.links.map((link,index)=><>{index>0&&' · '}<a href={link.href}>{link.label}</a></>)}</p><div class="service-education-cta"><p>Have a dent or hail damage you are unsure can be repaired with PDR?</p><a class="button" href={educationalFeature.cta.href}>{educationalFeature.cta.label} →</a></div></div>
+  </section>}
   <article class="section service-detail">
     <div class="service-article">
       {sections.map((section) => <section><h2>{section.heading}</h2><p class="direct-answer">{section.paragraphs[0]}</p>{section.paragraphs.slice(1).map((paragraph) => <p>{paragraph}</p>)}{section.links && <div class="service-context-links">{section.links.map((link) => <a href={link.href}>{link.label} →</a>)}</div>}</section>)}

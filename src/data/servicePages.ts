@@ -1,4 +1,6 @@
-export interface ServicePage { title:string; description:string; h1:string; intro:string; serviceType:string; sections:{heading:string;paragraphs:string[];links?:{href:string;label:string}[]}[]; faqs:{question:string;answer:string}[]; related:{href:string;label:string}[] }
+interface ServiceLink { href:string; label:string }
+interface EducationalFeature { eyebrow:string; heading:string; paragraphs:string[]; image:{src:string;smallSrc:string;width:number;height:number;alt:string;caption:string;name:string;description:string}; links:ServiceLink[]; cta:ServiceLink }
+export interface ServicePage { title:string; description:string; h1:string; intro:string; serviceType:string; educationalFeature?:EducationalFeature; sections:{heading:string;paragraphs:string[];links?:ServiceLink[]}[]; faqs:{question:string;answer:string}[]; related:ServiceLink[] }
 
 export const servicePages:Record<string,ServicePage> = {
   'auto-hail-repair': {
@@ -49,6 +51,26 @@ export const servicePages:Record<string,ServicePage> = {
     h1:'Paintless Dent Repair in Greeley, Colorado',
     intro:'Paintless dent repair is a skilled method for reshaping suitable vehicle panels while retaining the existing finish. Peak Country brings 20+ years of hands-on Paintless Dent Repair experience to mobile inspections and repairs across Greeley, Weld County, and Northern Colorado.',
     serviceType:'Paintless Dent Repair',
+    educationalFeature:{
+      eyebrow:'Professional PDR Lighting',
+      heading:'How Paintless Dent Repair Technicians See Panel Damage',
+      paragraphs:[
+        'Paintless dent repair relies on controlled visibility, not guesswork. A specialized reflection light casts straight reference lines across the vehicle finish. Where a panel is low, high, crowned, or uneven, those lines bend, making subtle distortion easier to read than it would be under ordinary lighting.',
+        'An experienced technician monitors those reflections while making small, controlled adjustments to suitable damaged metal. Peak Country uses professional PDR lighting and specialized tools to evaluate and repair suitable hail damage, door dings, creases, and minor dents throughout Greeley, Weld County, and nearby Northern Colorado communities. When the paint and metal are suitable, the process can preserve the factory finish; a direct inspection is still required to determine repairability.'
+      ],
+      image:{
+        src:'/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg',
+        smallSrc:'/images/pdr-light-reflection-paintless-dent-repair-greeley-co-640.jpg',
+        width:977,
+        height:1139,
+        alt:'PDR reflection light revealing distortion in a vehicle panel during paintless dent repair',
+        caption:'Professional PDR reflection lighting reveals subtle panel distortion so a technician can read the metal with greater precision.',
+        name:'Professional paintless dent repair reflection lighting',
+        description:'A PDR reflection light casting reference lines across a vehicle panel to reveal distortion during paintless dent repair.'
+      },
+      links:[{href:'/auto-hail-repair/',label:'Learn how hail damage is evaluated'},{href:'/repair-standards/',label:'Review Peak Country’s repair standards'}],
+      cta:{href:'/free-hail-inspection/',label:'Request a Free Dent Inspection'}
+    },
     sections:[
       {heading:'What paintless dent repair is',paragraphs:[
         'PDR restores suitable dents by gradually moving damaged metal toward its original form without sanding, body filler, or repainting. The technician reads the panel through reflected light, identifies the low area and surrounding tension, and makes controlled adjustments. The work is progressive: many small, deliberate movements are used instead of one forceful push.',
