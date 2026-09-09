@@ -43,7 +43,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Does a hail report near Greeley prove my car was hit?',answer:'No. A report confirms an observation near a location, not exposure or damage to a particular vehicle. Inspection lighting and a direct vehicle assessment are needed.'},
       {question:'Do you provide mobile hail inspections?',answer:'Yes. Peak Country provides mobile service by appointment in Greeley, Weld County, and nearby Northern Colorado communities, subject to location and working conditions.'}
     ],
-    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/hail-tracker/',label:'Northern Colorado Hail Tracker'},{href:'/northern-colorado-hail-history/',label:'Historical Hail'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/free-hail-inspection/',label:'Free Hail Inspection'}]
+    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/hail-tracker/',label:'Northern Colorado Hail Tracker'},{href:'/northern-colorado-hail-history/',label:'Historical Hail'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/free-hail-inspection/',label:'Free Hail Inspection'}]
   },
   'paintless-dent-repair': {
     title:'Paintless Dent Repair Greeley, CO | Peak Country',
@@ -105,7 +105,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Can PDR repair a crease?',answer:'Some minor creases qualify. Length, sharpness, location, metal stretch, paint condition, and access determine whether a paintless approach makes sense.'},
       {question:'Is a photo enough to approve a PDR repair?',answer:'A photo can start the conversation but often hides depth, crowns, finish issues, and access limitations. Direct inspection is needed for a reliable plan.'}
     ],
-    related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/about/',label:'About Peak Country'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/process/',label:'Repair Process'},{href:'/free-hail-inspection/',label:'Free Inspection'}]
+    related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/about/',label:'About Peak Country'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/process/',label:'Repair Process'},{href:'/free-hail-inspection/',label:'Free Inspection'}]
   },
   'door-ding-repair': {
     title:'Door Ding Repair in Greeley, CO | Peak Country',
