@@ -1,11 +1,34 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import LeadForm from '../components/LeadForm.astro';
-import {submitLead} from '../lib/leads';
-import {env} from 'cloudflare:workers';
-import {site} from '../data/site';
-const result=Astro.request.method==='POST'?await submitLead(Astro.request,env):null;
-if(result)Astro.response.status=result.status;
-Astro.response.headers.set('Cache-Control','no-store');
+import { submitLead } from '../lib/leads';
+import { env } from 'cloudflare:workers';
+import { site } from '../data/site';
+const result = Astro.request.method === 'POST' ? await submitLead(Astro.request, env) : null;
+if (result) Astro.response.status = result.status;
+Astro.response.headers.set('Cache-Control', 'no-store');
+const pageSchema = {
+  '@context':'https://schema.org', '@type':'Service', '@id':`${site.url}/free-hail-inspection/#service`,
+  name:'Free Initial Hail-Damage Inspection',
+  description:'A mobile initial inspection to identify visible vehicle hail damage and discuss Paintless Dent Repair suitability.',
+  url:`${site.url}/free-hail-inspection/`, provider:{'@id':`${site.url}/#business`},
+  areaServed:[{'@type':'City',name:'Greeley, Colorado'},{'@type':'AdministrativeArea',name:'Weld County, Colorado'},{'@type':'Place',name:'Northern Colorado'}]
+};
 ---
-<Layout title="Free Hail Inspection | Peak Country Greeley, CO" description="Request a free mobile hail-damage inspection in Greeley or Northern Colorado to document visible dents and evaluate Paintless Dent Repair suitability." exactTitle><div class="page-head"><div class="eyebrow">Start with an inspection</div><h1>Request a Free Hail Inspection</h1><p>An inspection determines what is actually visible on the vehicle and which damaged areas may be suitable for Paintless Dent Repair.</p></div><section class="section narrow"><div class="contact-direct"><p class="eyebrow">Call, text, or request online</p><h2><a href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a></h2><p><a href={`sms:${site.phone}`}>Text Peak Country</a> or complete the request form below when online requests are enabled.</p></div><div class="prose"><h2>What the inspection is for</h2><p>Hail damage can be shallow, widespread, and difficult to see outdoors. Peak Country reviews clean exterior panels under controlled reflection lighting and evaluates dent depth, location, paint condition, panel material, metal stretch, previous repair, and access. The inspection identifies visible damage and supports a vehicle-specific discussion of PDR repairability.</p><h2>Information to provide</h2><p>Share your name, preferred contact method, city or ZIP, vehicle year, make and model, and a brief description of when or where the damage occurred. Mention obvious paint damage, broken glass, or previous repairs if known. A nearby weather report can add context but does not prove the vehicle was damaged.</p><h2>After the inspection</h2><p>Peak Country explains the visible findings, which panels appear suitable for PDR, known access considerations, and realistic next steps. Insurance hail repairs and customer-pay repairs are both welcome. If insurance is involved, coverage and authorization decisions remain with the insurer; additional legitimate damage found during approved access may require further documentation.</p><p>Mobile appointments are arranged individually for Greeley, Weld County, and nearby Northern Colorado communities. Review the <a href="/process/">seven-step repair process</a> or <a href="/repair-standards/">PDR repair standards</a> before submitting your request.</p></div>{result&&<div role="status" class={result.ok?'success':'error'}>{result.message}{!result.ok&&<p>For your privacy, form entries are not retained on this page. Re-enter them before trying again.</p>}</div>}{!result?.ok&&<LeadForm source="/free-hail-inspection/" />}</section></Layout>
+<Layout title="Free Hail Inspection | Peak Country Greeley, CO" description="Request a free mobile hail-damage inspection in Greeley or Northern Colorado to document visible dents and evaluate Paintless Dent Repair suitability." exactTitle pageSchema={pageSchema}>
+  <div class="page-head"><div class="eyebrow">Start with an inspection</div><h1>Request a Free Hail Inspection</h1><p>An inspection determines what is actually visible on the vehicle and which damaged areas may be suitable for Paintless Dent Repair.</p></div>
+  <section class="section narrow">
+    <div class="contact-direct"><p class="eyebrow">Call, text, or request online</p><h2><a href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a></h2><p><a href={`sms:${site.phone}`}>Text Peak Country</a> or complete the request form below.</p></div>
+    <div class="prose">
+      <h2>What does the free initial inspection cover?</h2>
+      <p><strong>It is an initial vehicle assessment focused on visible damage and PDR suitability.</strong> Hail damage can be shallow, widespread, and difficult to see outdoors. Peak Country reviews clean exterior panels under controlled reflection lighting and evaluates dent depth, location, paint condition, panel material, metal stretch, previous repair, and access. An online request is not a written estimate, repair authorization, or confirmed appointment.</p>
+      <h2>What information should I provide?</h2>
+      <p><strong>Share the vehicle, location, contact preference, and what you observed.</strong> Include your name, preferred contact method, city or ZIP, vehicle year, make and model, and a brief description of when or where the damage occurred. Mention obvious paint damage, broken glass, or previous repairs if known. A nearby weather report can add context but does not prove the vehicle was damaged.</p>
+      <h2>What happens after the inspection?</h2>
+      <p><strong>Peak Country explains the visible findings, repairability considerations, and realistic next steps.</strong> The discussion identifies which panels appear suitable for PDR and known access considerations. If insurance is involved, coverage and authorization decisions remain with the insurer; additional legitimate damage found during approved access may require further documentation.</p>
+      <p>Mobile appointments are arranged individually for Greeley, Weld County, and nearby Northern Colorado communities. Review the <a href="/process/">seven-step repair process</a> or <a href="/repair-standards/">PDR repair standards</a> before submitting your request.</p>
+    </div>
+    {result && <div role="status" class={result.ok ? 'success' : 'error'}>{result.message}{!result.ok && <p>For your privacy, form entries are not retained on this page. Re-enter them before trying again.</p>}</div>}
+    {!result?.ok && <LeadForm source="/free-hail-inspection/" />}
+  </section>
+</Layout>

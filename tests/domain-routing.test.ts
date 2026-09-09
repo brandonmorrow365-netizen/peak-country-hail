@@ -36,6 +36,6 @@ test('production and preview indexing directives are environment aware', () => {
   assert.equal(robotsMeta('peakcountryhail.com'), 'index, follow');
   assert.equal(robotsMeta('peakcountryhail.com', true), 'noindex, nofollow');
   assert.equal(robotsMeta('preview-peak-country.workers.dev'), 'noindex, nofollow');
-  assert.match(robotsText('production'), /Allow: \/\nSitemap: https:\/\/peakcountryhail\.com\/sitemap\.xml/);
+  assert.match(robotsText('production'), /User-agent: \*\nAllow: \/[\s\S]*Sitemap: https:\/\/peakcountryhail\.com\/sitemap\.xml/);
   assert.equal(robotsText('preview'), 'User-agent: *\nDisallow: /\n');
 });

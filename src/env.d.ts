@@ -9,5 +9,6 @@ declare namespace Cloudflare {
     CONTACT_EMAIL_RECIPIENT?: string;
     FORMS_ENABLED?: string;
     WEATHER_ENABLED?: string;
+    INDEXNOW_KEY?: string;
   }
 }

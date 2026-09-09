@@ -82,6 +82,8 @@ NWS/SPC scheduled ingestion is implemented and enabled on the bound preview Work
 - [ ] Connect/complete Google Business Profile as service-area business.
 
 ## Milestone 9 — Authority building
+- [x] Add stable entity schema, sitemap freshness metadata, crawler guidance, RSS discovery, and opt-in IndexNow tooling.
+- [x] Prepare unpublished case-study and location-page systems that require verified owner content before publication.
 - [ ] Publish high-quality storm summaries after meaningful events.
 - [ ] Build data-driven local history pages.
 - [ ] Execute `BACKLINK_PLAYBOOK.md`.

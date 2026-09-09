@@ -17,6 +17,7 @@
     "dev:private": "node scripts/preview-local.mjs",
     "hail-history:validate": "node scripts/validate-hail-history.mjs",
     "hero:validate": "node scripts/validate-hero-assets.mjs",
+    "indexnow:submit": "node scripts/submit-indexnow.mjs",
     "deploy:production": "node scripts/deploy-production.mjs"
   },
   "dependencies": {

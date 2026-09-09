@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import type { CaseStudy } from '../data/caseStudies';
+const { study } = Astro.props as { study: CaseStudy };
+const canonical = new URL(`/case-studies/${study.slug}/`, site.url).href;
+const vehicle = [study.vehicle.year, study.vehicle.make, study.vehicle.model].filter(Boolean).join(' ');
+const title = `${study.city} ${study.damageType} Case Study | Peak Country`;
+const description = `${vehicle} ${study.damageType.toLowerCase()} case study documenting affected panels, repair considerations, method, and verified outcome.`;
+const imageNodes = study.images.flatMap((pair, index) => [
+  { '@type':'ImageObject', '@id':`${canonical}#before-${index + 1}`, contentUrl:new URL(pair.before,site.url).href, caption:`Before: ${pair.caption}` },
+  { '@type':'ImageObject', '@id':`${canonical}#after-${index + 1}`, contentUrl:new URL(pair.after,site.url).href, caption:`After: ${pair.caption}` },
+]);
+const pageSchema = {'@context':'https://schema.org','@graph':[
+  {'@type':'Article','@id':`${canonical}#article`,headline:title,description,datePublished:study.dateCompleted,dateModified:study.dateCompleted,mainEntityOfPage:{'@id':`${canonical}#webpage`},author:{'@id':`${site.url}/#business`},publisher:{'@id':`${site.url}/#business`},image:imageNodes.map(node=>({'@id':node['@id']}))},
+  {'@type':'Service','@id':`${canonical}#service`,name:study.damageType,provider:{'@id':`${site.url}/#business`},areaServed:{'@type':'City',name:`${study.city}, Colorado`}},
+  ...imageNodes,
+]};
+---
+<Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
+  <header class="page-head"><div class="eyebrow">Verified repair case study · {study.city}</div><h1>{vehicle} {study.damageType}</h1><p>{description}</p></header>
+  <article class="section narrow prose">
+    <h2>What damage was documented?</h2><p>{study.damageType} affected {study.affectedPanels.join(', ')}.</p>
+    <h2>What affected the repair plan?</h2><ul>{study.repairConsiderations.map(item=><li>{item}</li>)}</ul>
+    <h2>How was the vehicle repaired?</h2><p>{study.repairMethod}</p>
+    <h2>What was the documented outcome?</h2><p>{study.outcome}</p>
+    {study.images.map(pair=><figure class="case-study-pair"><img src={pair.before} alt={`Before repair: ${pair.alt}`} loading="lazy" width="900" height="600"/><img src={pair.after} alt={`After repair: ${pair.alt}`} loading="lazy" width="900" height="600"/><figcaption>{pair.caption}</figcaption></figure>)}
+    <p class="content-review">Repair completed {study.dateCompleted}. Technician/author: {study.technician}.</p>
+  </article>
+</Layout>

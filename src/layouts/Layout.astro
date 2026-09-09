@@ -1,6 +1,7 @@
 ---
 import { site } from '../data/site';
 import {isProductionHostname, robotsMeta} from '../lib/seo';
+import { pageGraph } from '../lib/schema';
 import StormHeader from '../components/StormHeader.astro';
 import '../styles/global.css';
 interface Props { title: string; description: string; noindex?: boolean; exactTitle?: boolean; pageSchema?: Record<string, unknown>; }
@@ -9,40 +10,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 const robots = robotsMeta(Astro.url.hostname, noindex);
 const preview = !isProductionHostname(Astro.url.hostname);
 const documentTitle = exactTitle ? title : `${title} | Peak Country`;
-const websiteSchema = Astro.url.pathname === '/' ? {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': `${site.url}/#website`,
-  url: `${site.url}/`,
-  name: site.name,
-  publisher: { '@id': `${site.url}/#business` },
-  inLanguage: 'en-US',
-} : null;
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'AutoRepair',
-  '@id': site.url + '/#business',
-  name: site.name,
-  url: site.url,
-  logo: new URL(site.logo, site.url).href,
-  image: new URL(site.logo, site.url).href,
-  description: `${site.experience}. Technician-led mobile auto hail repair and paintless dent repair serving ${site.serviceRegion}.`,
-  telephone: site.phone,
-  email: site.email,
-  areaServed: [
-    { '@type': 'City', name: site.primaryLocation },
-    { '@type': 'AdministrativeArea', name: 'Weld County, Colorado' },
-    { '@type': 'Place', name: 'Northern Colorado' },
-    ...site.approvedCommunities.filter(name => name !== 'Greeley').map(name => ({ '@type': 'City', name: `${name}, Colorado` })),
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Vehicle dent repair services',
-    itemListElement: site.primaryServices.map(name => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
-  },
-  ...(site.ownerName ? { founder: { '@type': 'Person', name: site.ownerName } } : {}),
-  sameAs: site.socialProfiles,
-};
+const graph = pageGraph(Astro.url.pathname, title, description, pageSchema);
 ---
 <!doctype html>
 <html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" />
@@ -52,14 +20,13 @@ const schema = {
 <meta property="og:image" content={new URL(site.logo, site.url).href} /><meta property="og:image:alt" content={site.name} />
 <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={new URL(site.logo, site.url).href} />
 <link rel="manifest" href="/manifest.webmanifest" />
+<link rel="alternate" type="application/rss+xml" title="Peak Country Hail and Repair Resources" href={`${site.url}/feed.xml`} />
 <meta name="theme-color" content="#102536" />
-<script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
-{websiteSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema).replace(/</g, '\\u003c')} />}
-{pageSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(pageSchema).replace(/</g, '\\u003c')} />}
+<script is:inline type="application/ld+json" set:html={JSON.stringify(graph).replace(/</g, '\\u003c')} />
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
 {preview && <div class="preview">Preview · Business details and online requests are being prepared</div>}
 <StormHeader />
 <main id="main"><slot /></main>
-<footer><div><strong>{site.name}</strong><p>{site.focus}</p><p>Mobile paintless dent repair service · By appointment</p>{site.phone && <p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> · Call or text</p>}{site.email && <p><a href={`mailto:${site.email}`}>{site.email}</a></p>}<p>Careful repair. Clear information.</p></div><nav aria-label="Footer navigation"><a href="/contact/">Contact</a><a href="/service-area/">Service area</a><a href="/repair-standards/">Repair standards</a><a href="/resources/">Resources</a><a href="/data-sources/">Weather data sources</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav><p class="fine">Weather reports describe reported conditions, not confirmed damage to an individual vehicle. For urgent weather information, follow the National Weather Service and local emergency officials.</p></footer>
+<footer><div><strong>{site.name}</strong><p>{site.focus}</p><p>Mobile paintless dent repair service · By appointment</p>{site.phone && <p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> · Call or text</p>}{site.email && <p><a href={`mailto:${site.email}`}>{site.email}</a></p>}<p>Careful repair. Clear information.</p></div><nav aria-label="Footer navigation"><a href="/contact/">Contact</a><a href="/service-area/">Service area</a><a href="/repair-standards/">Repair standards</a><a href="/resources/">Resources</a><a href="/data-sources/">Weather data sources</a><a href="/feed.xml">Resource feed</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav><p class="fine">Weather reports describe reported conditions, not confirmed damage to an individual vehicle. For urgent weather information, follow the National Weather Service and local emergency officials.</p></footer>
 </body></html>

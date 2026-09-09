@@ -1,11 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import summary from '../../../data/hail-history/hail-history-summary.json';
+import { articleNode } from '../../lib/schema';
 const title='Hail Size Guide for Vehicle Owners | Peak Country';
 const description='Compare official hail diameters and learn how wind, exposure, panel material and impact conditions affect vehicle damage risk in Northern Colorado.';
+const pageSchema=articleNode('/hail-size-guide/',title,description,'2026-09-05','2026-09-08');
 const sizes=[['Pea','0.25 inch','Small hail can still arrive in large numbers or with strong wind.'],['Dime','0.50 inch','A familiar comparison, but individual stones and conditions vary.'],['Nickel','0.75 inch','Often used in public reports to describe approximate diameter.'],['Quarter','1.00 inch','The National Weather Service commonly treats one-inch hail as severe.'],['Half dollar','1.25 inches','A larger comparison that represents diameter, not damage depth.'],['Golf ball','1.75 inches','Large hail with greater damage potential, especially when wind-driven.'],['Hen egg','2.00 inches','A conventional comparison for very large hail.'],['Tennis ball','2.50 inches','Very large hail that should be treated as a serious outdoor hazard.'],['Baseball','2.75 inches','A report at this scale describes diameter at an observation point.'],['Softball','4.00 inches','Extremely large hail; remain sheltered and follow official warnings.']];
 ---
-<Layout title={title} description={description} exactTitle>
+<Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
 <header class="page-head"><div class="eyebrow">Understand official hail reports</div><h1>Hail Size Guide</h1><p>Common object comparisons make hail diameter easier to picture, but size alone cannot determine whether a particular vehicle was damaged.</p></header>
 <article class="section narrow prose">
 <h2>How hail diameter is reported</h2>
@@ -24,5 +26,6 @@ const sizes=[['Pea','0.25 inch','Small hail can still arrive in large numbers or
 <h2>Why object comparisons need care</h2><p>Common names are useful shorthand, but they should not be treated as exact measurements unless the observer supplied a measured diameter. A stone can be irregular rather than perfectly round, can melt before it is examined, and can differ from nearby stones in the same storm. When comparing a report with a vehicle, keep the official time, location, source, and stated precision together instead of relying on the object name alone.</p>
 <h2>Use reports as context, then inspect the vehicle</h2>
 <p>Use the <a href="/hail-tracker/">Live Hail Tracker</a> for current official-source context and the <a href="/northern-colorado-hail-history/">Northern Colorado Hail History</a> for completed historical records. After conditions are safe, follow the <a href="/after-a-hailstorm/">steps to check a vehicle after a hailstorm</a>. If you see dents or remain unsure, learn about <a href="/auto-hail-repair/">auto hail repair</a> or <a href="/free-hail-inspection/">request a free hail inspection</a>.</p>
+<p class="content-review">Published September 5, 2026 · Last reviewed September 8, 2026 · Reviewed by Peak Country Auto Hail Repair &amp; Paintless Dent Repair</p>
 </article>
 </Layout>

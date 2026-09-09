@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import type { LocationPage } from '../data/locationPages';
+const { location } = Astro.props as { location: LocationPage };
+const title = `Mobile PDR in ${location.city}, CO | Peak Country`;
+const description = `Verified service availability, appointment expectations, and local hail-repair resources for vehicle owners in ${location.city}, Colorado.`;
+const canonical = new URL(`/locations/${location.slug}/`, site.url).href;
+const pageSchema = {'@context':'https://schema.org','@graph':[
+  {'@type':'Service','@id':`${canonical}#service`,name:`Mobile Paintless Dent Repair in ${location.city}`,description,url:canonical,provider:{'@id':`${site.url}/#business`},areaServed:{'@type':'City',name:`${location.city}, Colorado`}},
+  {'@type':'FAQPage','@id':`${canonical}#faq`,mainEntity:location.localQuestions.map(({question,answer})=>({'@type':'Question',name:question,acceptedAnswer:{'@type':'Answer',text:answer}}))},
+]};
+---
+<Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
+  <header class="page-head"><div class="eyebrow">Mobile service · By appointment</div><h1>Paintless Dent Repair in {location.city}, Colorado</h1><p>{location.coverage}</p></header>
+  <article class="section narrow prose"><h2>Is mobile PDR available in {location.city}?</h2><p>{location.coverage}</p><h2>What should customers expect when scheduling?</h2><p>{location.appointmentExpectations}</p>{location.localQuestions.map(({question,answer})=><section><h2>{question}</h2><p>{answer}</p></section>)}</article>
+</Layout>

@@ -14,6 +14,10 @@ export default {
         },
       });
     }
+    const requestUrl = new URL(request.url);
+    if (request.method === 'GET' && env.SITE_STAGE === 'production' && env.INDEXNOW_KEY && requestUrl.pathname === `/${env.INDEXNOW_KEY}.txt`) {
+      return new Response(env.INDEXNOW_KEY, { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=3600', 'X-Robots-Tag': 'noindex, nofollow', 'X-Content-Type-Options': 'nosniff' } });
+    }
     const response = await handle(request, env, ctx);
     const headers = new Headers(response.headers);
     if (env.SITE_STAGE !== 'production') headers.set('X-Robots-Tag', 'noindex, nofollow');

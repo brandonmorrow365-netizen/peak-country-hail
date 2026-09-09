@@ -21,7 +21,8 @@ export const site = {
     'Door Ding Repair',
     'Minor Dent Repair',
     'Crease Repair',
-    'Insurance Hail Damage Repair',
+    'Hail-Damage Inspection',
+    'Vehicle Repair Planning',
   ],
   positioning: {
     technicianLed: true,

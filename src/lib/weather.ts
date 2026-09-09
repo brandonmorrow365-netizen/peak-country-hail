@@ -69,7 +69,7 @@ export async function ingestWeather(db:D1Database,now:number){
   if(!Array.isArray(data.features))throw new Error('invalid_nws_schema');
   const statements=[db.prepare('DELETE FROM weather_alerts')];
   for(const f of data.features){const p=f.properties;if(!f.id||!p||typeof p.event!=='string'||typeof p.expires!=='string'||!Number.isFinite(Date.parse(p.expires)))throw new Error('invalid_alert');
-   statements.push(db.prepare('INSERT INTO weather_alerts(id,event,headline,area,expires_at,source_url,fetched_at,raw_json) VALUES(?,?,?,?,?,?,?,?)').bind(f.id,p.event,String(p.headline||p.event),String(p.areaDesc||''),new Date(p.expires).toISOString(),NWS,new Date().toISOString(),JSON.stringify(f)));
+   statements.push(db.prepare('INSERT INTO weather_alerts(id,event,headline,area,expires_at,source_url,fetched_at,raw_json) VALUES(?,?,?,?,?,?,?,?)').bind(f.id,p.event,String(p.headline||p.event),String(p.areaDesc||''),new Date(p.expires).toISOString(),f.id,new Date().toISOString(),JSON.stringify(f)));
   }
   await db.batch(statements);return data.features.length;
  });
@@ -79,7 +79,11 @@ export async function ingestWeather(db:D1Database,now:number){
   const rows=parseHail(text,day),fetched=new Date().toISOString();
   // Replace this source window atomically so corrected/withdrawn reports disappear.
   const statements=[db.prepare('DELETE FROM hail_reports WHERE report_day=?').bind(day)];
-  for(const r of rows){const id=await digest(JSON.stringify(r));statements.push(db.prepare('INSERT OR IGNORE INTO hail_reports(id,occurred_at,report_day,location,county,state,size_inches,latitude,longitude,comments,source_url,fetched_at,raw_json) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(id,r.occurred_at,r.report_day,r.location,r.county,r.state,r.size_inches,r.latitude,r.longitude,r.comments,SPC,fetched,JSON.stringify(r)));}
+  for(const r of rows){
+   const id=await digest(JSON.stringify(r)),raw=JSON.stringify(r);
+   statements.push(db.prepare('INSERT INTO hail_report_archive(id,occurred_at,report_day,location,county,state,size_inches,latitude,longitude,comments,source_url,first_seen_at,last_seen_at,raw_json) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET last_seen_at=excluded.last_seen_at, raw_json=excluded.raw_json').bind(id,r.occurred_at,r.report_day,r.location,r.county,r.state,r.size_inches,r.latitude,r.longitude,r.comments,SPC,fetched,fetched,raw));
+   statements.push(db.prepare('INSERT OR IGNORE INTO hail_reports(id,occurred_at,report_day,location,county,state,size_inches,latitude,longitude,comments,source_url,fetched_at,raw_json) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(id,r.occurred_at,r.report_day,r.location,r.county,r.state,r.size_inches,r.latitude,r.longitude,r.comments,SPC,fetched,raw));
+  }
   await db.batch(statements);return rows.length;
  });
 }

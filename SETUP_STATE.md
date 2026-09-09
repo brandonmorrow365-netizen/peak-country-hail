@@ -3,6 +3,8 @@
 Last reviewed: 2026-09-04
 
 ## Known complete
+- [x] Search-discovery foundation: stable business/site/page schema graph, accurate sitemap `lastmod`, crawler-aware robots rules, RSS feed, and guarded IndexNow support.
+- [x] Unpublished case-study and city-page templates are present; no sample repair or thin location page is publicly routable or included in the sitemap.
 - [x] Public GitHub repository downloaded; missing application folders implemented locally.
 - [x] Milestone 0: compatible pinned packages and npm lockfile; Astro check and build pass.
 - [x] 30 routes validated locally, including canonical URLs, JSON-LD, internal links, 404, robots and sitemap exclusions.

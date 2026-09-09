@@ -1,0 +1,7 @@
+---
+import LocationServicePage from '../../components/LocationServicePage.astro';
+import { locationPages } from '../../data/locationPages';
+const location = locationPages.find((entry) => entry.slug === Astro.params.city && entry.published);
+if (!location) return Astro.rewrite('/404');
+---
+<LocationServicePage location={location} />

@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { articleNode } from '../../lib/schema';
 const title='What to Do After a Hailstorm | Peak Country';
 const description='A practical sequence for safely checking, documenting and professionally inspecting possible vehicle hail damage in Greeley and Northern Colorado.';
+const pageSchema=articleNode('/after-a-hailstorm/',title,description,'2026-09-05','2026-09-08');
 ---
-<Layout title={title} description={description} exactTitle>
+<Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
 <header class="page-head"><div class="eyebrow">Safe, practical next steps</div><h1>What to Do After a Hailstorm</h1><p>Use this sequence to check your vehicle carefully, understand weather reports, and make an informed repair decision.</p></header>
 <article class="section narrow prose">
 <h2>1. Wait until the storm is safely over</h2><p>Remain sheltered while severe weather is active. Follow National Weather Service warnings and local emergency instructions, and do not go outside to protect or inspect a vehicle during hail, lightning, high wind, or flooding. Peak Country’s weather pages are informational and do not replace official warnings.</p>
@@ -16,5 +18,6 @@ const description='A practical sequence for safely checking, documenting and pro
 <h2>8. Understand the repair plan</h2><p>Before authorizing work, ask which panels are suitable for PDR, whether the paint is intact, what access or trim removal is expected, and what realistic result the technician anticipates. Review Peak Country’s <a href="/repair-standards/">repair standards</a> and <a href="/faq/">hail-repair FAQ</a>. Avoid pressing, heating, or glue-pulling dents yourself, since an unsuccessful attempt can complicate later repair.</p>
 <h2>Keep the vehicle safe while deciding</h2><p>If glass is broken or a panel has sharp damage, avoid handling loose fragments and arrange appropriate protection or transport. Do not cover a wet vehicle with material that can rub grit across the paint, and do not test dents with household suction tools, boiling water, dry ice, or improvised glue. These approaches can harm paint, trim, wiring, or panel shape and can make the original damage harder to evaluate.</p><p>Keep copies of photographs, estimates, and repair discussions in one place. If an insurer is involved, record claim contacts and ask questions when a proposed operation is unclear. Documentation supports an orderly process; it does not replace inspection, repair planning, or a final quality review.</p>
 <div class="callout"><h2>Request a Free Hail Inspection</h2><p>Peak Country provides mobile Paintless Dent Repair by appointment in Greeley, Weld County, and surrounding Northern Colorado communities. An inspection determines actual damage and repairability.</p><a class="button" href="/free-hail-inspection/">Request a Free Hail Inspection</a></div>
+<p class="content-review">Published September 5, 2026 · Last reviewed September 8, 2026 · Reviewed by Peak Country Auto Hail Repair &amp; Paintless Dent Repair</p>
 </article>
 </Layout>

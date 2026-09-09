@@ -1,0 +1,7 @@
+---
+import CaseStudyDetail from '../../components/CaseStudyDetail.astro';
+import { publishedCaseStudies } from '../../data/caseStudies';
+const study = publishedCaseStudies.find((entry) => entry.slug === Astro.params.slug && entry.published);
+if (!study) return Astro.rewrite('/404');
+---
+<CaseStudyDetail study={study} />

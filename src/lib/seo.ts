@@ -11,7 +11,8 @@ export function robotsMeta(hostname: string, pageNoindex = false) {
 }
 
 export function robotsText(stage?: string) {
-  return stage === 'production'
-    ? `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`
-    : 'User-agent: *\nDisallow: /\n';
+  if (stage !== 'production') return 'User-agent: *\nDisallow: /\n';
+  const directives = 'Allow: /\nDisallow: /api/\nDisallow: /admin/\nDisallow: /internal/\nDisallow: /preview/';
+  const agents = ['Googlebot', 'Bingbot', 'OAI-SearchBot', 'ChatGPT-User', 'PerplexityBot', '*'];
+  return agents.map((agent) => `User-agent: ${agent}\n${directives}`).join('\n\n') + `\n\nSitemap: ${site.url}/sitemap.xml\n`;
 }

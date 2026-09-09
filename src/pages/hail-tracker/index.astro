@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import {env} from 'cloudflare:workers';
 import {readWeather,feedState,NWS,SPC,GREELEY,LOCAL_RADIUS_MILES} from '../../lib/weather';
+import {site} from '../../data/site';
 const data=await readWeather(env.DB);
 const nwsState=feedState(data?.nws,data?.nwsSuccess,15);
 const spcState=feedState(data?.spc,data?.spcSuccess,25);
@@ -11,14 +12,17 @@ const time=(s:string)=>new Intl.DateTimeFormat('en-US',{timeStyle:'short',timeZo
 const stateLabel=(state:string)=>state==='current'?'Current':state==='stale'?'Cached · out of date':state==='cached-error'?'Cached · latest refresh failed':'Unavailable';
 const severe=data?.localAlerts.filter(a=>/severe thunderstorm|tornado|special weather statement/i.test(a.event))??[];
 const broader=data?.alerts.filter(a=>!a.local)??[];
+const successfulUpdates=[data?.nwsSuccess?.completed_at,data?.spcSuccess?.completed_at].filter(Boolean) as string[];
+const datasetModified=successfulUpdates.toSorted().at(-1)??'2026-09-08';
+const pageSchema={'@context':'https://schema.org','@type':'Dataset','@id':`${site.url}/hail-tracker/#dataset`,name:'Live Northern Colorado Hail Tracker Near Greeley',description:'Official active National Weather Service alerts and preliminary Storm Prediction Center hail reports prioritized within 50 statute miles of Greeley.',url:`${site.url}/hail-tracker/`,mainEntityOfPage:{'@id':`${site.url}/hail-tracker/#webpage`},dateModified:datasetModified,spatialCoverage:{'@type':'Place',name:'Approximately 50 statute miles from the Greeley, Colorado city reference point'},creator:[{'@type':'Organization',name:'National Weather Service',url:'https://www.weather.gov/'},{'@type':'Organization',name:'NOAA Storm Prediction Center',url:'https://www.spc.noaa.gov/'}],publisher:{'@id':`${site.url}/#business`},isBasedOn:[NWS,SPC]};
 Astro.response.headers.set('Cache-Control','public, max-age=60, s-maxage=300, stale-if-error=900');
 ---
-<Layout title="Northern Colorado Hail Tracker Near Greeley" description="Official NWS alerts and preliminary SPC hail reports prioritized within 50 miles of Greeley, with distances, timestamps, freshness, and source limitations.">
+<Layout title="Northern Colorado Hail Tracker Near Greeley" description="Official NWS alerts and preliminary SPC hail reports prioritized within 50 miles of Greeley, with distances, timestamps, freshness, and source limitations." pageSchema={pageSchema}>
   <header class="page-head tracker-head"><div class="eyebrow">Official data · 50-mile Greeley focus</div><h1>Live Northern Colorado Hail Tracker</h1><p>Active National Weather Service alerts and preliminary NOAA Storm Prediction Center hail reports prioritized within approximately {LOCAL_RADIUS_MILES} statute miles of Greeley, Colorado.</p><div class="tracker-scope"><span>Geographic calculation anchor</span><strong>{GREELEY.latitude.toFixed(5)}, {GREELEY.longitude.toFixed(7)}</strong><small>City reference point only—not a business, shop, or owner address.</small></div></header>
 
   <section class="section tracker-summary" aria-label="Tracker coverage and status">
-    <div><span>NWS alert status</span><strong class:list={{'status-current':nwsState==='current','status-stale':nwsState!=='current'}}>{stateLabel(nwsState)}</strong><small>Last successful refresh: {data?.nwsSuccess?fmt(data.nwsSuccess.completed_at):'None available'}</small></div>
-    <div><span>SPC hail-report status</span><strong class:list={{'status-current':spcState==='current','status-stale':spcState!=='current'}}>{stateLabel(spcState)}</strong><small>Last successful refresh: {data?.spcSuccess?fmt(data.spcSuccess.completed_at):'None available'}</small></div>
+    <div><span>NWS alert status</span><strong class:list={{'status-current':nwsState==='current','status-stale':nwsState!=='current'}}>{stateLabel(nwsState)}</strong><small>Last checked: {data?.nws?fmt(data.nws.completed_at):'None available'}<br/>Last successful refresh: {data?.nwsSuccess?fmt(data.nwsSuccess.completed_at):'None available'}</small></div>
+    <div><span>SPC hail-report status</span><strong class:list={{'status-current':spcState==='current','status-stale':spcState!=='current'}}>{stateLabel(spcState)}</strong><small>Last checked: {data?.spc?fmt(data.spc.completed_at):'None available'}<br/>Last successful refresh: {data?.spcSuccess?fmt(data.spcSuccess.completed_at):'None available'}</small></div>
     <div><span>Primary coverage</span><strong>{LOCAL_RADIUS_MILES} miles from Greeley</strong><small>Distance is calculated from the city reference coordinate.</small></div>
   </section>
 

@@ -1,6 +1,24 @@
 # Peak Country Auto Hail Repair & Paintless Dent Repair
-Canonical site: https://peakcountryhail.com
-Business facts: https://peakcountryhail.com/about/
-Weather methodology: https://peakcountryhail.com/data-sources/
-Regional tracker: https://peakcountryhail.com/hail-tracker/
-SPC reports are preliminary. Nearby reports do not establish individual vehicle damage.
+
+Peak Country is a mobile auto hail repair and Paintless Dent Repair service by appointment for Greeley, Weld County, and nearby Northern Colorado communities. The business has more than 20 years of hands-on PDR experience. The canonical site is https://peakcountryhail.com/.
+
+## Business and repair information
+- About and experience: https://peakcountryhail.com/about/
+- Service area: https://peakcountryhail.com/service-area/
+- Repair standards: https://peakcountryhail.com/repair-standards/
+- Inspection and repair process: https://peakcountryhail.com/process/
+- Auto hail repair: https://peakcountryhail.com/auto-hail-repair/
+- Paintless Dent Repair: https://peakcountryhail.com/paintless-dent-repair/
+- Door ding repair: https://peakcountryhail.com/door-ding-repair/
+- Request a free hail inspection: https://peakcountryhail.com/free-hail-inspection/
+- Contact: https://peakcountryhail.com/contact/
+
+## Hail information
+- Live Northern Colorado hail tracker: https://peakcountryhail.com/hail-tracker/
+- Hail size guide: https://peakcountryhail.com/hail-size-guide/
+- Verified Northern Colorado hail history: https://peakcountryhail.com/northern-colorado-hail-history/
+- What to do after a hailstorm: https://peakcountryhail.com/after-a-hailstorm/
+- Data sources and limitations: https://peakcountryhail.com/data-sources/
+- Public resource feed: https://peakcountryhail.com/feed.xml
+
+Current hail reports come from official sources and may be preliminary. Nearby reports do not establish that an individual vehicle was exposed or damaged. Peak Country's hail pages are informational and are not an emergency-alert service.

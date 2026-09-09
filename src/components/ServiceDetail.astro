@@ -11,7 +11,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 const pageSchema = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'Service', '@id': `${canonical}#service`, name: serviceType, description, url: canonical, provider: { '@id': `${site.url}/#business` }, areaServed: ['Greeley, Colorado', 'Weld County, Colorado', 'Northern Colorado'] },
+    { '@type': 'Service', '@id': `${canonical}#service`, name: serviceType, description, url: canonical, mainEntityOfPage: { '@id': `${canonical}#webpage` }, provider: { '@id': `${site.url}/#business` }, areaServed: [{ '@type':'City', name:'Greeley, Colorado' }, { '@type':'AdministrativeArea', name:'Weld County, Colorado' }, { '@type':'Place', name:'Northern Colorado' }] },
     { '@type': 'FAQPage', '@id': `${canonical}#faq`, mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) }
   ]
 };
@@ -20,7 +20,7 @@ const pageSchema = {
   <header class="page-head service-head"><div class="eyebrow">Peak Country · Greeley · Northern Colorado</div><h1>{h1}</h1><p>{intro}</p><div class="service-head-actions"><a class="button" href="/free-hail-inspection/">Request a Free Hail Inspection →</a><a href="/process/">Review the repair process →</a></div></header>
   <article class="section service-detail">
     <div class="service-article">
-      {sections.map((section) => <section><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.links && <div class="service-context-links">{section.links.map((link) => <a href={link.href}>{link.label} →</a>)}</div>}</section>)}
+      {sections.map((section) => <section><h2>{section.heading}</h2><p class="direct-answer">{section.paragraphs[0]}</p>{section.paragraphs.slice(1).map((paragraph) => <p>{paragraph}</p>)}{section.links && <div class="service-context-links">{section.links.map((link) => <a href={link.href}>{link.label} →</a>)}</div>}</section>)}
     </div>
     <aside class="service-sidebar"><div class="eyebrow">Peak Country Service</div><h2>A careful inspection comes first.</h2><p>Repairability depends on the vehicle, panel, paint, and damage—not a photograph or nearby weather report alone.</p><a class="button" href="/free-hail-inspection/">Request an Inspection →</a><a href="/about/">About Peak Country</a><a href="/repair-standards/">Repair standards</a><a href="/process/">What to expect</a></aside>
   </article>
