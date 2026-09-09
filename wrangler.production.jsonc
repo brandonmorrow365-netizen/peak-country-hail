@@ -6,7 +6,7 @@
   "main": "./src/worker.ts",
   "compatibility_date": "2026-09-04",
   "compatibility_flags": ["nodejs_compat"],
-  "routes": [{ "pattern": "peakcountryhail.com", "custom_domain": true }],
+  "routes": [{ "pattern": "peakcountryhail.com", "custom_domain": true, "zone_id": "d6e49058279e791997df3572ac0a1a8f" }],
   "assets": { "binding": "ASSETS", "directory": "./dist/client" },
   "send_email": [{ "name": "CONTACT_EMAIL" }],
   "observability": { "enabled": true },
