@@ -1,0 +1,9 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {pages} from '../data/pages';
+const page=pages.find(p=>p.slug===Astro.params.slug);
+if(!page)return Astro.rewrite('/404');
+---
+<Layout title={page.title} description={page.description} noindex={page.noindex}><div class="page-head"><div class="eyebrow">Peak Country · Northern Colorado</div><h1>{page.title}</h1><p>{page.description}</p></div><section class="section narrow"><div class="prose">{page.sections.map(([heading,body])=><section><h2>{heading}</h2><p>{body}</p></section>)}</div>
+{['data-sources','resources','hail-size-guide','after-a-hailstorm'].includes(page.slug)&&<div class="links"><a href="https://www.weather.gov/">National Weather Service</a><a href="https://www.spc.noaa.gov/climo/reports/">SPC reports</a><a href="https://www.ncei.noaa.gov/stormevents/">NOAA/NCEI Storm Events</a></div>}
+<div class="links"><a href="/hail-tracker/">Regional hail tracker</a><a href="/free-hail-inspection/">Request an inspection</a><a href="/process/">Repair process</a></div></section></Layout>

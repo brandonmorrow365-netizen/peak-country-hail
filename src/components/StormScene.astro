@@ -1,0 +1,15 @@
+<div class="storm-scene" data-storm-scene role="img" aria-label="Interactive thunderstorm over Northern Colorado mountains">
+  <img src="/brand/hero-storm-background.png" alt="Thunderstorm over Northern Colorado mountains and a wet roadway" width="1942" height="809" fetchpriority="high" />
+  <canvas aria-hidden="true"></canvas><div class="storm-flash" aria-hidden="true"></div>
+  <p class="storm-hint">Move across the storm · tap for lightning</p>
+</div>
+<script>
+// @ts-nocheck -- progressive enhancement with a complete static-image fallback.
+const scene=document.querySelector('[data-storm-scene]');
+if(scene){const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,canvas=scene.querySelector('canvas'),ctx=canvas.getContext('2d'),flash=scene.querySelector('.storm-flash');let width=0,height=0,dpr=1,wind=0,targetWind=0,flashLevel=0,drops=[];
+const makeDrop=(anywhere=false)=>({x:Math.random()*width,y:anywhere?Math.random()*height:-20,speed:320+Math.random()*420,length:8+Math.random()*17,hail:Math.random()>.83,opacity:.16+Math.random()*.38});
+const resize=()=>{const b=scene.getBoundingClientRect();width=b.width;height=b.height;dpr=Math.min(devicePixelRatio,1.6);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.width=`${width}px`;canvas.style.height=`${height}px`;ctx.setTransform(dpr,0,0,dpr,0,0);drops=Array.from({length:Math.max(35,Math.min(115,Math.round(width/6)))},()=>makeDrop(true))};
+const lightning=(strength=1)=>{if(!reduced)flashLevel=Math.max(flashLevel,strength)};
+scene.addEventListener('pointermove',e=>{const b=scene.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;targetWind=x*145;scene.style.setProperty('--storm-x',`${x*-10}px`);scene.style.setProperty('--storm-y',`${y*-5}px`)});scene.addEventListener('pointerleave',()=>{targetWind=0;scene.style.setProperty('--storm-x','0px');scene.style.setProperty('--storm-y','0px')});scene.addEventListener('pointerdown',()=>lightning(1));new ResizeObserver(resize).observe(scene);resize();
+if(!reduced){let previous=performance.now(),nextFlash=3500+Math.random()*5000;const draw=now=>{const dt=Math.min(.035,(now-previous)/1000);previous=now;nextFlash-=dt*1000;if(nextFlash<0){lightning(.55+Math.random()*.35);nextFlash=5000+Math.random()*9000}wind+=(targetWind-wind)*.035;ctx.clearRect(0,0,width,height);for(const drop of drops){drop.y+=drop.speed*dt;drop.x+=(wind+25)*dt;if(drop.y>height+20||drop.x>width+30||drop.x< -30)Object.assign(drop,makeDrop());ctx.globalAlpha=drop.opacity;if(drop.hail){ctx.fillStyle='#eef8ff';ctx.beginPath();ctx.arc(drop.x,drop.y,1.7,0,Math.PI*2);ctx.fill()}else{ctx.strokeStyle='#c8e8ff';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(drop.x,drop.y);ctx.lineTo(drop.x-(wind+25)*.025,drop.y-drop.length);ctx.stroke()}}ctx.globalAlpha=1;flashLevel*=.84;flash.style.opacity=String(flashLevel);requestAnimationFrame(draw)};requestAnimationFrame(draw)}else scene.querySelector('.storm-hint').remove()}
+</script>

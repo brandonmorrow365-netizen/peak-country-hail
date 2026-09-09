@@ -1,0 +1,18 @@
+export const site = {
+  name: 'Peak Country Auto Hail Repair & Paintless Dent Repair',
+  shortName: 'Peak Country',
+  url: 'https://peakcountryhail.com',
+  experience: '20+ years of hands-on PDR experience',
+  focus: 'Greeley · Weld County · Northern Colorado',
+  phone: '+17204456246',
+  phoneDisplay: '(720) 445-6246',
+  email: null,
+  hours: null,
+  logo: '/brand/peak-country-logo.png',
+  mobileService: true,
+  ownerName: null,
+  approvedCommunities: ['Greeley', 'Evans', 'Windsor', 'Eaton', 'Severance', 'Johnstown', 'Milliken', 'LaSalle', 'Platteville'],
+  proposedRadiusMiles: 30,
+  serviceAreaConfirmed: true,
+  reviews: [], gallery: [], socialProfiles: [],
+};

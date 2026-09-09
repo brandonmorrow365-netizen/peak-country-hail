@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {env} from 'cloudflare:workers';
+import {readWeather,fresh,NWS,SPC} from '../../lib/weather';
+const data=await readWeather(env.DB);
+const fmt=(s:string)=>new Intl.DateTimeFormat('en-US',{dateStyle:'medium',timeStyle:'short',timeZone:'America/Denver'}).format(new Date(s))+' Mountain Time';
+---
+<Layout title="Northern Colorado hail tracker" description="Official NWS alerts and preliminary SPC hail reports with source, freshness, and coverage information.">
+<div class="page-head"><div class="eyebrow">Official sources · Clear context</div><h1>Northern Colorado<br />hail tracker</h1><p>Preliminary hail reports for Weld and Larimer counties, alongside Colorado weather alerts. Reports cannot confirm damage to a specific vehicle or property.</p></div>
+<section class="section"><h2>Colorado active alerts</h2><p class="fine">Source: <a href={NWS}>National Weather Service</a> · {data?.nws ? 'Last attempt: '+fmt(data.nws.completed_at) : 'No successful update available'} · Statewide alert coverage</p>
+{!fresh(data?.nws,15)&&<div class="callout">Current alert data is unavailable or out of date. Check <a href="https://www.weather.gov/">weather.gov</a> for current warnings. This page does not indicate an all-clear.</div>}
+{data?.alerts.map(a=><article class="card"><h3>{a.headline}</h3><p>{a.area}</p><p>Expires {fmt(a.expires_at)}</p></article>)}
+{fresh(data?.nws,15)&&!data?.alerts.length&&<p>No active Colorado alerts were returned at the last successful check. Conditions can change.</p>}
+<h2>Reported hail · Weld &amp; Larimer counties</h2><p class="fine">Source: <a href={SPC}>NOAA Storm Prediction Center</a> · Preliminary · {data?.spc?'Last attempt: '+fmt(data.spc.completed_at):'No successful update available'}</p>
+<p>Coverage follows the current SPC report day: noon UTC through 11:59 UTC the following day. This is not a complete survey of every location that received hail.</p>
+{!fresh(data?.spc,25)&&<div class="callout">Recent hail data is unavailable or out of date. Missing reports do not mean that no hail occurred.</div>}
+{data?.reports.length ? <div class="table-wrap"><table><caption>Preliminary reports; times displayed in Mountain Time</caption><thead><tr><th scope="col">Time</th><th scope="col">Location</th><th scope="col">County</th><th scope="col">Size (inches)</th><th scope="col">Coordinates</th></tr></thead><tbody>{data.reports.map(r=><tr><td>{fmt(r.occurred_at)}</td><td>{r.location}</td><td>{r.county}</td><td>{r.size_inches}</td><td>{r.latitude}, {r.longitude}</td></tr>)}</tbody></table></div>:fresh(data?.spc,25)&&<p>No reports for Weld or Larimer County were returned for this report day at the last check.</p>}
+<div class="links"><a href="/data-sources/">Methodology &amp; limitations</a><a href="/hail-history/">Historical data</a><a href="/after-a-hailstorm/">After a hailstorm</a></div><div class="callout"><h3>Concerned about your vehicle?</h3><p>An inspection can help establish whether there is damage and whether PDR is appropriate.</p><a href="/free-hail-inspection/">Request a hail inspection →</a></div></section>
+</Layout>

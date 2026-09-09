@@ -44,3 +44,6 @@ Before making architectural, content, SEO, deployment, data-model, or branding d
 - Update `SETUP_STATE.md` after infrastructure milestones.
 - Keep `DEVELOPMENT_ROADMAP.md` current as milestones are completed.
 - Never delete the project context/specification files.
+
+## Owner launch restriction — 2026-09-04
+The owner requires the unfinished website to remain inaccessible to the public until graphics, content, and final changes are complete and the owner explicitly approves launch. Keep `workers_dev` and `preview_urls` false and attach no public domains/routes. Use localhost for design review. Code pushes must not restore public access.

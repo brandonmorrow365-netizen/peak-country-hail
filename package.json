@@ -9,17 +9,29 @@
     "preview": "astro preview",
     "deploy": "astro build && wrangler deploy",
     "check": "astro check",
-    "cf-types": "wrangler types"
+    "cf-types": "wrangler types",
+    "test": "node --test tests/*.test.ts",
+    "test:site": "node scripts/check-site.mjs",
+    "dev:private": "node scripts/preview-local.mjs"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "latest",
-    "@astrojs/sitemap": "latest",
-    "astro": "latest"
+    "@astrojs/cloudflare": "14.3.0",
+    "@astrojs/sitemap": "3.7.4",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^2.0.36",
+    "astro": "7.3.1",
+    "gsap": "^3.15.0",
+    "three": "^0.185.1"
   },
   "devDependencies": {
-    "@astrojs/check": "latest",
-    "typescript": "latest",
-    "wrangler": "latest",
-    "@cloudflare/workers-types": "latest"
+    "@astrojs/check": "0.9.10",
+    "@cloudflare/workers-types": "5.20260904.1",
+    "typescript": "6.0.3",
+    "wrangler": "4.129.0"
+  },
+  "engines": {
+    "node": ">=24.0.0 <25"
   }
 }

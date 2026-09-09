@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LeadForm from '../components/LeadForm.astro';
+import {submitLead} from '../lib/leads';
+import {site} from '../data/site';
+import {env} from 'cloudflare:workers';
+const result=Astro.request.method==='POST'?await submitLead(Astro.request,env):null;
+if(result)Astro.response.status=result.status;
+Astro.response.headers.set('Cache-Control','no-store');
+---
+<Layout title="Contact Peak Country" description="Contact Peak Country for mobile auto hail repair or paintless dent repair in Greeley and Northern Colorado."><div class="page-head"><div class="eyebrow">Mobile service · Greeley and Northern Colorado</div><h1>Let’s take a closer look.</h1><p>Tell us about your vehicle and the damage. Service availability and repair options are confirmed individually.</p></div><section class="section narrow"><div class="contact-direct"><p class="eyebrow">Contact information</p><h2>Call or text <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></h2><p>Peak Country is a mobile paintless dent repair service. Appointments and service locations are confirmed directly.</p></div>{result&&<div role="status" class={result.ok?'success':'error'}>{result.message}{!result.ok&&<p>For your privacy, form entries are not retained on this page. Re-enter them before trying again.</p>}</div>}{!result?.ok&&<LeadForm source="/contact/" />}</section></Layout>

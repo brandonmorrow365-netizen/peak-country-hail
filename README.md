@@ -24,12 +24,12 @@ npm run dev
 npm run build
 ```
 
-## Deploy preview
+## Update private development Worker
 ```bash
 npm run deploy
 ```
 
-Cloudflare's current Astro/Workers flow supports deploying Astro to Workers and previewing on a `workers.dev` subdomain. Keep the production custom domain disconnected until launch QA is complete.
+Public access is disabled: `workers_dev` and `preview_urls` must remain false. Use localhost for review while graphics and revisions are unfinished. Do not connect a domain or enable public URLs until the owner explicitly approves launch.
 
 ## D1 setup
 When authenticated to Cloudflare:

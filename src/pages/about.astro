@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+
+const title = 'About Peak Country PDR | Greeley Auto Hail Repair';
+const description = 'Meet the technician behind Peak Country. 20+ years of paintless dent repair experience serving Greeley, Weld County and Northern Colorado.';
+const faq = [
+  ['How much paintless dent repair experience does Peak Country have?', 'Peak Country is built around more than 20 years of hands-on paintless dent repair experience repairing hail damage, door dings, creases and other repairable dents.'],
+  ['What types of dents can Peak Country repair?', 'Peak Country specializes in auto hail damage, door dings, minor dents and creases that are good candidates for paintless dent repair. Each vehicle is evaluated individually because not every dent is appropriate for PDR.'],
+  ['Can hail damage be repaired without repainting a vehicle?', 'In many cases, yes. Paintless dent repair reshapes damaged metal while preserving the original factory paint when the paint and panel are suitable for PDR.'],
+  ['Does Peak Country work with insurance hail claims?', 'Yes. Peak Country works with insurance hail damage claims as well as customer-pay paintless dent repairs.'],
+  ['What areas does Peak Country serve?', 'Peak Country is a mobile service serving Greeley and surrounding Northern Colorado communities including Evans, Windsor, Eaton, Severance, Johnstown, Milliken, LaSalle and Platteville, with a primary service focus on Weld County.'],
+];
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+};
+---
+<Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
+  <div class="page-head about-head">
+    <div class="eyebrow">The technician behind Peak Country</div>
+    <h1>About Peak Country Auto Hail Repair &amp; Paintless Dent Repair</h1>
+    <p>More than two decades of hands-on dent repair experience, careful workmanship and straight answers for vehicle owners in Northern Colorado.</p>
+    <div class="about-actions">
+      <a class="button" href="/free-hail-inspection/">Get a Free Dent or Hail Damage Estimate</a>
+      <a class="text-link" href="/paintless-dent-repair/">See Our Paintless Dent Repair Services</a>
+    </div>
+  </div>
+
+  <section class="section about-intro" aria-labelledby="experience-heading">
+    <div>
+      <div class="eyebrow">Experience at the center of every repair</div>
+      <h2 id="experience-heading">20+ Years of Hands-On Paintless Dent Repair Experience</h2>
+      <p class="lead">I’ve spent more than 20 years repairing dents with paintless dent repair, and that experience is the foundation of Peak Country Auto Hail Repair &amp; Paintless Dent Repair.</p>
+      <p>Peak Country specializes in <a href="/auto-hail-repair/">auto hail damage repair</a>, <a href="/paintless-dent-repair/">paintless dent repair (PDR)</a>, door dings, creases and minor dents for vehicle owners in Greeley, Weld County and throughout Northern Colorado.</p>
+      <p>I built Peak Country around a simple idea: do the repair correctly, take care of the vehicle and give the customer straight answers.</p>
+    </div>
+    <aside class="technician-card" aria-label="Peak Country technician profile">
+      <div class="technician-photo" role="img" aria-label="Technician photograph will be added when an owner-approved image is supplied">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="43" r="22"/><path d="M20 112c3-27 18-42 40-42s37 15 40 42"/></svg>
+        <span>Owner photo coming soon</span>
+      </div>
+      <div class="technician-details">
+        <span class="profile-label">Peak Country technician</span>
+        <h3>Owner / Paintless Dent Repair Technician</h3>
+        <dl>
+          <div><dt>Experience</dt><dd>20+ years in PDR</dd></div>
+          <div><dt>Based in</dt><dd>Greeley / Northern Colorado</dd></div>
+          <div><dt>Service</dt><dd>Mobile, by appointment</dd></div>
+          <div><dt>Specialties</dt><dd>Auto hail repair, paintless dent repair, door dings and creases</dd></div>
+        </dl>
+      </div>
+    </aside>
+  </section>
+
+  <section class="about-dark">
+    <div class="section about-split">
+      <div>
+        <div class="eyebrow">Workmanship over sales tactics</div>
+        <h2>A Different Approach to Auto Hail Repair</h2>
+      </div>
+      <div class="about-copy">
+        <p>Hail repair has become a highly competitive business, and customers are often approached with promotions, giveaways and aggressive sales pitches after a major Colorado hailstorm.</p>
+        <p><strong>That isn’t what Peak Country is built around.</strong></p>
+        <p>My value is the repair itself—the experience behind it, the quality of the workmanship and the way your vehicle is treated while it is in my care.</p>
+        <p>When paintless dent repair is appropriate, the goal is to restore the damaged metal while preserving the vehicle’s original factory paint. PDR can often repair hail damage and dents without sanding, body filler or repainting.</p>
+        <p>If a dent isn’t a good candidate for paintless dent repair, I’ll tell you. I would rather give someone an honest recommendation than promise a repair that PDR isn’t suited to perform.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-principles" aria-label="Peak Country repair principles">
+    <article class="principle-card">
+      <span class="principle-number">01</span>
+      <h2>The Entire Vehicle Matters</h2>
+      <p>Good paintless dent repair involves more than simply making a dent disappear. Accessing hail damage can require the careful removal of trim, interior panels, headliners, lights or other vehicle components. Those parts need to be handled properly and reinstalled correctly when the repair is complete.</p>
+      <p>I pay attention to the entire vehicle throughout that process—not just the damaged panel. That attention to detail is especially important on newer vehicles, where owners expect their vehicle to look, feel and function the same way it did before the damage occurred.</p>
+    </article>
+    <article class="principle-card">
+      <span class="principle-number">02</span>
+      <h2>Clear Communication and Realistic Expectations</h2>
+      <p>You should understand what is being repaired, how it will be repaired and what to expect before leaving your vehicle with someone.</p>
+      <p>Peak Country provides straightforward estimates and realistic recommendations about what paintless dent repair can accomplish. I also believe in communicating with customers during the repair rather than leaving them wondering what is happening with their vehicle.</p>
+      <p><strong>No confusing sales pitch. No unnecessary promises. Just clear information about the repair.</strong></p>
+    </article>
+  </section>
+
+  <section class="service-region">
+    <div class="section service-region-grid">
+      <div>
+        <div class="eyebrow">Mobile service across the region</div>
+        <h2>Auto Hail Repair and PDR in Northern Colorado</h2>
+        <p>Colorado hailstorms can cause anything from a few isolated dents to extensive damage across the hood, roof, fenders, doors, quarter panels and trunk or liftgate.</p>
+        <p>Peak Country is a mobile paintless dent repair service serving Greeley, Evans, Windsor, Eaton, Severance, Johnstown, Milliken, LaSalle, Platteville and surrounding communities throughout Weld County and Northern Colorado.</p>
+        <p><a href="/service-area/">Explore the Peak Country service area</a> or check the <a href="/hail-tracker/">Northern Colorado Hail Tracker</a> for current official-source weather information.</p>
+      </div>
+      <div class="service-list">
+        <h3>Professional PDR for</h3>
+        <ul>
+          <li>Auto hail damage</li>
+          <li>Paintless dent repair (PDR)</li>
+          <li>Door dings</li>
+          <li>Minor dents</li>
+          <li>Creases</li>
+          <li>Insurance hail damage claims</li>
+          <li>Customer-pay dent repairs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section experience-close">
+    <div class="experience-mark" aria-hidden="true">20<span>+</span></div>
+    <div>
+      <div class="eyebrow">A skilled trade refined over time</div>
+      <h2>Experience Matters</h2>
+      <p>Paintless dent repair is a skilled trade. The tools matter, but knowing how metal moves, understanding proper access and recognizing when a dent can—or cannot—be repaired with PDR comes from experience.</p>
+      <p>After more than two decades of hands-on dent repair, that experience is what I bring to every vehicle that comes to Peak Country.</p>
+      <p>If your vehicle has hail damage, a door ding, crease or unwanted dent, contact Peak Country Auto Hail Repair &amp; Paintless Dent Repair for a free evaluation and find out whether PDR is the right repair for your vehicle.</p>
+    </div>
+  </section>
+
+  <section class="about-faq" aria-labelledby="faq-heading">
+    <div class="section">
+      <div class="section-head">
+        <div><div class="eyebrow">Straight answers</div><h2 id="faq-heading">About Peak Country PDR</h2></div>
+        <a href="/faq/">View all frequently asked questions</a>
+      </div>
+      <div class="faq-list">
+        {faq.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-cta" aria-labelledby="about-cta-heading">
+    <div>
+      <div class="eyebrow">Mobile service · Greeley and Northern Colorado</div>
+      <h2 id="about-cta-heading">Let’s take a careful look at the damage.</h2>
+      <p>Call or text <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>, or send the vehicle details online to begin.</p>
+      <div class="about-actions">
+        <a class="button" href="/free-hail-inspection/">Get a Free Dent or Hail Damage Estimate</a>
+        <a class="text-link" href="/paintless-dent-repair/">See Our Paintless Dent Repair Services</a>
+      </div>
+    </div>
+  </section>
+</Layout>
