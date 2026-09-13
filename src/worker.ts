@@ -1,6 +1,9 @@
 import { handle } from '@astrojs/cloudflare/handler';
 import { ingestWeather } from './lib/weather';
 import { getCanonicalRedirect } from './lib/domain-routing';
+
+const googleReviewUrl = 'https://g.page/r/CeY8oGjuCPRWEBM/review';
+
 export default {
   async fetch(request, env, ctx) {
     const redirect = getCanonicalRedirect(request.url);
@@ -15,6 +18,16 @@ export default {
       });
     }
     const requestUrl = new URL(request.url);
+    if (requestUrl.pathname === '/review') {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          'Location': googleReviewUrl,
+          'Cache-Control': 'no-store',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      });
+    }
     if (request.method === 'GET' && env.SITE_STAGE === 'production' && env.INDEXNOW_KEY && requestUrl.pathname === `/${env.INDEXNOW_KEY}.txt`) {
       return new Response(env.INDEXNOW_KEY, { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=3600', 'X-Robots-Tag': 'noindex, nofollow', 'X-Content-Type-Options': 'nosniff' } });
     }
