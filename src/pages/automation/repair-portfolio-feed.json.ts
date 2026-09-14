@@ -10,7 +10,8 @@ export const GET: APIRoute = () => {
     repairs: portfolioRepairs.map((repair) => ({
       repairId: repair.repairId,
       displayName: repair.vehicle,
-      historical: true,
+      privacyReviewed: repair.privacyReviewed,
+      portfolioDisclosure: 'Portfolio includes current Peak Country repairs and selected work personally completed by the owner throughout his professional PDR career.',
       galleryUrl: `${site.url}/gallery/#${repair.slug}`,
       serviceType: 'Paintless Dent Repair',
       description: repair.summary,

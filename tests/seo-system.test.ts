@@ -7,7 +7,7 @@ import { site } from '../src/data/site.ts';
 import { canonicalIndexNowUrls } from '../scripts/indexnow-lib.mjs';
 import { publishedCaseStudies } from '../src/data/caseStudies.ts';
 import { locationPages } from '../src/data/locationPages.ts';
-import { portfolioRepairs } from '../src/data/gallery.ts';
+import { portfolioPairs, portfolioRepairs } from '../src/data/gallery.ts';
 import { GET as getPortfolioFeed } from '../src/pages/automation/repair-portfolio-feed.json.ts';
 import { existsSync } from 'node:fs';
 
@@ -55,8 +55,8 @@ test('sample case studies and unready location pages remain unpublished', () => 
   assert.ok(locationPages.every((entry) => !entry.published));
 });
 
-test('historical portfolio keeps grouped repairs, paired ordering, and context images', () => {
-  assert.deepEqual(portfolioRepairs.map((repair) => repair.vehicle), ['2013 Chevrolet Silverado','Toyota 4Runner','Nissan Murano','Lexus RX']);
+test('repair-proof portfolio keeps grouped repairs, paired ordering, context images, and privacy review', () => {
+  assert.deepEqual(portfolioRepairs.map((repair) => repair.vehicle), ['2013 Chevrolet Silverado','Nissan Murano','Toyota 4Runner','Lexus RX']);
   const counts = portfolioRepairs.map((repair) => ({
     vehicle: repair.vehicle,
     before: repair.photos.filter((photo) => photo.state === 'before').length,
@@ -64,17 +64,20 @@ test('historical portfolio keeps grouped repairs, paired ordering, and context i
   }));
   assert.deepEqual(counts, [
     {vehicle:'2013 Chevrolet Silverado',before:3,after:3},
-    {vehicle:'Toyota 4Runner',before:2,after:2},
     {vehicle:'Nissan Murano',before:3,after:2},
+    {vehicle:'Toyota 4Runner',before:2,after:2},
     {vehicle:'Lexus RX',before:2,after:1},
   ]);
   for (const repair of portfolioRepairs) {
     assert.ok(repair.photos.length >= 2);
     assert.ok(repair.photos.some((photo) => photo.state === 'before'));
     assert.ok(repair.photos.some((photo) => photo.state === 'after'));
+    assert.equal(repair.privacyReviewed, true);
     const order = repair.photos.map((photo) => `${photo.angle}-${photo.state}`);
     assert.deepEqual(order, [...order].sort((a,b) => Number(a[0])-Number(b[0]) || (a.endsWith('before') ? -1 : 1)));
     assert.equal(new Set(repair.photos.map((photo) => `${repair.repairId}:${photo.state}:${photo.angle}`)).size, repair.photos.length);
+    assert.equal(portfolioPairs(repair).length, repair.photos.filter((photo) => photo.state === 'before').length);
+    assert.ok(portfolioPairs(repair).some((pair) => pair.after));
   }
 });
 
