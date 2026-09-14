@@ -38,6 +38,7 @@ export const contentMeta: ContentMeta[] = [
   { path: '/repair-standards/', lastmod: '2026-09-08' },
   { path: '/resources/', lastmod: '2026-09-05' },
   { path: '/service-area/', lastmod: '2026-09-08' },
+  { path: '/warranty/', lastmod: '2026-09-14' },
   { path: '/why-pdr/', lastmod: '2026-09-05' },
 ];
 
