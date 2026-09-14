@@ -30,13 +30,20 @@ import { site } from '../data/site';
   </div>
 
   <div class="storm-nav-wrap">
-    <nav class="storm-nav" aria-label="Main navigation">
+    <div class="storm-nav-controls">
+      <button class="storm-nav-toggle" type="button" aria-controls="storm-primary-nav" aria-expanded="false" data-storm-nav-toggle>
+        <span>Menu</span>
+        <span aria-hidden="true">☰</span>
+      </button>
+    </div>
+    <nav class="storm-nav" id="storm-primary-nav" aria-label="Main navigation" data-storm-primary-nav>
       <a href="/auto-hail-repair/">Hail repair</a>
       <a href="/paintless-dent-repair/">PDR</a>
       <a href="/gallery/">Gallery</a>
       <a href="/hail-tracker/">Hail tracker</a>
+      <a href="/service-area/">Service area</a>
       <a href="/about/">About</a>
-      <a class="button small" href="/free-hail-inspection/">Request an inspection <span aria-hidden="true">↗</span></a>
+      <a class="button small" href="/free-hail-inspection/">Get Started <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
 </header>
@@ -44,6 +51,21 @@ import { site } from '../data/site';
 <script>
   import { initHeaderStorm } from '../scripts/header-storm';
   document.querySelectorAll<HTMLElement>('[data-storm-header]').forEach(initHeaderStorm);
+
+  document.documentElement.classList.add('js');
+  document.querySelectorAll<HTMLElement>('[data-storm-header]').forEach((header) => {
+    const toggle = header.querySelector<HTMLButtonElement>('[data-storm-nav-toggle]');
+    const navigation = header.querySelector<HTMLElement>('[data-storm-primary-nav]');
+    if (!toggle || !navigation) return;
+
+    const setOpen = (open: boolean) => {
+      navigation.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    toggle.addEventListener('click', () => setOpen(!navigation.classList.contains('is-open')));
+    navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+  });
 </script>
 
 <style>
@@ -83,6 +105,9 @@ import { site } from '../data/site';
   .storm-tools button:disabled { opacity: .5; cursor: default; }
   .storm-tools svg { width: 13px; height: 15px; fill: none; stroke: #a0d7ff; stroke-width: 1.5; }
   .storm-nav-wrap { position: relative; z-index: 4; border-top: 1px solid #84c7fa45; background: linear-gradient(110deg,#091b30,#112c46); box-shadow: 0 -8px 24px #03102140; }
+  .storm-nav-controls { display: none; max-width: 1280px; margin: auto; padding: 12px 25px 0; }
+  .storm-nav-toggle { display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; min-width: 130px; padding: 11px 14px; color: #eef6ff; background: #0a2843; border: 1px solid #75bceb; border-radius: 3px; font: 700 .78rem/1 InterVariable,Inter,Arial,Helvetica,sans-serif; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+  .storm-nav-toggle:hover { background: #123a5d; }
   .storm-nav { max-width: 1280px; min-height: 76px; margin: auto; padding: 14px 48px; gap: clamp(20px,4vw,58px); flex-wrap: nowrap; }
   .storm-nav > a:not(.button) { color: #e7eef8; white-space: nowrap; font-weight: 600; font-size: .91rem; padding: 8px 0; }
   .storm-nav > a:not(.button):hover { color: #8ed2ff; }
@@ -95,8 +120,12 @@ import { site } from '../data/site';
     .storm-location { padding-top: 15px; max-width: 190px; }
     .storm-location span { font-size: .57rem; letter-spacing: .16em; }
     .storm-location strong { font-size: .85rem; letter-spacing: .12em; }
-    .storm-nav { padding: 15px 25px; gap: 25px; flex-wrap: wrap; justify-content: center; }
-    .storm-nav .button { margin-left: 0; }
+    .storm-nav-controls { display: block; }
+    .storm-nav { min-height: 0; padding: 15px 25px 20px; gap: 0; display: grid; grid-template-columns: 1fr; }
+    html.js .storm-nav { display: none; }
+    html.js .storm-nav.is-open { display: grid; }
+    .storm-nav > a:not(.button) { padding: 13px 0; border-bottom: 1px solid #84c7fa30; }
+    .storm-nav .button { width: max-content; margin: 17px 0 0; }
   }
   @media (max-width: 520px) {
     .storm-masthead,.storm-brand-layer { min-height: 390px; }
@@ -108,9 +137,10 @@ import { site } from '../data/site';
     .storm-picture img { object-position: 57% 50%; }
     .storm-tools { bottom: 16px; right: 18px; }
     .storm-tools button { padding: 9px 12px; font-size: .65rem; }
-    .storm-nav { gap: 8px 25px; padding: 13px 20px 16px; }
+    .storm-nav-controls { padding: 12px 20px 0; }
+    .storm-nav { gap: 0; padding: 10px 20px 18px; }
     .storm-nav > a:not(.button) { font-size: .8rem; }
-    .storm-nav .button { flex-basis: 100%; text-align: center; margin-top: 4px; }
+    .storm-nav .button { width: 100%; text-align: center; margin-top: 16px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .storm-illumination { display:none; }

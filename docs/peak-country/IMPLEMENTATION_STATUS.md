@@ -7,7 +7,7 @@
 
 ## Implementation phases
 1. [ ] Repository audit + architecture baseline
-2. [ ] Global navigation, routes, footer, and site hierarchy
+2. [x] Global navigation, routes, footer, and site hierarchy (2026-09-14)
 3. [ ] Homepage + Why Peak Country
 4. [ ] Hail Repair + PDR + Repair Evaluation
 5. [ ] Free Initial Assessment + Professional Estimating/Documentation
