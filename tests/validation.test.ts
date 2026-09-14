@@ -44,10 +44,15 @@ test('feed states distinguish live, empty-cache, failed-cache and stale-cache',(
  assert.equal(feedState({status:'error',completed_at:'2026-09-05T19:59:00Z'},recent,15,now),'cached-error');
  assert.equal(feedState(old,old,15,now),'stale');
 });
-function form(){const f=new FormData();for(const[k,v]of Object.entries({name:'Test',email:'test@example.com',phone:'',location:'Greeley',vehicle:'Test vehicle',damage_type:'hail',message:'',preferred_contact:'email',source_page:'/contact/',consent:'yes'}))f.set(k,v);return f;}
+function form(overrides:Record<string,string>={}){const f=new FormData();for(const[k,v]of Object.entries({...{name:'Test',email:'test@example.com',phone:'',location:'Greeley',vehicle:'Test vehicle',damage_type:'hail',message:'',preferred_contact:'email',source_page:'/contact/',consent:'yes'},...overrides}))f.set(k,v);return f;}
 test('lead validation enforces consent, preferred contact, bounds and source',()=>{
  assert.equal(validateLead(form()).name,'Test');
  for(const [key,value] of [['consent','no'],['email','bad'],['name','x'.repeat(101)],['source_page','https://example.com'],['damage_type','invented']]){const f=form();f.set(key,value);assert.throws(()=>validateLead(f));}
+});
+test('Get Started accepts either contact method, keeps location optional, and records routing details',()=>{
+ const f=new FormData();for(const[k,v]of Object.entries({name:'Customer',email:'',phone:'7204456246',vehicle:'2020 Example',damage_type:'hail',insurance:'yes',existing_estimate:'not-sure',photo_availability:'no',message:'Roof damage',preferred_contact:'email',source_page:'/get-started/',consent:'yes'}))f.set(k,v);
+ const lead=validateLead(f);assert.equal(lead.location,'');assert.equal(lead.preferred,'phone');assert.match(lead.message,/Insurance: yes/);assert.match(lead.message,/Photos available: no/);
+ f.set('phone','');assert.throws(()=>validateLead(f),/contact method/);
 });
 test('unconfigured forms refuse submissions',async()=>{assert.equal((await submitLead(new Request('https://example.com/contact/',{method:'POST'}),{})).status,503);});
 test('verified submission writes through prepared statements and rejects wrong host',async()=>{
@@ -70,9 +75,12 @@ test('verified submission writes through prepared statements and rejects wrong h
   assert.equal((sqlite.prepare('SELECT COUNT(*) AS count FROM leads').get() as {count:number}).count,1);
   assert.equal((sqlite.prepare('SELECT notification_status FROM leads').get() as {notification_status:string}).notification_status,'sent');
   assert.equal(message?.replyTo,'test@example.com');assert.match(message?.html||'',/Test vehicle/);
+  const workflowBody=new URLSearchParams(Array.from(form({source_page:'/get-started/',location:'',phone:'7204456246',email:'',preferred_contact:'email',insurance:'yes',existing_estimate:'not-sure',photo_availability:'yes'}).entries()) as [string,string][]);workflowBody.set('cf-turnstile-response','test-token');
+  const workflowRequest=new Request('https://example.com/get-started/',{method:'POST',headers:{Origin:'https://example.com','Content-Type':'application/x-www-form-urlencoded'},body:workflowBody});
+  const workflowSubmission=await submitLead(workflowRequest,env);assert.equal(workflowSubmission.ok,true);assert.equal(workflowSubmission.damage,'hail');assert.match(message?.html||'',/Insurance: yes/);assert.match(message?.html||'',/Photos available: yes/);
   globalThis.fetch=async()=>Response.json({success:true,hostname:'attacker.example',action:'lead'});
   assert.equal((await submitLead(request(),env)).status,400);
-  assert.equal((sqlite.prepare('SELECT COUNT(*) AS count FROM leads').get() as {count:number}).count,1);
+  assert.equal((sqlite.prepare('SELECT COUNT(*) AS count FROM leads').get() as {count:number}).count,2);
  }finally{globalThis.fetch=original;sqlite.close();}
 });
 test('submission requires Turnstile and retains the lead when email sending fails',async()=>{

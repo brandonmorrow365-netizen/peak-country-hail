@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GetStartedWorkflow from '../../components/GetStartedWorkflow.astro';
+import {submitLead} from '../../lib/leads';
+import {env} from 'cloudflare:workers';
+const result=Astro.request.method==='POST'?await submitLead(Astro.request,env):null;
+if(result) Astro.response.status=result.status;
+Astro.response.headers.set('Cache-Control','no-store');
+---
+<Layout title="Get Started | Peak Country" description="Start a no-obligation conversation about hail damage, dents, and Paintless Dent Repair with Peak Country." exactTitle>
+  <header class="page-head workflow-head"><div class="eyebrow">Free Initial Assessment · $0</div><h1>Get Started</h1><p>Start with a conversation—not a commitment. A few simple details help Peak Country understand your vehicle and guide you toward the right next step.</p></header>
+  <main class="section narrow workflow-shell"><GetStartedWorkflow {result} /></main>
+</Layout>

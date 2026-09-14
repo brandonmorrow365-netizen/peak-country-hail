@@ -1,22 +1,31 @@
 import {site} from '../data/site.ts';
 
 export function validateLead(form:FormData){
- const read=(key:string,max:number,required=false)=>{const value=form.get(key);if(typeof value!=='string'||value.length>max||(required&&!value.trim()))throw new Error('Please check the '+key.replaceAll('_',' ')+' field.');return value.trim();};
- const name=read('name',100,true),email=read('email',254),phone=read('phone',40),location=read('location',120,true),vehicle=read('vehicle',160,true),damage=read('damage_type',40,true),message=read('message',4000),preferred=read('preferred_contact',10,true),source=read('source_page',100,true);
+ const read=(key:string,max:number,required=false)=>{const value=form.get(key);if(value===null&&!required)return '';if(typeof value!=='string'||value.length>max||(required&&!value.trim()))throw new Error('Please check the '+key.replaceAll('_',' ')+' field.');return value.trim();};
+ const name=read('name',100,true),email=read('email',254),phone=read('phone',40),source=read('source_page',100,true);
+ const workflow=source==='/get-started/';
+ const location=read('location',120,!workflow),vehicle=read('vehicle',160,true),damage=read('damage_type',40,true),message=read('message',4000),preferred=read('preferred_contact',10,!workflow);
  if(!['email','phone'].includes(preferred))throw new Error('Choose a contact method.');
  if(/[\r\n\x00-\x1f\x7f]/.test(name)||/[\r\n\x00-\x1f\x7f]/.test(email))throw new Error('Please remove invalid characters.');
  if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))throw new Error('Enter a valid email address.');
  if(phone&&(phone.replace(/\D/g,'').length<7||phone.replace(/\D/g,'').length>15))throw new Error('Enter a valid phone number.');
- if(preferred==='email'&&!email||preferred==='phone'&&!phone)throw new Error('Provide your preferred contact details.');
- if(!['hail','door-ding','crease','other'].includes(damage))throw new Error('Choose a damage type.');
- if(!['/contact/','/free-hail-inspection/'].includes(source))throw new Error('Invalid source page.');
+ if(workflow ? !email&&!phone : preferred==='email'&&!email||preferred==='phone'&&!phone)throw new Error('Provide at least one reliable contact method.');
+ if(!(workflow?['hail','door-ding','not-sure']:['hail','door-ding','crease','other']).includes(damage))throw new Error('Choose a damage type.');
+ if(!['/contact/','/free-hail-inspection/','/get-started/'].includes(source))throw new Error('Invalid source page.');
  if(form.get('consent')!=='yes')throw new Error('Please acknowledge the contact consent.');
  if(form.get('website'))throw new Error('Unable to accept this request.');
- return {name,email,phone,location,vehicle,damage,message,preferred,source};
+ const insurance=workflow?read('insurance',20):'';
+ const existingEstimate=workflow?read('existing_estimate',20):'';
+ const photoAvailability=workflow?read('photo_availability',20):'';
+ if(workflow&&insurance&&!['yes','no','not-sure'].includes(insurance))throw new Error('Choose an insurance response.');
+ if(workflow&&existingEstimate&&!['yes','no','not-sure'].includes(existingEstimate))throw new Error('Choose an estimate response.');
+ if(workflow&&photoAvailability&&!['yes','no'].includes(photoAvailability))throw new Error('Choose whether you have photos to share.');
+ const workflowDetails=workflow?[insurance&&`Insurance: ${insurance}`,existingEstimate&&`Existing estimate: ${existingEstimate}`,photoAvailability&&`Photos available: ${photoAvailability}`].filter(Boolean).join('\n'):'';
+ return {name,email,phone,location,vehicle,damage,message:[message,workflowDetails].filter(Boolean).join(message&&workflowDetails?'\n\n':''),preferred:workflow?(phone&&!email?'phone':'email'):preferred,source};
 }
 const htmlEscape=(value:string)=>value.replace(/[&<>"']/g,(character)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]!));
 const textLine=(label:string,value:string)=>`${label}: ${value||'Not provided'}`;
-export async function submitLead(request:Request,env:Cloudflare.Env):Promise<{status:number;message:string;ok?:boolean;leadId?:string;messageId?:string}>{
+export async function submitLead(request:Request,env:Cloudflare.Env):Promise<{status:number;message:string;ok?:boolean;leadId?:string;messageId?:string;damage?:string}>{
  if(env.FORMS_ENABLED!=='true'||!env.DB||!env.TURNSTILE_SECRET_KEY||!env.TURNSTILE_SITE_KEY||!env.CONTACT_EMAIL||!env.CONTACT_EMAIL_RECIPIENT)return {status:503,message:`Online requests are not available yet. Call or text ${site.phoneDisplay} to contact Peak Country.`};
  const url=new URL(request.url);
  if(request.headers.get('origin')!==url.origin)return {status:403,message:'Please submit the form from this website.'};
@@ -45,12 +54,12 @@ export async function submitLead(request:Request,env:Cloudflare.Env):Promise<{st
    const sent=await env.CONTACT_EMAIL.send({to:env.CONTACT_EMAIL_RECIPIENT,from:{email:'website@peakcountryhail.com',name:'Peak Country Website'},subject:`New Peak Country Website Lead — ${lead.name}`,replyTo:lead.email||undefined,text,html});
    await env.DB.prepare('UPDATE leads SET notification_status=?,notification_message_id=?,notified_at=? WHERE id=?').bind('sent',sent.messageId,new Date().toISOString(),leadId).run();
    console.log('Contact notification accepted',{leadId,messageId:sent.messageId});
-   return {status:200,ok:true,message:'Thanks — your request has been received. We’ll be in touch soon.',leadId,messageId:sent.messageId};
+   return {status:200,ok:true,message:'Thanks — your request has been received. We’ll be in touch soon.',leadId,messageId:sent.messageId,damage:lead.damage};
   }catch(error){
    const code=typeof error==='object'&&error&&'code' in error?String(error.code):'send_failed';
    await env.DB.prepare('UPDATE leads SET notification_status=?,notification_error=? WHERE id=?').bind('failed',code.slice(0,120),leadId).run();
    console.error('Contact notification failed',{leadId,code});
-   return {status:202,ok:true,message:`Your request was saved, but the automatic notification was delayed. Please call or text ${site.phoneDisplay} if your request is urgent.`,leadId};
+   return {status:202,ok:true,message:`Your request was saved, but the automatic notification was delayed. Please call or text ${site.phoneDisplay} if your request is urgent.`,leadId,damage:lead.damage};
   }
  }catch{return {status:503,message:'We could not confirm that your request was saved. Please try again later.'};}
 }

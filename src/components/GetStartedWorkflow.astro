@@ -1,0 +1,49 @@
+---
+import {env} from 'cloudflare:workers';
+import {site} from '../data/site';
+const {result}=Astro.props;
+const ready=env.FORMS_ENABLED==='true'&&!!env.DB&&!!env.TURNSTILE_SITE_KEY&&!!env.TURNSTILE_SECRET_KEY&&!!env.CONTACT_EMAIL&&!!env.CONTACT_EMAIL_RECIPIENT;
+const selected=result?.damage as string|undefined;
+const acknowledgement={
+  hail:'Thanks for contacting Peak Country about hail damage. We’ll review what you shared and help determine the right next step.',
+  'door-ding':'Thanks for contacting Peak Country about your dent or crease. We’ll review what you shared and help determine the right next step.',
+  'not-sure':'Thanks for starting the conversation. We’ll review what you shared and help determine the right next step.',
+}[selected ?? ''] ?? 'Thanks for contacting Peak Country. We’ll review what you shared and help determine the right next step.';
+---
+{result?.ok ? <section class="workflow-result success" role="status" aria-live="polite"><p class="eyebrow">Request received</p><h2>{acknowledgement}</h2><p>There is no charge, repair authorization, or commitment from this request. An experienced PDR professional will help you decide whether to share photos, talk first, or request an inspection.</p><div class="workflow-next"><a class="button dark" href={`tel:${site.phone}`}>Talk to Us First</a><a href="/free-hail-inspection/">Request an Inspection when appropriate →</a><a href="/estimating-documentation/">Review Estimate Options →</a></div><p class="fine">Photos are shared only through the next method Peak Country provides after review; this initial request does not upload files.</p></section> : <>
+  {!ready && <div class="callout">Online requests are not available yet. Call or text <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> to start a conversation. Please do not enter personal information in this preview.</div>}
+  {result && <div class="workflow-result error" role="alert"><strong>We couldn’t send your request.</strong><p>{result.message}</p><p class="fine">For your privacy, form entries are not retained on this page. Re-enter them before trying again.</p></div>}
+  <form class="workflow-form" method="post" action="/get-started/" novalidate>
+    <fieldset disabled={!ready}><legend class="sr-only">Get Started request</legend>
+      <section class="workflow-step" data-step="choice"><div class="workflow-step__label">Step 1 of 4</div><h2>What can we help with?</h2><p>Choose the closest match. You can tell us more in your own words next.</p><div class="workflow-choices" role="radiogroup" aria-label="What can we help with?">
+        <label><input type="radio" name="damage_type" value="hail" required /><span><strong>Hail Damage</strong><small>Storm-related dents or possible hail damage.</small></span></label>
+        <label><input type="radio" name="damage_type" value="door-ding" /><span><strong>Door Ding / Dent / Crease</strong><small>Everyday dents, dings, or creases.</small></span></label>
+        <label><input type="radio" name="damage_type" value="not-sure" /><span><strong>Not Sure What I Need</strong><small>Start with a conversation and we’ll help sort it out.</small></span></label>
+      </div></section>
+      <aside class="workflow-privacy"><strong>Your information is used to respond to your request. We do not sell it.</strong><span>We’ll only ask for what helps us begin the conversation.</span></aside>
+      <section class="workflow-step" data-step="details"><div class="workflow-step__label">Step 2 of 4</div><h2>Tell us the basics</h2><div class="form-grid">
+        <label class="full">Your name<input name="name" autocomplete="name" maxlength="100" required /></label>
+        <label>Email address <span class="fine">(one contact method is required)</span><input name="email" type="email" autocomplete="email" maxlength="254" /></label>
+        <label>Phone number <span class="fine">(one contact method is required)</span><input name="phone" type="tel" autocomplete="tel" maxlength="40" /></label>
+        <label class="full">Vehicle year, make &amp; model<input name="vehicle" autocomplete="off" maxlength="160" required /></label>
+        <label class="full">Anything else you’d like us to know? <span class="fine">(optional)</span><textarea name="message" maxlength="4000" placeholder="For example: which panel is affected, when it happened, or what you’re concerned about."></textarea></label>
+      </div><p class="fine">You do not need to provide an address or confirm service-area eligibility to start a conversation.</p></section>
+      <section class="workflow-step" data-step="routing"><div class="workflow-step__label">Step 3 of 4</div><h2>Help us understand the situation</h2>
+        <div class="workflow-routing" data-insurance-routing hidden><fieldset><legend>Are you planning to use insurance?</legend><label><input type="radio" name="insurance" value="yes" /> Yes</label><label><input type="radio" name="insurance" value="no" /> No</label><label><input type="radio" name="insurance" value="not-sure" /> Not Sure</label></fieldset>
+        <fieldset data-estimate-routing hidden><legend>Do you already have an insurance company or body-shop estimate?</legend><label><input type="radio" name="existing_estimate" value="yes" /> Yes</label><label><input type="radio" name="existing_estimate" value="no" /> No</label><label><input type="radio" name="existing_estimate" value="not-sure" /> Not Sure</label></fieldset></div>
+        <fieldset class="workflow-photos"><legend>Do you have photos to share? <span class="fine">(optional)</span></legend><label><input type="radio" name="photo_availability" value="yes" /> Yes, I have photos</label><label><input type="radio" name="photo_availability" value="no" /> Not right now</label><p class="fine">Photos can help us provide better initial guidance, but they are never required. This workflow does not upload files yet; Peak Country will let you know the appropriate secure way to share them after review.</p></fieldset>
+      </section>
+      <section class="workflow-step workflow-submit" data-step="review"><div class="workflow-step__label">Step 4 of 4</div><h2>Start with a conversation—not a commitment.</h2><div class="workflow-privacy workflow-privacy--final"><strong>Your information is used to respond to this request. We do not sell it.</strong><span>This request is not a marketing signup.</span></div><ul><li>Submitting this request does not authorize repairs.</li><li>It does not create a charge, repair commitment, or checkout.</li><li>Requesting a Free Initial Assessment creates no obligation.</li></ul><label class="check"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about this request and acknowledge the <a href="/privacy/">privacy notice</a>.</span></label><label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label><input type="hidden" name="preferred_contact" value="email" /><input type="hidden" name="location" value="" /><input type="hidden" name="source_page" value="/get-started/" />
+      {ready && <div class="cf-turnstile" data-sitekey={env.TURNSTILE_SITE_KEY} data-action="lead"></div>}<p class="workflow-contact-error" role="alert" hidden>Please provide an email address or phone number so we can respond.</p><button class="button dark" type="submit">Send request</button></section>
+    </fieldset>
+  </form>
+  {ready && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+  <script>
+    const form=document.querySelector('.workflow-form');
+    const insurance=document.querySelector('[data-insurance-routing]') as HTMLElement | null;
+    const estimate=document.querySelector('[data-estimate-routing]') as HTMLElement | null;
+    const setRouting=()=>{const hail=(form?.querySelector('input[name="damage_type"]:checked') as HTMLInputElement)?.value==='hail';if(insurance)insurance.hidden=!hail;if(!hail&&estimate)estimate.hidden=true;};
+    form?.addEventListener('change',(event)=>{const input=event.target as HTMLInputElement;if(input.name==='damage_type')setRouting();if(input.name==='insurance'&&estimate)estimate.hidden=input.value!=='yes';});
+    form?.addEventListener('submit',(event)=>{const email=(form.querySelector('[name="email"]') as HTMLInputElement).value.trim();const phone=(form.querySelector('[name="phone"]') as HTMLInputElement).value.trim();const error=form.querySelector('.workflow-contact-error') as HTMLElement;if(!email&&!phone){event.preventDefault();error.hidden=false;error.focus();}else error.hidden=true;});
+  </script>
+</>}
