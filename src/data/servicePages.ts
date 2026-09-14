@@ -33,7 +33,7 @@ export const servicePages:Record<string,ServicePage> = {
       {heading:'What happens during a Peak Country hail inspection',paragraphs:[
         'The inspection starts with the vehicle’s year, make, model, storm context, location, and any concerns you have noticed. Under appropriate lighting, the visible exterior panels are reviewed for dent patterns, paint damage, prior repairs, access constraints, and other conditions that could affect the approach. Peak Country then explains which areas appear suitable for PDR, which may need another method, and what additional access may be necessary.',
         'Weather data can help establish regional context, but a nearby NOAA or Storm Prediction Center report does not prove that a specific vehicle was struck. Reports describe observations at a place and time, with varying coverage and precision. The vehicle itself must be inspected before damage or repairability is determined.'
-      ],links:[{href:'/hail-tracker/',label:'Review the Northern Colorado Hail Tracker'},{href:'/gallery/',label:'View the repair gallery'},{href:'/free-hail-inspection/',label:'Get Started'}]}
+      ],links:[{href:'/hail-tracker/',label:'Review the Northern Colorado Hail Tracker'},{href:'/gallery/',label:'View the repair gallery'},{href:'/get-started/',label:'Get Started'}]}
     ],
     faqs:[
       {question:'Can all hail damage be repaired with PDR?',answer:'No. PDR suitability depends on paint condition, dent depth and location, metal stretch, panel material, prior repairs, and access. Some vehicles need a combination of PDR and conventional repair.'},
@@ -43,7 +43,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Does a hail report near Greeley prove my car was hit?',answer:'No. A report confirms an observation near a location, not exposure or damage to a particular vehicle. Inspection lighting and a direct vehicle assessment are needed.'},
       {question:'Do you provide mobile hail inspections?',answer:'Yes. Peak Country provides mobile service by appointment in Greeley, Weld County, and nearby Northern Colorado communities, subject to location and working conditions.'}
     ],
-    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/free-hail-inspection/',label:'Get Started'}]
+    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/get-started/',label:'Get Started'}]
   },
   'paintless-dent-repair': {
     title:'Paintless Dent Repair Greeley, CO | Peak Country',
@@ -69,7 +69,7 @@ export const servicePages:Record<string,ServicePage> = {
         description:'A PDR reflection light casting reference lines across a vehicle panel to reveal distortion during paintless dent repair.'
       },
       links:[{href:'/auto-hail-repair/',label:'Learn how hail damage is evaluated'},{href:'/repair-standards/',label:'Review Repair Evaluation'}],
-      cta:{href:'/free-hail-inspection/',label:'Get Started'}
+      cta:{href:'/get-started/',label:'Get Started'}
     },
     sections:[
       {heading:'What paintless dent repair is',paragraphs:[
@@ -99,7 +99,7 @@ export const servicePages:Record<string,ServicePage> = {
       {heading:'What to expect from a PDR inspection',paragraphs:[
         'Peak Country reviews the dent under controlled reflection lighting and considers its depth, location, body-line involvement, paint condition, panel material, and access. The surrounding panel is checked for crowns, prior damage, and evidence of previous repair. Photos can help with initial scheduling, but a final repairability decision requires a direct view of the vehicle.',
         'After assessment, the proposed approach and known limitations can be explained in plain language. Mobile service is available by appointment in Greeley, Weld County, and nearby Northern Colorado communities. The working location must provide safe, suitable conditions for inspection and repair.'
-      ],links:[{href:'/gallery/',label:'View the repair gallery'},{href:'/free-hail-inspection/',label:'Get Started'}]}
+      ],links:[{href:'/gallery/',label:'View the repair gallery'},{href:'/get-started/',label:'Get Started'}]}
     ],
     faqs:[
       {question:'Does PDR remove the original paint?',answer:'No. PDR is intended to retain the existing paint while reshaping suitable metal. If the paint is cracked or unstable, another repair method may be more appropriate.'},
@@ -109,7 +109,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Can PDR repair a crease?',answer:'Some minor and more complex creases qualify. Length, sharpness, location, metal stretch, paint condition, material, access, and the repair goal determine whether a paintless approach makes sense.'},
       {question:'Is a photo enough to approve a PDR repair?',answer:'A photo can start the conversation but often hides depth, crowns, finish issues, and access limitations. Direct inspection is needed for a reliable plan.'}
     ],
-    related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/free-hail-inspection/',label:'Get Started'}]
+    related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/get-started/',label:'Get Started'}]
   },
   'door-ding-repair': {
     title:'Door Ding Repair in Greeley, CO | Peak Country',

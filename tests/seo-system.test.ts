@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { contentMeta } from '../src/data/contentMeta.ts';
 import { pageGraph, schemaIds } from '../src/lib/schema.ts';
-import { robotsText } from '../src/lib/seo.ts';
+import { canonicalPath, canonicalUrl, robotsText } from '../src/lib/seo.ts';
 import { site } from '../src/data/site.ts';
 import { canonicalIndexNowUrls } from '../scripts/indexnow-lib.mjs';
 import { publishedCaseStudies } from '../src/data/caseStudies.ts';
@@ -18,13 +18,28 @@ test('entity graph uses stable references without private location data', () => 
   const website = nodes.find((node) => node['@id'] === schemaIds.website) as Record<string, unknown>;
   const page = nodes.find((node) => node['@id'] === `${site.url}/paintless-dent-repair/#webpage`) as Record<string, unknown>;
   const ref = (value: unknown) => (value as Record<string, unknown>)['@id'];
-  assert.equal(business['@type'], 'AutoRepair');
+  assert.deepEqual(business['@type'], ['AutoRepair', 'LocalBusiness']);
   assert.equal(ref(website.publisher), schemaIds.business);
   assert.equal(ref(page.isPartOf), schemaIds.website);
   assert.equal(ref(page.about), schemaIds.business);
   assert.equal(business.address, undefined);
   assert.equal(business.geo, undefined);
   assert.equal(business.sameAs, undefined);
+  assert.equal((business.contactPoint as Record<string, unknown>).telephone, site.phone);
+  assert.equal((business.contactPoint as Record<string, unknown>).email, site.email);
+  assert.match(business.description as string, /More than 20 years of professional Paintless Dent Repair experience/);
+  assert.match(business.description as string, /more than 25 years of collision-industry experience/);
+  const offers = (business.hasOfferCatalog as {itemListElement:Array<{itemOffered:Record<string, unknown>}>}).itemListElement;
+  assert.deepEqual(offers.map(({itemOffered}) => itemOffered.url), site.primaryServices.map(({path}) => canonicalUrl(path)));
+  assert.equal(ref(page.breadcrumb), `${site.url}/paintless-dent-repair/#breadcrumb`);
+});
+
+test('canonical URLs normalize document routes without changing file endpoints', () => {
+  assert.equal(canonicalPath('/about'), '/about/');
+  assert.equal(canonicalPath('/about/index.html'), '/about/');
+  assert.equal(canonicalPath('/feed.xml'), '/feed.xml');
+  assert.equal(canonicalUrl('/about?ignored=true'), `${site.url}/about/`);
+  assert.equal(canonicalUrl('/'), `${site.url}/`);
 });
 
 test('content metadata contains unique canonical paths and stable ISO dates', () => {

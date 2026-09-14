@@ -1,6 +1,12 @@
 # Peak Country Auto Hail Repair & Paintless Dent Repair
 
-Peak Country is a mobile auto hail repair and Paintless Dent Repair service by appointment for Greeley, Weld County, and nearby Northern Colorado communities. The business has more than 20 years of hands-on PDR experience. The canonical site is https://peakcountryhail.com/.
+Peak Country Auto Hail Repair & Paintless Dent Repair is one mobile, service-area auto hail repair and Paintless Dent Repair business serving Greeley and Northern Colorado by appointment. It is backed by more than 20 years of professional PDR experience and more than 25 years of collision-industry experience. The canonical website is https://peakcountryhail.com/.
+
+Public contact details:
+- Phone: 720-445-6246
+- Email: info@peakcountryhail.com
+
+Peak Country does not advertise a public walk-in storefront. No secondary domain represents a separate business entity.
 
 ## Business and repair information
 - About and experience: https://peakcountryhail.com/about/
@@ -13,6 +19,7 @@ Peak Country is a mobile auto hail repair and Paintless Dent Repair service by a
 - Free Initial Assessment: https://peakcountryhail.com/free-hail-inspection/
 - Professional Estimating & Documentation: https://peakcountryhail.com/estimating-documentation/
 - Contact: https://peakcountryhail.com/contact/
+- Official review link: https://peakcountryhail.com/review
 
 ## Hail information
 - Live Northern Colorado hail tracker: https://peakcountryhail.com/hail-tracker/

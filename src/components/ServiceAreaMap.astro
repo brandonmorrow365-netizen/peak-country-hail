@@ -8,7 +8,6 @@ const { radiusMiles, referencePoint } = site.mobileServiceArea;
   <div class="section service-map-wrap"><div class="service-map" data-service-area-map data-latitude={referencePoint.latitude} data-longitude={referencePoint.longitude} data-radius-miles={radiusMiles} role="region" aria-label={`Interactive map of the standard ${radiusMiles}-mile mobile-service radius around downtown Greeley, Colorado`} aria-describedby="service-map-description"><p class="service-map-loading">Loading the interactive service-area map…</p></div><p id="service-map-description" class="service-map-description">Use the map controls to zoom and pan. The map uses a neutral downtown Greeley reference point only to calculate the radius; it does not identify a storefront, office, or residential address.</p><noscript><p class="service-map-noscript">The interactive map requires JavaScript. The standard mobile-service area is approximately 25 straight-line miles from a neutral downtown Greeley reference point; service may still be available outside the circle.</p></noscript></div>
 </section>
 <script>
-  import maplibregl from 'maplibre-gl';
   const earthRadiusMiles = 3958.8;
   const radians = (value: number) => value * Math.PI / 180;
   const degrees = (value: number) => value * 180 / Math.PI;
@@ -25,9 +24,10 @@ const { radiusMiles, referencePoint } = site.mobileServiceArea;
     }
     return coordinates;
   }
-  document.querySelectorAll<HTMLElement>('[data-service-area-map]').forEach((container) => {
+  async function initializeMap(container: HTMLElement) {
     const latitude = Number(container.dataset.latitude), longitude = Number(container.dataset.longitude), radiusMiles = Number(container.dataset.radiusMiles);
     if (!Number.isFinite(latitude) || !Number.isFinite(longitude) || !Number.isFinite(radiusMiles)) return;
+    const { default: maplibregl } = await import('maplibre-gl');
     const map = new maplibregl.Map({ container, center: [longitude, latitude], zoom: 8.65, minZoom: 6.5, maxZoom: 15, cooperativeGestures: true, style: { version: 8, sources: { carto: { type: 'raster', tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'], tileSize: 256, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>' } }, layers: [{ id: 'carto', type: 'raster', source: 'carto' }] } });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     map.addControl(new maplibregl.ScaleControl({ unit: 'imperial' }), 'bottom-left');
@@ -39,5 +39,19 @@ const { radiusMiles, referencePoint } = site.mobileServiceArea;
       container.querySelector('.service-map-loading')?.remove();
     });
     map.on('error', () => { const loading = container.querySelector<HTMLElement>('.service-map-loading'); if (loading) loading.textContent = 'Map tiles could not be loaded. The standard mobile-service area remains approximately 25 straight-line miles from a neutral downtown Greeley reference point.'; });
-  });
+  }
+  const containers = document.querySelectorAll<HTMLElement>('[data-service-area-map]');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      initializeMap(entry.target as HTMLElement).catch(() => {
+        const loading = entry.target.querySelector<HTMLElement>('.service-map-loading');
+        if (loading) loading.textContent = 'The interactive map could not be loaded. The standard mobile-service area remains approximately 25 straight-line miles from a neutral downtown Greeley reference point.';
+      });
+    }), { rootMargin: '300px 0px' });
+    containers.forEach((container) => observer.observe(container));
+  } else {
+    containers.forEach((container) => initializeMap(container));
+  }
 </script>

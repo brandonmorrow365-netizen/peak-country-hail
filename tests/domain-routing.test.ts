@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {getCanonicalRedirect, secondaryDomainRedirects} from '../src/lib/domain-routing.ts';
+import {getCanonicalRedirect, getTrailingSlashRedirect, secondaryDomainRedirects} from '../src/lib/domain-routing.ts';
 import {isProductionHostname, robotsMeta, robotsText} from '../src/lib/seo.ts';
 
 test('secondary apex and www domains redirect directly to canonical destinations', () => {
@@ -23,6 +23,14 @@ test('canonical host normalizes HTTP and www in one hop while preserving path an
   assert.equal(getCanonicalRedirect('http://peakcountryhail.com/paintless-dent-repair/?source=review'), destination);
   assert.equal(getCanonicalRedirect('https://www.peakcountryhail.com/paintless-dent-repair/?source=review'), destination);
   assert.equal(getCanonicalRedirect('http://www.peakcountryhail.com/paintless-dent-repair/?source=review'), destination);
+  assert.equal(getCanonicalRedirect('http://www.peakcountryhail.com/paintless-dent-repair?source=review'), destination);
+  assert.equal(getCanonicalRedirect('https://peakcountryhail.com/about'), 'https://peakcountryhail.com/about/');
+});
+
+test('preview routes gain trailing slashes without changing hosts or file endpoints', () => {
+  assert.equal(getTrailingSlashRedirect('http://127.0.0.1:45124/about?source=preview'), 'http://127.0.0.1:45124/about/?source=preview');
+  assert.equal(getTrailingSlashRedirect('https://preview.example.workers.dev/feed.xml'), null);
+  assert.equal(getTrailingSlashRedirect('https://preview.example.workers.dev/review'), null);
 });
 
 test('canonical HTTPS and preview hosts do not redirect', () => {

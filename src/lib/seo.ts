@@ -2,6 +2,16 @@ import {site} from '../data/site.ts';
 
 const canonicalHostname = new URL(site.url).hostname;
 
+export function canonicalPath(pathname: string) {
+  const clean = (pathname.split(/[?#]/, 1)[0] || '/').replace(/\/index\.html$/, '/');
+  if (clean === '/') return '/';
+  return /\/[^/]+\.[^/]+$/.test(clean) ? clean : `${clean.replace(/\/+$/, '')}/`;
+}
+
+export function canonicalUrl(pathname: string) {
+  return new URL(canonicalPath(pathname), `${site.url}/`).href;
+}
+
 export function isProductionHostname(hostname: string) {
   return hostname.toLowerCase().replace(/\.$/, '') === canonicalHostname;
 }

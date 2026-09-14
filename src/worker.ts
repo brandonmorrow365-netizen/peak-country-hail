@@ -1,8 +1,7 @@
 import { handle } from '@astrojs/cloudflare/handler';
 import { ingestWeather } from './lib/weather';
-import { getCanonicalRedirect } from './lib/domain-routing';
-
-const googleReviewUrl = 'https://g.page/r/CeY8oGjuCPRWEBM/review';
+import { getCanonicalRedirect, getTrailingSlashRedirect } from './lib/domain-routing';
+import { site } from './data/site';
 
 export default {
   async fetch(request, env, ctx) {
@@ -22,8 +21,19 @@ export default {
       return new Response(null, {
         status: 302,
         headers: {
-          'Location': googleReviewUrl,
+          'Location': site.reviewUrl,
           'Cache-Control': 'no-store',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      });
+    }
+    const pathRedirect = getTrailingSlashRedirect(requestUrl);
+    if (pathRedirect) {
+      return new Response(null, {
+        status: 308,
+        headers: {
+          'Location': pathRedirect,
+          'Cache-Control': 'public, max-age=3600',
           'X-Content-Type-Options': 'nosniff',
         },
       });

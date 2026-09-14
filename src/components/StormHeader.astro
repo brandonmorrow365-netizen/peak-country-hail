@@ -1,5 +1,7 @@
 ---
 import { site } from '../data/site';
+const currentPath = Astro.url.pathname;
+const isCurrent = (path: string) => path === '/' ? currentPath === '/' : currentPath.startsWith(path);
 ---
 
 <header class="storm-header" data-storm-header>
@@ -37,13 +39,13 @@ import { site } from '../data/site';
       </button>
     </div>
     <nav class="storm-nav" id="storm-primary-nav" aria-label="Main navigation" data-storm-primary-nav>
-      <a href="/auto-hail-repair/">Hail repair</a>
-      <a href="/paintless-dent-repair/">PDR</a>
-      <a href="/gallery/">Gallery</a>
-      <a href="/hail-tracker/">Hail tracker</a>
-      <a href="/service-area/">Service area</a>
-      <a href="/about/">About</a>
-      <a class="button small" href="/get-started/">Get Started <span aria-hidden="true">↗</span></a>
+      <a href="/auto-hail-repair/" aria-current={isCurrent('/auto-hail-repair/') ? 'page' : undefined}>Hail repair</a>
+      <a href="/paintless-dent-repair/" aria-current={isCurrent('/paintless-dent-repair/') ? 'page' : undefined}>PDR</a>
+      <a href="/gallery/" aria-current={isCurrent('/gallery/') ? 'page' : undefined}>Gallery</a>
+      <a href="/hail-tracker/" aria-current={isCurrent('/hail-tracker/') ? 'page' : undefined}>Hail tracker</a>
+      <a href="/service-area/" aria-current={isCurrent('/service-area/') ? 'page' : undefined}>Service area</a>
+      <a href="/about/" aria-current={isCurrent('/about/') ? 'page' : undefined}>About</a>
+      <a class="button small" href="/get-started/" aria-current={isCurrent('/get-started/') ? 'page' : undefined}>Get Started <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
 </header>
@@ -111,6 +113,7 @@ import { site } from '../data/site';
   .storm-nav { max-width: 1280px; min-height: 76px; margin: auto; padding: 14px 48px; gap: clamp(20px,4vw,58px); flex-wrap: nowrap; }
   .storm-nav > a:not(.button) { color: #e7eef8; white-space: nowrap; font-weight: 600; font-size: .91rem; padding: 8px 0; }
   .storm-nav > a:not(.button):hover { color: #8ed2ff; }
+  .storm-nav > a[aria-current='page']:not(.button) { color: #8ed2ff; text-decoration: underline; text-decoration-thickness: 2px; }
   .storm-nav .button { margin-left: auto; white-space: nowrap; padding: 12px 19px; font-size: .76rem; }
   .storm-nav .button span { margin-left: 14px; }
   @media (max-width: 900px) {

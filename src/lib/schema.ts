@@ -1,5 +1,6 @@
 import { site } from '../data/site.ts';
 import { contentByPath } from '../data/contentMeta.ts';
+import { canonicalPath, canonicalUrl } from './seo.ts';
 
 export type SchemaNode = Record<string, unknown>;
 
@@ -16,15 +17,24 @@ function titleCase(segment: string) {
 
 export function businessNode(): SchemaNode {
   return {
-    '@type': 'AutoRepair',
+    '@type': ['AutoRepair', 'LocalBusiness'],
     '@id': schemaIds.business,
     name: site.name,
+    alternateName: site.shortName,
     url: `${site.url}/`,
     telephone: site.phone,
     email: site.email,
-    logo: { '@type': 'ImageObject', '@id': `${site.url}/#logo`, url: absolute(site.logo), contentUrl: absolute(site.logo), caption: site.name },
+    logo: { '@type': 'ImageObject', '@id': `${site.url}/#logo`, url: absolute(site.logo), contentUrl: absolute(site.logo), caption: site.name, width: 1448, height: 1086 },
     image: { '@id': `${site.url}/#logo` },
-    description: `${site.experience}. Mobile auto hail repair and paintless dent repair by appointment in ${site.serviceRegion}.`,
+    description: `${site.experience} and ${site.collisionExperience.toLowerCase()}. Mobile auto hail repair and paintless dent repair by appointment in ${site.serviceRegion}.`,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: site.phone,
+      email: site.email,
+      areaServed: site.serviceRegion,
+      availableLanguage: 'English',
+    },
     areaServed: [
       ...site.approvedCommunities.map((name) => ({ '@type': 'City', name: `${name}, Colorado` })),
       { '@type': 'AdministrativeArea', name: 'Weld County, Colorado' },
@@ -33,9 +43,12 @@ export function businessNode(): SchemaNode {
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Vehicle dent repair services',
-      itemListElement: site.primaryServices.map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
+      itemListElement: site.primaryServices.map(({ name, path }) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', '@id': `${canonicalUrl(path)}#service`, name, url: canonicalUrl(path), provider: { '@id': schemaIds.business } },
+      })),
     },
-    knowsAbout: ['Automotive hail damage', 'Paintless Dent Repair', 'Door ding repair', 'Minor dent repair', 'Crease repair', 'Hail-damage inspection', 'Vehicle repair planning'],
+    knowsAbout: ['Automotive hail damage', 'Paintless Dent Repair', 'Door ding repair', 'Minor dent repair', 'Crease repair', 'Hail-damage inspection', 'Vehicle repair planning', 'Collision repair documentation'],
     ...(site.socialProfiles.length ? { sameAs: site.socialProfiles } : {}),
   };
 }
@@ -52,10 +65,12 @@ export function websiteNode(): SchemaNode {
 }
 
 export function webPageNode(pathname: string, name: string, description: string): SchemaNode {
-  const url = absolute(pathname);
-  const lastmod = contentByPath.get(pathname as `/${string}`)?.lastmod;
+  const path = canonicalPath(pathname);
+  const url = canonicalUrl(path);
+  const lastmod = contentByPath.get(path as `/${string}`)?.lastmod;
+  const pageType = path === '/about/' ? 'AboutPage' : path === '/contact/' ? 'ContactPage' : path === '/gallery/' ? 'CollectionPage' : 'WebPage';
   return {
-    '@type': 'WebPage',
+    '@type': pageType,
     '@id': `${url}#webpage`,
     url,
     name,
@@ -63,21 +78,23 @@ export function webPageNode(pathname: string, name: string, description: string)
     isPartOf: { '@id': schemaIds.website },
     about: { '@id': schemaIds.business },
     publisher: { '@id': schemaIds.business },
+    ...(path !== '/' ? { breadcrumb: { '@id': `${url}#breadcrumb` } } : {}),
     inLanguage: 'en-US',
     ...(lastmod ? { dateModified: lastmod } : {}),
   };
 }
 
 export function breadcrumbNode(pathname: string, pageName: string): SchemaNode | null {
-  const segments = pathname.split('/').filter(Boolean);
+  const canonicalPathname = canonicalPath(pathname);
+  const segments = canonicalPathname.split('/').filter(Boolean);
   if (!segments.length) return null;
   const items: SchemaNode[] = [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` }];
-  let path = '';
+  let accumulatedPath = '';
   segments.forEach((segment, index) => {
-    path += `/${segment}`;
-    items.push({ '@type': 'ListItem', position: index + 2, name: index === segments.length - 1 ? pageName : titleCase(segment), item: absolute(`${path}/`) });
+    accumulatedPath += `/${segment}`;
+    items.push({ '@type': 'ListItem', position: index + 2, name: index === segments.length - 1 ? pageName : titleCase(segment), item: absolute(`${accumulatedPath}/`) });
   });
-  return { '@type': 'BreadcrumbList', '@id': `${absolute(pathname)}#breadcrumb`, itemListElement: items };
+  return { '@type': 'BreadcrumbList', '@id': `${canonicalUrl(canonicalPathname)}#breadcrumb`, itemListElement: items };
 }
 
 export function schemaNodes(value?: SchemaNode | null): SchemaNode[] {
@@ -106,7 +123,7 @@ export function articleNode(pathname: string, headline: string, description: str
 }
 
 export function pageGraph(pathname: string, name: string, description: string, pageSchema?: SchemaNode | null) {
-  const breadcrumb = breadcrumbNode(pathname, name);
+  const breadcrumb = breadcrumbNode(pathname, name.split('|')[0].trim());
   const nodes = [businessNode(), websiteNode(), webPageNode(pathname, name, description), ...(breadcrumb ? [breadcrumb] : []), ...schemaNodes(pageSchema)];
   const seen = new Set<string>();
   return {
