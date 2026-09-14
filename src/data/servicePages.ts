@@ -29,7 +29,7 @@ export const servicePages:Record<string,ServicePage> = {
       {heading:'Documentation, insurance context, and repair economics',paragraphs:[
         'Insurance use does not change the workmanship standard. Whether a customer pays directly or uses insurance, the repair recommendation should be based on the vehicle’s condition, the appropriate method, and the agreed repair goal. Coverage, deductibles, authorization, and payment decisions remain controlled by the policy and insurer.',
         'Complex hail or insurance-related work may require professional estimating and documentation: detailed panel inspection, repair planning, required R&I, photographs, technical information, and supported revisions when authorized access reveals additional needs. Repair economics can also affect whether PDR, a hybrid plan, conventional repair, or replacement makes more sense for a particular panel. Peak Country explains the appropriate next step before any paid documentation service is performed.'
-      ],links:[{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/faq/#insurance-questions',label:'Professional Estimating & Documentation questions'}]},
+      ],links:[{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'}]},
       {heading:'What happens during a Peak Country hail inspection',paragraphs:[
         'The inspection starts with the vehicle’s year, make, model, storm context, location, and any concerns you have noticed. Under appropriate lighting, the visible exterior panels are reviewed for dent patterns, paint damage, prior repairs, access constraints, and other conditions that could affect the approach. Peak Country then explains which areas appear suitable for PDR, which may need another method, and what additional access may be necessary.',
         'Weather data can help establish regional context, but a nearby NOAA or Storm Prediction Center report does not prove that a specific vehicle was struck. Reports describe observations at a place and time, with varying coverage and precision. The vehicle itself must be inspected before damage or repairability is determined.'
@@ -43,7 +43,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Does a hail report near Greeley prove my car was hit?',answer:'No. A report confirms an observation near a location, not exposure or damage to a particular vehicle. Inspection lighting and a direct vehicle assessment are needed.'},
       {question:'Do you provide mobile hail inspections?',answer:'Yes. Peak Country provides mobile service by appointment in Greeley, Weld County, and nearby Northern Colorado communities, subject to location and working conditions.'}
     ],
-    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/faq/#insurance-questions',label:'Professional Estimating & Documentation'},{href:'/free-hail-inspection/',label:'Get Started'}]
+    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/free-hail-inspection/',label:'Get Started'}]
   },
   'paintless-dent-repair': {
     title:'Paintless Dent Repair Greeley, CO | Peak Country',
@@ -109,7 +109,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Can PDR repair a crease?',answer:'Some minor and more complex creases qualify. Length, sharpness, location, metal stretch, paint condition, material, access, and the repair goal determine whether a paintless approach makes sense.'},
       {question:'Is a photo enough to approve a PDR repair?',answer:'A photo can start the conversation but often hides depth, crowns, finish issues, and access limitations. Direct inspection is needed for a reliable plan.'}
     ],
-    related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/faq/#insurance-questions',label:'Professional Estimating & Documentation'},{href:'/free-hail-inspection/',label:'Get Started'}]
+    related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/free-hail-inspection/',label:'Get Started'}]
   },
   'door-ding-repair': {
     title:'Door Ding Repair in Greeley, CO | Peak Country',
