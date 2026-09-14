@@ -2,13 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import { site } from '../../data/site';
 
-const title = 'PDR Repair Standards | Peak Country Greeley, CO';
-const description = 'How Peak Country approaches PDR inspection, factory-paint preservation, vehicle access, protection, metal repair, reassembly, and quality checks.';
+const title = 'PDR Repair Evaluation | Peak Country Greeley, CO';
+const description = 'How Peak Country evaluates PDR repairability, factory-paint preservation, vehicle access, material, repair goals, and safe repair methods.';
 const pageSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': `${site.url}/repair-standards/#service`,
-  name: 'Peak Country Paintless Dent Repair Standards',
+  name: 'Peak Country Paintless Dent Repair Evaluation',
   description,
   url: `${site.url}/repair-standards/`,
   provider: { '@id': `${site.url}/#business` },
@@ -18,9 +18,9 @@ const pageSchema = {
 <Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
   <header class="page-head standards-head">
     <div class="eyebrow">Vehicle care · Technician judgment · Clear expectations</div>
-    <h1>Our Paintless Dent Repair Standards</h1>
-    <p>Peak Country approaches auto hail repair and PDR as work on a complete vehicle. These standards explain how inspection, access, protection, metal repair, reassembly, and an honest final review fit together.</p>
-    <div class="about-actions"><a class="button" href="/free-hail-inspection/">Request a Free Hail or Dent Inspection →</a><a class="text-link" href="/about/">Meet the technician behind Peak Country →</a></div>
+    <h1>Paintless Dent Repair Evaluation</h1>
+    <p>Peak Country approaches auto hail repair and PDR as work on a complete vehicle. This evaluation explains how inspection, material, access, repair goals, safety, and an honest final review fit together.</p>
+    <div class="about-actions"><a class="button" href="/free-hail-inspection/">Get Started →</a><a class="text-link" href="/about/">Meet the technician behind Peak Country →</a></div>
   </header>
 
   <div class="standards-intro"><div class="section"><span>20+</span><p><strong>Years of hands-on Paintless Dent Repair experience</strong> inform the decisions behind every Peak Country inspection and repair in Greeley, Weld County, and Northern Colorado.</p></div></div>
@@ -40,9 +40,9 @@ const pageSchema = {
 
     <section><div class="standards-number">07</div><div><div class="eyebrow">Final quality check</div><h2>Review the repair under useful lighting.</h2><p>A final visual review uses reflection lighting and multiple viewing angles to assess the repaired area, surrounding panel flow, and any known limitation discussed before the work. The technician also reviews the areas and components involved in access and reassembly.</p><p>Quality inspection is not a claim that every trace of every dent can always be removed. It is a deliberate comparison between the repair plan, the panel’s response, and the realistic expectation established for that vehicle.</p></div></section>
 
-    <section><div class="standards-number">08</div><div><div class="eyebrow">When PDR is not the right repair</div><h2>An honest recommendation can be another repair method.</h2><p>Peak Country may recommend conventional body repair or another approach when paint is significantly damaged, metal is excessively stretched, structural conditions make PDR inappropriate, or safe access makes appropriate PDR impossible. Severe creases, collision damage, torn metal, certain edge damage, and extensive previous repair can also change what is reasonable.</p><p>Saying no to PDR can be the experienced decision. The aim is to explain the evidence, acknowledge limitations, and help the vehicle owner understand why another repair method better fits the damage. Straight answers and realistic expectations are part of technician-led service.</p></div></section>
+    <section><div class="standards-number">08</div><div><div class="eyebrow">Repair goals and other methods</div><h2>An honest recommendation can be another repair method.</h2><p>Full repair and improvement repair are different goals. Peak Country may recommend conventional body repair, panel replacement, a hybrid plan, or another qualified repair facility when paint is significantly damaged, metal is excessively stretched, structural conditions make PDR inappropriate, or safe access makes appropriate PDR impossible. Peak Country does not currently perform conventional body repair or panel replacement in house.</p><p>Saying no to PDR can be the experienced decision. Safety, structural integrity, and relevant OEM restrictions take priority over cosmetic convenience. The aim is to explain the evidence, acknowledge limitations, and help the vehicle owner understand why another repair method better fits the damage.</p></div></section>
   </article>
 
   <section class="section standards-links"><div><div class="eyebrow">Related Peak Country Information</div><h2>Understand the repair before you schedule it.</h2></div><nav aria-label="Related repair information"><a href="/auto-hail-repair/">Auto Hail Repair →</a><a href="/paintless-dent-repair/">Paintless Dent Repair →</a><a href="/door-ding-repair/">Door Ding Repair →</a><a href="/process/">Inspection and Repair Process →</a></nav></section>
-  <section class="about-cta"><div><div class="eyebrow">Mobile service · Greeley and Northern Colorado</div><h2>Request a Free Hail or Dent Inspection</h2><p>Start with the vehicle, the visible damage, and a clear conversation about repairability.</p><div class="about-actions"><a class="button" href="/free-hail-inspection/">Request a Free Hail or Dent Inspection →</a><a class="text-link" href={`tel:${site.phone}`}>Call {site.phoneDisplay} →</a></div></div></section>
+  <section class="about-cta"><div><div class="eyebrow">Mobile service · Greeley and Northern Colorado</div><h2>Start with the vehicle and a clear conversation.</h2><p>Begin with the visible damage, repair goals, and a practical discussion of repairability.</p><div class="about-actions"><a class="button" href="/free-hail-inspection/">Get Started →</a><a class="text-link" href={`tel:${site.phone}`}>Call {site.phoneDisplay} →</a></div></div></section>
 </Layout>

@@ -5,51 +5,51 @@ export interface ServicePage { title:string; description:string; h1:string; intr
 export const servicePages:Record<string,ServicePage> = {
   'auto-hail-repair': {
     title:'Auto Hail Repair in Greeley, CO | Peak Country',
-    description:'Understand professional auto hail repair, PDR repairability, inspections, insurance claims, and repair expectations in Greeley and Northern Colorado.',
+    description:'Understand professional auto hail repair, panel-by-panel evaluation, PDR repairability, documentation, and repair expectations in Greeley and Northern Colorado.',
     h1:'Auto Hail Repair in Greeley and Northern Colorado',
-    intro:'Hail damage can affect nearly every upward-facing and side panel on a vehicle. Peak Country inspects the complete vehicle, explains which dents may qualify for paintless dent repair, and builds the repair plan around the actual damage.',
+    intro:'Hail damage is evaluated panel by panel and as a complete vehicle. Peak Country uses professional PDR lighting, considers the repair conditions and vehicle construction, and recommends paintless dent repair only where it is technically appropriate.',
     serviceType:'Auto Hail Repair',
     sections:[
       {heading:'What automotive hail damage can look like',paragraphs:[
         'Automotive hail damage rarely appears as one uniform group of dents. A hood may show broad, shallow impressions while the roof has sharper impacts. Fender and door damage can be harder to see because reflections change across curved panels. Quarter-panel dents may sit near body lines or areas with limited access behind the metal. Moldings, roof rails, trim, lights, and glass also need attention during a complete inspection.',
         'Dent count is only part of the picture. Depth, diameter, location, panel material, paint condition, and metal stretch all influence repairability. A shallow dent in open steel may respond differently from a deep impact on a reinforced body line. Cracked paint or metal stretched beyond its workable range can change the recommended repair method.'
       ],links:[{href:'/hail-size-guide/',label:'Understand reported hail sizes'},{href:'/after-a-hailstorm/',label:'What to do after a hailstorm'}]},
-      {heading:'Why professional inspection lighting matters',paragraphs:[
-        'Purpose-built reflection lighting makes subtle changes in a panel easier to read. The reflected lines reveal low spots, crowns, waves, and distortion that ordinary garage or outdoor light can hide. Moving the light and viewing each panel from several angles helps establish the dent pattern and supports a more accurate repair plan.',
-        'The inspection also separates visible hail dents from unrelated scratches, chips, prior bodywork, and everyday door dings. Photographs are useful for an initial conversation, but they often miss shallow damage and cannot show access behind the panel. Peak Country’s inspection considers the entire vehicle before repair scope is discussed.'
-      ]},
+      {heading:'Why a controlled hail evaluation matters',paragraphs:[
+        'Purpose-built reflection lighting makes subtle changes in a panel easier to read. The reflected lines reveal low spots, crowns, waves, and distortion that ordinary garage or outdoor light can hide. A clean, dry vehicle and a controlled indoor environment make a more complete hail assessment possible; hail repairs generally benefit from those conditions.',
+        'The inspection separates visible hail dents from unrelated scratches, chips, prior bodywork, and everyday door dings. Moving the light and viewing each panel from several angles helps establish dent count, severity, and pattern. Photographs can begin a conversation, but they often miss shallow damage and cannot show access behind the panel.'
+      ],links:[{href:'/repair-standards/',label:'Understand Repair Evaluation'}]},
       {heading:'PDR repairability and conventional body repair',paragraphs:[
         'Paintless dent repair gradually reshapes suitable metal while preserving the existing finish. It is often considered when the paint remains intact, the metal has not stretched excessively, and the technician can reach or safely work the damaged area. Retaining original factory paint may be desirable because it avoids sanding, filler, color matching, and refinishing on panels that can be repaired without those steps.',
-        'PDR is not appropriate for every impact. Cracked paint, severe stretching, sharp damage at certain edges, inaccessible construction, or previous repairs may call for conventional body repair or panel replacement. A mixed repair plan is sometimes reasonable when some panels qualify for PDR and others do not. The recommendation should follow the vehicle’s condition rather than a blanket promise.'
-      ],links:[{href:'/paintless-dent-repair/',label:'How paintless dent repair works'},{href:'/repair-standards/',label:'Read the repair standards'}]},
+        'PDR is not appropriate for every impact. Cracked paint, severe stretching, sharp damage at certain edges, inaccessible construction, or previous repairs may call for conventional repair, panel replacement, or a hybrid plan. Peak Country does not currently perform conventional body repair or panel replacement in house. The recommendation should follow the vehicle’s condition rather than a blanket promise.'
+      ],links:[{href:'/paintless-dent-repair/',label:'How paintless dent repair works'},{href:'/repair-standards/',label:'Read the Repair Evaluation'}]},
       {heading:'Access, disassembly, and proper reassembly',paragraphs:[
         'Repairing roof or door damage may require careful removal of approved trim or interior components to reach the back of a panel. Hood and deck-lid repairs can involve bracing that limits tool paths. The plan must account for wiring, airbags, glass, seals, clips, fasteners, headliners, and finished surfaces near the work area.',
         'Removal should have a clear purpose, and reassembly is part of the repair. Components need to return to their correct position with their connections, fit, and function checked. Peak Country discusses relevant access considerations and realistic limitations before work moves forward.'
       ],links:[{href:'/process/',label:'See the Peak Country repair process'}]},
-      {heading:'Insurance hail claims and documented supplements',paragraphs:[
-        'If you plan to file a claim, ask your insurer which photographs, inspections, estimates, and approvals it requires. Coverage, deductibles, repair authorization, and payment decisions are controlled by your policy and insurer. A repair provider can document the vehicle and proposed work but cannot promise a coverage result.',
-        'An initial estimate may not include every legitimate repair operation or hidden area. When additional damage or required work becomes visible during authorized access, a supplement can document those specific findings for insurer review. A supplement should reflect real, supported changes in scope—not an automatic increase or a way to bypass the claims process.'
-      ]},
+      {heading:'Documentation, insurance context, and repair economics',paragraphs:[
+        'Insurance use does not change the workmanship standard. Whether a customer pays directly or uses insurance, the repair recommendation should be based on the vehicle’s condition, the appropriate method, and the agreed repair goal. Coverage, deductibles, authorization, and payment decisions remain controlled by the policy and insurer.',
+        'Complex hail or insurance-related work may require professional estimating and documentation: detailed panel inspection, repair planning, required R&I, photographs, technical information, and supported revisions when authorized access reveals additional needs. Repair economics can also affect whether PDR, a hybrid plan, conventional repair, or replacement makes more sense for a particular panel. Peak Country explains the appropriate next step before any paid documentation service is performed.'
+      ],links:[{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/faq/#insurance-questions',label:'Professional Estimating & Documentation questions'}]},
       {heading:'What happens during a Peak Country hail inspection',paragraphs:[
         'The inspection starts with the vehicle’s year, make, model, storm context, location, and any concerns you have noticed. Under appropriate lighting, the visible exterior panels are reviewed for dent patterns, paint damage, prior repairs, access constraints, and other conditions that could affect the approach. Peak Country then explains which areas appear suitable for PDR, which may need another method, and what additional access may be necessary.',
         'Weather data can help establish regional context, but a nearby NOAA or Storm Prediction Center report does not prove that a specific vehicle was struck. Reports describe observations at a place and time, with varying coverage and precision. The vehicle itself must be inspected before damage or repairability is determined.'
-      ],links:[{href:'/hail-tracker/',label:'Review the Northern Colorado Hail Tracker'},{href:'/northern-colorado-hail-history/',label:'Explore historical hail information'},{href:'/free-hail-inspection/',label:'Request a free hail inspection'}]}
+      ],links:[{href:'/hail-tracker/',label:'Review the Northern Colorado Hail Tracker'},{href:'/gallery/',label:'View the repair gallery'},{href:'/free-hail-inspection/',label:'Get Started'}]}
     ],
     faqs:[
       {question:'Can all hail damage be repaired with PDR?',answer:'No. PDR suitability depends on paint condition, dent depth and location, metal stretch, panel material, prior repairs, and access. Some vehicles need a combination of PDR and conventional repair.'},
       {question:'How long does auto hail repair take?',answer:'The timeline depends on dent count, severity, affected panels, access, parts or trim needs, insurer requirements, and current scheduling. A realistic range can be discussed after inspection and scope review.'},
       {question:'Will PDR preserve my factory paint?',answer:'PDR is designed to retain the existing finish when the paint and metal are suitable. Cracked paint or severe damage may require a different repair method.'},
-      {question:'Can you work from an insurance estimate?',answer:'An insurer estimate can be reviewed alongside the actual vehicle. If authorized access reveals documented additional damage or necessary operations, a legitimate supplement may be submitted for insurer review.'},
+      {question:'Can you work from an insurance estimate?',answer:'An insurer estimate can be reviewed alongside the actual vehicle. Insurance use does not change the workmanship standard. If authorized access reveals documented additional damage or necessary operations, professional documentation may be needed for insurer review.'},
       {question:'Does a hail report near Greeley prove my car was hit?',answer:'No. A report confirms an observation near a location, not exposure or damage to a particular vehicle. Inspection lighting and a direct vehicle assessment are needed.'},
       {question:'Do you provide mobile hail inspections?',answer:'Yes. Peak Country provides mobile service by appointment in Greeley, Weld County, and nearby Northern Colorado communities, subject to location and working conditions.'}
     ],
-    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/hail-tracker/',label:'Northern Colorado Hail Tracker'},{href:'/northern-colorado-hail-history/',label:'Historical Hail'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/free-hail-inspection/',label:'Free Hail Inspection'}]
+    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/faq/#insurance-questions',label:'Professional Estimating & Documentation'},{href:'/free-hail-inspection/',label:'Get Started'}]
   },
   'paintless-dent-repair': {
     title:'Paintless Dent Repair Greeley, CO | Peak Country',
     description:'Learn how paintless dent repair works, which dents may qualify, and why technician judgment matters for PDR in Greeley and Northern Colorado.',
     h1:'Paintless Dent Repair in Greeley, Colorado',
-    intro:'Paintless dent repair is a skilled method for reshaping suitable vehicle panels while retaining the existing finish. Peak Country brings 20+ years of hands-on Paintless Dent Repair experience to mobile inspections and repairs across Greeley, Weld County, and Northern Colorado.',
+    intro:'Paintless dent repair is a skilled method for reshaping suitable vehicle panels while retaining the existing finish when appropriate. Peak Country evaluates the damage, vehicle construction, paint, access, and your repair goal before recommending PDR.',
     serviceType:'Paintless Dent Repair',
     educationalFeature:{
       eyebrow:'Professional PDR Lighting',
@@ -68,8 +68,8 @@ export const servicePages:Record<string,ServicePage> = {
         name:'Professional paintless dent repair reflection lighting',
         description:'A PDR reflection light casting reference lines across a vehicle panel to reveal distortion during paintless dent repair.'
       },
-      links:[{href:'/auto-hail-repair/',label:'Learn how hail damage is evaluated'},{href:'/repair-standards/',label:'Review Peak Country’s repair standards'}],
-      cta:{href:'/free-hail-inspection/',label:'Request a Free Dent Inspection'}
+      links:[{href:'/auto-hail-repair/',label:'Learn how hail damage is evaluated'},{href:'/repair-standards/',label:'Review Repair Evaluation'}],
+      cta:{href:'/free-hail-inspection/',label:'Get Started'}
     },
     sections:[
       {heading:'What paintless dent repair is',paragraphs:[
@@ -81,13 +81,17 @@ export const servicePages:Record<string,ServicePage> = {
         'Glue pulling works from the exterior when suitable access from behind is limited or when the dent plan benefits from controlled outward movement. A removable tab is attached with repair-specific adhesive and used to make measured pulls. Glue pulling is not appropriate for every finish, especially where paint integrity or previous refinishing is uncertain. Technicians may combine methods as the metal responds.'
       ]},
       {heading:'Dents that may be suitable for PDR',paragraphs:[
-        'Common candidates include many hail dents, parking-lot door dings, minor dents, and some shallow creases. Body-line dents can also be repairable, but the formed character line often holds more tension and demands careful control. Location and depth matter as much as apparent diameter.',
-        'Steel and aluminum panels can both be repaired with PDR in appropriate cases, but they do not behave identically. Aluminum responds differently to pressure and temperature and may require a different plan. A technician evaluates the panel material, damage shape, and access rather than assuming one technique fits every vehicle.'
-      ],links:[{href:'/auto-hail-repair/',label:'PDR for automotive hail damage'},{href:'/door-ding-repair/',label:'Door ding and minor dent repair'}]},
+        'Common candidates include many hail dents, parking-lot door dings, dents, creases, and body-line damage. Larger or more complex damage can also be repairable when the full combination of severity, stretch, paint condition, material, construction, access, and customer goals supports that approach. There is no rigid maximum dent-size rule.',
+        'Steel and aluminum panels can both be repaired with PDR in appropriate cases, but they do not behave identically. High-strength steel, ultra-high-strength steel, aluminum, and other specialized materials require an appropriate evaluation. Material type is part of the decision, not an automatic reason to approve or reject PDR.'
+      ],links:[{href:'/auto-hail-repair/',label:'PDR for automotive hail damage'},{href:'/repair-standards/',label:'Read the Repair Evaluation'}]},
       {heading:'Damage that may not qualify',paragraphs:[
         'Cracked, chipped, or otherwise damaged paint can prevent a paintless result because moving the metal does not restore the coating. Excessively stretched metal may no longer hold its original contour reliably. Very sharp impacts, severe creases, damage at certain panel edges, and collision-related distortion can also require conventional repair.',
         'Access limitations matter. Bracing, closed structural areas, laminated components, glass, wiring, and safety systems may block a useful tool path. Previous body filler or refinishing can change how the surface reacts, particularly with glue-pull methods. An inspection identifies these constraints before a recommendation is made.'
       ]},
+      {heading:'Repair evaluation: full repair or improvement repair',paragraphs:[
+        'PDR should be recommended because it is technically appropriate—not merely because metal can physically be moved. A full repair and an improvement repair are different goals. When an improvement repair is appropriate, the expected result and meaningful limitations should be clear before authorization.',
+        'Paint condition, vehicle age, previous repairs or refinishing, and the hidden condition of a panel can increase uncertainty and risk. Safety, structural integrity, sensor locations, and relevant OEM restrictions take priority over cosmetic convenience. If PDR is not the right choice, Peak Country will say so and may recommend a conventional, replacement, hybrid, or another qualified repair-facility path.'
+      ],links:[{href:'/repair-standards/',label:'Explore Repair Evaluation'}]},
       {heading:'Why technician judgment matters',paragraphs:[
         'Owning PDR tools is not the same as having extensive repair experience. The tools create pressure or pull; they do not decide where, when, or how much movement is appropriate. A technician must interpret reflected lines, metal tension, crowns, panel movement, finish condition, and the effect of every adjustment.',
         'Experience also shapes restraint. Sometimes the correct decision is to change the access strategy, stop before the finish is placed at risk, or recommend conventional body repair. Peak Country’s 20+ years of hands-on Paintless Dent Repair experience supports those practical decisions and realistic conversations about what a panel can achieve.'
@@ -95,17 +99,17 @@ export const servicePages:Record<string,ServicePage> = {
       {heading:'What to expect from a PDR inspection',paragraphs:[
         'Peak Country reviews the dent under controlled reflection lighting and considers its depth, location, body-line involvement, paint condition, panel material, and access. The surrounding panel is checked for crowns, prior damage, and evidence of previous repair. Photos can help with initial scheduling, but a final repairability decision requires a direct view of the vehicle.',
         'After assessment, the proposed approach and known limitations can be explained in plain language. Mobile service is available by appointment in Greeley, Weld County, and nearby Northern Colorado communities. The working location must provide safe, suitable conditions for inspection and repair.'
-      ],links:[{href:'/free-hail-inspection/',label:'Request a free dent inspection'}]}
+      ],links:[{href:'/gallery/',label:'View the repair gallery'},{href:'/free-hail-inspection/',label:'Get Started'}]}
     ],
     faqs:[
       {question:'Does PDR remove the original paint?',answer:'No. PDR is intended to retain the existing paint while reshaping suitable metal. If the paint is cracked or unstable, another repair method may be more appropriate.'},
       {question:'Can a body-line dent be repaired with PDR?',answer:'Sometimes. Body-line dents often carry more panel tension, so depth, sharpness, paint condition, material, and access must be evaluated first.'},
       {question:'Can aluminum panels be repaired?',answer:'Many aluminum dents can be repaired with PDR, but aluminum behaves differently from steel. The panel and damage need an individual assessment.'},
       {question:'Is glue pulling safe for every vehicle?',answer:'No. Glue pulling depends on finish condition and repair history. It may be unsuitable on compromised or previously refinished paint.'},
-      {question:'Can PDR repair a crease?',answer:'Some minor creases qualify. Length, sharpness, location, metal stretch, paint condition, and access determine whether a paintless approach makes sense.'},
+      {question:'Can PDR repair a crease?',answer:'Some minor and more complex creases qualify. Length, sharpness, location, metal stretch, paint condition, material, access, and the repair goal determine whether a paintless approach makes sense.'},
       {question:'Is a photo enough to approve a PDR repair?',answer:'A photo can start the conversation but often hides depth, crowns, finish issues, and access limitations. Direct inspection is needed for a reliable plan.'}
     ],
-    related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/door-ding-repair/',label:'Door Ding Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/about/',label:'About Peak Country'},{href:'/repair-standards/',label:'Repair Standards'},{href:'/process/',label:'Repair Process'},{href:'/free-hail-inspection/',label:'Free Inspection'}]
+    related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/faq/#insurance-questions',label:'Professional Estimating & Documentation'},{href:'/free-hail-inspection/',label:'Get Started'}]
   },
   'door-ding-repair': {
     title:'Door Ding Repair in Greeley, CO | Peak Country',
