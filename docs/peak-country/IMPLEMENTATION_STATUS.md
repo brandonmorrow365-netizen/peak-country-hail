@@ -8,7 +8,7 @@
 ## Implementation phases
 1. [ ] Repository audit + architecture baseline
 2. [x] Global navigation, routes, footer, and site hierarchy (2026-09-14)
-3. [ ] Homepage + Why Peak Country
+3. [x] Homepage + Why Peak Country (2026-09-14; verified with Astro check, production build, internal-link audit, portfolio-asset audit, and responsive CSS audit)
 4. [ ] Hail Repair + PDR + Repair Evaluation
 5. [ ] Free Initial Assessment + Professional Estimating/Documentation
 6. [ ] Insurance FAQ + Limited Lifetime Workmanship Warranty presentation

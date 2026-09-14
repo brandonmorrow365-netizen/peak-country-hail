@@ -17,41 +17,22 @@ const services = [
   ['Complex panel damage', 'Body lines, limited access, trim, and panel construction all affect how a skilled repair is planned.', '/repair-standards/']
 ];
 
-const faq = [
-  ['What is paintless dent repair?', 'Paintless dent repair, or PDR, carefully reshapes suitable vehicle panels while retaining the existing paint. It avoids sanding, filler, and repainting when the damage and finish make that approach appropriate.'],
-  ['Can every hail dent be repaired with PDR?', 'No. Paint condition, dent depth, stretched metal, panel location, previous repairs, and access all affect suitability. A hands-on inspection is the best way to identify an appropriate repair plan.'],
-  ['Do you provide mobile service?', 'Yes. Peak Country is a mobile PDR service focused on Greeley, Weld County, and nearby Northern Colorado communities. The service location and appointment details are confirmed before repair.'],
-  ['Does a nearby hail report prove my vehicle was damaged?', 'No. A report documents an observation at a place and time. It does not confirm that a particular vehicle was exposed or damaged. Inspect the vehicle in good light or request an evaluation.'],
-  ['Should I contact my insurance company first?', 'Follow the requirements in your policy and ask your insurer what documentation it needs. Peak Country can inspect the visible damage and discuss repair scope, but your insurer makes coverage and claim decisions.'],
-  ['How do I request a free hail inspection?', `Call or text ${site.phoneDisplay}, or use the inspection request page. Include your city, vehicle year, make and model, and a short description of the damage.`]
-];
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faq.map(([name, text]) => ({
-    '@type': 'Question',
-    name,
-    acceptedAnswer: { '@type': 'Answer', text }
-  }))
-};
 ---
 <Layout
   title="Auto Hail Repair & PDR | Greeley, CO | Peak Country"
-  description="Mobile auto hail repair and PDR in Greeley and Northern Colorado, backed by 20+ years of hands-on paintless dent repair experience."
+  description="Auto hail repair and paintless dent repair in Greeley and Northern Colorado, with direct guidance from an experienced PDR professional."
   exactTitle
-  pageSchema={faqSchema}
 >
   <section class="hero home-hero">
     <div class="home-hero__progressive-layer" data-future-vehicle-3d aria-hidden="true"></div>
     <div class="hero-copy">
       <div class="eyebrow">Greeley · Weld County · Northern Colorado</div>
       <h1>Auto Hail Repair &amp; Paintless Dent Repair in Greeley, Colorado</h1>
-      <p class="hero-statement"><span>Hail happens.</span><strong>Protect your factory finish.</strong></p>
-      <p class="hero-support">Professional auto hail repair and paintless dent repair for Greeley, Weld County, and Northern Colorado, backed by {site.experience.toLowerCase()}.</p>
+      <p class="hero-statement">An experienced PDR professional is involved from the first conversation through the repair.</p>
+      <p class="hero-support">Peak Country provides auto hail repair and paintless dent repair for Greeley, Weld County, and Northern Colorado—helping you understand the damage and your options without the sales pressure.</p>
       <div class="actions">
-        <a class="button" href="/free-hail-inspection/">Request a Free Hail Inspection →</a>
-        <a href="/paintless-dent-repair/">See How Paintless Dent Repair Works →</a>
+        <a class="button" href="/free-hail-inspection/">Get Started →</a>
+        <a href="/auto-hail-repair/">Explore Hail Repair →</a>
       </div>
     </div>
     <aside class="weather-card home-weather-card">
@@ -64,21 +45,23 @@ const faqSchema = {
   </section>
 
   <div class="band">
-    <span>{site.experience}</span>
-    <span>Mobile service in Northern Colorado</span>
-    <span>Factory finish preservation when appropriate</span>
+    <span>20+ years of professional PDR experience</span>
+    <span>25+ years of collision-industry experience</span>
+    <span>Mobile service throughout Northern Colorado</span>
   </div>
 
   <section class="section home-why">
     <div class="home-section-head">
-      <div><div class="eyebrow">Why Peak Country</div><h2>Experienced judgment before the first repair move.</h2></div>
-      <p>The right result begins with understanding the panel, the paint, and the limits of the damage.</p>
+      <div><div class="eyebrow">Why Peak Country</div><h2>Professional repair judgment before sales pressure.</h2></div>
+      <p>Peak Country is built around experienced judgment, clear communication, skilled workmanship, and direct involvement throughout the repair process.</p>
     </div>
     <div class="trust-grid">
-      <article><span>01</span><h3>20+ years of PDR experience</h3><p>Hands-on experience helps identify the access points, metal movement, and repair sequence that each vehicle requires.</p></article>
-      <article><span>02</span><h3>Factory finish focused</h3><p>When the paint and metal condition allow, PDR restores the panel without sanding, body filler, or repainting.</p></article>
-      <article><span>03</span><h3>Local mobile service</h3><p>Peak Country serves vehicle owners in Greeley, Weld County, and nearby Northern Colorado communities by appointment.</p></article>
+      <article><span>01</span><h3>Direct access to an experienced PDR professional</h3><p>An experienced PDR professional helps evaluate the damage, explain the options, and guide the repair process from the beginning.</p></article>
+      <article><span>02</span><h3>More than 20 years of professional PDR experience</h3><p>More than 25 years across the collision industry brings a broader perspective to repair planning and vehicle construction.</p></article>
+      <article><span>03</span><h3>The repair method should fit the vehicle</h3><p>Peak Country does not try to force every dent into PDR. If PDR is not the right choice, we will tell you.</p></article>
+      <article><span>04</span><h3>Start with a conversation</h3><p>A Free Initial Assessment helps you understand the damage, whether PDR appears appropriate, repair options, and what type of evaluation may be needed next.</p></article>
     </div>
+    <div class="home-trust-links" aria-label="Learn more about Peak Country"><a href="/about/">Meet the approach behind Peak Country →</a><a href="/service-area/">See the Greeley and Northern Colorado service area →</a></div>
   </section>
 
   <section class="section home-services">
@@ -103,9 +86,10 @@ const faqSchema = {
 
   <section class="section home-gallery">
     <div class="home-section-head">
-      <div><div class="eyebrow">Previous repair examples</div><h2>Real Repairs. Real Results.</h2></div>
-      <p>See grouped before-and-after views from previous Peak Country Paintless Dent Repair work.</p>
+      <div><div class="eyebrow">Repair Portfolio</div><h2>Real Repairs. Real Results.</h2></div>
+      <p>Quality is easier to trust when you can see the work. These are real before-and-after repair photographs, not stock images.</p>
     </div>
+    <p class="home-gallery-disclosure"><em>Portfolio includes current Peak Country repairs and selected work personally completed by the owner throughout his professional PDR career.</em></p>
     <div class="home-gallery-grid">
       {featuredRepairs.map(({ repair, before, after }) => before && after && <article class="home-gallery-card">
         <h3>{repair.vehicle}</h3>
@@ -147,24 +131,17 @@ const faqSchema = {
 
   <section class="section local-service">
     <div class="eyebrow">Local Mobile Service</div>
-    <h2>Built around Greeley and Weld County drivers.</h2>
-    <p>Peak Country provides mobile paintless dent repair by appointment in Greeley, Evans, Windsor, Severance, Eaton, Milliken, Johnstown, LaSalle, Kersey, Loveland, Fort Collins, Platteville, and nearby Northern Colorado communities. Call or text to discuss the vehicle’s location and arrange an inspection.</p>
+    <h2>Mobile convenience without lowering the repair standard.</h2>
+    <p>Peak Country provides mobile PDR throughout Greeley and surrounding Northern Colorado communities. When an indoor or more controlled environment will provide a better evaluation or repair, we will recommend it.</p>
     <a href="/service-area/">View the mobile service area →</a>
   </section>
 
-  <section class="section home-faq">
-    <div class="home-section-head"><div><div class="eyebrow">Common Questions</div><h2>Before you schedule an inspection.</h2></div><a href="/faq/">More answers →</a></div>
-    <div class="home-faq-list">
-      {faq.map(([question, answer], index) => <details open={index === 0}><summary>{question}</summary><p>{answer}</p></details>)}
-    </div>
-  </section>
-
   <section class="section home-final-cta">
-    <div><div class="eyebrow">Start With a Clear Look</div><h2>Concerned about hail damage?</h2><p>Request a free inspection or call Peak Country to discuss your vehicle and location.</p></div>
-    <div class="actions"><a class="button" href="/free-hail-inspection/">Request a Free Hail Inspection →</a><a href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a></div>
+    <div><div class="eyebrow">Free Initial Assessment</div><h2>Start with a conversation—not a commitment.</h2><p>Submitting a request does not commit you to a repair. If professional estimating, documentation, or repair work carries a charge, it is explained before the work is performed.</p><p>Qualifying Peak Country PDR repairs are backed by a <a href="/repair-standards/">Limited Lifetime Workmanship Warranty</a>.</p></div>
+    <div class="actions"><a class="button" href="/free-hail-inspection/">Get Started →</a><a href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a></div>
   </section>
 
   <nav class="mobile-conversion" aria-label="Quick contact">
-    <a href={`tel:${site.phone}`}>Call</a><a href={`sms:${site.phone}`}>Text</a><a href="/free-hail-inspection/">Free Inspection</a>
+    <a href={`tel:${site.phone}`}>Call</a><a href={`sms:${site.phone}`}>Text</a><a href="/free-hail-inspection/">Get Started</a>
   </nav>
 </Layout>
