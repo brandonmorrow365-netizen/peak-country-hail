@@ -1,6 +1,17 @@
 # Peak Country Hail — Agent Instructions
 
-This repository is the source of truth for **Peak Country Auto Hail Repair & Paintless Dent Repair** and the **Northern Colorado Hail Tracker**.
+This repository contains **Peak Country Auto Hail Repair & Paintless Dent Repair** and the **Northern Colorado Hail Tracker**.
+
+## Peak Country source of truth
+
+Before changing product behavior, business rules, pricing, customer workflow, public copy, SEO/entity data, trust messaging, or page structure, use this precedence:
+
+1. `docs/peak-country/CURRENT_DECISIONS.md`
+2. `docs/peak-country/APPROVED_COPY.md`
+3. `docs/peak-country/MASTER_ARCHITECTURE.md`
+4. Existing production implementation
+
+Newer written decisions override older code and architecture. Read `docs/peak-country/IMPLEMENTATION_STATUS.md` before starting a phase and update it when that phase is verified. Keep detailed Peak Country specifications in `docs/peak-country/`; do not duplicate them here.
 
 ## Read first
 Before making architectural, content, SEO, deployment, data-model, or branding decisions, read in this order:

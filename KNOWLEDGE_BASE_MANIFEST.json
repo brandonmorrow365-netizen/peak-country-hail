@@ -1,0 +1,17 @@
+{
+  "created": "2026-09-14",
+  "precedence": [
+    "docs/peak-country/CURRENT_DECISIONS.md",
+    "docs/peak-country/APPROVED_COPY.md",
+    "docs/peak-country/MASTER_ARCHITECTURE.md",
+    "existing production implementation"
+  ],
+  "files": [
+    "AGENTS.md",
+    "docs/peak-country/README.md",
+    "docs/peak-country/CURRENT_DECISIONS.md",
+    "docs/peak-country/APPROVED_COPY.md",
+    "docs/peak-country/MASTER_ARCHITECTURE.md",
+    "docs/peak-country/IMPLEMENTATION_STATUS.md"
+  ]
+}
