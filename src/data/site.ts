@@ -31,7 +31,15 @@ export const site = {
     honestRepairabilityRecommendations: true,
     clearCommunication: true,
   },
-  proposedRadiusMiles: 30,
+  /** Neutral public downtown reference; never a business address or meeting point. */
+  mobileServiceArea: {
+    radiusMiles: 25,
+    referencePoint: {
+      latitude: 40.4233,
+      longitude: -104.7091,
+      label: 'Neutral downtown Greeley reference point',
+    },
+  },
   serviceAreaConfirmed: true,
   reviews: [], gallery: [], socialProfiles: [],
 };

@@ -13,7 +13,7 @@
 5. [x] Free Initial Assessment + Professional Estimating/Documentation (2026-09-14; verified with production build, Astro check, public pricing/timing and estimate-credit audit, no-checkout audit, internal-link audit, and responsive CSS audit)
 6. [x] Insurance FAQ + Limited Lifetime Workmanship Warranty presentation (2026-09-14; verified with Astro check, production build, internal-link audit, responsive CSS audit, and insurance-language audit)
 7. [x] Gallery/portfolio framework + proof/privacy language (2026-09-14; verified repair-set grouping, responsive AVIF/WebP/JPEG sources, explicit dimensions, alt text, public privacy/plate controls, navigation and internal links, Astro check, and production build. Verified assets: 2013 Silverado, Nissan Murano, Toyota 4Runner, Lexus RX. Porsche, Toyota Tundra, Bedside repair, Honda, and Hyundai assets remain unavailable and were not substituted.)
-8. [ ] Service Area + mobile-service standards
+8. [x] Service Area + mobile-service standards (2026-09-14; verified with Astro check, production build, MapLibre circle/configuration audit, responsive CSS audit, accessibility/semantic-map audit, named-community/internal-link audit, and private-address exposure audit.)
 9. [ ] Get Started workflow shell
 10. [ ] Technical SEO + schema + internal links + AI/entity signals
 11. [ ] Cross-site consistency + architecture/code consolidation
