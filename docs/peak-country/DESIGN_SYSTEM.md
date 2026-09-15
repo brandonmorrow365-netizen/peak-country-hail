@@ -42,7 +42,7 @@ The canonical CSS tokens are declared in `src/styles/global.css`. New page work 
 
 ## Header and footer
 
-The homepage uses the approved Peak Country motion header restored from historical commit `c8271df`: the original Northern Colorado mountain/storm artwork, a masked drifting-cloud layer, canvas rain/hail and lightning, pointer depth, visible motion controls, and the approved core navigation with a single **Get Started** CTA. Internal pages use the compact content-first site header. Its mobile navigation uses a native `details` disclosure so it works with keyboard input and without JavaScript; the homepage storm navigation uses an accessible button disclosure while enhanced and remains visible without JavaScript.
+The homepage uses the approved Peak Country motion header: the sharp responsive production artwork introduced in `909db73`, combined with the masked drifting-cloud, canvas rain/hail and lightning, and pointer-depth behaviors recovered from `c8271df`. The sharp mountain base must remain untransformed; atmospheric movement is isolated to the sky layer. The header retains visible motion controls and the approved core navigation with a single **Get Started** CTA. Internal pages use the compact content-first site header. Its mobile navigation uses a native `details` disclosure so it works with keyboard input and without JavaScript; the homepage storm navigation uses an accessible button disclosure while enhanced and remains visible without JavaScript.
 
 The footer groups repair, planning, and educational links instead of presenting one unstructured link cloud. Business identity, mobile/by-appointment positioning, public phone, and public email remain visible.
 
@@ -50,7 +50,7 @@ The footer groups repair, planning, and educational links instead of presenting 
 
 - Ambient motion is limited to the approved homepage storm header. Its cloud, rain/hail, lightning, and pointer-depth layers are progressive enhancement over crawlable HTML and the original static image.
 - No Three.js, Spline, or scroll-triggered animation is required by the core experience.
-- The storm header provides pause/play control, stops when offscreen or hidden, and caps canvas pixel density and frame rate. `prefers-reduced-motion` pauses canvas motion, cloud drift, parallax, and animated transitions while preserving the original static mountain/storm artwork.
+- The storm header provides pause/play control, stops when offscreen or hidden, caps its frame rate, and supports up to 2× canvas backing density for Retina/high-DPI displays. `prefers-reduced-motion` pauses canvas motion, cloud drift, parallax, and animated transitions while preserving the original static mountain/storm artwork.
 - Real repair photographs are never replaced by generic automotive stock imagery.
 - Responsive images keep explicit dimensions to reduce layout shift.
 

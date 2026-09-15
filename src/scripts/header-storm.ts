@@ -19,7 +19,7 @@ export function initHeaderStorm(header: HTMLElement) {
     if (!surface || !canvas || !ctx) return;
     const bounds = surface.getBoundingClientRect();
     width = bounds.width; height = bounds.height;
-    const pixelRatio = Math.min(devicePixelRatio || 1, 1.5);
+    const pixelRatio = Math.min(devicePixelRatio || 1, 2);
     canvas.width = Math.round(width * pixelRatio); canvas.height = Math.round(height * pixelRatio);
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     drops = Array.from({ length: Math.min(150, Math.max(48, Math.floor(width / 9))) }, () => ({ x: Math.random() * width, y: Math.random() * height, depth: .25 + Math.random() * .75, hail: Math.random() > .91 }));
