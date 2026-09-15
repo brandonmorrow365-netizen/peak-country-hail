@@ -3,6 +3,7 @@ import { site } from '../data/site';
 import {canonicalPath, canonicalUrl, isProductionHostname, robotsMeta} from '../lib/seo';
 import { pageGraph } from '../lib/schema';
 import SiteHeader from '../components/SiteHeader.astro';
+import StormHeader from '../components/StormHeader.astro';
 import '../styles/global.css';
 interface Props { title: string; description: string; noindex?: boolean; exactTitle?: boolean; pageSchema?: Record<string, unknown>; }
 const { title, description, noindex = false, exactTitle = false, pageSchema } = Astro.props;
@@ -35,7 +36,7 @@ const breadcrumbItems = breadcrumbSegments.map((segment, index) => ({
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
 {preview && <div class="preview">Preview · Business details and online requests are being prepared</div>}
-<SiteHeader />
+{pathname === '/' ? <StormHeader /> : <SiteHeader />}
 <main id="main">
 {breadcrumbItems.length > 0 && <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li>{breadcrumbItems.map((item, index) => <li>{index === breadcrumbItems.length - 1 ? <span aria-current="page">{item.label}</span> : <a href={item.href}>{item.label}</a>}</li>)}</ol></nav>}
 <slot /></main>

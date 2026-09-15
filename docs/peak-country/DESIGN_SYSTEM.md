@@ -42,15 +42,15 @@ The canonical CSS tokens are declared in `src/styles/global.css`. New page work 
 
 ## Header and footer
 
-The site header is compact and content-first. It includes the approved core navigation and a single **Get Started** CTA. Mobile navigation uses a native `details` disclosure so it works with keyboard input and without JavaScript.
+The homepage uses the approved Peak Country motion header restored from historical commit `c8271df`: the original Northern Colorado mountain/storm artwork, a masked drifting-cloud layer, canvas rain/hail and lightning, pointer depth, visible motion controls, and the approved core navigation with a single **Get Started** CTA. Internal pages use the compact content-first site header. Its mobile navigation uses a native `details` disclosure so it works with keyboard input and without JavaScript; the homepage storm navigation uses an accessible button disclosure while enhanced and remains visible without JavaScript.
 
 The footer groups repair, planning, and educational links instead of presenting one unstructured link cloud. Business identity, mobile/by-appointment positioning, public phone, and public email remain visible.
 
 ## Motion and media
 
-- Motion is limited to short hover/focus transitions that communicate interactivity.
-- No ambient canvas, Three.js, Spline, or scroll-triggered animation is required by the core experience.
-- `prefers-reduced-motion` disables smooth scrolling and reduces transitions/animation to effectively zero.
+- Ambient motion is limited to the approved homepage storm header. Its cloud, rain/hail, lightning, and pointer-depth layers are progressive enhancement over crawlable HTML and the original static image.
+- No Three.js, Spline, or scroll-triggered animation is required by the core experience.
+- The storm header provides pause/play control, stops when offscreen or hidden, and caps canvas pixel density and frame rate. `prefers-reduced-motion` pauses canvas motion, cloud drift, parallax, and animated transitions while preserving the original static mountain/storm artwork.
 - Real repair photographs are never replaced by generic automotive stock imagery.
 - Responsive images keep explicit dimensions to reduce layout shift.
 
