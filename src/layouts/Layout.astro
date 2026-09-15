@@ -2,7 +2,7 @@
 import { site } from '../data/site';
 import {canonicalPath, canonicalUrl, isProductionHostname, robotsMeta} from '../lib/seo';
 import { pageGraph } from '../lib/schema';
-import StormHeader from '../components/StormHeader.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import '../styles/global.css';
 interface Props { title: string; description: string; noindex?: boolean; exactTitle?: boolean; pageSchema?: Record<string, unknown>; }
 const { title, description, noindex = false, exactTitle = false, pageSchema } = Astro.props;
@@ -35,9 +35,26 @@ const breadcrumbItems = breadcrumbSegments.map((segment, index) => ({
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
 {preview && <div class="preview">Preview · Business details and online requests are being prepared</div>}
-<StormHeader />
+<SiteHeader />
 <main id="main">
 {breadcrumbItems.length > 0 && <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li>{breadcrumbItems.map((item, index) => <li>{index === breadcrumbItems.length - 1 ? <span aria-current="page">{item.label}</span> : <a href={item.href}>{item.label}</a>}</li>)}</ol></nav>}
 <slot /></main>
-<footer><div><strong>{site.name}</strong><p>{site.focus}</p><p>Mobile paintless dent repair service · By appointment</p>{site.phone && <p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> · Call or text</p>}{site.email && <p><a href={`mailto:${site.email}`}>{site.email}</a></p>}<p>Careful repair. Clear information.</p></div><nav aria-label="Footer navigation"><a href="/auto-hail-repair/">Hail Repair</a><a href="/paintless-dent-repair/">PDR</a><a href="/gallery/">Gallery</a><a href="/hail-tracker/">Hail Tracker</a><a href="/service-area/">Service Area</a><a href="/about/">About</a><a href="/get-started/">Get Started</a><a href="/contact/">Contact</a><a href="/faq/#insurance-questions">Insurance FAQ</a><a href="/warranty/">Workmanship Warranty</a><a href="/repair-standards/">Repair standards</a><a href="/resources/">Resources</a><a href="/data-sources/">Weather data sources</a><a href="/feed.xml">Resource feed</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav><p class="fine">Weather reports describe reported conditions, not confirmed damage to an individual vehicle. For urgent weather information, follow the National Weather Service and local emergency officials.</p></footer>
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <strong>{site.name}</strong>
+      <p>{site.focus}</p>
+      <p>Mobile paintless dent repair service · By appointment</p>
+      {site.phone && <p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> · Call or text</p>}
+      {site.email && <p><a href={`mailto:${site.email}`}>{site.email}</a></p>}
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer navigation">
+      <div><strong>Repair</strong><a href="/auto-hail-repair/">Hail Repair</a><a href="/paintless-dent-repair/">PDR</a><a href="/gallery/">Gallery</a><a href="/repair-standards/">Repair Standards</a><a href="/warranty/">Workmanship Warranty</a></div>
+      <div><strong>Plan</strong><a href="/get-started/">Get Started</a><a href="/service-area/">Service Area</a><a href="/estimating-documentation/">Estimating &amp; Documentation</a><a href="/faq/#insurance-questions">Insurance FAQ</a><a href="/contact/">Contact</a></div>
+      <div><strong>Learn</strong><a href="/hail-tracker/">Hail Tracker</a><a href="/about/">About</a><a href="/resources/">Resources</a><a href="/data-sources/">Weather Data Sources</a><a href="/feed.xml">Resource Feed</a></div>
+    </nav>
+    <div class="site-footer__legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+    <p class="fine">Weather reports describe reported conditions, not confirmed damage to an individual vehicle. For urgent weather information, follow the National Weather Service and local emergency officials.</p>
+  </div>
+</footer>
 </body></html>

@@ -1,0 +1,37 @@
+---
+import { site } from '../data/site';
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (path: string) => path === '/' ? currentPath === '/' : currentPath.startsWith(path);
+const links = [
+  ['/auto-hail-repair/', 'Hail Repair'],
+  ['/paintless-dent-repair/', 'PDR'],
+  ['/gallery/', 'Gallery'],
+  ['/hail-tracker/', 'Hail Tracker'],
+  ['/service-area/', 'Service Area'],
+  ['/about/', 'About'],
+] as const;
+---
+
+<header class="site-header">
+  <div class="site-header__utility">
+    <p>Mobile PDR · By appointment · Northern Colorado</p>
+    <a href={`tel:${site.phone}`}>Call or text {site.phoneDisplay}</a>
+  </div>
+  <div class="site-header__main">
+    <a class="site-logo" href="/" aria-label="Peak Country home">
+      <img src="/brand/peak-country-logo-604.png" srcset="/brand/peak-country-logo-604.png 604w, /brand/peak-country-logo.png 1448w" sizes="156px" width="604" height="453" alt={site.name} fetchpriority="high" decoding="async" />
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      {links.map(([href, label]) => <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>)}
+      <a class="button small" href="/get-started/" aria-current={isCurrent('/get-started/') ? 'page' : undefined}>Get Started</a>
+    </nav>
+    <details class="site-menu">
+      <summary>Menu <span aria-hidden="true">☰</span></summary>
+      <nav aria-label="Mobile navigation">
+        {links.map(([href, label]) => <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>)}
+        <a class="button small" href="/get-started/" aria-current={isCurrent('/get-started/') ? 'page' : undefined}>Get Started</a>
+      </nav>
+    </details>
+  </div>
+</header>
