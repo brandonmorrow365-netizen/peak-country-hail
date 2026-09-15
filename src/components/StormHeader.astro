@@ -92,7 +92,7 @@ const links = [
     --cloud-x: 50%; --cloud-y: 48%;
     position: absolute; inset: -8px;
     background: url('/brand/hero-storm-background-1942.webp') var(--cloud-x) var(--cloud-y) / cover;
-    mask-image: linear-gradient(#000 0%, #000 24%, transparent 43%);
+    mask-image: linear-gradient(#000 0%, #000 18%, transparent 27%);
     opacity: .58;
     transform: translate(var(--header-x, 0px), var(--header-y, 0px));
     transition: transform 800ms ease-out;
@@ -133,7 +133,7 @@ const links = [
   .storm-nav > a[aria-current='page']:not(.button) { color: #8ed2ff; text-decoration: underline; text-decoration-thickness: 2px; }
   .storm-nav .button { margin-left: auto; white-space: nowrap; padding: 12px 19px; font-size: .76rem; }
   .storm-nav .button span { margin-left: 14px; }
-  [data-motion-paused="true"] .storm-cloud-layer { animation-play-state: paused; }
+  [data-motion-paused="true"] .storm-cloud-layer { opacity: 0; animation-play-state: paused; }
   @keyframes cloud-drift {
     from { background-position: calc(var(--cloud-x) - 4px) calc(var(--cloud-y) - 1px); }
     to { background-position: calc(var(--cloud-x) + 4px) calc(var(--cloud-y) + 1px); }
