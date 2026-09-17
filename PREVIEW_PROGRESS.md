@@ -272,8 +272,57 @@ The live homepage also exposes `/privacy/`, `/terms/`, and `/feed.xml`. The live
 - Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 4 preview is the verified instance on `http://127.0.0.1:4328`.
 - All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
 
+## TASK 5 — WHY PEAK COUNTRY PREVIEW
+
+**Status:** COMPLETED — 2026-09-17
+
+### Task completed
+
+- Added the approved Why Peak Country section at `/__preview/home/#why-peak-country` and activated its comparison link from `/__preview/`.
+- Reused the real owner-supplied `PDR Light reflection.jpeg` through its existing approved full-size and 640-pixel optimized repository derivatives. No image was generated, replaced, or materially altered.
+- Implemented the approved headline and all three credibility claims as substantial live HTML, keeping the `20+ YEARS` PDR claim distinct from the `25+ YEARS` collision-industry claim.
+- Preserved useful existing trust copy about direct access to an experienced PDR professional, repair-method fit, and the free initial assessment rather than deleting information for appearance.
+- Presented the four approved principles as a divided editorial list with restrained blue numbering, not four matching floating cards.
+- Used an asymmetric photo-and-copy composition, thin rules, real photographic texture, restrained accents, and natural responsive stacking without glowing borders or SaaS-panel styling.
+- Preserved useful links to the existing About and Service Area pages.
+- Made no production homepage, production component, public asset, route, metadata, schema, sitemap, redirect, deployment, or live-service change.
+
+### Files added
+
+- `src/components/preview/PreviewWhy.astro`
+
+### Files modified
+
+- `src/pages/[preview]/home/index.astro`
+- `src/pages/[preview]/index.astro`
+- `src/styles/preview.css`
+- `PREVIEW_PROGRESS.md`
+
+### Tests performed
+
+- Astro project check: PASS — 81 files, 0 errors, 0 warnings, 0 hints.
+- Astro production build: PASS — both `/__preview/` and `/__preview/home/` prerendered successfully; the existing JavaScript chunk-size warning remains.
+- Automated Node test suite: PASS — 39 passed, 0 failed.
+- Fresh local production-route smoke test against `http://127.0.0.1:4329`: PASS — all 34 existing pages and their metadata, canonicals, schema, internal links, sitemap behavior, 404 behavior, and disabled forms validated.
+- Task 5 content validation: PASS — exact approved headline, credibility claims, and principle labels; correct distinction between PDR and collision experience; both real image derivatives; existing About and Service Area links; one-H1/one-main semantics; noindex state; absent canonical/JSON-LD; and sitemap exclusion confirmed.
+- Responsive visual QA: PASS — inspected at 1440×900, 768×1024, and the browser's 319-pixel mobile viewport. The section stacks naturally, retains all content, selects the 640-pixel image source on mobile, and has no horizontal overflow.
+- Production checkout verification: PASS — original branch `peak-country-seo-hail-upgrade`, HEAD `5f4dce4f487736053d1a4ab99c52cf95cc5025da`, and the same two modified plus one untracked warranty-related paths remain unchanged.
+- Remote default reference verification: PASS — `origin/main` remains at `449a854bd0502506d7ccaf88b61de0794e3a982f`.
+
+### Decisions made
+
+- Treat the existing SEO-renamed image derivatives as the approved implementation of the owner-supplied source, consistent with the Task 2 inventory.
+- Use one continuous editorial principles list with varied row proportions and subtle dividers instead of a repeated card grid.
+- Keep the useful existing explanations and contextual links while giving the approved headline and proof points the strongest visual hierarchy.
+
+### Known issues
+
+- The production build continues to report the pre-existing MapLibre-related JavaScript chunk warning above 500 kB.
+- Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 5 preview is the verified instance on `http://127.0.0.1:4329`.
+- All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
+
 ## NEXT TASK
 
-**TASK 5 — WHY PEAK COUNTRY**
+**TASK 6 — WHAT WE REPAIR + DETAILED SERVICES**
 
-Do not begin Task 5 until the owner says `continue`.
+Do not begin Task 6 until the owner says `continue`.
