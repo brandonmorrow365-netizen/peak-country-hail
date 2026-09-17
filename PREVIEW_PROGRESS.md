@@ -375,8 +375,60 @@ The live homepage also exposes `/privacy/`, `/terms/`, and `/feed.xml`. The live
 - Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 6 preview is the verified instance on `http://127.0.0.1:4330`.
 - All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
 
+## TASK 7 — CUSTOMER PROCESS
+
+**Status:** COMPLETED — 2026-09-17
+
+### Task completed
+
+- Added the approved Customer Process section at `/__preview/home/#process` with the exact `The Process` label, approved headline, and five-step order: Start the Conversation, Review the Damage, Understand the Options, Approve the Repair, and Repair + Documentation.
+- Preserved meaningful explanatory copy beneath every step, including the actual Get Started intake choices, optional-photo and optional-insurance-information behavior, human review, direct inspection and reflection lighting, PDR versus alternative repair paths, repair access and reassembly, quality review, and proportionate documentation.
+- Tied the section directly to the established Get Started workflow with two `/get-started/` links and a supporting link to the complete `/process/` page.
+- Kept the customer safeguards prominent in live HTML: no obligation, no commitment, no checkout, no automatic payment, no request-based repair authorization, and customer approval before paid estimates, documentation, or repair work.
+- Preserved the distinction between free initial guidance and any paid estimating or documentation service, including advance explanation of scope and price.
+- Implemented the section as one continuous editorial sequence with thin dividers, asymmetrical text measures, quiet cyan wayfinding, and the approved topographic texture rather than five repeated cards or a SaaS-style stepper.
+- Added a restrained four-part safeguard strip and a closing action area that reinforces conversation before transaction, clear communication, honest guidance, and customer approval.
+- Activated the Task 7 comparison link from `/__preview/` and updated the preview-shell task label.
+- Made no production homepage, Get Started workflow, process page, form logic, route, metadata, schema, sitemap, redirect, deployment, or live-service change.
+
+### Files added
+
+- `src/components/preview/PreviewProcess.astro`
+
+### Files modified
+
+- `src/pages/[preview]/home/index.astro`
+- `src/pages/[preview]/index.astro`
+- `src/styles/preview.css`
+- `PREVIEW_PROGRESS.md`
+
+### Tests performed
+
+- Astro project check: PASS — 83 files, 0 errors, 0 warnings, 0 hints.
+- Astro production build: PASS — both `/__preview/` and `/__preview/home/` prerendered successfully; the existing JavaScript chunk-size warning remains.
+- Automated Node test suite: PASS — 39 passed, 0 failed.
+- Fresh local production-route smoke test against `http://127.0.0.1:4331`: PASS — all 34 existing pages and their metadata, canonicals, schema, internal links, sitemap behavior, 404 behavior, and disabled forms validated.
+- Task 7 content validation: PASS — approved heading and five-step order, all four visible safeguards, request/approval boundaries, workflow links, one-H1/one-main semantics, preview noindex state, absent canonical/JSON-LD, and sitemap exclusion confirmed.
+- Responsive visual QA: PASS — inspected at 1440×900, 768×1024, and 390×844. Desktop uses divided editorial rows, tablet preserves readable three-part step alignment, and mobile keeps a natural numbered flow, complete safeguard copy, full-width primary action, and no horizontal overflow.
+- Markdown/Git whitespace validation: PASS — `git diff --check` reported no errors.
+- Production checkout verification: PASS — original branch `peak-country-seo-hail-upgrade`, HEAD `5f4dce4f487736053d1a4ab99c52cf95cc5025da`, and the same two modified plus one untracked warranty-related paths remain unchanged.
+- Remote default reference verification: PASS — `origin/main` remains at `449a854bd0502506d7ccaf88b61de0794e3a982f`.
+
+### Decisions made
+
+- Use the approved five-step homepage narrative as an accessible summary while retaining the dedicated seven-step `/process/` page as the deeper canonical explanation.
+- Keep the Get Started request, human review, direct evaluation, paid-service disclosure, customer authorization, repair, and documentation boundaries explicit instead of compressing the process into generic marketing labels.
+- Present the steps in one semantic ordered list with continuous rules and varied copy measures; use the separate safeguard strip only for the four transaction boundaries that need immediate scanning.
+- Keep documentation proportional to the repair and avoid promising a uniform insurance package where the approved workflow distinguishes simple work from complex or insurance-related repairs.
+
+### Known issues
+
+- The production build continues to report the pre-existing MapLibre-related JavaScript chunk warning above 500 kB.
+- Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 7 preview is the verified instance on `http://127.0.0.1:4331`.
+- All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
+
 ## NEXT TASK
 
-**TASK 7 — CUSTOMER PROCESS**
+**TASK 8 — REAL REPAIRS / GALLERY**
 
-Do not begin Task 7 until the owner says `continue`.
+Do not begin Task 8 until the owner says `continue`.

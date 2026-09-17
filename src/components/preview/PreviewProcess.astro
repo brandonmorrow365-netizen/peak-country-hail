@@ -1,0 +1,83 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Start the conversation',
+    body: 'Use Get Started to tell Peak Country what happened, what you are seeing, and what you would like help understanding. Choose hail damage, a ding or crease, or “not sure,” then share basic contact and vehicle details. Photos and insurance information can help, but they are optional at this stage; the request creates no obligation or commitment.',
+  },
+  {
+    number: '02',
+    title: 'Review the damage',
+    body: 'An experienced technician reviews the information personally and may ask a few focused questions before recommending the next step. A clean, dry vehicle and professional reflection lighting allow a direct inspection to separate hail patterns from unrelated damage and evaluate paint condition, panel shape, prior repair, and access.',
+  },
+  {
+    number: '03',
+    title: 'Understand the options',
+    body: 'Peak Country explains what appears repairable, where PDR may preserve the existing finish, and when conventional, replacement, or hybrid work may be the better path. Free initial guidance is kept distinct from any detailed paid estimate or documentation service; if paid work would be useful, the scope and price are explained first.',
+  },
+  {
+    number: '04',
+    title: 'Approve the repair',
+    body: 'You decide whether to move forward after the repair approach, access needs, known limitations, timing, and price are clear. Sending a request is not repair authorization. There is no checkout or automatic payment, and no paid estimate, documentation, or repair begins without customer approval.',
+  },
+  {
+    number: '05',
+    title: 'Repair + documentation',
+    body: 'Authorized work follows the agreed scope, including careful access, removal and installation when needed, reassembly, and a quality review from multiple angles. Documentation is proportionate to the repair and may include an invoice or receipt, photographs, repair notes, and warranty information; more complex or insurance-related work may require a fuller record.',
+  },
+] as const;
+
+const safeguards = [
+  ['No obligation', 'A request only starts the conversation.'],
+  ['No commitment', 'You choose whether to move forward.'],
+  ['No checkout', 'The website does not sell a repair.'],
+  ['No automatic payment', 'Paid work requires approval first.'],
+] as const;
+---
+
+<section id="process" class="pc-process pc-contour-surface" aria-labelledby="pc-process-heading">
+  <div class="pc-content-width pc-process__intro">
+    <div>
+      <p class="pc-kicker">The process</p>
+      <h2 id="pc-process-heading">
+        <span>A straightforward process</span>
+        <span>from start to finish.</span>
+      </h2>
+    </div>
+
+    <aside class="pc-process__promise" aria-label="Customer-first process">
+      <p class="pc-label">Conversation before transaction</p>
+      <p>Start with a real conversation and clear guidance—not a sales commitment. Peak Country reviews the vehicle and your goals before recommending a repair path.</p>
+      <a href="/get-started/">Begin with Get Started <span aria-hidden="true">→</span></a>
+    </aside>
+  </div>
+
+  <div class="pc-content-width">
+    <ol class="pc-process__steps">
+      {steps.map((step) => (
+        <li>
+          <span class="pc-process__number" aria-hidden="true">{step.number}</span>
+          <h3>{step.title}</h3>
+          <p>{step.body}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="pc-process__safeguards" aria-label="Get Started safeguards">
+      {safeguards.map(([title, detail]) => (
+        <div>
+          <strong>{title}</strong>
+          <span>{detail}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="pc-process__close">
+      <p>No pressure. Clear communication, honest guidance, and quality repairs—with customer approval before any paid work.</p>
+      <div class="pc-actions">
+        <a class="pc-button" href="/get-started/">Get Started</a>
+        <a class="pc-text-link" href="/process/">View the full repair process <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
