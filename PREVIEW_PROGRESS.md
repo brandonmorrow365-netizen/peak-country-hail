@@ -166,8 +166,61 @@ The live homepage also exposes `/privacy/`, `/terms/`, and `/feed.xml`. The live
 - The production build continues to report the existing MapLibre-related JavaScript chunk warning above 500 kB.
 - The Task 1 process on port 4321 became stale after `dist` was rebuilt and now returns a static-asset error for the manifest. Process isolation prevented replacing that already-running process in this turn. A fresh verified loopback preview is running at `http://127.0.0.1:4322`.
 
+## TASK 3 — PREVIEW DESIGN SYSTEM + SHELL
+
+**Status:** COMPLETED — 2026-09-17
+
+### Task completed
+
+- Created an isolated preview-only visual system with dark navy/charcoal foundations, Peak Country cyan accents, off-white primary type, readable cool-gray secondary type, fluid spacing, three content widths, thin dividers, restrained controls, text links, and accessible focus states.
+- Added subtle topographic-line texture and low-contrast mountain silhouettes without glowing borders, glass panels, repetitive iconography, or a uniform SaaS-card grid.
+- Added a shared preview layout plus dedicated preview navigation and footer components. Production layout, header, footer, global stylesheet, and public page components were not edited.
+- Established desktop, tablet, mobile, and reduced-motion rules. Desktop uses the full primary navigation; tablet and mobile use a native disclosure menu; page sections collapse into a natural reading order before becoming cramped.
+- Added the real existing PDR reflection-light photograph as the system's evidence-led photo treatment, with a truthful crop, descriptive alternative text, caption, restrained contrast adjustment, and no generated repair evidence.
+- Created the `/__preview/` index with design tokens, typography and control specimens, responsive layout guidance, photo treatment, isolation status, and current-versus-preview links that activate only completed preview work.
+- Implemented the exact `/__preview/` URL through a single prerendered static dynamic segment because Astro intentionally excludes page files and directories whose names begin with an underscore.
+- Kept the preview route out of the production sitemap, applied `noindex, nofollow`, omitted canonical and structured-data markup, and left all production route metadata and redirects unchanged.
+- Performed no individual page rebuild, homepage-hero redesign, deployment, push, merge, or live-service change.
+
+### Files added
+
+- `src/components/preview/PreviewHeader.astro`
+- `src/components/preview/PreviewFooter.astro`
+- `src/layouts/PreviewLayout.astro`
+- `src/pages/[preview]/index.astro`
+- `src/styles/preview.css`
+
+### Files modified
+
+- `PREVIEW_PROGRESS.md`
+
+### Tests performed
+
+- Astro project check: PASS — 78 files, 0 errors, 0 warnings, 0 hints.
+- Astro production build: PASS — `/__preview/index.html` prerendered successfully; the existing JavaScript chunk-size warning remains.
+- Automated Node test suite: PASS — 39 passed, 0 failed.
+- Fresh local production-route smoke test against `http://127.0.0.1:4324`: PASS — all 34 existing pages and their metadata, canonicals, schema, internal links, sitemap behavior, 404 behavior, and disabled forms validated.
+- Preview isolation test: PASS — `/__preview/` returns 200, contains one H1 and one main landmark, carries `noindex, nofollow`, contains no canonical or JSON-LD, is absent from the sitemap, and all 16 unique local links resolve.
+- Responsive visual QA: PASS — inspected the rendered shell at 1440×900, 768×1024, and 390×844, including desktop navigation, mobile menu, photo treatment, comparison rows, and footer stacking.
+- Production checkout verification: PASS — original branch `peak-country-seo-hail-upgrade`, HEAD `5f4dce4f487736053d1a4ab99c52cf95cc5025da`, and the same two modified plus one untracked warranty-related paths remain unchanged.
+- Remote default reference verification: PASS — `origin/main` remains at `449a854bd0502506d7ccaf88b61de0794e3a982f`.
+
+### Decisions made
+
+- Keep every shared visual primitive under the `pc-` preview namespace and import the stylesheet only through `PreviewLayout.astro`.
+- Use editorial rhythm, asymmetric compositions, rules, and whitespace as the primary organization system rather than repeated boxed cards.
+- Keep the preview index honest: unfinished page previews are labeled as planned and are not linked to nonexistent routes.
+- Link preview-shell navigation to the current working routes until corresponding preview pages are created, preventing broken internal navigation during staged approval.
+- Preserve the current homepage storm header and every individual production page until its authorized task.
+
+### Known issues
+
+- The production build continues to report the pre-existing MapLibre-related JavaScript chunk warning above 500 kB.
+- Warranty source documents, owner identity/photo, business hours, social profiles, reviews, and additional approved repair media remain unresolved as documented in Task 2; Task 3 did not invent or alter them.
+- Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 3 preview is the verified instance on `http://127.0.0.1:4324`.
+
 ## NEXT TASK
 
-**TASK 3 — PREVIEW DESIGN SYSTEM + SHELL**
+**TASK 4 — HOMEPAGE HERO PREVIEW**
 
-Do not begin Task 3 until the owner says `continue`.
+Do not begin Task 4 until the owner says `continue`.

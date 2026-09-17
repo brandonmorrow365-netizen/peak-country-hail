@@ -1,0 +1,177 @@
+---
+import PreviewLayout from '../../layouts/PreviewLayout.astro';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [{ params: { preview: '__preview' } }];
+}
+
+const comparisons = [
+  { name: 'Design system + shell', current: '/', preview: '/__preview/', status: 'Ready · Task 3' },
+  { name: 'Homepage hero', current: '/', preview: null, status: 'Planned · Task 4' },
+  { name: 'Real repairs / gallery', current: '/gallery/', preview: null, status: 'Planned · Task 8' },
+  { name: 'Results, trust + warranty', current: '/warranty/', preview: null, status: 'Planned · Task 9' },
+  { name: 'Auto hail repair', current: '/auto-hail-repair/', preview: null, status: 'Planned · Task 10' },
+  { name: 'Paintless dent repair', current: '/paintless-dent-repair/', preview: null, status: 'Planned · Task 11' },
+  { name: 'Hail tracker', current: '/hail-tracker/', preview: null, status: 'Planned · Task 12' },
+  { name: 'Service area', current: '/service-area/', preview: null, status: 'Planned · Task 13' },
+  { name: 'About / experience', current: '/about/', preview: null, status: 'Planned · Task 14' },
+  { name: 'Get Started', current: '/get-started/', preview: null, status: 'Planned · Task 15' },
+] as const;
+---
+
+<PreviewLayout
+  title="Visual Design System"
+  description="Isolated noindex design-system and shell preview for Peak Country Auto Hail Repair & Paintless Dent Repair."
+>
+  <section class="pc-preview-intro pc-contour-surface">
+    <div class="pc-shell-width pc-preview-intro__layout">
+      <div>
+        <p class="pc-kicker">Task 3 · Preview design system + shell</p>
+        <h1>Precision without the sales pressure.</h1>
+        <p class="pc-lede">
+          A restrained Northern Colorado automotive system built around clear information, real repair evidence, and direct access to experience.
+        </p>
+        <div class="pc-actions">
+          <a class="pc-button" href="#comparison-index">Review page index</a>
+          <a class="pc-text-link" href="/" target="_blank" rel="noopener">Open current site <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <aside class="pc-preview-status" aria-label="Preview isolation status">
+        <p class="pc-label">Preview status</p>
+        <dl>
+          <div><dt>Route</dt><dd>/__preview/</dd></div>
+          <div><dt>Indexing</dt><dd>Noindex, nofollow</dd></div>
+          <div><dt>Canonical</dt><dd>None</dd></div>
+          <div><dt>Production</dt><dd>Unchanged</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="pc-section pc-section--light" aria-labelledby="foundation-heading">
+    <div class="pc-content-width">
+      <header class="pc-section-heading pc-section-heading--split">
+        <div>
+          <p class="pc-kicker">Foundation</p>
+          <h2 id="foundation-heading">Color with a clear job.</h2>
+        </div>
+        <p>Navy and charcoal establish authority. Peak Country blue identifies action and useful wayfinding without outlining every surface.</p>
+      </header>
+
+      <ul class="pc-color-strip" aria-label="Preview color tokens">
+        <li class="pc-color-strip__night"><span>Night</span><code>#071522</code></li>
+        <li class="pc-color-strip__navy"><span>Peak navy</span><code>#0B2236</code></li>
+        <li class="pc-color-strip__charcoal"><span>Charcoal</span><code>#17232C</code></li>
+        <li class="pc-color-strip__blue"><span>Peak blue</span><code>#55BDED</code></li>
+        <li class="pc-color-strip__mist"><span>Cool mist</span><code>#AAB8C2</code></li>
+        <li class="pc-color-strip__paper"><span>Off-white</span><code>#F2F3EF</code></li>
+      </ul>
+
+      <div class="pc-type-specimen">
+        <div class="pc-type-specimen__display">
+          <p class="pc-label">Display / natural sans serif</p>
+          <p class="pc-type-display">Repair judgment<br />comes first.</p>
+        </div>
+        <div class="pc-type-specimen__body">
+          <p class="pc-label">Body / readable at every size</p>
+          <p>Clear guidance should feel calm and direct. The typography remains open, readable, and useful on a phone—without condensed advertising type or oversized headline stacks.</p>
+          <p class="pc-small-copy">Secondary copy uses cool gray with accessible contrast rather than fading into the background.</p>
+        </div>
+      </div>
+
+      <div class="pc-control-specimen" aria-labelledby="controls-heading">
+        <div>
+          <p class="pc-kicker">Controls + links</p>
+          <h3 id="controls-heading">One primary action. Quiet supporting paths.</h3>
+        </div>
+        <div class="pc-actions">
+          <a class="pc-button" href="/get-started/">Get Started</a>
+          <a class="pc-button pc-button--outline" href="/auto-hail-repair/">Explore Hail Repair</a>
+          <a class="pc-text-link pc-text-link--dark" href="/hail-tracker/">View Hail Tracker <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pc-section pc-section--dark pc-contour-surface" aria-labelledby="photography-heading">
+    <div class="pc-content-width pc-photo-specimen">
+      <figure class="pc-photo-frame">
+        <picture>
+          <source media="(max-width: 680px)" srcset="/images/pdr-light-reflection-paintless-dent-repair-greeley-co-640.jpg" />
+          <img
+            src="/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg"
+            width="977"
+            height="1139"
+            alt="PDR reflection light revealing distortion in a vehicle panel during paintless dent repair"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <figcaption>Real repair-process photography · descriptive caption · truthful crop</figcaption>
+      </figure>
+
+      <div class="pc-photo-specimen__copy">
+        <p class="pc-kicker">Photography treatment</p>
+        <h2 id="photography-heading">Evidence carries the visual weight.</h2>
+        <p>Real automotive and PDR photography sits against quiet surfaces with thin rules and useful captions. The system avoids artificial gloss, fake fleet branding, and generated repair evidence.</p>
+        <ul class="pc-rule-list">
+          <li><span>01</span> Preserve panel shape and reflection lines.</li>
+          <li><span>02</span> Use truthful crops and normal exposure adjustment.</li>
+          <li><span>03</span> Keep customer and vehicle identifiers private.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pc-section pc-section--paper" aria-labelledby="layout-heading">
+    <div class="pc-content-width">
+      <header class="pc-section-heading pc-section-heading--split">
+        <div>
+          <p class="pc-kicker">Layout + rhythm</p>
+          <h2 id="layout-heading">Editorial hierarchy, not a field of cards.</h2>
+        </div>
+        <p>Three purposeful widths, a fluid spacing scale, and thin dividers keep long-form service information readable without stripping it down.</p>
+      </header>
+
+      <div class="pc-width-specimen" aria-label="Preview layout widths">
+        <div class="pc-width-specimen__shell"><span>Shell</span><code>1360px</code></div>
+        <div class="pc-width-specimen__content"><span>Content</span><code>1180px</code></div>
+        <div class="pc-width-specimen__measure"><span>Reading measure</span><code>720px</code></div>
+      </div>
+
+      <div class="pc-responsive-notes">
+        <article><p class="pc-label">Desktop</p><h3>Asymmetric balance</h3><p>Photography and text can share the page without forming a repetitive equal-card grid.</p></article>
+        <article><p class="pc-label">Tablet</p><h3>Reduced columns</h3><p>Navigation condenses, margins tighten, and supporting content stacks before it becomes cramped.</p></article>
+        <article><p class="pc-label">Mobile</p><h3>Natural reading order</h3><p>Live text, photography, actions, and privacy messaging remain legible and complete.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparison-index" class="pc-section pc-section--light pc-comparison" aria-labelledby="comparison-heading">
+    <div class="pc-content-width">
+      <header class="pc-section-heading pc-section-heading--split">
+        <div>
+          <p class="pc-kicker">Side-by-side review index</p>
+          <h2 id="comparison-heading">Current versus preview.</h2>
+        </div>
+        <p>Only the design system and shell are ready today. Preview links will be activated task by task so this directory never points to unfinished or missing routes.</p>
+      </header>
+
+      <div class="pc-comparison-list" role="list">
+        {comparisons.map((item) => (
+          <article class="pc-comparison-row" role="listitem">
+            <h3>{item.name}</h3>
+            <a href={item.current} target="_blank" rel="noopener">Open current <span aria-hidden="true">↗</span></a>
+            {item.preview
+              ? <a class="pc-comparison-row__preview" href={item.preview} target="_blank" rel="noopener">Open preview <span aria-hidden="true">↗</span></a>
+              : <span class="pc-comparison-row__pending">Preview not linked yet</span>}
+            <span class:list={['pc-comparison-row__status', { 'is-ready': item.preview }]}>{item.status}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</PreviewLayout>

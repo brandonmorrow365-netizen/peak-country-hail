@@ -1,0 +1,56 @@
+---
+import { site } from '../../data/site';
+---
+
+<footer class="pc-preview-footer">
+  <div class="pc-preview-footer__mountains" aria-hidden="true"></div>
+  <div class="pc-preview-footer__inner">
+    <div class="pc-preview-footer__identity">
+      <p class="pc-kicker">Greeley · Weld County · Northern Colorado</p>
+      <strong>{site.name}</strong>
+      <p>Mobile paintless dent repair and auto hail repair by appointment.</p>
+      <p class="pc-preview-footer__contact">
+        <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>
+        <span aria-hidden="true">/</span>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+
+    <nav class="pc-preview-footer__nav" aria-label="Preview footer navigation">
+      <div>
+        <strong>Repair</strong>
+        <a href="/auto-hail-repair/">Hail Repair</a>
+        <a href="/paintless-dent-repair/">Paintless Dent Repair</a>
+        <a href="/gallery/">Real Repairs</a>
+        <a href="/warranty/">Workmanship Warranty</a>
+      </div>
+      <div>
+        <strong>Plan</strong>
+        <a href="/get-started/">Get Started</a>
+        <a href="/service-area/">Service Area</a>
+        <a href="/estimating-documentation/">Estimating &amp; Documentation</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <div>
+        <strong>Learn</strong>
+        <a href="/hail-tracker/">Hail Tracker</a>
+        <a href="/about/">About</a>
+        <a href="/repair-standards/">Repair Evaluation</a>
+        <a href="/resources/">Resources</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="pc-preview-footer__base">
+    <p>Preview-only design work. No production page has been replaced.</p>
+    <div>
+      <a href="/__preview/">Preview index</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </div>
+  </div>
+
+  <p class="pc-preview-footer__weather">
+    Weather reports describe reported conditions, not confirmed damage to an individual vehicle. For urgent weather information, follow the National Weather Service and local emergency officials.
+  </p>
+</footer>

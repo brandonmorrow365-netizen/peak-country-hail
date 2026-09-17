@@ -1,0 +1,38 @@
+---
+import PreviewHeader from '../components/preview/PreviewHeader.astro';
+import PreviewFooter from '../components/preview/PreviewFooter.astro';
+import '../styles/preview.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const documentTitle = `${title} | Peak Country Preview`;
+
+Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+Astro.response.headers.set('Cache-Control', 'no-store');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#071522" />
+  </head>
+  <body class="pc-preview-body">
+    <a class="pc-skip-link" href="#preview-main">Skip to preview content</a>
+    <div class="pc-preview-frame">
+      <PreviewHeader />
+      <main id="preview-main" class="pc-preview-main">
+        <slot />
+      </main>
+      <PreviewFooter />
+    </div>
+  </body>
+</html>

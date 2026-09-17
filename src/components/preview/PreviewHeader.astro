@@ -1,0 +1,47 @@
+---
+import { site } from '../../data/site';
+
+const links = [
+  ['/auto-hail-repair/', 'Hail Repair'],
+  ['/paintless-dent-repair/', 'PDR'],
+  ['/gallery/', 'Gallery'],
+  ['/hail-tracker/', 'Hail Tracker'],
+  ['/service-area/', 'Service Area'],
+  ['/about/', 'About'],
+] as const;
+---
+
+<header class="pc-preview-header">
+  <div class="pc-preview-header__utility">
+    <p><strong>Isolated visual preview</strong><span>Task 3 · Design system + shell</span></p>
+    <a href={`tel:${site.phone}`}>Call or text {site.phoneDisplay}</a>
+  </div>
+
+  <div class="pc-preview-header__main">
+    <a class="pc-preview-logo" href="/__preview/" aria-label="Peak Country preview index">
+      <img
+        src="/brand/peak-country-logo-604.png"
+        srcset="/brand/peak-country-logo-604.png 604w, /brand/peak-country-logo.png 1448w"
+        sizes="144px"
+        width="604"
+        height="453"
+        alt={site.name}
+        decoding="async"
+      />
+    </a>
+
+    <nav class="pc-preview-nav" aria-label="Preview primary navigation">
+      {links.map(([href, label]) => <a href={href}>{label}</a>)}
+      <a class="pc-button pc-button--small" href="/get-started/">Get Started</a>
+    </nav>
+
+    <details class="pc-preview-menu">
+      <summary><span>Menu</span><span aria-hidden="true">＋</span></summary>
+      <nav aria-label="Preview mobile navigation">
+        <a href="/__preview/" aria-current="page">Preview Index</a>
+        {links.map(([href, label]) => <a href={href}>{label}</a>)}
+        <a class="pc-button pc-button--small" href="/get-started/">Get Started</a>
+      </nav>
+    </details>
+  </div>
+</header>
