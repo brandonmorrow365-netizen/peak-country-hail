@@ -3,212 +3,148 @@ const overview = [
   {
     number: '01',
     title: 'Auto hail damage',
-    body: 'Vehicle-wide dent patterns require controlled lighting, panel-by-panel evaluation, and a repair plan that can account for access, finish condition, and documentation.',
+    body: 'Vehicle-wide evaluation and a repair plan built around the actual damage.',
     href: '#hail-damage-repair',
+    image: '/media/portfolio/2013-silverado/before-angle-1.jpg',
+    avif: '/media/portfolio/2013-silverado/before-angle-1-720.avif',
+    webp: '/media/portfolio/2013-silverado/before-angle-1-720.webp',
+    alt: 'Hail damage visible across a Chevrolet Silverado body panel before repair',
   },
   {
     number: '02',
     title: 'Paintless dent repair',
-    body: 'Hail dents, door dings, creases, body-line damage, and localized dents may qualify when the paint, metal, construction, and access support the method.',
+    body: 'Skilled metal movement that preserves the existing finish when PDR fits.',
     href: '#paintless-dent-repair-detail',
+    image: '/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg',
+    alt: 'PDR reflection light revealing distortion in a vehicle panel',
   },
   {
     number: '03',
     title: 'Mobile PDR service',
-    body: 'Professional lighting and repair equipment can come to a suitable home, workplace, fleet, dealership, or commercial location throughout Northern Colorado.',
+    body: 'Professional lighting and repair equipment at suitable Northern Colorado locations.',
     href: '#mobile-pdr-service',
+    image: '/media/portfolio/nissan-murano/after-angle-1.jpg',
+    avif: '/media/portfolio/nissan-murano/after-angle-1-720.avif',
+    webp: '/media/portfolio/nissan-murano/after-angle-1-720.webp',
+    alt: 'Nissan Murano rear quarter panel after paintless dent repair',
+  },
+] as const;
+
+const details = [
+  {
+    id: 'hail-damage-repair',
+    number: '01 / 03',
+    eyebrow: 'Vehicle-wide evaluation',
+    title: 'Hail damage repair',
+    body: 'Hail damage is evaluated panel by panel under controlled reflection lighting. Dent depth, paint condition, panel material, access, and prior repair all shape the plan.',
+    benefits: ['Direct inspection after photos start the conversation', 'PDR, conventional, or blended repair guidance', 'Documentation scaled to the repair'],
+    href: '/auto-hail-repair/',
+    link: 'Explore Hail Repair',
+    image: '/media/portfolio/2013-silverado/before-angle-2.jpg',
+    avif: '/media/portfolio/2013-silverado/before-angle-2-720.avif',
+    webp: '/media/portfolio/2013-silverado/before-angle-2-720.webp',
+    alt: 'Hail dents visible on a Chevrolet Silverado panel before repair',
+  },
+  {
+    id: 'paintless-dent-repair-detail',
+    number: '02 / 03',
+    eyebrow: 'Skilled metal movement',
+    title: 'Paintless dent repair',
+    body: 'PDR gradually reshapes suitable metal while retaining the existing finish. It can be a strong option for many hail dents, dings, creases, and body-line impacts—but not every dent.',
+    benefits: ['Factory-finish preservation when appropriate', 'Push and glue-pull access options', 'Vehicle-specific repairability decision'],
+    href: '/paintless-dent-repair/',
+    link: 'Explore Paintless Dent Repair',
+    image: '/media/portfolio/lexus-rx/before-angle-2.jpg',
+    avif: '/media/portfolio/lexus-rx/before-angle-2-720.avif',
+    webp: '/media/portfolio/lexus-rx/before-angle-2-720.webp',
+    alt: 'Localized dent on a Lexus RX panel before paintless dent repair',
+  },
+  {
+    id: 'mobile-pdr-service',
+    number: '03 / 03',
+    eyebrow: 'Northern Colorado · By appointment',
+    title: 'Mobile PDR service',
+    body: 'Many localized repairs can be completed at a suitable home, workplace, fleet, dealership, or commercial location. Lighting, weather, temperature, access, and scope determine the setting.',
+    benefits: ['Professional mobile lighting and equipment', 'Clean, dry vehicle and suitable workspace', 'Approximately 25-mile standard Greeley service area'],
+    href: '/service-area/',
+    link: 'View Mobile Service',
+    image: '/media/portfolio/nissan-murano/after-angle-2.jpg',
+    avif: '/media/portfolio/nissan-murano/after-angle-2-720.avif',
+    webp: '/media/portfolio/nissan-murano/after-angle-2-720.webp',
+    alt: 'Clean Nissan Murano panel after paintless dent repair',
   },
 ] as const;
 ---
 
-<section id="what-we-repair" class="pc-services-overview pc-contour-surface" aria-labelledby="pc-services-heading">
-  <div class="pc-content-width pc-services-overview__layout">
-    <div class="pc-services-overview__lead">
+<section id="what-we-repair" class="pc-services pc-contour-surface" aria-labelledby="pc-services-heading">
+  <div class="pc-content-width pc-services__overview">
+    <header class="pc-services__lead">
       <p class="pc-kicker">What we repair</p>
       <h2 id="pc-services-heading">
-        <span>Clear solutions for hail damage,</span>
-        <span>dents, and mobile service.</span>
+        <span>Real solutions</span>
+        <span>for real vehicles.</span>
       </h2>
-      <p>Every service starts with the same question: what does this vehicle and this damage actually need? The overview below leads directly into the repair detail—not a simplified substitute for it.</p>
+      <p>Experienced evaluation for hail damage, dents, and mobile PDR—starting with the repair method that fits the vehicle.</p>
+      <a class="pc-text-link" href="#services-in-detail">Explore Our Services <span aria-hidden="true">↓</span></a>
+    </header>
 
-      <figure class="pc-services-overview__photo">
-        <picture>
-          <source type="image/avif" srcset="/media/portfolio/2013-silverado/after-angle-3-720.avif 720w, /media/portfolio/2013-silverado/after-angle-3.avif 1200w" sizes="(max-width: 820px) calc(100vw - 40px), 430px" />
-          <source type="image/webp" srcset="/media/portfolio/2013-silverado/after-angle-3-720.webp 720w, /media/portfolio/2013-silverado/after-angle-3.webp 1200w" sizes="(max-width: 820px) calc(100vw - 40px), 430px" />
-          <img
-            src="/media/portfolio/2013-silverado/after-angle-3.jpg"
-            width="1200"
-            height="900"
-            alt="Third angle of the 2013 Chevrolet Silverado side panel after PDR"
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
-        <figcaption>Real repair photography · privacy-reviewed portfolio image</figcaption>
-      </figure>
-    </div>
-
-    <ol class="pc-services-overview__list">
+    <ol class="pc-services__categories">
       {overview.map((service) => (
         <li>
-          <span class="pc-services-overview__number" aria-hidden="true">{service.number}</span>
-          <div>
+          <a href={service.href}>
+            <picture>
+              {'avif' in service && <source type="image/avif" srcset={service.avif} />}
+              {'webp' in service && <source type="image/webp" srcset={service.webp} />}
+              <img src={service.image} width="720" height="540" alt={service.alt} loading="lazy" decoding="async" />
+            </picture>
+            <span class="pc-services__number" aria-hidden="true">{service.number}</span>
             <h3>{service.title}</h3>
             <p>{service.body}</p>
-            <a href={service.href}>Read service detail <span aria-hidden="true">↓</span></a>
-          </div>
+          </a>
         </li>
       ))}
     </ol>
   </div>
-</section>
 
-<section id="services-in-detail" class="pc-services-detail" aria-labelledby="pc-services-detail-heading">
-  <header class="pc-content-width pc-services-detail__heading">
-    <div>
-      <p class="pc-kicker">Our services in detail</p>
-      <h2 id="pc-services-detail-heading">More than just dent removal.</h2>
-    </div>
-    <p>The repair method, access plan, documentation, working environment, and realistic outcome all matter. These summaries preserve the important service guidance while the dedicated pages remain available for deeper research.</p>
-  </header>
-
-  <div class="pc-service-stories">
-    <article id="hail-damage-repair" class="pc-service-story pc-content-width" aria-labelledby="hail-damage-heading">
-      <header class="pc-service-story__header">
-        <p class="pc-service-story__index">01 / 03</p>
-        <div>
-          <p class="pc-label">Vehicle-wide evaluation</p>
-          <h3 id="hail-damage-heading">Hail damage repair</h3>
-          <p class="pc-service-story__lede">Automotive hail damage is evaluated panel by panel and as a complete vehicle. Dent count matters, but so do depth, location, metal stretch, paint condition, panel material, access, and previous repairs.</p>
-        </div>
-      </header>
-
-      <div class="pc-service-story__topics">
-        <section>
-          <h4>Controlled evaluation</h4>
-          <p>A clean, dry vehicle and purpose-built reflection lighting reveal low spots, crowns, waves, and subtle distortion that ordinary outdoor or garage light can hide. Photographs can start the conversation, but a direct inspection is needed to separate hail patterns from unrelated scratches, chips, door dings, and prior bodywork.</p>
-        </section>
-        <section>
-          <h4>PDR when it fits</h4>
-          <p>Paintless dent repair can preserve the factory finish when the paint remains sound, the metal has not stretched excessively, and the damaged area can be worked safely. Cracked paint, severe stretch, sharp edge damage, inaccessible construction, or previous repair may call for conventional repair, replacement, or a blended plan.</p>
-        </section>
-        <section>
-          <h4>Insurance or out-of-pocket</h4>
-          <p>The workmanship standard and repair recommendation do not change based on who pays. Complex hail or insurance-related work may need panel-by-panel inspection, photographs, R&amp;I planning, technical research, estimates, or supported revisions. Customer-pay repairs receive the same vehicle-specific judgment without unnecessary paperwork.</p>
-        </section>
-        <section>
-          <h4>Communication through repair</h4>
-          <p>Peak Country explains which panels appear suitable for PDR, which areas may need another method, what access or disassembly may be required, and what limitations are visible before work moves forward. If authorized access changes the known scope, the next step is discussed and documented rather than assumed.</p>
-        </section>
-      </div>
-
-      <nav class="pc-service-story__links" aria-label="Auto hail damage resources">
-        <a href="/auto-hail-repair/">Explore Auto Hail Repair <span aria-hidden="true">→</span></a>
-        <a href="/estimating-documentation/">Estimating &amp; Documentation <span aria-hidden="true">→</span></a>
-        <a href="/after-a-hailstorm/">What to Do After a Hailstorm <span aria-hidden="true">→</span></a>
-      </nav>
-    </article>
-
-    <article id="paintless-dent-repair-detail" class="pc-service-story pc-service-story--pdr pc-content-width" aria-labelledby="pdr-detail-heading">
-      <header class="pc-service-story__header">
-        <p class="pc-service-story__index">02 / 03</p>
-        <div>
-          <p class="pc-label">Skilled metal movement</p>
-          <h3 id="pdr-detail-heading">Paintless dent repair</h3>
-          <p class="pc-service-story__lede">PDR gradually reshapes suitable metal while retaining the existing finish. It is a skilled repair method with real advantages and real limits—not an automatic answer for every dent.</p>
-        </div>
-      </header>
-
-      <div class="pc-service-story__pdr-layout">
-        <div class="pc-service-story__pdr-copy">
-          <p>Many hail dents, parking-lot door dings, localized dents, minor creases, and body-line impacts may qualify. There is no reliable one-size-only rule: shape, depth, impact severity, surrounding crowns, material, finish condition, repair history, panel construction, and the customer’s goal all affect repairability.</p>
-          <p>Specialized tools may reach behind a panel to make measured adjustments, while glue-pull techniques can provide controlled exterior movement when the finish and repair history make that approach appropriate. Braces, wiring, glass, trim, airbags, sensors, and closed construction can change the access plan. Any approved removal and installation work is part of the repair—not an afterthought.</p>
-          <p>Factory-finish preservation is valuable when the coating and panel are suitable because it avoids sanding, filler, color matching, and refinishing. PDR does not restore cracked or missing paint, and excessively stretched metal, severe creases, collision distortion, unsafe access, or vehicle-specific repair restrictions may make another method the better choice.</p>
-        </div>
-
-        <aside class="pc-service-story__considerations" aria-labelledby="pdr-considerations-heading">
-          <h4 id="pdr-considerations-heading">A repairability decision may consider</h4>
-          <ul>
-            <li>Dent depth, shape, stretch, and body-line involvement</li>
-            <li>Paint integrity and previous refinishing or bodywork</li>
-            <li>Steel, aluminum, and specialized panel materials</li>
-            <li>Backside access, bracing, trim, wiring, and safety systems</li>
-            <li>Full-repair versus improvement-repair goals</li>
-          </ul>
-          <p>If PDR is not the right choice, Peak Country will say so and may recommend a conventional, replacement, hybrid, or another qualified repair-facility path.</p>
-        </aside>
-      </div>
-
-      <nav class="pc-service-story__links" aria-label="Paintless dent repair resources">
-        <a href="/paintless-dent-repair/">Explore Paintless Dent Repair <span aria-hidden="true">→</span></a>
-        <a href="/door-ding-repair/">Door Dings, Dents &amp; Creases <span aria-hidden="true">→</span></a>
-        <a href="/repair-standards/">Repair Evaluation Standards <span aria-hidden="true">→</span></a>
-      </nav>
-    </article>
-
-    <article id="mobile-pdr-service" class="pc-service-story pc-service-story--mobile pc-content-width" aria-labelledby="mobile-pdr-heading">
-      <header class="pc-service-story__header">
-        <p class="pc-service-story__index">03 / 03</p>
-        <div>
-          <p class="pc-label">Northern Colorado · By appointment</p>
-          <h3 id="mobile-pdr-heading">Mobile PDR service</h3>
-          <p class="pc-service-story__lede">Peak Country brings professional lighting, equipment, and experienced PDR service to suitable locations throughout Greeley and Northern Colorado—without lowering the conditions required for careful work.</p>
-        </div>
-      </header>
-
-      <div class="pc-service-story__mobile-layout">
-        <figure class="pc-service-story__vehicle">
-          <picture>
-            <source type="image/avif" srcset="/media/portfolio/nissan-murano/after-angle-1-720.avif 720w, /media/portfolio/nissan-murano/after-angle-1.avif 1200w" sizes="(max-width: 820px) calc(100vw - 40px), 480px" />
-            <source type="image/webp" srcset="/media/portfolio/nissan-murano/after-angle-1-720.webp 720w, /media/portfolio/nissan-murano/after-angle-1.webp 1200w" sizes="(max-width: 820px) calc(100vw - 40px), 480px" />
-            <img
-              src="/media/portfolio/nissan-murano/after-angle-1.jpg"
-              width="1200"
-              height="1600"
-              alt="Nissan Murano rear quarter panel after paintless dent repair"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
-          <figcaption>Real, privacy-reviewed vehicle photography · no fabricated fleet branding</figcaption>
-        </figure>
-
-        <div class="pc-service-story__mobile-copy">
-          <section>
-            <h4>Convenience where the work supports it</h4>
-            <p>Many repairs can be completed at a home, workplace, fleet facility, dealership, commercial property, or another suitable location. Reasonable working access, a clean and dry vehicle, and authorization to move or reposition it when needed help the appointment run smoothly. Customer electrical power is not normally required.</p>
-          </section>
-          <section>
-            <h4>Lighting, temperature, and weather matter</h4>
-            <p>Professional reflection lighting is part of both evaluation and repair. Outdoor work normally should not occur in rain or snow; excessive wind may require relocation or rescheduling. Depending on the repair, temperatures below approximately 50–60°F may require a different time or location.</p>
-          </section>
-          <section>
-            <h4>The scope decides the setting</h4>
-            <p>Door dings and localized dents may be practical mobile repairs when conditions are suitable. Vehicle-wide hail damage commonly needs a larger panel-by-panel evaluation and generally benefits from—or requires—a controlled indoor environment. Recommending another location protects the quality of the evaluation and repair; it is not a barrier to starting the conversation.</p>
-          </section>
-          <p class="pc-service-story__area-note">The standard mobile-service area is approximately 25 miles from a fixed neutral reference point in downtown Greeley. It is not a hard boundary: customers outside the area may still request service, and any small mobile-service fee is discussed before scheduling.</p>
-        </div>
-      </div>
-
-      <nav class="pc-service-story__links" aria-label="Mobile PDR resources">
-        <a href="/service-area/">View Mobile Service Details <span aria-hidden="true">→</span></a>
-        <a href="/process/">See the Repair Process <span aria-hidden="true">→</span></a>
-        <a href="/get-started/">Start the Conversation <span aria-hidden="true">→</span></a>
-      </nav>
-    </article>
-  </div>
-
-  <aside class="pc-repair-fit pc-contour-surface" aria-labelledby="pc-repair-fit-heading">
-    <div class="pc-content-width pc-repair-fit__layout">
-      <p class="pc-repair-fit__label">The right repair<br />for your vehicle.</p>
+  <div id="services-in-detail" class="pc-services__detail" aria-labelledby="pc-services-detail-heading">
+    <header class="pc-content-width pc-services__detail-heading">
       <div>
-        <h2 id="pc-repair-fit-heading">PDR is not automatically the correct method for every dent.</h2>
-        <p>Peak Country evaluates the damage, vehicle construction, paint condition, panel material, access, repair requirements, and your goals before explaining the options and recommending the method that makes sense.</p>
-        <div class="pc-actions">
-          <a class="pc-button" href="/get-started/">Get Started</a>
-          <a class="pc-text-link" href="/repair-standards/">How repairability is evaluated <span aria-hidden="true">→</span></a>
-        </div>
+        <p class="pc-kicker">Our services in detail</p>
+        <h2 id="pc-services-detail-heading">More than just dent removal.</h2>
       </div>
+      <p>Repairability, access, finish condition, working environment, documentation, and the customer’s goal all matter.</p>
+    </header>
+
+    <div class="pc-content-width pc-services__detail-grid">
+      {details.map((service) => (
+        <article id={service.id} class="pc-services__detail-item" aria-labelledby={`${service.id}-heading`}>
+          <figure>
+            <picture>
+              <source type="image/avif" srcset={service.avif} />
+              <source type="image/webp" srcset={service.webp} />
+              <img src={service.image} width="720" height="540" alt={service.alt} loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>{service.eyebrow}</figcaption>
+          </figure>
+          <p class="pc-services__detail-index">{service.number}</p>
+          <h3 id={`${service.id}-heading`}>{service.title}</h3>
+          <p class="pc-services__detail-copy">{service.body}</p>
+          <ul>
+            {service.benefits.map((benefit) => <li>{benefit}</li>)}
+          </ul>
+          <a href={service.href}>{service.link} <span aria-hidden="true">→</span></a>
+        </article>
+      ))}
     </div>
-  </aside>
+
+    <aside class="pc-content-width pc-services__fit" aria-labelledby="pc-repair-fit-heading">
+      <p class="pc-label">The right repair for your vehicle</p>
+      <h2 id="pc-repair-fit-heading">PDR is not automatically the correct method for every dent.</h2>
+      <p>Peak Country evaluates the damage, construction, paint, access, requirements, and your goals before explaining the options.</p>
+      <div>
+        <a href="/repair-standards/">How repairability is evaluated <span aria-hidden="true">→</span></a>
+        <a href="/get-started/">Start the conversation <span aria-hidden="true">→</span></a>
+      </div>
+    </aside>
+  </div>
 </section>
