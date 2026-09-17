@@ -3,90 +3,93 @@ const steps = [
   {
     number: '01',
     title: 'Start the conversation',
-    body: 'Share the basics through Get Started; photos are helpful but optional. The request creates no obligation or commitment.',
-    image: '/media/portfolio/toyota-4runner/before-angle-1.jpg',
-    avif: '/media/portfolio/toyota-4runner/before-angle-1-720.avif',
-    webp: '/media/portfolio/toyota-4runner/before-angle-1-720.webp',
-    alt: 'Toyota 4Runner panel before paintless dent repair',
+    body: 'Reach out online, by phone, or with a few photos. Tell us about your vehicle and what you’re hoping to get done. There’s no obligation—we’re here to help and answer questions.',
+    visual: 'contact',
   },
   {
     number: '02',
     title: 'Review the damage',
-    body: 'An experienced technician personally reviews the vehicle under proper lighting and evaluates the paint, metal, and access.',
-    image: '/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg',
-    alt: 'PDR reflection light used to evaluate panel damage',
+    body: 'We’ll take a close look at the damage in person—or review your photos—and evaluate what can be repaired with PDR. Every vehicle is assessed around its specific damage and goals.',
+    image: '/media/portfolio/2013-silverado/before-angle-2.jpg',
+    avif: '/media/portfolio/2013-silverado/before-angle-2-720.avif',
+    webp: '/media/portfolio/2013-silverado/before-angle-2-720.webp',
+    alt: 'Hail damage being reviewed on a Chevrolet Silverado panel',
   },
   {
     number: '03',
     title: 'Understand the options',
-    body: 'Peak Country explains where PDR fits, when another method may be better, and any paid estimating scope and price first.',
-    image: '/media/portfolio/lexus-rx/before-angle-1.jpg',
-    avif: '/media/portfolio/lexus-rx/before-angle-1-720.avif',
-    webp: '/media/portfolio/lexus-rx/before-angle-1-720.webp',
-    alt: 'Lexus RX dent before repair evaluation',
+    body: 'We’ll explain what PDR can do, when another repair method may be a better fit, and what the recommended plan involves—so you can make the best decision for your vehicle.',
+    image: '/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg',
+    alt: 'PDR reflection light used to explain and assess repair options',
   },
   {
     number: '04',
     title: 'Approve the repair',
-    body: 'There is no checkout or automatic payment. No paid estimate, documentation, or repair begins without your approval.',
-    image: '/media/portfolio/nissan-murano/before-angle-2.jpg',
-    avif: '/media/portfolio/nissan-murano/before-angle-2-720.avif',
-    webp: '/media/portfolio/nissan-murano/before-angle-2-720.webp',
-    alt: 'Nissan Murano panel before an approved paintless dent repair',
+    body: 'Once you’re comfortable with the plan, you give the go-ahead. No paid estimate, documentation, or repair begins without approval, and we schedule the work for a practical time and location.',
+    visual: 'approval',
   },
   {
     number: '05',
     title: 'Repair + documentation',
-    body: 'Authorized work follows the agreed scope, with careful access, reassembly, quality review, and proportionate records.',
-    image: '/media/portfolio/2013-silverado/after-angle-3.jpg',
-    avif: '/media/portfolio/2013-silverado/after-angle-3-720.avif',
-    webp: '/media/portfolio/2013-silverado/after-angle-3-720.webp',
-    alt: 'Chevrolet Silverado panel after paintless dent repair',
+    body: 'We complete the authorized repair using proven PDR techniques, review the result, and provide documentation appropriate to the work. You leave knowing what was done and why.',
+    image: '/media/portfolio/nissan-murano/after-angle-2.jpg',
+    avif: '/media/portfolio/nissan-murano/after-angle-2-720.avif',
+    webp: '/media/portfolio/nissan-murano/after-angle-2-720.webp',
+    alt: 'Nissan Murano panel after completed paintless dent repair',
   },
 ] as const;
-
-const safeguards = ['No obligation', 'No commitment', 'No checkout', 'Approval before paid work'] as const;
 ---
 
-<section id="process" class="pc-process pc-contour-surface" aria-labelledby="pc-process-heading">
-  <div class="pc-content-width pc-process__intro">
+<section id="process" class="pc-process" aria-labelledby="pc-process-heading">
+  <div class="pc-process__photo" aria-hidden="true">
+    <img src="/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg" width="977" height="1139" alt="" loading="lazy" decoding="async" />
+  </div>
+  <div class="pc-process__shade" aria-hidden="true"></div>
+
+  <div class="pc-shell-width pc-process__intro">
     <div>
       <p class="pc-kicker">The process</p>
-      <h2 id="pc-process-heading">
-        <span>A straightforward process</span>
-        <span>from start to finish.</span>
-      </h2>
-    </div>
-    <div class="pc-process__promise">
+      <h2 id="pc-process-heading"><span>A straightforward process</span><span>from start to finish.</span></h2>
       <p>No pressure. Just clear communication, honest guidance, and quality repairs.</p>
-      <a href="/get-started/">Begin with Get Started <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="pc-process__regional">
+      <p>Northern Colorado<br />Driven to keep you<br />on the road</p>
+      <span aria-hidden="true"></span>
     </div>
   </div>
 
-  <div class="pc-content-width">
-    <ol class="pc-process__steps">
-      {steps.map((step) => (
-        <li>
-          <span class="pc-process__number" aria-hidden="true">{step.number}</span>
-          <h3>{step.title}</h3>
+  <ol class="pc-shell-width pc-process__steps">
+    {steps.map((step) => (
+      <li>
+        <header><span class="pc-process__number" aria-hidden="true">{step.number}</span><h3>{step.title}</h3></header>
+        {'visual' in step && step.visual === 'contact' ? (
+          <div class="pc-process__illustration pc-process__illustration--contact" role="img" aria-label="Illustration of the Get Started contact options">
+            <div class="pc-process__phone"><strong>Get Started</strong><span>Start online</span><span>Call or text</span><span>Send photos</span></div>
+          </div>
+        ) : 'visual' in step && step.visual === 'approval' ? (
+          <div class="pc-process__illustration pc-process__illustration--approval" role="img" aria-label="Illustration of repair authorization after review">
+            <div class="pc-process__approval-sheet"><strong>Authorization to Repair</strong><span>✓ Estimate reviewed</span><span>✓ Repair process explained</span><span>✓ Questions answered</span></div>
+          </div>
+        ) : (
           <picture>
             {'avif' in step && <source type="image/avif" srcset={step.avif} />}
             {'webp' in step && <source type="image/webp" srcset={step.webp} />}
             <img src={step.image} width="720" height="540" alt={step.alt} loading="lazy" decoding="async" />
           </picture>
-          <p>{step.body}</p>
-        </li>
-      ))}
-    </ol>
+        )}
+        <p>{step.body}</p>
+      </li>
+    ))}
+  </ol>
 
-    <div class="pc-process__base">
-      <div class="pc-process__safeguards" aria-label="Get Started safeguards">
-        {safeguards.map((safeguard) => <span>{safeguard}</span>)}
+  <div class="pc-process__base">
+    <div class="pc-shell-width pc-process__base-inner">
+      <div class="pc-process__promise-mark">
+        <svg viewBox="0 0 48 56" aria-hidden="true"><path d="M24 3c7 6 13 8 20 9v15c0 13-8 21-20 26C12 48 4 40 4 27V12c7-1 13-3 20-9Z"/><path d="m15 28 6 6 13-14"/></svg>
+        <strong>Real people. Real experience.<br />A better experience.</strong>
       </div>
-      <div class="pc-process__actions">
-        <a class="pc-button" href="/get-started/">Get Started</a>
-        <a class="pc-text-link" href="/process/">View the full repair process <span aria-hidden="true">→</span></a>
-      </div>
+      <p>From the first conversation to the final repair, Peak Country is here to make the process simple, clear, and stress-free.</p>
+      <a class="pc-button pc-button--outline-light" href="/get-started/">Get Started Today <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
