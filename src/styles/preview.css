@@ -384,35 +384,33 @@
 }
 
 /* Why Peak Country */
-.pc-why { color: var(--pc-paper); background: #091a27; border-bottom: 1px solid var(--pc-line-dark); }
-.pc-why__spread { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr); min-height: 820px; padding-block: clamp(2rem, 4vw, 3.5rem); }
-.pc-why__photo { position: relative; min-height: 750px; margin: 0; overflow: hidden; border-right: 1px solid rgb(85 189 237 / 42%); }
-.pc-why__photo::before { position: absolute; z-index: 2; top: 1.5rem; left: 1.5rem; width: 42%; height: 29%; content: ""; border-top: 1px solid var(--pc-blue); border-left: 1px solid var(--pc-blue); pointer-events: none; }
-.pc-why__photo::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 55%, rgb(2 14 23 / 78%)); pointer-events: none; }
+.pc-why { position: relative; color: var(--pc-paper); background: #081a27; border-bottom: 1px solid var(--pc-line-dark); overflow: hidden; }
+.pc-why__credibility { position: relative; z-index: 3; background: rgb(6 22 34 / 95%); border-block: 1px solid rgb(85 189 237 / 32%); }
+.pc-why__credibility::before { position: absolute; right: 0; bottom: 100%; left: 0; height: 28px; content: ''; background: url('/brand/hero-storm-background-1942.webp') center 72% / cover; opacity: .38; filter: grayscale(.2) contrast(1.2); }
+.pc-why__credibility-inner { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: 1.1rem; }
+.pc-why__credibility-inner > div { display: grid; gap: .05rem; justify-items: center; padding-inline: 1.5rem; text-align: center; border-right: 1px solid rgb(85 189 237 / 55%); }
+.pc-why__credibility-inner > div:last-child { border-right: 0; }
+.pc-why__credibility strong { color: var(--pc-blue); font-family: var(--pc-font-display); font-size: clamp(1.35rem, 2.4vw, 2rem); font-weight: 620; letter-spacing: -.025em; text-transform: uppercase; }
+.pc-why__credibility span { color: #d4dde2; font-size: .92rem; line-height: 1.35; }
+.pc-why__spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 850px; }
+.pc-why__photo { position: relative; min-height: 850px; margin: 0; overflow: hidden; }
+.pc-why__photo::after { position: absolute; inset: 0; content: ''; background: linear-gradient(90deg, rgb(2 14 23 / 8%), transparent 58%, rgb(4 19 30 / 38%)), linear-gradient(0deg, rgb(2 14 23 / 82%), transparent 32%); pointer-events: none; }
 .pc-why__photo picture,
 .pc-why__photo img { display: block; width: 100%; height: 100%; }
-.pc-why__photo img { position: absolute; inset: 0; object-fit: cover; object-position: 52% 43%; filter: saturate(.82) contrast(1.08); }
-.pc-why__photo figcaption { position: absolute; z-index: 3; right: 1.8rem; bottom: 1.5rem; left: 1.8rem; padding-top: .75rem; color: #c4d0d7; border-top: 1px solid rgb(255 255 255 / 28%); font-size: .65rem; letter-spacing: .08em; line-height: 1.45; text-transform: uppercase; }
-.pc-why__panel { display: flex; min-width: 0; flex-direction: column; justify-content: center; padding: clamp(2.5rem, 4vw, 3.5rem); background: #0c202f; }
-.pc-why__copy h2 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(2.65rem, 3.8vw, 3.85rem); font-weight: 670; letter-spacing: -.05em; line-height: .98; }
+.pc-why__photo img { position: absolute; inset: 0; object-fit: cover; object-position: 48% 43%; filter: saturate(.84) contrast(1.07); }
+.pc-why__photo figcaption { position: absolute; z-index: 3; bottom: 4.7rem; left: clamp(2rem, 5vw, 4.8rem); display: grid; gap: .28rem; color: #c7d2d8; font-size: .68rem; font-weight: 520; letter-spacing: .2em; line-height: 1.45; text-transform: uppercase; }
+.pc-why__photo figcaption::after { width: 2.6rem; height: 2px; margin-top: .85rem; content: ''; background: var(--pc-blue); }
+.pc-why__panel { display: flex; min-width: 0; flex-direction: column; justify-content: center; padding: clamp(3rem, 5.2vw, 5.25rem); background: linear-gradient(115deg, #0a202f, #071a27); }
+.pc-why__copy h2 { max-width: 680px; margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(2.5rem, 3.45vw, 3.45rem); font-weight: 610; letter-spacing: -.03em; line-height: 1.06; }
 .pc-why__copy h2 span { display: block; }
-.pc-why__copy h2 span:last-child { color: var(--pc-blue); }
-.pc-why__copy > p:not(.pc-kicker) { max-width: 590px; margin: 1.25rem 0 0; color: #b2c0c8; font-size: .95rem; }
-.pc-why__credibility { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 1.8rem; border-block: 1px solid var(--pc-line-dark); }
-.pc-why__credibility > div { display: grid; gap: .16rem; align-content: center; min-height: 78px; padding: .9rem 1rem; border-right: 1px solid var(--pc-line-dark); }
-.pc-why__credibility > div:first-child { padding-left: 0; }
-.pc-why__credibility > div:last-child { padding-right: 0; border-right: 0; }
-.pc-why__credibility strong { color: var(--pc-blue); font-size: .65rem; font-weight: 820; letter-spacing: .13em; text-transform: uppercase; }
-.pc-why__credibility span { color: #d2dbe0; font-size: .76rem; line-height: 1.35; }
-.pc-why__principles { display: grid; grid-template-columns: 1fr 1fr; margin: 1.8rem 0 0; padding: 0; border-top: 1px solid var(--pc-line-dark); list-style: none; }
-.pc-why__principles li { display: grid; grid-template-columns: 2.7rem 1fr; gap: .8rem; min-height: 132px; padding: 1.2rem 1.2rem 1.2rem 0; border-right: 1px solid var(--pc-line-dark); border-bottom: 1px solid var(--pc-line-dark); }
-.pc-why__principles li:nth-child(even) { padding-right: 0; padding-left: 1.2rem; border-right: 0; }
-.pc-why__number { color: rgb(85 189 237 / 55%); font-family: var(--pc-font-display); font-size: 1.7rem; font-weight: 610; letter-spacing: -.04em; line-height: 1; }
-.pc-why__principles h3 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: .9rem; font-weight: 720; letter-spacing: -.01em; line-height: 1.16; text-transform: uppercase; }
-.pc-why__principles p { margin: .55rem 0 0; color: #91a2ad; font-size: .72rem; line-height: 1.45; }
-.pc-why__links { display: flex; gap: 1rem 2rem; flex-wrap: wrap; margin-top: 1.4rem; }
-.pc-why__links a { color: var(--pc-blue-bright); font-size: .72rem; font-weight: 740; text-decoration-color: rgb(134 214 250 / 35%); text-underline-offset: .3rem; }
-.pc-why__links a:hover { color: var(--pc-white); }
+.pc-why__copy > p:not(.pc-kicker) { max-width: 650px; margin: 1.35rem 0 0; color: #b8c6ce; font-size: .98rem; line-height: 1.55; }
+.pc-why__principles { display: grid; grid-template-columns: 1fr 1fr; margin: 2.3rem 0 0; padding: 0; list-style: none; }
+.pc-why__principles li { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; min-height: 178px; padding: 1.25rem 1.8rem 1.25rem 0; border-bottom: 1px solid var(--pc-line-dark); }
+.pc-why__principles li:nth-child(even) { padding-right: 0; padding-left: 1.8rem; }
+.pc-why__number { color: rgb(85 189 237 / 58%); font-family: var(--pc-font-display); font-size: 2.7rem; font-weight: 520; letter-spacing: -.04em; line-height: .9; }
+.pc-why__principles h3 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: .82rem; font-weight: 650; letter-spacing: .06em; line-height: 1.45; text-transform: uppercase; }
+.pc-why__principles p { margin: .7rem 0 0; color: #b0bec6; font-size: .78rem; line-height: 1.5; }
+.pc-why__mountains { position: absolute; z-index: 4; right: 0; bottom: 0; left: 0; height: 76px; background: url('/brand/hero-storm-background-1942.webp') center 70% / cover; opacity: .56; filter: saturate(.65) contrast(1.3); clip-path: polygon(0 66%, 5% 54%, 10% 64%, 17% 35%, 22% 58%, 29% 46%, 35% 66%, 43% 40%, 49% 57%, 56% 32%, 63% 61%, 69% 44%, 77% 67%, 84% 38%, 91% 58%, 100% 46%, 100% 100%, 0 100%); pointer-events: none; }
 
 /* What We Repair + detailed services */
 .pc-services { color: var(--pc-paper); background: #071824; border-bottom: 1px solid var(--pc-line-dark); }
@@ -643,7 +641,7 @@
   .pc-home-hero__copy { max-width: 720px; }
   .pc-home-tracker { max-width: 540px; margin-top: 0; }
   .pc-why__spread { grid-template-columns: 1fr; padding-block: 0; }
-  .pc-why__photo { min-height: min(72vw, 620px); border-right: 0; border-bottom: 1px solid rgb(85 189 237 / 42%); }
+  .pc-why__photo { min-height: min(88vw, 680px); border-bottom: 1px solid rgb(85 189 237 / 28%); }
   .pc-why__photo img { object-position: 50% 42%; }
   .pc-why__panel { padding: clamp(3rem, 8vw, 4.5rem) var(--pc-gutter); }
   .pc-services__overview,
@@ -724,16 +722,15 @@
   .pc-home-hero__support { margin-top: 1.35rem; }
   .pc-home-tracker { padding: 1.7rem 1.4rem 1.8rem; }
   .pc-home-hero__tools { right: var(--pc-gutter); bottom: 1rem; }
-  .pc-why__credibility { grid-template-columns: 1fr; }
-  .pc-why__credibility > div { min-height: 0; padding: .8rem 0; border-right: 0; border-bottom: 1px solid var(--pc-line-dark); }
-  .pc-why__credibility > div:last-child { border-bottom: 0; }
+  .pc-why__credibility-inner { grid-template-columns: 1fr; padding-block: .5rem; }
+  .pc-why__credibility-inner > div { min-height: 0; padding: .8rem 0; border-right: 0; border-bottom: 1px solid var(--pc-line-dark); }
+  .pc-why__credibility-inner > div:last-child { border-bottom: 0; }
   .pc-why__photo { min-height: 430px; }
-  .pc-why__photo::before { top: .9rem; left: .9rem; }
-  .pc-why__photo figcaption { right: 1.1rem; bottom: 1rem; left: 1.1rem; }
+  .pc-why__photo figcaption { bottom: 2rem; left: 1.25rem; }
   .pc-why__copy h2 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
   .pc-why__principles { grid-template-columns: 1fr; }
   .pc-why__principles li,
-  .pc-why__principles li:nth-child(even) { grid-template-columns: 2.8rem 1fr; gap: .65rem 1rem; min-height: 0; padding: 1.1rem 0; border-right: 0; }
+  .pc-why__principles li:nth-child(even) { grid-template-columns: 3.4rem 1fr; gap: .65rem 1rem; min-height: 0; padding: 1.25rem 0; }
   .pc-why__principles p { font-size: .76rem; }
   .pc-services__lead h2,
   .pc-services__detail-heading h2 { font-size: clamp(2.4rem, 12vw, 3.6rem); }

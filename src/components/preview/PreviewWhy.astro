@@ -3,28 +3,36 @@ const principles = [
   {
     number: '01',
     title: 'Direct access to experience',
-    body: 'An experienced PDR professional guides the evaluation and repair.',
+    body: 'An experienced PDR professional helps evaluate the damage, explain the options, and guide the repair from the beginning.',
   },
   {
     number: '02',
     title: '20+ years of PDR experience',
-    body: 'PDR experience supported by 25+ years across collision repair.',
+    body: 'Experience with both PDR and the broader collision industry informs how the repair is approached.',
   },
   {
     number: '03',
     title: 'The repair method should fit the vehicle',
-    body: 'If PDR is not the right method, Peak Country will say so.',
+    body: 'Not every dent should be forced into PDR. If another method makes more sense, we’ll explain why.',
   },
   {
     number: '04',
     title: 'Start with a conversation',
-    body: 'A Free Initial Assessment starts with guidance, not a commitment.',
+    body: 'Understand the damage and your options before making a repair decision. No obligation, just straight answers.',
   },
 ] as const;
 ---
 
 <section id="why-peak-country" class="pc-why" aria-labelledby="pc-why-heading">
-  <div class="pc-shell-width pc-why__spread">
+  <div class="pc-why__credibility" aria-label="Peak Country experience and service">
+    <div class="pc-shell-width pc-why__credibility-inner">
+      <div><strong>20+ years</strong><span>Professional PDR experience</span></div>
+      <div><strong>25+ years</strong><span>Collision-industry experience</span></div>
+      <div><strong>Mobile service</strong><span>Throughout Northern Colorado</span></div>
+    </div>
+  </div>
+
+  <div class="pc-why__spread">
     <figure class="pc-why__photo">
       <picture>
         <source media="(max-width: 680px)" srcset="/images/pdr-light-reflection-paintless-dent-repair-greeley-co-640.jpg" />
@@ -37,25 +45,18 @@ const principles = [
           decoding="async"
         />
       </picture>
-      <figcaption>Real PDR process · controlled reflection lighting · vehicle-specific evaluation</figcaption>
+      <figcaption><span>Real vehicles.</span><span>Real repairs.</span><span>Northern Colorado.</span></figcaption>
     </figure>
 
     <div class="pc-why__panel">
       <header class="pc-why__copy">
         <p class="pc-kicker">Why Peak Country</p>
         <h2 id="pc-why-heading">
-          <span>Repair experience</span>
-          <span>you can trust.</span>
-          <span>No sales pressure.</span>
+          <span>Repair experience you</span>
+          <span>can trust. No sales pressure.</span>
         </h2>
-        <p>Experienced judgment, clear communication, and skilled workmanship guide the repair from the first conversation. The method should fit the vehicle—not a sales target.</p>
+        <p>Peak Country is built on hands-on experience, honest guidance, and quality workmanship. You’ll work directly with an experienced PDR professional who helps evaluate the damage, explain your options, and guide the repair from start to finish.</p>
       </header>
-
-      <div class="pc-why__credibility" aria-label="Peak Country experience and service">
-        <div><strong>20+ years</strong><span>Professional PDR experience</span></div>
-        <div><strong>25+ years</strong><span>Collision-industry experience</span></div>
-        <div><strong>Mobile service</strong><span>Northern Colorado</span></div>
-      </div>
 
       <ol class="pc-why__principles">
         {principles.map((principle) => (
@@ -69,10 +70,7 @@ const principles = [
         ))}
       </ol>
 
-      <nav class="pc-why__links" aria-label="Learn more about Peak Country">
-        <a href="/about/">Meet the approach <span aria-hidden="true">→</span></a>
-        <a href="/service-area/">View service area <span aria-hidden="true">→</span></a>
-      </nav>
     </div>
   </div>
+  <div class="pc-why__mountains" aria-hidden="true"></div>
 </section>
