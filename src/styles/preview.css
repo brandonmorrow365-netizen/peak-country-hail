@@ -293,6 +293,89 @@
 .pc-preview-status dt { color: #8fa0ab; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
 .pc-preview-status dd { margin: 0; color: #e0e7e9; font-size: .85rem; font-weight: 640; }
 
+/* Preview homepage hero */
+.pc-home-hero { position: relative; color: var(--pc-paper); background: #061522; border-bottom: 1px solid var(--pc-line-dark); isolation: isolate; }
+.pc-home-hero__surface { position: relative; min-height: clamp(690px, 76vh, 850px); overflow: hidden; }
+.pc-home-hero__landscape { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #0b1b2b; }
+.pc-home-hero__picture { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.pc-home-hero__picture img { display: block; width: 100%; max-width: none; height: 100%; object-fit: cover; object-position: 50% 48%; }
+.pc-home-hero__clouds {
+  --cloud-x: 50%;
+  --cloud-y: 48%;
+  position: absolute;
+  inset: -8px;
+  background: url('/brand/hero-storm-background-1942.webp') var(--cloud-x) var(--cloud-y) / cover;
+  -webkit-mask-image: linear-gradient(#000 0%, #000 18%, transparent 27%);
+  mask-image: linear-gradient(#000 0%, #000 18%, transparent 27%);
+  opacity: .58;
+  transform: translate(var(--header-x, 0), var(--header-y, 0));
+  transition: transform 800ms ease-out;
+  animation: pc-cloud-drift 28s ease-in-out infinite alternate;
+}
+
+.pc-home-hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(2 16 32 / 92%) 0%, rgb(2 16 32 / 72%) 45%, rgb(2 16 32 / 40%) 72%, rgb(2 16 32 / 58%) 100%),
+    linear-gradient(0deg, rgb(3 17 34 / 94%) 0%, transparent 34%, rgb(3 17 34 / 24%) 78%, rgb(3 17 34 / 52%) 100%);
+}
+
+.pc-home-hero [data-storm-canvas] { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+.pc-home-hero__layout {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr);
+  gap: clamp(3.5rem, 8vw, 8rem);
+  min-height: clamp(690px, 76vh, 850px);
+  align-items: end;
+  padding-top: clamp(5rem, 10vh, 8rem);
+  padding-bottom: clamp(7.5rem, 14vh, 10rem);
+}
+
+.pc-home-hero__copy { min-width: 0; max-width: 880px; }
+.pc-home-hero__location,
+.pc-home-hero__service { margin: 0; font-size: .73rem; font-weight: 780; letter-spacing: .16em; line-height: 1.45; text-transform: uppercase; }
+.pc-home-hero__location { color: #c2d0d9; }
+.pc-home-hero__location span { margin-inline: .42rem; color: #788f9e; }
+.pc-home-hero__service { margin-top: .9rem; color: var(--pc-blue); }
+.pc-home-hero h1 {
+  max-width: 900px;
+  margin: 1.55rem 0 0;
+  color: var(--pc-white);
+  font-family: var(--pc-font-display);
+  font-size: clamp(3.05rem, 4.4vw, 4.25rem);
+  font-weight: 670;
+  letter-spacing: -.052em;
+  line-height: .98;
+}
+.pc-home-hero h1 span { display: block; }
+
+.pc-home-hero__support { max-width: 720px; margin: 1.65rem 0 0; color: #c2d0d8; font-size: clamp(1rem, 1.4vw, 1.15rem); }
+.pc-home-hero__actions { margin-top: 2rem; }
+
+.pc-home-tracker { max-width: 390px; padding: 1.6rem 0 1.65rem 1.5rem; background: rgb(4 18 29 / 75%); border-left: 1px solid rgb(85 189 237 / 75%); }
+.pc-home-tracker__label { margin: 0 0 .75rem; color: var(--pc-blue); font-size: .68rem; font-weight: 790; letter-spacing: .15em; text-transform: uppercase; }
+.pc-home-tracker h2 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(1.55rem, 2.2vw, 2.25rem); font-weight: 660; letter-spacing: -.03em; line-height: 1.08; }
+.pc-home-tracker > p:not(.pc-home-tracker__label) { margin: .9rem 0 0; color: #b6c5ce; font-size: .87rem; line-height: 1.62; }
+.pc-home-tracker .pc-home-tracker__disclaimer { color: #899ba6; font-size: .73rem; }
+.pc-home-tracker > a { display: inline-block; margin-top: 1.2rem; color: var(--pc-blue-bright); font-size: .78rem; font-weight: 760; text-decoration-color: rgb(134 214 250 / 45%); text-underline-offset: .32rem; }
+.pc-home-tracker > a:hover { color: var(--pc-white); text-decoration-color: currentColor; }
+
+.pc-home-hero__tools { position: absolute; z-index: 4; right: max(var(--pc-gutter), calc((100% - var(--pc-shell)) / 2 + var(--pc-gutter))); bottom: 1.25rem; display: flex; gap: .55rem; }
+.pc-home-hero__tools[hidden] { display: none; }
+.pc-home-hero__tools button { display: inline-flex; min-height: 36px; align-items: center; gap: .42rem; padding: .55rem .8rem; color: #c9d8e1; background: rgb(4 18 29 / 78%); border: 1px solid rgb(160 193 211 / 31%); border-radius: 2px; cursor: pointer; font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.pc-home-hero__tools button:hover { color: var(--pc-white); border-color: rgb(85 189 237 / 68%); background: #102c43; }
+.pc-home-hero__tools button:disabled { cursor: default; opacity: .5; }
+.pc-home-hero__tools svg { width: 12px; height: 14px; fill: none; stroke: var(--pc-blue); stroke-width: 1.5; }
+.pc-home-hero[data-motion-paused="true"] .pc-home-hero__clouds { opacity: 0; animation-play-state: paused; }
+
+@keyframes pc-cloud-drift {
+  from { background-position: calc(var(--cloud-x) - 4px) calc(var(--cloud-y) - 1px); }
+  to { background-position: calc(var(--cloud-x) + 4px) calc(var(--cloud-y) + 1px); }
+}
+
 .pc-section { padding-block: var(--pc-section-space); }
 .pc-section--light { color: var(--pc-charcoal); background: #e8ebe8; }
 .pc-section--paper { color: var(--pc-charcoal); background: var(--pc-paper); }
@@ -399,6 +482,7 @@
   .pc-preview-intro__layout { grid-template-columns: minmax(0, 1.25fr) minmax(250px, .75fr); gap: 3rem; }
   .pc-photo-specimen { gap: 4rem; }
   .pc-preview-footer__inner { gap: 4rem; }
+  .pc-home-hero__layout { grid-template-columns: minmax(0, 1.3fr) minmax(270px, .7fr); gap: 3.5rem; }
 }
 
 @media (max-width: 820px) {
@@ -426,6 +510,11 @@
   .pc-comparison-row { grid-template-columns: 1.2fr .8fr .9fr; }
   .pc-comparison-row__status { grid-column: 1 / -1; justify-self: start; }
   .pc-preview-footer__inner { gap: 3.5rem; }
+  .pc-home-hero__surface,
+  .pc-home-hero__layout { min-height: 0; }
+  .pc-home-hero__layout { grid-template-columns: 1fr; gap: 3.5rem; align-items: start; padding-top: 5.5rem; padding-bottom: 7.5rem; }
+  .pc-home-hero__copy { max-width: 720px; }
+  .pc-home-tracker { max-width: 540px; }
 }
 
 @media (max-width: 640px) {
@@ -462,6 +551,18 @@
   .pc-comparison-row__status { grid-column: 1 / -1; margin-top: .2rem; }
   .pc-preview-footer__nav { grid-template-columns: 1fr 1fr; gap: 2.5rem 1.5rem; }
   .pc-preview-footer__base { display: grid; }
+  .pc-home-hero__picture img { object-position: 57% 50%; }
+  .pc-home-hero__clouds { --cloud-x: 57%; --cloud-y: 50%; background-image: url('/brand/hero-storm-background-960.webp'); }
+  .pc-home-hero__shade { background: linear-gradient(90deg, rgb(2 16 32 / 91%), rgb(2 16 32 / 60%)), linear-gradient(0deg, rgb(3 17 34 / 96%), transparent 38%, rgb(3 17 34 / 48%)); }
+  .pc-home-hero__layout { gap: 3rem; padding-top: 4.5rem; padding-bottom: 8rem; }
+  .pc-home-hero__location { max-width: 22rem; }
+  .pc-home-hero__location span { margin-inline: .25rem; }
+  .pc-home-hero h1 { margin-top: 1.25rem; font-size: clamp(2.7rem, 12vw, 4.25rem); }
+  .pc-home-hero h1 span { display: inline; }
+  .pc-home-hero h1 span:not(:last-child)::after { content: " "; }
+  .pc-home-hero__support { margin-top: 1.35rem; }
+  .pc-home-tracker { padding: 1.4rem 0 1.45rem 1.2rem; }
+  .pc-home-hero__tools { right: var(--pc-gutter); bottom: 1rem; }
 }
 
 @media (max-width: 420px) {
@@ -476,6 +577,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .pc-home-hero__clouds { animation: none; transform: none; transition: none; }
   .pc-preview-body { scroll-behavior: auto; }
   .pc-preview-body *,
   .pc-preview-body *::before,

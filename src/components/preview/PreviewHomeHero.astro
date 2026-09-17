@@ -1,0 +1,65 @@
+<section class="pc-home-hero" data-storm-header aria-labelledby="pc-home-hero-heading">
+  <div class="pc-home-hero__surface" data-storm-surface>
+    <div class="pc-home-hero__landscape" aria-hidden="true">
+      <picture class="pc-home-hero__picture">
+        <source
+          type="image/webp"
+          srcset="/brand/hero-storm-background-960.webp 960w, /brand/hero-storm-background-1942.webp 1942w"
+          sizes="100vw"
+        />
+        <img
+          src="/brand/hero-storm-background.png"
+          width="1942"
+          height="809"
+          alt=""
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      <div class="pc-home-hero__clouds"></div>
+      <div class="pc-home-hero__shade"></div>
+      <canvas data-storm-canvas></canvas>
+    </div>
+
+    <div class="pc-shell-width pc-home-hero__layout">
+      <div class="pc-home-hero__copy">
+        <p class="pc-home-hero__location">Greeley <span>•</span> Weld County <span>•</span> Northern Colorado</p>
+        <p class="pc-home-hero__service">Auto Hail Repair &amp; Paintless Dent Repair</p>
+        <h1 id="pc-home-hero-heading">
+          <span>Experienced PDR guidance</span>
+          <span>from the first conversation</span>
+          <span>through the repair.</span>
+        </h1>
+        <p class="pc-home-hero__support">
+          Direct, experienced guidance for auto hail repair and paintless dent repair across Greeley, Weld County, and Northern Colorado—without the sales pressure.
+        </p>
+        <div class="pc-actions pc-home-hero__actions">
+          <a class="pc-button" href="/get-started/">Get Started</a>
+          <a class="pc-text-link" href="/auto-hail-repair/">Explore Hail Repair <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <aside class="pc-home-tracker" aria-labelledby="pc-home-tracker-heading">
+        <p class="pc-home-tracker__label">Northern Colorado Hail Tracker</p>
+        <h2 id="pc-home-tracker-heading">Recent hail in your area?</h2>
+        <p>Review current National Weather Service alerts and preliminary Storm Prediction Center hail reports for Weld and Larimer counties.</p>
+        <p class="pc-home-tracker__disclaimer">Weather data can be delayed or incomplete. A nearby report does not confirm damage to your vehicle.</p>
+        <a href="/hail-tracker/">View Hail Tracker <span aria-hidden="true">→</span></a>
+      </aside>
+    </div>
+
+    <div class="pc-home-hero__tools" data-storm-tools hidden>
+      <button type="button" data-lightning aria-label="Create a lightning strike in the mountain scene">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 2-9 12h6l-1 8 9-12h-6l1-8Z"></path></svg>
+        Lightning
+      </button>
+      <button type="button" data-storm-pause>Pause motion</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initHeaderStorm } from '../../scripts/header-storm';
+
+  document.querySelectorAll<HTMLElement>('.pc-home-hero[data-storm-header]').forEach(initHeaderStorm);
+</script>

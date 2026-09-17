@@ -219,8 +219,61 @@ The live homepage also exposes `/privacy/`, `/terms/`, and `/feed.xml`. The live
 - Warranty source documents, owner identity/photo, business hours, social profiles, reviews, and additional approved repair media remain unresolved as documented in Task 2; Task 3 did not invent or alter them.
 - Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 3 preview is the verified instance on `http://127.0.0.1:4324`.
 
+## TASK 4 — HOMEPAGE HERO PREVIEW
+
+**Status:** COMPLETED — 2026-09-17
+
+### Task completed
+
+- Added the isolated `/__preview/home/` homepage-hero preview and activated its comparison link from `/__preview/`.
+- Reused the current production storm/mountain PNG and responsive WebP assets without replacement, regeneration, or modification.
+- Reused the existing `initHeaderStorm` implementation so cloud drift, rain, hail, lightning, pointer response, visibility throttling, pause/play control, manual lightning control, and reduced-motion behavior remain intact.
+- Implemented all approved hero text as live HTML: the regional identifier, blue service line, three-part headline, concise local service support, primary Get Started CTA, and secondary Hail Repair link.
+- Restyled the Hail Tracker into a visually secondary dark utility with a restrained blue rule, current NWS/SPC explanation, existing delay/incompleteness and vehicle-damage disclaimer, and working tracker link.
+- Avoided stock weather imagery, glowing outlines, large bordered boxes, SaaS-dashboard styling, and generated scenery.
+- Extended the preview header to show the current task label while keeping the Task 3 index label unchanged.
+- Made no production homepage, production header, storm assets, animation source, weather integration, route, metadata, schema, sitemap, redirect, or live-service change.
+
+### Files added
+
+- `src/components/preview/PreviewHomeHero.astro`
+- `src/pages/[preview]/home/index.astro`
+
+### Files modified
+
+- `src/components/preview/PreviewHeader.astro`
+- `src/layouts/PreviewLayout.astro`
+- `src/pages/[preview]/index.astro`
+- `src/styles/preview.css`
+- `PREVIEW_PROGRESS.md`
+
+### Tests performed
+
+- Astro project check: PASS — 80 files, 0 errors, 0 warnings, 0 hints.
+- Astro production build: PASS — both `/__preview/` and `/__preview/home/` prerendered successfully; the existing JavaScript chunk-size warning remains.
+- Automated Node test suite: PASS — 39 passed, 0 failed.
+- Fresh local production-route smoke test against `http://127.0.0.1:4328`: PASS — all 34 existing pages and their metadata, canonicals, schema, internal links, sitemap behavior, 404 behavior, and disabled forms validated.
+- Preview hero validation: PASS — exact approved copy, CTA destinations, current storm assets and behavior hooks, tracker utility copy/disclaimer/link, one-H1/one-main semantics, noindex state, absent canonical/JSON-LD, and sitemap exclusion confirmed.
+- Storm-control interaction test: PASS — pause changes the control to Play Motion, disables manual lightning, and sets the paused state; play restores motion.
+- Responsive visual QA: PASS — inspected at 1440×900, 768×1024, and 390×844. Desktop preserves the approved three-line hierarchy; tablet stacks the utility; mobile has no horizontal overflow and retains complete live text and controls.
+- Production checkout verification: PASS — original branch `peak-country-seo-hail-upgrade`, HEAD `5f4dce4f487736053d1a4ab99c52cf95cc5025da`, and the same two modified plus one untracked warranty-related paths remain unchanged.
+- Remote default reference verification: PASS — `origin/main` remains at `449a854bd0502506d7ccaf88b61de0794e3a982f`.
+
+### Decisions made
+
+- Reuse the production storm initializer directly rather than copying its behavior, while keeping all Task 4 markup and styling inside preview-only files.
+- Preserve the approved three-line headline on desktop with semantic live-text spans and allow natural wrapping below the tablet breakpoint.
+- Keep the homepage tracker as a gateway to the full existing Hail Tracker, matching current homepage functionality without inventing a reduced live-data dashboard.
+- Keep the tracker visually subordinate through scale, placement, translucent dark fill, and one thin blue rule rather than a glowing or fully outlined panel.
+
+### Known issues
+
+- The production build continues to report the pre-existing MapLibre-related JavaScript chunk warning above 500 kB.
+- Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 4 preview is the verified instance on `http://127.0.0.1:4328`.
+- All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
+
 ## NEXT TASK
 
-**TASK 4 — HOMEPAGE HERO PREVIEW**
+**TASK 5 — WHY PEAK COUNTRY**
 
-Do not begin Task 4 until the owner says `continue`.
+Do not begin Task 5 until the owner says `continue`.

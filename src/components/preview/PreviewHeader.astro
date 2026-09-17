@@ -1,6 +1,12 @@
 ---
 import { site } from '../../data/site';
 
+interface Props {
+  taskLabel?: string;
+}
+
+const { taskLabel = 'Task 3 · Design system + shell' } = Astro.props;
+
 const links = [
   ['/auto-hail-repair/', 'Hail Repair'],
   ['/paintless-dent-repair/', 'PDR'],
@@ -13,7 +19,7 @@ const links = [
 
 <header class="pc-preview-header">
   <div class="pc-preview-header__utility">
-    <p><strong>Isolated visual preview</strong><span>Task 3 · Design system + shell</span></p>
+    <p><strong>Isolated visual preview</strong><span>{taskLabel}</span></p>
     <a href={`tel:${site.phone}`}>Call or text {site.phoneDisplay}</a>
   </div>
 

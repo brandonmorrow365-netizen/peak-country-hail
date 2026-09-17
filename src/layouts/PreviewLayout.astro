@@ -6,9 +6,10 @@ import '../styles/preview.css';
 interface Props {
   title: string;
   description: string;
+  taskLabel?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, taskLabel } = Astro.props;
 const documentTitle = `${title} | Peak Country Preview`;
 
 Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
@@ -28,7 +29,7 @@ Astro.response.headers.set('Cache-Control', 'no-store');
   <body class="pc-preview-body">
     <a class="pc-skip-link" href="#preview-main">Skip to preview content</a>
     <div class="pc-preview-frame">
-      <PreviewHeader />
+      <PreviewHeader taskLabel={taskLabel} />
       <main id="preview-main" class="pc-preview-main">
         <slot />
       </main>
