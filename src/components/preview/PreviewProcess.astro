@@ -3,36 +3,49 @@ const steps = [
   {
     number: '01',
     title: 'Start the conversation',
-    body: 'Use Get Started to tell Peak Country what happened, what you are seeing, and what you would like help understanding. Choose hail damage, a ding or crease, or “not sure,” then share basic contact and vehicle details. Photos and insurance information can help, but they are optional at this stage; the request creates no obligation or commitment.',
+    body: 'Share the basics through Get Started; photos are helpful but optional. The request creates no obligation or commitment.',
+    image: '/media/portfolio/toyota-4runner/before-angle-1.jpg',
+    avif: '/media/portfolio/toyota-4runner/before-angle-1-720.avif',
+    webp: '/media/portfolio/toyota-4runner/before-angle-1-720.webp',
+    alt: 'Toyota 4Runner panel before paintless dent repair',
   },
   {
     number: '02',
     title: 'Review the damage',
-    body: 'An experienced technician reviews the information personally and may ask a few focused questions before recommending the next step. A clean, dry vehicle and professional reflection lighting allow a direct inspection to separate hail patterns from unrelated damage and evaluate paint condition, panel shape, prior repair, and access.',
+    body: 'An experienced technician personally reviews the vehicle under proper lighting and evaluates the paint, metal, and access.',
+    image: '/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg',
+    alt: 'PDR reflection light used to evaluate panel damage',
   },
   {
     number: '03',
     title: 'Understand the options',
-    body: 'Peak Country explains what appears repairable, where PDR may preserve the existing finish, and when conventional, replacement, or hybrid work may be the better path. Free initial guidance is kept distinct from any detailed paid estimate or documentation service; if paid work would be useful, the scope and price are explained first.',
+    body: 'Peak Country explains where PDR fits, when another method may be better, and any paid estimating scope and price first.',
+    image: '/media/portfolio/lexus-rx/before-angle-1.jpg',
+    avif: '/media/portfolio/lexus-rx/before-angle-1-720.avif',
+    webp: '/media/portfolio/lexus-rx/before-angle-1-720.webp',
+    alt: 'Lexus RX dent before repair evaluation',
   },
   {
     number: '04',
     title: 'Approve the repair',
-    body: 'You decide whether to move forward after the repair approach, access needs, known limitations, timing, and price are clear. Sending a request is not repair authorization. There is no checkout or automatic payment, and no paid estimate, documentation, or repair begins without customer approval.',
+    body: 'There is no checkout or automatic payment. No paid estimate, documentation, or repair begins without your approval.',
+    image: '/media/portfolio/nissan-murano/before-angle-2.jpg',
+    avif: '/media/portfolio/nissan-murano/before-angle-2-720.avif',
+    webp: '/media/portfolio/nissan-murano/before-angle-2-720.webp',
+    alt: 'Nissan Murano panel before an approved paintless dent repair',
   },
   {
     number: '05',
     title: 'Repair + documentation',
-    body: 'Authorized work follows the agreed scope, including careful access, removal and installation when needed, reassembly, and a quality review from multiple angles. Documentation is proportionate to the repair and may include an invoice or receipt, photographs, repair notes, and warranty information; more complex or insurance-related work may require a fuller record.',
+    body: 'Authorized work follows the agreed scope, with careful access, reassembly, quality review, and proportionate records.',
+    image: '/media/portfolio/2013-silverado/after-angle-3.jpg',
+    avif: '/media/portfolio/2013-silverado/after-angle-3-720.avif',
+    webp: '/media/portfolio/2013-silverado/after-angle-3-720.webp',
+    alt: 'Chevrolet Silverado panel after paintless dent repair',
   },
 ] as const;
 
-const safeguards = [
-  ['No obligation', 'A request only starts the conversation.'],
-  ['No commitment', 'You choose whether to move forward.'],
-  ['No checkout', 'The website does not sell a repair.'],
-  ['No automatic payment', 'Paid work requires approval first.'],
-] as const;
+const safeguards = ['No obligation', 'No commitment', 'No checkout', 'Approval before paid work'] as const;
 ---
 
 <section id="process" class="pc-process pc-contour-surface" aria-labelledby="pc-process-heading">
@@ -44,12 +57,10 @@ const safeguards = [
         <span>from start to finish.</span>
       </h2>
     </div>
-
-    <aside class="pc-process__promise" aria-label="Customer-first process">
-      <p class="pc-label">Conversation before transaction</p>
-      <p>Start with a real conversation and clear guidance—not a sales commitment. Peak Country reviews the vehicle and your goals before recommending a repair path.</p>
+    <div class="pc-process__promise">
+      <p>No pressure. Just clear communication, honest guidance, and quality repairs.</p>
       <a href="/get-started/">Begin with Get Started <span aria-hidden="true">→</span></a>
-    </aside>
+    </div>
   </div>
 
   <div class="pc-content-width">
@@ -58,23 +69,21 @@ const safeguards = [
         <li>
           <span class="pc-process__number" aria-hidden="true">{step.number}</span>
           <h3>{step.title}</h3>
+          <picture>
+            {'avif' in step && <source type="image/avif" srcset={step.avif} />}
+            {'webp' in step && <source type="image/webp" srcset={step.webp} />}
+            <img src={step.image} width="720" height="540" alt={step.alt} loading="lazy" decoding="async" />
+          </picture>
           <p>{step.body}</p>
         </li>
       ))}
     </ol>
 
-    <div class="pc-process__safeguards" aria-label="Get Started safeguards">
-      {safeguards.map(([title, detail]) => (
-        <div>
-          <strong>{title}</strong>
-          <span>{detail}</span>
-        </div>
-      ))}
-    </div>
-
-    <div class="pc-process__close">
-      <p>No pressure. Clear communication, honest guidance, and quality repairs—with customer approval before any paid work.</p>
-      <div class="pc-actions">
+    <div class="pc-process__base">
+      <div class="pc-process__safeguards" aria-label="Get Started safeguards">
+        {safeguards.map((safeguard) => <span>{safeguard}</span>)}
+      </div>
+      <div class="pc-process__actions">
         <a class="pc-button" href="/get-started/">Get Started</a>
         <a class="pc-text-link" href="/process/">View the full repair process <span aria-hidden="true">→</span></a>
       </div>
