@@ -406,6 +406,82 @@
 .pc-why__principles h3 { margin: 0; color: var(--pc-navy); font-family: var(--pc-font-display); font-size: clamp(1.2rem, 2vw, 1.85rem); font-weight: 680; letter-spacing: -.025em; line-height: 1.12; text-transform: uppercase; }
 .pc-why__principles p { max-width: 620px; margin: 0; color: #53656e; font-size: .94rem; }
 
+/* What We Repair + detailed services */
+.pc-services-overview { color: var(--pc-paper); background: #081a28; border-bottom: 1px solid var(--pc-line-dark); }
+.pc-services-overview__layout { display: grid; grid-template-columns: minmax(360px, .95fr) minmax(0, 1.05fr); gap: clamp(4rem, 7vw, 7rem); align-items: start; padding-block: var(--pc-section-space); }
+.pc-services-overview__lead { min-width: 0; }
+.pc-services-overview__lead h2 { max-width: 640px; margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(2.75rem, 4.35vw, 4.35rem); font-weight: 665; letter-spacing: -.052em; line-height: .99; }
+.pc-services-overview__lead h2 span { display: block; }
+.pc-services-overview__lead > p:not(.pc-kicker) { max-width: 600px; margin: 1.6rem 0 0; color: #aebfc9; }
+.pc-services-overview__photo { position: relative; margin: clamp(2.8rem, 7vw, 5rem) 0 0; }
+.pc-services-overview__photo::after { position: absolute; right: -1rem; bottom: 2.5rem; width: 42%; height: 42%; content: ""; border-right: 1px solid rgb(85 189 237 / 68%); border-bottom: 1px solid rgb(85 189 237 / 68%); pointer-events: none; }
+.pc-services-overview__photo img { display: block; width: 100%; height: clamp(310px, 35vw, 455px); object-fit: cover; object-position: 50% 52%; filter: saturate(.76) contrast(1.08); }
+.pc-services-overview__photo figcaption,
+.pc-service-story__vehicle figcaption { padding: .8rem 0; color: #7f939f; border-bottom: 1px solid var(--pc-line-dark); font-size: .66rem; letter-spacing: .08em; line-height: 1.4; text-transform: uppercase; }
+
+.pc-services-overview__list { margin: 0; padding: 0; border-top: 1px solid rgb(160 193 211 / 38%); list-style: none; }
+.pc-services-overview__list li { display: grid; grid-template-columns: 4.25rem 1fr; gap: clamp(1.2rem, 3vw, 2.5rem); padding: clamp(2rem, 4vw, 3.3rem) 0; border-bottom: 1px solid var(--pc-line-dark); }
+.pc-services-overview__number { padding-top: .35rem; color: var(--pc-blue); font-size: .7rem; font-weight: 820; letter-spacing: .14em; }
+.pc-services-overview__list h3 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(1.65rem, 3vw, 2.7rem); font-weight: 670; letter-spacing: -.035em; line-height: 1.05; text-transform: uppercase; }
+.pc-services-overview__list p { max-width: 650px; margin: 1rem 0 0; color: #9eb0bb; font-size: .94rem; }
+.pc-services-overview__list a { display: inline-block; margin-top: 1.15rem; color: var(--pc-blue-bright); font-size: .72rem; font-weight: 760; letter-spacing: .06em; text-decoration-color: rgb(134 214 250 / 40%); text-underline-offset: .32rem; text-transform: uppercase; }
+.pc-services-overview__list a:hover { color: var(--pc-white); text-decoration-color: currentColor; }
+
+.pc-services-detail { color: var(--pc-charcoal); background: var(--pc-paper); }
+.pc-services-detail__heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); gap: clamp(3rem, 9vw, 8rem); align-items: end; padding-block: var(--pc-section-space) clamp(3.2rem, 7vw, 5.6rem); }
+.pc-services-detail__heading h2 { max-width: 760px; margin: 0; color: var(--pc-navy); font-family: var(--pc-font-display); font-size: clamp(2.8rem, 5.3vw, 5.25rem); font-weight: 665; letter-spacing: -.052em; line-height: .98; }
+.pc-services-detail__heading > p { max-width: 600px; margin: 0; color: #53656e; }
+.pc-service-stories { border-top: 1px solid #aab6ba; }
+
+.pc-service-story { padding-block: clamp(4rem, 8vw, 7rem); scroll-margin-top: 2rem; }
+.pc-service-story + .pc-service-story { border-top: 1px solid #aab6ba; }
+.pc-service-story__header { display: grid; grid-template-columns: clamp(4.25rem, 8vw, 7.5rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.pc-service-story__index { margin: .55rem 0 0; color: var(--pc-blue-ink); font-size: .7rem; font-weight: 820; letter-spacing: .13em; }
+.pc-service-story__header h3 { margin: 0; color: var(--pc-navy); font-family: var(--pc-font-display); font-size: clamp(2.4rem, 5vw, 4.7rem); font-weight: 665; letter-spacing: -.05em; line-height: .98; text-transform: uppercase; }
+.pc-service-story__lede { max-width: 810px; margin: 1.35rem 0 0; color: #314852; font-size: clamp(1.04rem, 1.5vw, 1.2rem); }
+
+.pc-service-story__topics,
+.pc-service-story__pdr-layout,
+.pc-service-story__mobile-layout { margin: clamp(3rem, 7vw, 5.5rem) 0 0 clamp(5.75rem, 12vw, 11rem); }
+.pc-service-story__topics { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 0 clamp(3rem, 8vw, 7rem); border-top: 1px solid var(--pc-line-light); }
+.pc-service-story__topics section { padding: 2rem 0; border-bottom: 1px solid var(--pc-line-light); }
+.pc-service-story h4 { margin: 0; color: var(--pc-navy); font-family: var(--pc-font-display); font-size: clamp(1.12rem, 2vw, 1.5rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
+.pc-service-story__topics p,
+.pc-service-story__pdr-copy p,
+.pc-service-story__mobile-copy p { color: #53656e; font-size: .94rem; }
+.pc-service-story__topics p { margin: .85rem 0 0; }
+
+.pc-service-story--pdr { position: relative; background: transparent; isolation: isolate; }
+.pc-service-story--pdr::before { position: absolute; z-index: -1; inset: 0 calc(50% - 50vw); content: ""; background: var(--pc-paper-warm); }
+.pc-service-story__pdr-layout { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(280px, .82fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+.pc-service-story__pdr-copy { max-width: 730px; }
+.pc-service-story__pdr-copy p:first-child { margin-top: 0; color: #304750; font-size: 1.03rem; }
+.pc-service-story__considerations { padding-left: clamp(1.5rem, 3vw, 2.4rem); border-left: 1px solid var(--pc-blue-ink); }
+.pc-service-story__considerations ul { margin: 1.3rem 0 0; padding: 0; list-style: none; }
+.pc-service-story__considerations li { position: relative; padding: .7rem 0 .7rem 1.5rem; color: #40555e; border-top: 1px solid #c2cacb; font-size: .86rem; }
+.pc-service-story__considerations li::before { position: absolute; top: 1.23rem; left: 0; width: .48rem; height: 1px; content: ""; background: var(--pc-blue-ink); }
+.pc-service-story__considerations p { margin: 1.4rem 0 0; color: #304750; font-size: .9rem; font-weight: 640; }
+
+.pc-service-story__mobile-layout { display: grid; grid-template-columns: minmax(320px, .86fr) minmax(0, 1.14fr); gap: clamp(3rem, 8vw, 7.5rem); align-items: start; }
+.pc-service-story__vehicle { position: relative; margin: 0; }
+.pc-service-story__vehicle::before { position: absolute; top: -1rem; left: -1rem; width: 45%; height: 32%; content: ""; border-top: 1px solid var(--pc-blue-ink); border-left: 1px solid var(--pc-blue-ink); pointer-events: none; }
+.pc-service-story__vehicle img { display: block; width: 100%; height: clamp(480px, 55vw, 700px); object-fit: cover; object-position: 51% 46%; filter: saturate(.83) contrast(1.03); }
+.pc-service-story__vehicle figcaption { color: #697b84; border-color: var(--pc-line-light); }
+.pc-service-story__mobile-copy { border-top: 1px solid #aab6ba; }
+.pc-service-story__mobile-copy section { padding: 1.65rem 0; border-bottom: 1px solid var(--pc-line-light); }
+.pc-service-story__mobile-copy section p { margin: .75rem 0 0; }
+.pc-service-story__mobile-copy .pc-service-story__area-note { margin: 1.8rem 0 0; padding-left: 1.2rem; color: #2f4853; border-left: 1px solid var(--pc-blue-ink); font-size: .88rem; font-weight: 620; }
+
+.pc-service-story__links { display: flex; gap: .35rem clamp(1.5rem, 4vw, 3.5rem); flex-wrap: wrap; margin: clamp(3rem, 6vw, 4.75rem) 0 0 clamp(5.75rem, 12vw, 11rem); padding-block: 1rem; border-block: 1px solid var(--pc-line-light); }
+.pc-service-story__links a { color: #155f80; font-size: .76rem; font-weight: 750; text-decoration: none; }
+.pc-service-story__links a:hover { color: var(--pc-navy); text-decoration: underline; text-underline-offset: .3rem; }
+
+.pc-repair-fit { color: var(--pc-paper); background: #0a1f30; border-top: 1px solid var(--pc-line-dark); }
+.pc-repair-fit__layout { display: grid; grid-template-columns: minmax(250px, .7fr) minmax(0, 1.3fr); gap: clamp(3rem, 10vw, 9rem); align-items: start; padding-block: var(--pc-section-space); }
+.pc-repair-fit__label { margin: 0; color: var(--pc-blue); font-family: var(--pc-font-display); font-size: clamp(1.6rem, 3vw, 2.8rem); font-weight: 680; letter-spacing: -.035em; line-height: 1.04; text-transform: uppercase; }
+.pc-repair-fit h2 { max-width: 830px; margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(2.25rem, 4.5vw, 4.3rem); font-weight: 665; letter-spacing: -.045em; line-height: 1.02; }
+.pc-repair-fit__layout > div > p { max-width: 760px; margin: 1.45rem 0 0; color: #adbec8; font-size: 1rem; }
+
 .pc-section { padding-block: var(--pc-section-space); }
 .pc-section--light { color: var(--pc-charcoal); background: #e8ebe8; }
 .pc-section--paper { color: var(--pc-charcoal); background: var(--pc-paper); }
@@ -513,6 +589,9 @@
   .pc-photo-specimen { gap: 4rem; }
   .pc-preview-footer__inner { gap: 4rem; }
   .pc-home-hero__layout { grid-template-columns: minmax(0, 1.3fr) minmax(270px, .7fr); gap: 3.5rem; }
+  .pc-services-overview__layout { gap: 4.5rem; }
+  .pc-service-story__pdr-layout,
+  .pc-service-story__mobile-layout { gap: 4rem; }
 }
 
 @media (max-width: 820px) {
@@ -551,6 +630,25 @@
   .pc-why__copy { max-width: 720px; }
   .pc-why__principles li { grid-template-columns: 3.5rem 1fr; gap: .7rem 1.5rem; }
   .pc-why__principles p { grid-column: 2; }
+  .pc-services-overview__layout,
+  .pc-services-detail__heading,
+  .pc-service-story__pdr-layout,
+  .pc-service-story__mobile-layout,
+  .pc-repair-fit__layout { grid-template-columns: 1fr; }
+  .pc-services-overview__photo { width: min(100%, 600px); }
+  .pc-services-overview__photo img { height: min(72vw, 430px); }
+  .pc-services-overview__list { margin-top: .5rem; }
+  .pc-services-detail__heading { gap: 1.7rem; align-items: start; }
+  .pc-service-story__topics,
+  .pc-service-story__pdr-layout,
+  .pc-service-story__mobile-layout,
+  .pc-service-story__links { margin-left: 0; }
+  .pc-service-story__topics { gap: 0 3rem; }
+  .pc-service-story__mobile-layout { gap: 3.5rem; }
+  .pc-service-story__vehicle { width: min(100%, 560px); }
+  .pc-service-story__vehicle img { height: min(110vw, 660px); }
+  .pc-repair-fit__layout { gap: 2.5rem; }
+  .pc-repair-fit__label br { display: none; }
 }
 
 @media (max-width: 640px) {
@@ -607,6 +705,26 @@
   .pc-why__copy h2 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
   .pc-why__principles li { grid-template-columns: 2.8rem 1fr; gap: .65rem 1rem; padding-block: 1.6rem; }
   .pc-why__principles p { font-size: .9rem; }
+  .pc-services-overview__layout { gap: 3.5rem; }
+  .pc-services-overview__lead h2 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
+  .pc-services-overview__photo::after { right: -.65rem; bottom: 2.2rem; }
+  .pc-services-overview__list li { grid-template-columns: 2.8rem 1fr; gap: 1rem; }
+  .pc-services-overview__list h3 { font-size: clamp(1.5rem, 8vw, 2.25rem); }
+  .pc-services-detail__heading h2 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
+  .pc-service-story { padding-block: 4rem; }
+  .pc-service-story__header { grid-template-columns: 1fr; gap: .65rem; }
+  .pc-service-story__index { margin: 0; }
+  .pc-service-story__header h3 { font-size: clamp(2.25rem, 12vw, 3.5rem); }
+  .pc-service-story__topics { grid-template-columns: 1fr; }
+  .pc-service-story__pdr-layout,
+  .pc-service-story__mobile-layout { margin-top: 2.8rem; }
+  .pc-service-story__considerations { padding-left: 1.15rem; }
+  .pc-service-story__vehicle::before { top: -.65rem; left: -.65rem; }
+  .pc-service-story__vehicle img { height: min(125vw, 590px); }
+  .pc-service-story__links { display: grid; gap: 0; }
+  .pc-service-story__links a { padding: .8rem 0; border-bottom: 1px solid var(--pc-line-light); }
+  .pc-service-story__links a:last-child { border-bottom: 0; }
+  .pc-repair-fit h2 { font-size: clamp(2.25rem, 11vw, 3.5rem); }
 }
 
 @media (max-width: 420px) {

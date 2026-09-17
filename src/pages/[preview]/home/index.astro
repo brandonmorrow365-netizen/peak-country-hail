@@ -1,5 +1,6 @@
 ---
 import PreviewHomeHero from '../../../components/preview/PreviewHomeHero.astro';
+import PreviewServices from '../../../components/preview/PreviewServices.astro';
 import PreviewWhy from '../../../components/preview/PreviewWhy.astro';
 import PreviewLayout from '../../../layouts/PreviewLayout.astro';
 
@@ -13,8 +14,9 @@ export function getStaticPaths() {
 <PreviewLayout
   title="Homepage Hero"
   description="Isolated noindex homepage hero preview for Peak Country Auto Hail Repair & Paintless Dent Repair."
-  taskLabel="Task 5 · Why Peak Country"
+  taskLabel="Task 6 · What We Repair"
 >
   <PreviewHomeHero />
   <PreviewWhy />
+  <PreviewServices />
 </PreviewLayout>

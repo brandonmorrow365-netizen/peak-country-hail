@@ -321,8 +321,62 @@ The live homepage also exposes `/privacy/`, `/terms/`, and `/feed.xml`. The live
 - Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 5 preview is the verified instance on `http://127.0.0.1:4329`.
 - All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
 
+## TASK 6 — WHAT WE REPAIR + DETAILED SERVICES
+
+**Status:** COMPLETED — 2026-09-17
+
+### Task completed
+
+- Added the approved What We Repair overview at `/__preview/home/#what-we-repair` with the exact three-category hierarchy: Auto Hail Damage, Paintless Dent Repair, and Mobile PDR Service.
+- Implemented the approved headline direction, restrained numbered rows, real repair photography, thin dividers, topographic texture, and direct anchor links into the detailed content rather than using three small floating cards.
+- Added a substantial live-HTML `Our Services in Detail` section immediately after the overview, covering Hail Damage Repair, Paintless Dent Repair, and Mobile PDR Service.
+- Preserved authoritative existing service guidance about panel-by-panel hail evaluation, controlled reflection lighting, PDR and factory-finish preservation when appropriate, conventional/hybrid alternatives, access and disassembly, insurance-related documentation, customer-pay repairs, and communication throughout the repair.
+- Preserved meaningful PDR detail for door dings, creases, body-line and localized dents, material and finish condition, push and glue-pull access, repairability limits, full versus improvement goals, and when another repair method may be better.
+- Preserved the current mobile-service standards for suitable home/work/fleet/dealership/commercial locations, vehicle access and authorization, professional lighting and equipment, clean/dry vehicle conditions, rain/snow/wind limitations, the approximate 50–60°F consideration, hail-work environment, the standard approximately 25-mile Greeley radius, and the non-exclusive outside-area policy.
+- Used two existing real, privacy-reviewed owner portfolio photographs. The Mobile PDR image shows a clean ordinary customer vehicle with no fabricated Peak Country wrap or fleet branding; no image was generated or altered as repair evidence.
+- Preserved the approved closing concept, `The right repair for your vehicle`, and explicitly states that PDR is not automatically the correct method for every dent.
+- Maintained crawlable internal links to Auto Hail Repair, PDR, Door Ding Repair, Service Area, Repair Standards, Estimating & Documentation, After a Hailstorm, Process, and Get Started.
+- Activated the Task 6 comparison link from `/__preview/` and updated the preview-shell task label.
+- Made no production homepage, production service page, public asset, route, metadata, schema, sitemap, redirect, deployment, or live-service change.
+
+### Files added
+
+- `src/components/preview/PreviewServices.astro`
+
+### Files modified
+
+- `src/pages/[preview]/home/index.astro`
+- `src/pages/[preview]/index.astro`
+- `src/styles/preview.css`
+- `PREVIEW_PROGRESS.md`
+
+### Tests performed
+
+- Astro project check: PASS — 82 files, 0 errors, 0 warnings, 0 hints.
+- Astro production build: PASS — both `/__preview/` and `/__preview/home/` prerendered successfully; the existing JavaScript chunk-size warning remains.
+- Automated Node test suite: PASS — 39 passed, 0 failed.
+- Fresh local production-route smoke test against `http://127.0.0.1:4330`: PASS — all 34 existing pages and their metadata, canonicals, schema, internal links, sitemap behavior, 404 behavior, and disabled forms validated.
+- Task 6 content validation: PASS — approved overview and detailed headings, all three service subjects, repair-method caveat, internal-link destinations, responsive portfolio image derivatives, one-H1/one-main semantics, preview noindex state, absent canonical/JSON-LD, and sitemap exclusion confirmed.
+- Responsive visual QA: PASS — inspected at 1440×900, 768×1024, and 390×844. Desktop retains the asymmetric editorial hierarchy; tablet stacks the overview cleanly; mobile preserves natural reading order, selects a 720-pixel image derivative, and has no horizontal overflow.
+- Production checkout verification: PASS — original branch `peak-country-seo-hail-upgrade`, HEAD `5f4dce4f487736053d1a4ab99c52cf95cc5025da`, and the same two modified plus one untracked warranty-related paths remain unchanged.
+- Remote default reference verification: PASS — `origin/main` remains at `449a854bd0502506d7ccaf88b61de0794e3a982f`.
+
+### Decisions made
+
+- Use one editorial overview with three divided rows and direct in-page anchors, followed immediately by three substantial service narratives, so visual hierarchy does not replace crawlable depth.
+- Use only real, privacy-reviewed repository photography for both the repair overview and mobile-service image. Manufacturer identity may remain visible where naturally present; no Peak Country branding, wrap, or vehicle modification was fabricated.
+- Keep current dedicated service pages as the deeper canonical destinations and preserve their discovery through contextual internal links.
+- Use varied compositions for the three detailed narratives—paired topics, an asymmetric repairability list, and photo-plus-copy mobile guidance—instead of repeating the same card treatment.
+
+### Known issues
+
+- The production build continues to report the pre-existing MapLibre-related JavaScript chunk warning above 500 kB.
+- The first final-build attempt was blocked when the Cloudflare adapter tried to write its local prerender registry under the sandboxed user Preferences directory. Redirecting that temporary registry to `/tmp` produced a clean successful build without changing project configuration.
+- Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 6 preview is the verified instance on `http://127.0.0.1:4330`.
+- All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
+
 ## NEXT TASK
 
-**TASK 6 — WHAT WE REPAIR + DETAILED SERVICES**
+**TASK 7 — CUSTOMER PROCESS**
 
-Do not begin Task 6 until the owner says `continue`.
+Do not begin Task 7 until the owner says `continue`.
