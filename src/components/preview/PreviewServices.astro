@@ -88,13 +88,13 @@ const details = [
   </div>
 
   <div id="services-in-detail" class="pc-services__detail" aria-labelledby="pc-services-detail-heading">
-    <header class="pc-content-width pc-services__detail-heading">
+    <header class="pc-shell-width pc-services__detail-heading">
       <p class="pc-kicker">Our services in detail</p>
       <h2 id="pc-services-detail-heading">More than just dent removal.</h2>
       <p>Every vehicle and situation is different. Here’s a closer look at our main services, what to expect, and how we can help.</p>
     </header>
 
-    <div class="pc-content-width pc-services__detail-grid">
+    <div class="pc-shell-width pc-services__detail-grid">
       {details.map((service) => (
         <article id={service.id} class="pc-services__detail-item" aria-labelledby={`${service.id}-heading`}>
           <div class="pc-services__detail-top">
@@ -113,10 +113,19 @@ const details = [
     </div>
 
     <aside class="pc-services__fit" aria-labelledby="pc-repair-fit-heading">
-      <div class="pc-content-width pc-services__fit-inner">
+      <div class="pc-shell-width pc-services__fit-inner">
         <svg viewBox="0 0 48 56" aria-hidden="true"><path d="M24 3c7 6 13 8 20 9v15c0 13-8 21-20 26C12 48 4 40 4 27V12c7-1 13-3 20-9Z"/><path d="m15 28 6 6 13-14"/></svg>
         <p class="pc-label">The right repair<br />for your vehicle.</p>
         <p id="pc-repair-fit-heading">Not every dent should be repaired with PDR. We’ll evaluate the damage, explain your options, and recommend the best solution for your vehicle—even when a different repair method makes more sense.</p>
+        <img
+          class="pc-services__signature"
+          src="/images/preview/handwritten/peak-country-handwritten-honest-guidance-lasting-results.png"
+          width="205"
+          height="74"
+          alt=""
+          aria-hidden="true"
+          decoding="async"
+        />
       </div>
     </aside>
   </div>
