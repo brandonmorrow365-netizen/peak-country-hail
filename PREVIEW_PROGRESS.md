@@ -508,8 +508,37 @@ The live homepage also exposes `/privacy/`, `/terms/`, and `/feed.xml`. The live
 - Verified production checkout remains on `peak-country-seo-hail-upgrade` at locked baseline `5f4dce4f487736053d1a4ab99c52cf95cc5025da`, with its pre-existing two modified and one untracked warranty paths unchanged.
 - Final verified preview URL: `http://127.0.0.1:4350/__preview/gallery/`.
 
+## TASK 9 — TRUST / WORKMANSHIP WARRANTY + PRE-TASK VISUAL CLEANUP
+
+**Status:** IMPLEMENTATION COMPLETE / EXTERNAL VISUAL QA PENDING — 2026-09-22
+
+### Implementation completed
+
+- Removed the public Pause Motion control and public Lightning control from the preview homepage while preserving the automatic storm and lightning behavior.
+- Preserved `prefers-reduced-motion` support; reduced-motion users receive a paused storm canvas and disabled decorative cloud motion.
+- Added the Task 9 trust and workmanship-warranty section after Real Repairs, with links to the approved public warranty route, Get Started, Gallery, and About.
+- Reused the approved customer-facing warranty summary at `/warranty/` and its supporting approved-copy and current-decisions sources without expanding or changing the warranty terms.
+- Replaced the footer's earlier cyan mountain silhouette with the approved Tasks 5–7 photographic mountain treatment and retained the locked preview visual language.
+- Made no deployment or production modification and did not begin Task 10.
+
+### Validation completed
+
+- Astro project check: PASS — 86 files, 0 errors, 0 warnings, 0 hints.
+- Astro production build: PASS — preview index, homepage, and gallery routes prerendered successfully; the pre-existing MapLibre chunk-size warning remains.
+- Automated Node test suite: PASS — 39 passed, 0 failed.
+- Desktop and mobile browser QA: PASS — homepage and public warranty route were inspected at 1440×1200 and 390×844 with no horizontal overflow; public motion controls are absent and the Task 9 content is present.
+- Reduced-motion QA: PASS — automatic storm motion pauses and decorative cloud animation is disabled when reduced motion is requested.
+- Git whitespace validation: PASS — `git diff --check` reported no errors.
+
+### External visual QA status
+
+- Screenshot export is blocked by a system-level environment restriction. Prohibited screenshot-export workarounds were not retried.
+- No Task 9 screenshot set or QA ZIP could be produced.
+- External visual review remains required before Task 9 is locked.
+- Task 9 remains pending external visual approval; Task 10 has not started.
+
 ## NEXT TASK
 
-**TASK 9 — RESULTS / TRUST / WARRANTY**
+**Task 9 external visual approval**
 
-Do not begin Task 9 until the owner says `continue`.
+Do not begin Task 10 until Task 9 has received external visual approval.

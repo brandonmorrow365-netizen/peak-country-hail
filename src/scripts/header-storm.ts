@@ -8,7 +8,7 @@ export function initHeaderStorm(header: HTMLElement) {
   const pause = header.querySelector<HTMLButtonElement>('[data-storm-pause]');
   const strikeButton = header.querySelector<HTMLButtonElement>('[data-lightning]');
   const ctx = canvas?.getContext('2d');
-  if (!surface || !canvas || !ctx || !tools || !pause || !strikeButton) return;
+  if (!surface || !canvas || !ctx) return;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let paused = motion.matches, visible = true, width = 0, height = 0;
   let wind = 22, targetWind = 22, raf = 0, last = 0, elapsed = 0;
@@ -92,8 +92,8 @@ export function initHeaderStorm(header: HTMLElement) {
 
   function syncMotion() {
     header.dataset.motionPaused = String(paused || !visible || document.hidden);
-    pause!.textContent = paused ? 'Play motion' : 'Pause motion';
-    strikeButton!.disabled = paused;
+    if (pause) pause.textContent = paused ? 'Play motion' : 'Pause motion';
+    if (strikeButton) strikeButton.disabled = paused;
     if (raf) cancelAnimationFrame(raf);
     raf = 0;
     if (!paused && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(draw); }
@@ -110,16 +110,19 @@ export function initHeaderStorm(header: HTMLElement) {
     header.style.setProperty('--header-y', `${-y * 5}px`);
   });
   surface.addEventListener('pointerleave', () => { targetWind = 22; header.style.setProperty('--header-x', '0px'); header.style.setProperty('--header-y', '0px'); });
-  surface.addEventListener('click', (event) => {
-    if (event.target instanceof Element && event.target.closest('a,button')) return;
-    const rect = surface.getBoundingClientRect();
-    lightning(Math.max(.12, Math.min(.88, (event.clientX - rect.left) / rect.width)));
-  });
-  strikeButton.addEventListener('click', () => lightning());
-  pause.addEventListener('click', () => { paused = !paused; syncMotion(); });
+  if (strikeButton) {
+    surface.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a,button')) return;
+      const rect = surface.getBoundingClientRect();
+      lightning(Math.max(.12, Math.min(.88, (event.clientX - rect.left) / rect.width)));
+    });
+    strikeButton.addEventListener('click', () => lightning());
+  }
+  pause?.addEventListener('click', () => { paused = !paused; syncMotion(); });
   motion.addEventListener('change', () => { paused = motion.matches; syncMotion(); });
   document.addEventListener('visibilitychange', syncMotion);
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; syncMotion(); }).observe(header);
   new ResizeObserver(resize).observe(surface);
-  tools.hidden = false; resize(); syncMotion();
+  if (tools) tools.hidden = false;
+  resize(); syncMotion();
 }

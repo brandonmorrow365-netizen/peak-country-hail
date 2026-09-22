@@ -1,0 +1,55 @@
+---
+const promises = [
+  {
+    number: '01',
+    title: 'Limited Lifetime PDR Workmanship Warranty',
+    body: 'Qualifying Peak Country PDR workmanship is covered for as long as the original customer owns the vehicle, according to the published terms.',
+  },
+  {
+    number: '02',
+    title: 'Direct access to experience',
+    body: 'Work directly with an experienced PDR professional backed by more than 20 years of hands-on PDR experience.',
+  },
+  {
+    number: '03',
+    title: 'Real repair evidence',
+    body: 'Before-and-after photography, repair notes, and appropriate documentation help show the work honestly.',
+  },
+  {
+    number: '04',
+    title: 'Guidance without sales pressure',
+    body: 'The recommended repair method is based on the vehicle, the damage, and your goals—not the size of the transaction.',
+  },
+] as const;
+---
+
+<section id="workmanship-promise" class="pc-home-trust" aria-labelledby="pc-home-trust-heading">
+  <div class="pc-content-width pc-home-trust__layout">
+    <header class="pc-home-trust__heading">
+      <p class="pc-kicker">Our workmanship promise</p>
+      <h2 id="pc-home-trust-heading">Repair quality backed by our workmanship warranty.</h2>
+      <p>Peak Country stands behind qualifying PDR workmanship for the original customer according to the published warranty terms.</p>
+      <div class="pc-actions">
+        <a class="pc-button" href="/warranty/">View Warranty Details <span aria-hidden="true">→</span></a>
+        <a class="pc-text-link" href="/get-started/">Get Started <span aria-hidden="true">→</span></a>
+      </div>
+    </header>
+
+    <ol class="pc-home-trust__points">
+      {promises.map((promise) => (
+        <li>
+          <span aria-hidden="true">{promise.number}</span>
+          <div>
+            <h3>{promise.title}</h3>
+            <p>{promise.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <nav class="pc-content-width pc-home-trust__links" aria-label="Trust and experience resources">
+    <a href="/__preview/gallery/">See documented repairs <span aria-hidden="true">→</span></a>
+    <a href="/about/">About our experience <span aria-hidden="true">→</span></a>
+  </nav>
+</section>
