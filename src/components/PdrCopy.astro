@@ -1,0 +1,10 @@
+---
+import type { ServicePage } from '../data/servicePages';
+interface Props { section: ServicePage['sections'][number]; id: string }
+const { section, id } = Astro.props;
+---
+<section class="pdr-copy" aria-labelledby={id}>
+  <h2 id={id}>{section.heading}</h2>
+  {section.paragraphs.map((paragraph, index) => <p class:list={{ 'direct-answer': index === 0 }}>{paragraph}</p>)}
+  {section.links && <nav class="service-context-links" aria-label={`${section.heading} resources`}>{section.links.map(link => <a href={link.href}>{link.label} →</a>)}</nav>}
+</section>

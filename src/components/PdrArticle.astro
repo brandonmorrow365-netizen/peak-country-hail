@@ -1,0 +1,50 @@
+---
+import type { ServicePage } from '../data/servicePages';
+import PdrCopy from './PdrCopy.astro';
+interface Props { sections: ServicePage['sections']; feature: NonNullable<ServicePage['educationalFeature']> }
+const { sections, feature } = Astro.props;
+---
+<article class="pdr-article">
+  <div class="pdr-chapter pdr-chapter--light">
+    <div class="pdr-inner pdr-split">
+      <PdrCopy section={sections[0]} id="pdr-introduction" />
+      <figure class="pdr-photo">
+        <img src={feature.image.src} srcset={`${feature.image.smallSrc} 640w, ${feature.image.src} ${feature.image.width}w`} sizes="(max-width: 900px) calc(100vw - 40px), 530px" width={feature.image.width} height={feature.image.height} alt={feature.image.alt} loading="eager" decoding="async" />
+        <figcaption>{feature.image.caption}</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="pdr-chapter pdr-chapter--dark pdr-chapter--technique">
+    <div class="pdr-inner">
+      <div class="pdr-split pdr-technical-intro">
+        <section class="pdr-copy" aria-labelledby="service-education-heading">
+          <div class="eyebrow">{feature.eyebrow}</div>
+          <h2 id="service-education-heading">{feature.heading}</h2>
+          {feature.paragraphs.map((paragraph, index) => <p class:list={{ 'direct-answer': index === 0 }}>{paragraph}</p>)}
+          <p class="service-education-links">{feature.links.map((link,index) => <>{index > 0 && ' · '}<a href={link.href}>{link.label}</a></>)}</p>
+          <div class="pdr-education-cta"><p>Have a dent or hail damage you are unsure can be repaired with PDR?</p><a class="button" href={feature.cta.href}>{feature.cta.label} →</a></div>
+        </section>
+        <PdrCopy section={sections[5]} id="pdr-technician-judgment" />
+      </div>
+      <div class="pdr-technical-methods"><PdrCopy section={sections[1]} id="pdr-techniques" /></div>
+    </div>
+  </div>
+  <div class="pdr-chapter pdr-chapter--light">
+    <div class="pdr-inner pdr-split">
+      <PdrCopy section={sections[2]} id="pdr-suitable-dents" />
+      <figure class="pdr-photo"><img src="/media/portfolio/nissan-murano/before-angle-1.webp" srcset="/media/portfolio/nissan-murano/before-angle-1-720.webp 720w, /media/portfolio/nissan-murano/before-angle-1.webp 1200w" sizes="(max-width: 900px) calc(100vw - 40px), 530px" width="1200" height="1600" alt="Nissan Murano panel dent before repair, viewed under reflection lighting" loading="lazy" decoding="async" /></figure>
+    </div>
+  </div>
+  <div class="pdr-chapter pdr-chapter--dark pdr-chapter--limits">
+    <div class="pdr-inner pdr-split">
+      <PdrCopy section={sections[3]} id="pdr-limitations" />
+      <PdrCopy section={sections[4]} id="pdr-repair-goals" />
+    </div>
+  </div>
+  <div class="pdr-chapter pdr-chapter--light">
+    <div class="pdr-inner pdr-split">
+      <PdrCopy section={sections[6]} id="pdr-inspection" />
+      <aside class="pdr-inspection"><div class="eyebrow">Peak Country Service</div><h2>A careful inspection comes first.</h2><p>Repairability depends on the vehicle, panel, paint, and damage—not a photograph or nearby weather report alone.</p><a class="button" href="/get-started/">Get Started →</a><nav aria-label="Inspection resources"><a href="/about/">About Peak Country</a><a href="/repair-standards/">Repair Evaluation</a><a href="/process/">What to expect</a></nav></aside>
+    </div>
+  </div>
+</article>

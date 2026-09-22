@@ -27,6 +27,17 @@
 - Full-page and five detail screenshots per viewport were captured inline in the task. Local PNG export remains unavailable under the system-level browser restriction; no export workaround was attempted.
 - Pending: owner Task 10 visual approval. Task 11 has not started. Local preview only; nothing pushed, merged, or deployed.
 
+## Task 11 PDR visual realignment — 2026-09-22
+
+- Followed the supplied `pdr-task11-visual-reference.png` composition using approved homepage/Warranty/Auto Hail typography, palette, Longs Peak contours, photographic navy depth, and mountain ridge.
+- Authorized visual grouping retains all seven original substantive sections. Order: introduction; reflection-light education with technician judgment and push/glue-pull techniques; suitable dents; limitations with full/improvement repair evaluation; inspection with the original inspection aside; FAQ; resources; closing CTA.
+- Content data is unchanged. Browser baseline comparison confirmed all prior visible text and all 29 main-content links preserved, with identical metadata and JSON-LD (including FAQ answers).
+- Existing authentic reflection-light photograph supports hero, introduction, and technical background. Existing Murano before-repair panel photograph supports suitable dents and the limitations background. No stock or generated repair imagery added.
+- Desktop 1440 × 1200 and mobile 390 × 844 reviewed; no horizontal overflow. FAQ interaction passed. Auto Hail and Door Ding regression checks passed; styles are PDR-specific.
+- Astro check: 89 files, zero diagnostics. Production build passed with existing chunk-size warning. All 39 tests and diff whitespace validation passed.
+- Desktop/mobile full-page and detail screenshots captured inline. Local PNG export remains restricted; no workaround attempted.
+- Preview: `http://localhost:4362/paintless-dent-repair/`. Pending owner visual approval. Nothing pushed, merged, or deployed.
+
 ## Deployment rule
 
 Major workflow and visual changes should be previewed and verified before production deployment unless the user explicitly authorizes direct deployment for that specific phase.
