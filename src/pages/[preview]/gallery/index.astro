@@ -87,7 +87,10 @@ const galleryProjects = portfolioRepairs.map((repair) => {
               <p class="pc-gallery-evidence__tier">Primary comparison</p>
               <h3 id={`${repair.slug}-primary-heading`}>View {String(primaryPair.angle).padStart(2, '0')}</h3>
             </header>
-            <div class="pc-gallery-primary__pair">
+            <div
+              class="pc-gallery-primary__pair"
+              style={`--pc-gallery-primary-columns: ${primaryPhotos.map((photo) => `${photo.width / photo.height}fr`).join(' ')}`}
+            >
               {primaryPhotos.map((photo) => {
                 const photoIndex = repair.photos.indexOf(photo);
                 const state = photo.state === 'before' ? 'Before' : 'After';
@@ -132,7 +135,10 @@ const galleryProjects = portfolioRepairs.map((repair) => {
               </div>
               <p>Select any image for a closer look. Images advance only when you choose.</p>
             </header>
-            <div class="pc-gallery-thumbnails">
+            <div
+              class="pc-gallery-thumbnails"
+              style={`--pc-gallery-support-columns: ${supportingPhotos.map((photo) => `${photo.width / photo.height}fr`).join(' ')}; --pc-gallery-support-width: ${supportingPhotos.reduce((total, photo) => total + (photo.width / photo.height), 0) * 18}rem`}
+            >
               {supportingPhotos.map((photo) => {
                 const photoIndex = repair.photos.indexOf(photo);
                 const hasAfter = repair.photos.some((candidate) => candidate.state === 'after' && candidate.angle === photo.angle);
