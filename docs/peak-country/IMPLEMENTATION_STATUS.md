@@ -19,7 +19,16 @@
 11. [x] Cross-site consistency + architecture/code consolidation (2026-09-14; normalized the footer and design system, removed abandoned visual stubs and unused heavyweight 3D/Spline dependencies, corrected contact/process CTA language, documented the design system, and retained the compact accessible internal-page header. The homepage combines the sharp production hero assets from `909db73` with the cloud/rain/hail/lightning/parallax behaviors recovered from `c8271df`; the sharp base remains untransformed, atmosphere is sky-isolated, and the canvas supports up to 2× high-DPI backing resolution. Verified with Astro check, production build, 39 automated tests, 34-route private-preview QA, hail-history validation, hero/header validation, responsive production comparison, source-of-truth scans, and `git diff --check`.)
 12. [ ] Forms integration after forms are approved separately
 
+## Task 10 visual realignment — 2026-09-22
+
+- Auto Hail Repair now follows the supplied homepage-flow composition and approved Task 9 typography/palette, with scoped editorial dark/light sections, complete real hail imagery, authentic PDR imagery, integrated inspection CTA, and restrained FAQ/resources.
+- Existing substantive copy, destinations, metadata/schema, disclosure behavior, header/footer, homepage, and Warranty implementation are unchanged.
+- Verified at 1440 × 1200 and 390 × 844 with no horizontal overflow; PDR and Door Ding Repair regression reviews passed. Astro check: 87 files, zero diagnostics; production build passed (existing large-chunk warning); 39/39 tests passed; diff whitespace check passed.
+- Full-page and five detail screenshots per viewport were captured inline in the task. Local PNG export remains unavailable under the system-level browser restriction; no export workaround was attempted.
+- Pending: owner Task 10 visual approval. Task 11 has not started. Local preview only; nothing pushed, merged, or deployed.
+
 ## Deployment rule
+
 Major workflow and visual changes should be previewed and verified before production deployment unless the user explicitly authorizes direct deployment for that specific phase.
 
 ## Current pending items

@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import AutoHailArticle from './AutoHailArticle.astro';
+import '../styles/auto-hail.css';
 import { site } from '../data/site';
 
 interface Link { href: string; label: string }
@@ -37,26 +39,12 @@ const pageSchema = {
     </figure>
     <div class="service-education-copy"><div class="eyebrow">{educationalFeature.eyebrow}</div><h2 id="service-education-heading">{educationalFeature.heading}</h2>{educationalFeature.paragraphs.map((paragraph,index)=><p class:list={{'direct-answer':index===0}}>{paragraph}</p>)}<p class="service-education-links">{educationalFeature.links.map((link,index)=><>{index>0&&' · '}<a href={link.href}>{link.label}</a></>)}</p><div class="service-education-cta"><p>Have a dent or hail damage you are unsure can be repaired with PDR?</p><a class="button" href={educationalFeature.cta.href}>{educationalFeature.cta.label} →</a></div></div>
   </section>}
-  <article class:list={['section', 'service-detail', variant && `service-detail--${variant}`]}>
+  {variant === 'auto-hail' ? <AutoHailArticle sections={sections} /> : <article class="section service-detail">
     <div class="service-article">
-      {sections.map((section) => <section class:list={{'service-article-section': true, 'service-article-section--visual': Boolean(section.image)}}>
-        {section.image ? <>
-          <div class="service-visual-lead">
-            <div class="service-visual-copy"><h2>{section.heading}</h2><p class="direct-answer">{section.paragraphs[0]}</p></div>
-            <figure class="service-visual-media">
-              <picture>
-                <source media="(max-width: 720px)" srcset={section.image.smallSrc} />
-                <img src={section.image.src} width={section.image.width} height={section.image.height} alt={section.image.alt} loading="eager" decoding="async" />
-              </picture>
-            </figure>
-          </div>
-          {section.paragraphs.slice(1).map((paragraph) => <p>{paragraph}</p>)}
-          {section.links && <div class="service-context-links">{section.links.map((link) => <a href={link.href}>{link.label} →</a>)}</div>}
-        </> : <><h2>{section.heading}</h2><p class="direct-answer">{section.paragraphs[0]}</p>{section.paragraphs.slice(1).map((paragraph) => <p>{paragraph}</p>)}{section.links && <div class="service-context-links">{section.links.map((link) => <a href={link.href}>{link.label} →</a>)}</div>}</>}
-      </section>)}
+      {sections.map((section) => <section class="service-article-section"><h2>{section.heading}</h2><p class="direct-answer">{section.paragraphs[0]}</p>{section.paragraphs.slice(1).map((paragraph) => <p>{paragraph}</p>)}{section.links && <div class="service-context-links">{section.links.map((link) => <a href={link.href}>{link.label} →</a>)}</div>}</section>)}
     </div>
     <aside class="service-sidebar"><div class="eyebrow">Peak Country Service</div><h2>A careful inspection comes first.</h2><p>Repairability depends on the vehicle, panel, paint, and damage—not a photograph or nearby weather report alone.</p><a class="button" href="/get-started/">Get Started →</a><a href="/about/">About Peak Country</a><a href="/repair-standards/">Repair Evaluation</a><a href="/process/">What to expect</a></aside>
-  </article>
+  </article>}
   <section class:list={['section', 'service-faq', variant && `service-faq--${variant}`]}><div class="section-head"><div><div class="eyebrow">Service Questions</div><h2>Clear answers before repair.</h2></div><a href="/faq/">Visit the general FAQ →</a></div><div class="faq-list">{faqs.map(({ question, answer }, index) => <details open={index === 0}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
   <section class:list={['section', 'service-related', variant && `service-related--${variant}`]}><div><div class="eyebrow">Continue Your Research</div><h2>Repair and hail information in one place.</h2></div><nav aria-label="Related service resources">{related.map((link) => <a href={link.href}>{link.label} →</a>)}</nav></section>
   <section class:list={['about-cta', 'service-cta', variant && `service-cta--${variant}`]}><div><div class="eyebrow">Greeley · Weld County · Northern Colorado</div><h2>Start with the vehicle and a clear conversation.</h2><p>Call or text <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> to discuss your vehicle and mobile service location.</p><div class="about-actions"><a class="button" href="/get-started/">Get Started →</a><a class="text-link" href={`sms:${site.phone}`}>Text Peak Country →</a></div></div></section>

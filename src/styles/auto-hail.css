@@ -1,0 +1,103 @@
+/* Auto Hail Repair only. Values follow the locked preview.css and Warranty system. */
+:is(.service-head--auto-hail, .auto-hail-article, .service-faq--auto-hail, .service-related--auto-hail, .service-cta--auto-hail) {
+  --pc-night: #071522;
+  --pc-navy: #0b2236;
+  --pc-blue: #55bded;
+  --pc-blue-bright: #86d6fa;
+  --pc-blue-ink: #0a6e97;
+  --pc-paper: #f2f3ef;
+  --pc-white: #fbfcf9;
+  --pc-charcoal: #17232c;
+  --pc-line-light: #c9d0d1;
+  --pc-line-dark: rgb(160 193 211 / 24%);
+  --pc-font-body: Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --pc-font-display: "Inter Tight", Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--pc-font-body);
+  line-height: 1.65;
+}
+:is(.service-head--auto-hail, .auto-hail-article, .service-faq--auto-hail, .service-related--auto-hail, .service-cta--auto-hail) .eyebrow {
+  margin: 0 0 1.15rem; color: var(--pc-blue-ink); font-size: .7rem; font-weight: 750; letter-spacing: .14em; line-height: 1.45;
+}
+:is(.auto-hail-article, .service-faq--auto-hail, .service-related--auto-hail, .service-cta--auto-hail) h2 {
+  margin: 0 0 1.5rem; color: var(--pc-navy); font-family: var(--pc-font-display); font-size: clamp(2.15rem, 3.5vw, 3.45rem); font-weight: 610; letter-spacing: -.03em; line-height: 1.06;
+}
+:is(.service-head--auto-hail, .auto-hail-article, .service-cta--auto-hail) .button {
+  min-height: 48px; padding: .85rem 1.35rem; color: #04131e; background: var(--pc-blue); border: 1px solid var(--pc-blue); border-radius: 2px; box-shadow: none; font-size: .76rem; font-weight: 820; letter-spacing: .09em;
+}
+:is(.service-head--auto-hail, .auto-hail-article, .service-cta--auto-hail) .button:hover { background: var(--pc-blue-bright); border-color: var(--pc-blue-bright); transform: none; }
+.service-head--auto-hail { padding-block: clamp(4.75rem, 9vw, 8rem); border-bottom: 1px solid rgb(85 189 237 / 42%); }
+.service-head--auto-hail h1 { max-width: 980px; font-family: var(--pc-font-display); font-size: clamp(3rem, 5.2vw, 5.15rem); font-weight: 670; letter-spacing: -.05em; line-height: .96; text-transform: none; }
+.service-head--auto-hail p { max-width: 720px; margin-top: 1.5rem; color: #c6d3da; line-height: 1.6; }
+.service-head--auto-hail .eyebrow { color: var(--pc-blue-bright); }
+.service-head--auto-hail .service-head-actions > a:not(.button) { color: var(--pc-blue-bright); font-size: .86rem; font-weight: 720; text-decoration-color: rgb(134 214 250 / 55%); text-underline-offset: .38rem; }
+.auto-hail-chapter { color: var(--pc-charcoal); background: var(--pc-paper); }
+.auto-hail-inner { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: center; width: min(100%, 1284px); margin-inline: auto; padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1.25rem, 4vw, 3.25rem); }
+.auto-hail-chapter-copy { min-width: 0; }
+.auto-hail-chapter-copy > p:not(.eyebrow) { max-width: 720px; margin: 1.2rem 0 0; font-size: 1rem; line-height: 1.75; }
+.auto-hail-chapter-copy > .auto-hail-lead { font-weight: 500; }
+.auto-hail-photo { margin: 0; border-radius: 2px; overflow: hidden; }
+.auto-hail-photo img { display: block; width: 100%; height: auto; }
+.auto-hail-chapter--1 .auto-hail-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.auto-hail-chapter--dark { color: #b7c5cc; background: var(--pc-night); }
+.auto-hail-chapter--dark h2 { color: var(--pc-white); }
+.auto-hail-chapter--dark .eyebrow { color: var(--pc-blue); }
+.auto-hail-chapter--dark .auto-hail-lead { color: #d6e0e5; }
+.auto-hail-article .service-context-links { gap: .8rem 1.6rem; margin-top: 1.8rem; }
+.auto-hail-article .service-context-links a { color: var(--pc-blue-ink); font-size: .86rem; font-weight: 720; text-underline-offset: .38rem; }
+.auto-hail-chapter--dark .service-context-links a { color: var(--pc-blue-bright); }
+.auto-hail-support { padding-left: clamp(1.5rem, 3vw, 3rem); border-left: 1px solid var(--pc-line-dark); }
+.auto-hail-support p { margin: 0; line-height: 1.75; }
+.auto-hail-chapter--4 .auto-hail-inner,
+.auto-hail-chapter--5 .auto-hail-inner { display: block; }
+.auto-hail-chapter--4 .auto-hail-chapter-copy,
+.auto-hail-chapter--5 .auto-hail-chapter-copy { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); column-gap: clamp(2.5rem, 7vw, 7rem); }
+.auto-hail-chapter--4 .eyebrow,
+.auto-hail-chapter--5 .eyebrow { grid-column: 1 / -1; }
+.auto-hail-chapter--4 h2,
+.auto-hail-chapter--5 h2 { grid-column: 1; grid-row: 2 / span 3; }
+.auto-hail-chapter--4 .auto-hail-chapter-copy > p:not(.eyebrow),
+.auto-hail-chapter--5 .auto-hail-chapter-copy > p:not(.eyebrow),
+.auto-hail-chapter--4 .service-context-links,
+.auto-hail-chapter--5 .service-context-links { grid-column: 2; margin-top: 0; margin-bottom: 1.2rem; }
+.auto-hail-chapter--6 .auto-hail-inner { grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); }
+.auto-hail-inspection { padding-left: clamp(1.5rem, 3vw, 3rem); border-left: 1px solid var(--pc-blue); }
+.auto-hail-inspection h2 { font-size: clamp(1.65rem, 2.7vw, 2.55rem); }
+.auto-hail-inspection p { margin: 1rem 0 1.75rem; }
+.auto-hail-inspection nav { display: grid; gap: .75rem; margin-top: 1.6rem; }
+.auto-hail-inspection nav a { color: #d9e7ed; font-size: .86rem; font-weight: 720; }
+.service-faq--auto-hail.section,
+.service-related--auto-hail.section { width: 100%; max-width: none; padding: clamp(4.5rem, 8vw, 7.5rem) max(1.25rem, calc((100vw - 1180px) / 2)); color: var(--pc-charcoal); background: var(--pc-paper); border: 0; }
+.service-faq--auto-hail .section-head { margin-bottom: 2.5rem; }
+.service-faq--auto-hail .section-head > a { color: var(--pc-blue-ink); }
+.service-faq--auto-hail .faq-list { gap: 0 3.25rem; }
+.service-faq--auto-hail .faq-list details { padding: 1.35rem 0; background: transparent; border: 0; border-bottom: 1px solid var(--pc-line-light); border-radius: 0; }
+.service-faq--auto-hail .faq-list details[open] { box-shadow: none; }
+.service-faq--auto-hail .faq-list summary { color: var(--pc-navy); font-weight: 650; }
+.service-faq--auto-hail .faq-list p { color: var(--pc-charcoal); }
+.service-related--auto-hail.section { padding-top: 0; }
+.service-related--auto-hail nav { gap: 0 2.25rem; }
+.service-related--auto-hail nav a { padding: 1.2rem 0; color: var(--pc-navy); background: transparent; border: 0; border-bottom: 1px solid var(--pc-line-light); border-radius: 0; font-size: .9rem; font-weight: 650; }
+.service-related--auto-hail nav a:hover { color: var(--pc-blue-ink); }
+.service-cta--auto-hail { padding: clamp(4.5rem, 8vw, 7.5rem) max(1.25rem, calc((100vw - 1180px) / 2)); background: var(--pc-night); border-top: 1px solid var(--pc-line-dark); }
+.service-cta--auto-hail h2 { max-width: 800px; color: var(--pc-white); font-size: clamp(2.15rem, 4.4vw, 4.2rem); font-weight: 650; letter-spacing: -.045em; line-height: 1; }
+.service-cta--auto-hail .eyebrow { color: var(--pc-blue); }
+@media (max-width: 900px) {
+  .auto-hail-inner,
+  .auto-hail-chapter--1 .auto-hail-inner,
+  .auto-hail-chapter--6 .auto-hail-inner { grid-template-columns: 1fr; }
+  .auto-hail-photo { max-width: 600px; width: 100%; margin-inline: auto; }
+  .auto-hail-chapter--4 .auto-hail-chapter-copy,
+  .auto-hail-chapter--5 .auto-hail-chapter-copy { display: block; }
+  .auto-hail-support,
+  .auto-hail-inspection { padding: 2rem 0 0; border-left: 0; border-top: 1px solid var(--pc-line-dark); }
+  .service-related--auto-hail.section { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .service-head--auto-hail { padding-block: 4.5rem 5.25rem; }
+  .service-head--auto-hail h1 { font-size: clamp(2.75rem, 12vw, 4.2rem); }
+  .auto-hail-inner { padding-block: 4.25rem; gap: 2.25rem; }
+  .service-faq--auto-hail.section,
+  .service-related--auto-hail.section { padding-inline: 1.25rem; }
+  .service-faq--auto-hail .faq-list,
+  .service-related--auto-hail nav { grid-template-columns: 1fr; }
+}

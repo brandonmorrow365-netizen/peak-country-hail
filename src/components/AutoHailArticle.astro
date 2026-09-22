@@ -1,0 +1,40 @@
+---
+import type { ServicePage } from '../data/servicePages';
+interface Props { sections: ServicePage['sections'] }
+const { sections } = Astro.props;
+const labels = ['Reading hail damage', 'Controlled visibility', 'The right repair method', 'Careful vehicle access', 'A documented repair plan', 'Start with the vehicle'];
+---
+<article class="auto-hail-article">
+  {sections.map((section, index) => (
+    <section class:list={['auto-hail-chapter', `auto-hail-chapter--${index + 1}`, { 'auto-hail-chapter--dark': index % 2 === 1 }]} aria-labelledby={`auto-hail-heading-${index}`}>
+      <div class="auto-hail-inner">
+        <div class="auto-hail-chapter-copy">
+          <p class="eyebrow">{labels[index]}</p>
+          <h2 id={`auto-hail-heading-${index}`}>{section.heading}</h2>
+          <p class="auto-hail-lead">{section.paragraphs[0]}</p>
+          {index !== 1 && section.paragraphs.slice(1).map(paragraph => <p>{paragraph}</p>)}
+          {index !== 1 && section.links && <nav class="service-context-links" aria-label={`${section.heading} resources`}>
+            {section.links.map(link => <a href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
+          </nav>}
+        </div>
+        {section.image && <figure class="auto-hail-photo">
+          <img src={section.image.src} srcset={`${section.image.smallSrc} 720w, ${section.image.src} ${section.image.width}w`} sizes="(max-width: 900px) calc(100vw - 40px), 540px" width={section.image.width} height={section.image.height} alt={section.image.alt} loading="eager" decoding="async" />
+        </figure>}
+        {index === 1 && <div class="auto-hail-support">
+          {section.paragraphs.slice(1).map(paragraph => <p>{paragraph}</p>)}
+          {section.links && <nav class="service-context-links" aria-label={`${section.heading} resources`}>{section.links.map(link => <a href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}</nav>}
+        </div>}
+        {index === 2 && <figure class="auto-hail-photo auto-hail-photo--pdr">
+          <img src="/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg" srcset="/images/pdr-light-reflection-paintless-dent-repair-greeley-co-640.jpg 640w, /images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg 977w" sizes="(max-width: 900px) calc(100vw - 40px), 470px" width="977" height="1139" alt="PDR reflection lighting and glue tabs on a vehicle panel at Peak Country" loading="lazy" decoding="async" />
+        </figure>}
+        {index === 5 && <aside class="auto-hail-inspection">
+          <div class="eyebrow">Peak Country Service</div>
+          <h2>A careful inspection comes first.</h2>
+          <p>Repairability depends on the vehicle, panel, paint, and damage—not a photograph or nearby weather report alone.</p>
+          <a class="button" href="/get-started/">Get Started →</a>
+          <nav aria-label="Inspection resources"><a href="/about/">About Peak Country</a><a href="/repair-standards/">Repair Evaluation</a><a href="/process/">What to expect</a></nav>
+        </aside>}
+      </div>
+    </section>
+  ))}
+</article>

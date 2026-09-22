@@ -269,38 +269,6 @@ textarea { min-height: 130px; resize: vertical; }
 .service-related nav, .standards-links nav, .assessment-documentation nav, .estimating-links nav, .area-links nav { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
 .service-related nav a, .standards-links nav a, .assessment-documentation nav a, .estimating-links nav a, .area-links nav a:not(.button), .process-links a, .faq-links a, .history-links a, .local-hail-links a, .tracker-links a { padding: 1rem; color: #e9f4fa; background: var(--navy-raised); border-left: 3px solid var(--blue-bright); border-radius: var(--radius-sm); font-weight: 750; text-decoration: none; }
 
-/* Auto Hail Repair editorial treatment. Scoped so shared service pages retain their established layout. */
-.service-head--auto-hail .service-head-actions > a:not(.button) { color: #86d6fa; font-weight: 750; text-decoration-color: rgb(134 214 250 / 68%); }
-.service-head--auto-hail .service-head-actions > a:not(.button):hover { color: #fff; }
-.service-detail--auto-hail { grid-template-columns: 1fr; gap: var(--space-6); padding-block: clamp(4.5rem, 8vw, 7rem); }
-.service-detail--auto-hail .service-article { width: min(100%, 1000px); max-width: none; margin-inline: auto; counter-reset: auto-hail-section; }
-.service-detail--auto-hail .service-article > section { position: relative; padding: clamp(2.75rem, 5vw, 4.5rem) 0; border-bottom: 0; counter-increment: auto-hail-section; }
-.service-detail--auto-hail .service-article > section:first-child { padding-top: 0; }
-.service-detail--auto-hail .service-article > section + section { padding-top: clamp(2.75rem, 5vw, 4.5rem); border-top: 1px solid #d1dadd; }
-.service-detail--auto-hail .service-article > section::before { display: block; margin-bottom: var(--space-3); content: "0" counter(auto-hail-section); color: var(--blue); font-size: .72rem; font-weight: 850; letter-spacing: .16em; }
-.service-detail--auto-hail .service-article h2 { max-width: 760px; margin: 0 0 var(--space-4); font-size: clamp(2.15rem, 3.8vw, 3.45rem); font-weight: 680; }
-.service-detail--auto-hail .service-article p { max-width: 760px; margin-block: 0 var(--space-4); color: #405a6c; font-size: 1.04rem; }
-.service-detail--auto-hail .service-article .direct-answer { color: #203f55; font-size: clamp(1.06rem, 1.5vw, 1.18rem); line-height: 1.6; }
-.service-visual-lead { display: grid; grid-template-columns: minmax(0, .92fr) minmax(360px, 1.08fr); gap: clamp(2rem, 5vw, 4.75rem); align-items: center; margin-bottom: var(--space-5); }
-.service-visual-copy { align-self: center; }
-.service-visual-media { margin: 0; overflow: hidden; background: var(--navy); border: 1px solid #9aabb6; border-radius: var(--radius-sm); }
-.service-visual-media picture,
-.service-visual-media img { display: block; width: 100%; height: auto; }
-.service-detail--auto-hail .service-sidebar { position: static; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr); gap: .85rem clamp(2rem, 6vw, 5.5rem); width: min(100%, 1000px); margin-inline: auto; padding: clamp(2rem, 4vw, 3rem); background: #0b2236; border: 1px solid #294a61; border-top: 2px solid #55bded; border-radius: var(--radius-sm); box-shadow: none; }
-.service-detail--auto-hail .service-sidebar .eyebrow,
-.service-detail--auto-hail .service-sidebar h2,
-.service-detail--auto-hail .service-sidebar p { grid-column: 1; }
-.service-detail--auto-hail .service-sidebar .button { align-self: end; grid-column: 2; grid-row: 1 / span 2; }
-.service-detail--auto-hail .service-sidebar > a:not(.button) { grid-column: 2; color: #dbe7ed; font-size: .9rem; font-weight: 700; }
-.service-faq--auto-hail { padding-block: clamp(4.5rem, 8vw, 7rem); background: #fbfcf9; }
-.service-faq--auto-hail .section-head { margin-bottom: var(--space-6); }
-.service-faq--auto-hail .faq-list { gap: 0 var(--space-6); }
-.service-faq--auto-hail .faq-list details { padding: 1.35rem 0; background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
-.service-faq--auto-hail .faq-list details[open] { border-color: var(--blue); box-shadow: none; }
-.service-related--auto-hail { padding-block: clamp(4.5rem, 8vw, 7rem); }
-.service-related--auto-hail nav { gap: 0 var(--space-5); }
-.service-related--auto-hail nav a { display: flex; justify-content: space-between; gap: var(--space-3); align-items: center; padding: 1.05rem 0; color: var(--navy); background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; font-weight: 750; }
-.service-related--auto-hail nav a:hover { color: #0a6e97; border-color: var(--blue); }
 
 /* Repair portfolio */
 .gallery-intro, .gallery-explain { display: grid; grid-template-columns: .9fr 1.1fr; gap: var(--space-7); align-items: start; }
@@ -615,13 +583,6 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .local-hail-live { grid-template-columns: 1fr 1fr; }
   .local-hail-live > p { grid-column: 1 / -1; }
   .home-final-cta { align-items: flex-start; flex-direction: column; }
-  .service-visual-lead { grid-template-columns: 1fr; }
-  .service-detail--auto-hail .service-sidebar { grid-template-columns: 1fr; }
-  .service-detail--auto-hail .service-sidebar .eyebrow,
-  .service-detail--auto-hail .service-sidebar h2,
-  .service-detail--auto-hail .service-sidebar p,
-  .service-detail--auto-hail .service-sidebar .button,
-  .service-detail--auto-hail .service-sidebar > a:not(.button) { grid-column: 1; grid-row: auto; }
 }
 
 @media (max-width: 720px) {
@@ -664,16 +625,6 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .mobile-conversion { position: fixed; z-index: 50; right: 0; bottom: 0; left: 0; display: grid; grid-template-columns: .75fr .75fr 1.5fr; background: var(--navy); border-top: 3px solid var(--blue); box-shadow: 0 -8px 30px rgb(0 0 0 / 25%); }
   .mobile-conversion a { padding: 1rem .45rem; color: #fff; border-right: 1px solid rgb(255 255 255 / 16%); font-size: .78rem; font-weight: 850; text-align: center; text-decoration: none; text-transform: uppercase; }
   .mobile-conversion a:last-child { background: var(--blue); }
-  .service-detail--auto-hail { padding-block: 4rem; }
-  .service-detail--auto-hail .service-article > section,
-  .service-detail--auto-hail .service-article > section + section { padding-block: 2.75rem; }
-  .service-detail--auto-hail .service-article > section:first-child { padding-top: 0; }
-  .service-visual-lead { gap: var(--space-5); }
-  .service-visual-copy { display: contents; }
-  .service-visual-copy h2 { order: 1; }
-  .service-visual-copy .direct-answer { order: 2; }
-  .service-visual-media { order: 3; }
-  .service-faq--auto-hail .faq-list { gap: 0; }
 }
 
 @media (max-width: 480px) {
