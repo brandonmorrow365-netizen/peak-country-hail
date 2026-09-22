@@ -26,6 +26,7 @@
 }
 :is(.service-head--auto-hail, .auto-hail-article, .service-cta--auto-hail) .button:hover { background: var(--pc-blue-bright); border-color: var(--pc-blue-bright); transform: none; }
 .service-head--auto-hail { padding-block: clamp(4.75rem, 9vw, 8rem); border-bottom: 1px solid rgb(85 189 237 / 42%); }
+.service-head--auto-hail { background-image: linear-gradient(90deg, rgb(6 24 45 / 92%), rgb(8 38 65 / 78%) 60%, rgb(6 24 45 / 60%)), url('/brand/hero-storm-background-1942.webp'); }
 .service-head--auto-hail h1 { max-width: 980px; font-family: var(--pc-font-display); font-size: clamp(3rem, 5.2vw, 5.15rem); font-weight: 670; letter-spacing: -.05em; line-height: .96; text-transform: none; }
 .service-head--auto-hail p { max-width: 720px; margin-top: 1.5rem; color: #c6d3da; line-height: 1.6; }
 .service-head--auto-hail .eyebrow { color: var(--pc-blue-bright); }
@@ -38,7 +39,7 @@
 .auto-hail-photo { margin: 0; border-radius: 2px; overflow: hidden; }
 .auto-hail-photo img { display: block; width: 100%; height: auto; }
 .auto-hail-chapter--1 .auto-hail-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-.auto-hail-chapter--dark { color: #b7c5cc; background: var(--pc-night); }
+.auto-hail-chapter--dark { color: #b7c5cc; background: linear-gradient(180deg, #071a28 0%, #091d2a 52%, #071722 100%); }
 .auto-hail-chapter--dark h2 { color: var(--pc-white); }
 .auto-hail-chapter--dark .eyebrow { color: var(--pc-blue); }
 .auto-hail-chapter--dark .auto-hail-lead { color: #d6e0e5; }
@@ -81,6 +82,12 @@
 .service-cta--auto-hail { padding: clamp(4.5rem, 8vw, 7.5rem) max(1.25rem, calc((100vw - 1180px) / 2)); background: var(--pc-night); border-top: 1px solid var(--pc-line-dark); }
 .service-cta--auto-hail h2 { max-width: 800px; color: var(--pc-white); font-size: clamp(2.15rem, 4.4vw, 4.2rem); font-weight: 650; letter-spacing: -.045em; line-height: 1; }
 .service-cta--auto-hail .eyebrow { color: var(--pc-blue); }
+/* Reuse Warranty's approved ridge finish without changing the footer or CTA layout. */
+.service-cta--auto-hail { position: relative; isolation: isolate; }
+.service-cta--auto-hail::after { position: absolute; z-index: -1; right: 0; bottom: 0; left: 0; height: 118px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .68; pointer-events: none; }
+@media (max-width: 720px) {
+  .service-cta--auto-hail::after { height: 92px; }
+}
 @media (max-width: 900px) {
   .auto-hail-inner,
   .auto-hail-chapter--1 .auto-hail-inner,
