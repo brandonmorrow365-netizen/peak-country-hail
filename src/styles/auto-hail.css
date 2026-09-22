@@ -90,6 +90,12 @@
 .service-related--auto-hail nav { gap: 0 2.25rem; }
 .service-related--auto-hail nav a { padding: 1.2rem 0; color: var(--pc-navy); background: transparent; border: 0; border-bottom: 1px solid var(--pc-line-light); border-radius: 0; font-size: .9rem; font-weight: 650; }
 .service-related--auto-hail nav a:hover { color: var(--pc-blue-ink); }
+/* USGS-derived Longs Peak contours, limited to Auto Hail's light content sections. */
+:is(.auto-hail-chapter:not(.auto-hail-chapter--dark), .service-faq--auto-hail, .service-related--auto-hail) { position: relative; isolation: isolate; }
+:is(.auto-hail-chapter:not(.auto-hail-chapter--dark), .service-faq--auto-hail, .service-related--auto-hail)::before { position: absolute; z-index: -1; inset: 0; content: ''; background: url('/images/longs-peak-topographic-background-light.svg') center / 1800px auto repeat; opacity: .065; pointer-events: none; }
+@media (max-width: 640px) {
+  :is(.auto-hail-chapter:not(.auto-hail-chapter--dark), .service-faq--auto-hail, .service-related--auto-hail)::before { background-size: 2000px auto; opacity: .045; }
+}
 .service-cta--auto-hail { padding: clamp(4.5rem, 8vw, 7.5rem) max(1.25rem, calc((100vw - 1180px) / 2)); background: var(--pc-night); border-top: 1px solid var(--pc-line-dark); }
 .service-cta--auto-hail h2 { max-width: 800px; color: var(--pc-white); font-size: clamp(2.15rem, 4.4vw, 4.2rem); font-weight: 650; letter-spacing: -.045em; line-height: 1; }
 .service-cta--auto-hail .eyebrow { color: var(--pc-blue); }
