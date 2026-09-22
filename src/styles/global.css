@@ -538,7 +538,7 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
 .warranty-close .eyebrow { color: #55bded; }
 .warranty-close__actions { display: flex; gap: 1.4rem; align-items: center; padding-bottom: .35rem; }
 .warranty-close__actions .text-link { color: #d9e7ed; white-space: nowrap; }
-.warranty-mountain-finish { position: absolute; z-index: 0; right: 0; bottom: 0; left: 0; height: 92px; background: url('/brand/hero-storm-background-1942.webp') center 72% / cover; opacity: .38; filter: grayscale(.2) contrast(1.2); pointer-events: none; }
+.warranty-mountain-finish { position: absolute; z-index: 0; right: 0; bottom: 0; left: 0; height: 118px; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .68; pointer-events: none; }
 
 @media (max-width: 720px) {
   .warranty-hero { min-height: 390px; padding-block: 4.5rem 5.25rem; padding-inline: 1.25rem; background-image: linear-gradient(90deg, rgb(3 17 30 / 94%), rgb(4 22 37 / 65%)), linear-gradient(0deg, rgb(3 17 30 / 94%), transparent 50%), url('/brand/hero-storm-background-960.webp'); }
@@ -555,6 +555,7 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .warranty-close__actions { align-items: stretch; flex-direction: column; }
   .warranty-close__actions .button,
   .warranty-close__actions .text-link { width: 100%; text-align: center; }
+  .warranty-mountain-finish { height: 92px; background-size: auto 100%; }
 }
 
 @media (max-width: 1024px) {

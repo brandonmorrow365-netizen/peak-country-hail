@@ -44,6 +44,7 @@
 /* Task 8: real repair proof and gallery */
 .pc-home-repairs {
   position: relative;
+  overflow: hidden;
   padding-block: clamp(4.25rem, 7vw, 7rem);
   color: #d7e0e5;
   background: #061724;
@@ -54,11 +55,11 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  width: min(50vw, 720px);
-  height: 120px;
+  left: 0;
+  height: 112px;
   content: '';
-  background: rgb(85 189 237 / 6%);
-  clip-path: polygon(0 100%, 14% 62%, 25% 74%, 42% 27%, 55% 66%, 67% 46%, 79% 73%, 91% 40%, 100% 62%, 100% 100%);
+  background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat;
+  opacity: .72;
   pointer-events: none;
 }
 
@@ -141,7 +142,7 @@
 .pc-home-repairs__base p { max-width: 760px; margin: 0; color: #879aa6; font-size: .76rem; line-height: 1.55; }
 
 .pc-gallery-hero { position: relative; overflow: hidden; padding-block: clamp(5rem, 8vw, 8rem) 0; background: linear-gradient(120deg, #071522, #0a2335 70%, #06131f); border-bottom: 1px solid var(--pc-line-dark); }
-.pc-gallery-hero::after { position: absolute; right: -8%; bottom: -1px; width: min(62vw, 880px); height: 190px; content: ''; background: rgb(85 189 237 / 8%); clip-path: polygon(0 100%, 12% 62%, 22% 73%, 38% 23%, 50% 64%, 61% 43%, 73% 71%, 86% 30%, 100% 65%, 100% 100%); pointer-events: none; }
+.pc-gallery-hero::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 128px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .42; pointer-events: none; }
 .pc-gallery-hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.14fr) minmax(330px, .86fr); gap: clamp(3rem, 9vw, 9rem); align-items: end; padding-bottom: clamp(4rem, 7vw, 7rem); }
 .pc-gallery-hero h1 { max-width: 850px; margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(3.6rem, 7vw, 7rem); font-weight: 670; letter-spacing: -.06em; line-height: .9; }
 .pc-gallery-hero__copy { max-width: 600px; }
@@ -492,8 +493,8 @@
   width: min(25vw, 310px);
   height: 58px;
   content: "";
-  background: linear-gradient(180deg, rgb(85 189 237 / 13%), rgb(85 189 237 / 2%));
-  clip-path: polygon(0 100%, 19% 60%, 31% 75%, 51% 20%, 65% 59%, 75% 41%, 100% 100%);
+  background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat;
+  opacity: .34;
 }
 
 .pc-preview-logo { flex: 0 0 144px; line-height: 0; }
@@ -572,8 +573,7 @@
   width: min(52vw, 760px);
   height: min(18vw, 220px);
   content: "";
-  background: linear-gradient(180deg, rgb(125 190 220 / 18%), rgb(7 21 34 / 0%));
-  clip-path: polygon(0 100%, 12% 62%, 24% 77%, 43% 22%, 53% 56%, 63% 39%, 75% 68%, 86% 31%, 100% 100%);
+  background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat;
   opacity: .52;
 }
 
@@ -689,7 +689,7 @@
 /* Why Peak Country */
 .pc-why { position: relative; color: var(--pc-paper); background: #081a27; border-bottom: 1px solid var(--pc-line-dark); overflow: hidden; }
 .pc-why__credibility { position: relative; z-index: 3; background: rgb(6 22 34 / 95%); border-block: 1px solid rgb(85 189 237 / 32%); }
-.pc-why__credibility::before { position: absolute; right: 0; bottom: 100%; left: 0; height: 28px; content: ''; background: url('/brand/hero-storm-background-1942.webp') center 72% / cover; opacity: .38; filter: grayscale(.2) contrast(1.2); }
+.pc-why__credibility::before { position: absolute; right: 0; bottom: 100%; left: 0; height: 88px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .58; pointer-events: none; }
 .pc-why__credibility-inner { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: 1.1rem; }
 .pc-why__credibility-inner > div { display: grid; gap: .05rem; justify-items: center; padding-inline: 1.5rem; text-align: center; border-right: 1px solid rgb(85 189 237 / 55%); }
 .pc-why__credibility-inner > div:last-child { border-right: 0; }
@@ -713,7 +713,7 @@
 .pc-why__number { color: rgb(85 189 237 / 58%); font-family: var(--pc-font-display); font-size: 2.7rem; font-weight: 520; letter-spacing: -.04em; line-height: .9; }
 .pc-why__principles h3 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: .82rem; font-weight: 650; letter-spacing: .06em; line-height: 1.45; text-transform: uppercase; }
 .pc-why__principles p { margin: .7rem 0 0; color: #b0bec6; font-size: .78rem; line-height: 1.5; }
-.pc-why__mountains { position: absolute; z-index: 4; right: 0; bottom: 0; left: 0; height: 76px; background: url('/brand/hero-storm-background-1942.webp') center 70% / cover; opacity: .56; filter: saturate(.65) contrast(1.3); clip-path: polygon(0 66%, 5% 54%, 10% 64%, 17% 35%, 22% 58%, 29% 46%, 35% 66%, 43% 40%, 49% 57%, 56% 32%, 63% 61%, 69% 44%, 77% 67%, 84% 38%, 91% 58%, 100% 46%, 100% 100%, 0 100%); pointer-events: none; }
+.pc-why__mountains { position: absolute; z-index: 4; right: 0; bottom: 0; left: 0; height: 112px; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .78; pointer-events: none; }
 
 /* What We Repair + detailed services */
 .pc-services { color: var(--pc-paper); background: #071824; border-bottom: 1px solid var(--pc-line-dark); }
@@ -728,7 +728,7 @@
 .pc-button--outline-light { min-height: 42px; color: var(--pc-blue-bright); background: rgb(3 18 29 / 22%); border-color: var(--pc-blue); font-weight: 620; }
 .pc-button--outline-light:hover { color: var(--pc-white); background: rgb(3 18 29 / 82%); }
 .pc-services__regional-mark { display: flex; gap: 1.1rem; align-items: center; margin-top: 2.2rem; color: #81a8bd; }
-.pc-services__regional-mark > span { width: 78px; height: 32px; background: currentColor; clip-path: polygon(0 100%, 22% 45%, 35% 68%, 58% 15%, 72% 56%, 82% 38%, 100% 100%, 87% 77%, 73% 67%, 58% 42%, 38% 80%, 23% 66%); }
+.pc-services__regional-mark > span { width: 78px; height: 32px; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .7; }
 .pc-services__regional-mark p { margin: 0; font-size: .61rem; letter-spacing: .18em; line-height: 1.65; text-transform: uppercase; }
 .pc-services__categories { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; }
 .pc-services__categories li { min-width: 0; border-right: 1px solid rgb(85 189 237 / 62%); }
@@ -761,8 +761,8 @@
 .pc-services__detail-item li { position: relative; padding: .18rem 0 .18rem 1.25rem; color: #d1dbe0; font-size: .68rem; line-height: 1.35; }
 .pc-services__detail-item li::before { position: absolute; top: .28rem; left: 0; display: grid; place-items: center; width: .85rem; height: .85rem; content: '✓'; color: #062033; background: var(--pc-blue); border-radius: 50%; font-size: .58rem; font-weight: 850; }
 .pc-services__detail-item > a { display: inline-flex; min-height: 34px; align-items: center; margin-top: .85rem; padding: .5rem 1rem; color: var(--pc-blue-bright); border: 1px solid var(--pc-blue); font-size: .65rem; font-weight: 650; letter-spacing: .09em; text-decoration: none; text-transform: uppercase; }
-.pc-services__fit { position: relative; z-index: 1; margin-top: .6rem; padding-block: 1rem 4rem; border-top: 1px solid rgb(85 189 237 / 40%); background: linear-gradient(0deg, rgb(2 15 25 / 88%), transparent); }
-.pc-services__fit::after { position: absolute; right: 0; bottom: 0; left: 0; height: 54px; content: ''; background: url('/brand/hero-storm-background-1942.webp') center 72% / cover; opacity: .5; clip-path: polygon(0 68%, 8% 42%, 14% 62%, 22% 28%, 29% 58%, 37% 38%, 43% 67%, 52% 32%, 59% 61%, 67% 37%, 76% 64%, 84% 34%, 92% 60%, 100% 40%, 100% 100%, 0 100%); }
+.pc-services__fit { position: relative; z-index: 1; margin-top: .6rem; padding-block: 1rem 6.5rem; border-top: 1px solid rgb(85 189 237 / 40%); background: linear-gradient(0deg, rgb(2 15 25 / 88%), transparent); }
+.pc-services__fit::after { position: absolute; right: 0; bottom: 0; left: 0; height: 104px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .74; pointer-events: none; }
 .pc-services__fit-inner { display: grid; grid-template-columns: 44px 230px minmax(0, 1fr) minmax(170px, 205px); gap: 1rem 1.6rem; align-items: center; }
 .pc-services__fit svg { width: 44px; height: 52px; fill: none; stroke: var(--pc-blue); stroke-width: 2.4; }
 .pc-services__fit .pc-label { margin: 0; color: var(--pc-white); font-weight: 650; }
@@ -809,8 +809,8 @@
 .pc-process__approval-sheet strong { padding-bottom: .35rem; border-bottom: 1px solid #82909a; font-size: .6rem; }
 .pc-process__approval-sheet span { font-size: .47rem; }
 
-.pc-process__base { position: relative; z-index: 3; padding-block: 1.8rem 6.2rem; background: linear-gradient(0deg, #071c2c, #0b2638); border-top: 1px solid rgb(85 189 237 / 42%); }
-.pc-process__base::after { position: absolute; right: 0; bottom: 0; left: 0; height: 74px; content: ''; background: url('/brand/hero-storm-background-1942.webp') center 71% / cover; opacity: .62; filter: saturate(.72) contrast(1.2); clip-path: polygon(0 60%, 7% 35%, 13% 58%, 21% 23%, 29% 55%, 37% 34%, 45% 64%, 54% 25%, 62% 58%, 71% 31%, 79% 62%, 87% 28%, 94% 56%, 100% 42%, 100% 100%, 0 100%); }
+.pc-process__base { position: relative; z-index: 3; padding-block: 1.8rem 8.7rem; background: linear-gradient(0deg, #071c2c, #0b2638); border-top: 1px solid rgb(85 189 237 / 42%); }
+.pc-process__base::after { position: absolute; right: 0; bottom: 0; left: 0; height: 120px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .8; pointer-events: none; }
 .pc-process__base-inner { display: grid; grid-template-columns: minmax(260px, .85fr) minmax(340px, 1.35fr) auto; gap: 2rem 3rem; align-items: center; }
 .pc-process__promise-mark { display: grid; grid-template-columns: 50px 1fr; gap: 1rem; align-items: center; }
 .pc-process__promise-mark svg { width: 48px; height: 56px; fill: none; stroke: var(--pc-blue); stroke-width: 2.4; }
@@ -900,7 +900,7 @@
 
 /* Preview footer shell */
 .pc-preview-footer { position: relative; color: #c7d2d8; background: #06121c; border-top: 1px solid var(--pc-line-dark); }
-.pc-preview-footer__mountains { position: absolute; z-index: 0; right: 0; bottom: 0; left: 0; height: 76px; background: url('/brand/hero-storm-background-1942.webp') center 72% / cover; opacity: .38; filter: grayscale(.2) contrast(1.2); pointer-events: none; }
+.pc-preview-footer__mountains { position: absolute; z-index: 0; right: 0; bottom: 0; left: 0; height: 116px; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .64; pointer-events: none; }
 .pc-preview-footer__inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); gap: clamp(3rem, 9vw, 9rem); width: min(100%, var(--pc-shell)); margin-inline: auto; padding: clamp(4rem, 8vw, 7rem) var(--pc-gutter); }
 .pc-preview-footer__identity { max-width: 470px; }
 .pc-preview-footer__identity > strong { display: block; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(1.35rem, 2.4vw, 2.15rem); font-weight: 670; letter-spacing: -.025em; line-height: 1.1; }
