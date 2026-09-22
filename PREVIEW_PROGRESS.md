@@ -488,6 +488,26 @@ The live homepage also exposes `/privacy/`, `/terms/`, and `/feed.xml`. The live
 - Earlier loopback preview processes can become stale when `dist` is rebuilt. The verified production-style Task 8 preview is running locally at `http://127.0.0.1:4343`.
 - All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
 
+### Final gallery architecture correction — 2026-09-21
+
+**Status:** COMPLETED
+
+- Completed the safe handoff from the superseded refinement direction without creating a temporary/WIP commit. No earlier refinement commit existed; work continued from Task 8 checkpoint `ce98bf4626b35a7a7130481e2f617fbcf2d7cf46`.
+- Rebuilt only `/__preview/gallery/` around one large primary Before/After comparison per project, followed by compact supporting thumbnails: Silverado 4, Murano 3, Toyota 2, and Lexus 1.
+- Preserved all 18 approved repair photographs in crawlable markup with accurate alt text, captions, project context, and explicit Before/After/Supporting Context labels. Existing 720px and 1200px AVIF, WebP, and JPEG derivatives are reused; no source image or privacy mask was modified.
+- Added a manual, Peak Country-styled native dialog lightbox with large 1200px images, project/state/view context, close, previous, next, Escape, left/right arrow navigation, mobile controls, and focus return. No autoplay, timer, automatic carousel, or gallery-plugin styling exists.
+- Reduced measured gallery height from 10077px to 7888px at 1440×1200 and from 12901px to 10002px at 390×844 while retaining every approved image.
+- Verified 18 gallery images, 4 primary comparisons, supporting-thumbnail counts of 4/3/2/1, no horizontal overflow, manual navigation, wraparound behavior, Escape close, explicit close, keyboard arrows, mobile navigation, and focus restoration.
+- Reconfirmed the locked Task 4–7 components and `/__preview/home/` composition have no diff from checkpoint `ce98bf4626b35a7a7130481e2f617fbcf2d7cf46`; the approved homepage Real Repairs component is visually and textually unchanged.
+- Reconfirmed `public/media/portfolio/` has no diff from checkpoint `ce98bf4626b35a7a7130481e2f617fbcf2d7cf46`, preserving all prior privacy edits and source integrity.
+- Astro project check: PASS — 87 files, 0 errors, 0 warnings, 0 hints.
+- Astro production build: PASS — preview routes prerendered successfully; the existing JavaScript chunk-size warning remains.
+- Automated Node test suite: PASS — 39 passed, 0 failed.
+- Final visual QA: PASS — captured 22 verified PNG files: one approved homepage Real Repairs reference, seven 1440×1200 gallery frames, twelve 390×844 gallery frames, and desktop/mobile lightbox views. Output folder: `/Users/rexmorrow/Documents/Codex/Peak-Country-Visual-Review-PNGs/task-8-final/`.
+- QA archive verification: PASS — all 22 PNGs test successfully in `/Users/rexmorrow/Documents/Codex/Peak-Country-Visual-Review-PNGs/Peak-Country-Task-8-Final-Visual-QA.zip` (10,352,878 bytes).
+- Verified production checkout remains on `peak-country-seo-hail-upgrade` at locked baseline `5f4dce4f487736053d1a4ab99c52cf95cc5025da`, with its pre-existing two modified and one untracked warranty paths unchanged.
+- Final verified preview URL: `http://127.0.0.1:4350/__preview/gallery/`.
+
 ## NEXT TASK
 
 **TASK 9 — RESULTS / TRUST / WARRANTY**

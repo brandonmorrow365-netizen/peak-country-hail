@@ -14,6 +14,33 @@ const projectDescriptions: Record<string, string> = {
   'toyota-4runner': 'Two paired views document a dent across the rear liftgate and the repaired panel from corresponding viewpoints.',
   'lexus-rx': 'One paired view documents rear-hatch dent damage and the repaired panel. A PDR-light view is retained as supporting evidence of the original panel distortion.',
 };
+
+const primaryAngles: Record<string, number> = {
+  '2013-silverado': 1,
+  'nissan-murano': 1,
+  'toyota-4runner': 1,
+  'lexus-rx': 1,
+};
+
+const cleanCaption = (caption: string) => caption.replace(/^(Before|After) · Angle \d — /, '');
+
+const galleryProjects = portfolioRepairs.map((repair) => {
+  const primaryAngle = primaryAngles[repair.repairId];
+  const primaryPair = portfolioPairs(repair).find((pair) => pair.angle === primaryAngle);
+
+  if (!primaryPair?.after) {
+    throw new Error(`Missing primary before-and-after pair for ${repair.repairId}`);
+  }
+
+  const primaryAfter = primaryPair.after;
+
+  return {
+    repair,
+    primaryPair,
+    primaryPhotos: [primaryPair.before, primaryAfter],
+    supportingPhotos: repair.photos.filter((photo) => photo.angle !== primaryAngle),
+  };
+});
 ---
 
 <PreviewLayout
@@ -43,7 +70,7 @@ const projectDescriptions: Record<string, string> = {
   </header>
 
   <div class="pc-gallery-projects" aria-label="Paintless dent repair portfolio">
-    {portfolioRepairs.map((repair, projectIndex) => (
+    {galleryProjects.map(({ repair, primaryPair, primaryPhotos, supportingPhotos }, projectIndex) => (
       <article class="pc-gallery-project" id={repair.slug}>
         <header class="pc-shell-width pc-gallery-project__header">
           <p class="pc-gallery-project__number" aria-hidden="true">{String(projectIndex + 1).padStart(2, '0')}</p>
@@ -54,31 +81,128 @@ const projectDescriptions: Record<string, string> = {
           <p>{projectDescriptions[repair.repairId]}</p>
         </header>
 
-        <div class="pc-shell-width pc-gallery-views">
-          {portfolioPairs(repair).map((pair, pairIndex) => (
-            <section class:list={['pc-gallery-view', { 'pc-gallery-view--primary': pairIndex === 0 }]} aria-labelledby={`${repair.slug}-view-${pair.angle}`}>
-              <header>
-                <h3 id={`${repair.slug}-view-${pair.angle}`}>View {String(pair.angle).padStart(2, '0')}</h3>
-                <p>{pair.after ? 'Corresponding before and after angles' : 'Additional before context; no matching after view'}</p>
-              </header>
-              <div class:list={['pc-gallery-pair', { 'pc-gallery-pair--single': !pair.after }] }>
-                {[pair.before, pair.after].filter(Boolean).map((photo) => photo && (
-                  <figure class:list={['pc-gallery-photo', { 'is-portrait': photo.height > photo.width }]}>
-                    <figcaption><strong>{photo.state === 'before' ? 'Before' : 'After'}</strong><span>{photo.caption.replace(/^(Before|After) · Angle \d — /, '')}</span></figcaption>
-                    <picture>
-                      <source type="image/avif" srcset={`${galleryImage(repair, photo, 720, 'avif')} 720w, ${galleryImage(repair, photo, 1200, 'avif')} 1200w`} sizes="(max-width: 760px) calc(100vw - 40px), 620px" />
-                      <source type="image/webp" srcset={`${galleryImage(repair, photo, 720, 'webp')} 720w, ${galleryImage(repair, photo, 1200, 'webp')} 1200w`} sizes="(max-width: 760px) calc(100vw - 40px), 620px" />
-                      <img src={galleryImage(repair, photo, 1200, 'jpg')} width={photo.width} height={photo.height} alt={photo.alt} loading={projectIndex === 0 && pairIndex === 0 ? 'eager' : 'lazy'} decoding="async" />
-                    </picture>
+        <div class="pc-shell-width pc-gallery-evidence">
+          <section class="pc-gallery-primary" aria-labelledby={`${repair.slug}-primary-heading`}>
+            <header>
+              <p class="pc-gallery-evidence__tier">Primary comparison</p>
+              <h3 id={`${repair.slug}-primary-heading`}>View {String(primaryPair.angle).padStart(2, '0')}</h3>
+            </header>
+            <div class="pc-gallery-primary__pair">
+              {primaryPhotos.map((photo) => {
+                const photoIndex = repair.photos.indexOf(photo);
+                const state = photo.state === 'before' ? 'Before' : 'After';
+                return (
+                  <figure class:list={['pc-gallery-primary__photo', { 'is-portrait': photo.height > photo.width }]}>
+                    <figcaption><strong>{state}</strong><span>{cleanCaption(photo.caption)}</span></figcaption>
+                    <button
+                      class="pc-gallery-open pc-gallery-open--primary"
+                      type="button"
+                      aria-label={`Open ${state.toLowerCase()} View ${String(photo.angle).padStart(2, '0')} for ${repair.vehicle} in the large image viewer`}
+                      aria-haspopup="dialog"
+                      data-gallery-open
+                      data-project-index={projectIndex}
+                      data-photo-index={photoIndex}
+                      data-project={repair.title}
+                      data-state-label={`${state} · Primary comparison`}
+                      data-view-label={`View ${String(photo.angle).padStart(2, '0')}`}
+                      data-caption={cleanCaption(photo.caption)}
+                      data-alt={photo.alt}
+                      data-avif={galleryImage(repair, photo, 1200, 'avif')}
+                      data-webp={galleryImage(repair, photo, 1200, 'webp')}
+                      data-jpg={galleryImage(repair, photo, 1200, 'jpg')}
+                    >
+                      <picture>
+                        <source type="image/avif" srcset={`${galleryImage(repair, photo, 720, 'avif')} 720w, ${galleryImage(repair, photo, 1200, 'avif')} 1200w`} sizes="(max-width: 760px) calc(100vw - 40px), 500px" />
+                        <source type="image/webp" srcset={`${galleryImage(repair, photo, 720, 'webp')} 720w, ${galleryImage(repair, photo, 1200, 'webp')} 1200w`} sizes="(max-width: 760px) calc(100vw - 40px), 500px" />
+                        <img src={galleryImage(repair, photo, 1200, 'jpg')} width={photo.width} height={photo.height} alt={photo.alt} loading={projectIndex === 0 ? 'eager' : 'lazy'} decoding="async" />
+                      </picture>
+                      <span class="pc-gallery-open__hint" aria-hidden="true">View larger <span>↗</span></span>
+                    </button>
                   </figure>
-                ))}
+                );
+              })}
+            </div>
+          </section>
+
+          <section class="pc-gallery-support" aria-labelledby={`${repair.slug}-support-heading`}>
+            <header class="pc-gallery-support__heading">
+              <div>
+                <p class="pc-gallery-evidence__tier">Supporting evidence</p>
+                <h3 id={`${repair.slug}-support-heading`}>{supportingPhotos.length} additional {supportingPhotos.length === 1 ? 'view' : 'views'}</h3>
               </div>
-            </section>
-          ))}
+              <p>Select any image for a closer look. Images advance only when you choose.</p>
+            </header>
+            <div class="pc-gallery-thumbnails">
+              {supportingPhotos.map((photo) => {
+                const photoIndex = repair.photos.indexOf(photo);
+                const hasAfter = repair.photos.some((candidate) => candidate.state === 'after' && candidate.angle === photo.angle);
+                const state = photo.state === 'before' ? 'Before' : 'After';
+                const evidenceLabel = !hasAfter && photo.state === 'before' ? 'Supporting context' : `${state} · Supporting view`;
+                return (
+                  <figure class:list={['pc-gallery-thumb', { 'is-portrait': photo.height > photo.width }]}>
+                    <button
+                      class="pc-gallery-open pc-gallery-open--thumb"
+                      type="button"
+                      aria-label={`Open ${evidenceLabel.toLowerCase()}, View ${String(photo.angle).padStart(2, '0')}, for ${repair.vehicle}`}
+                      aria-haspopup="dialog"
+                      data-gallery-open
+                      data-project-index={projectIndex}
+                      data-photo-index={photoIndex}
+                      data-project={repair.title}
+                      data-state-label={evidenceLabel}
+                      data-view-label={`View ${String(photo.angle).padStart(2, '0')}`}
+                      data-caption={cleanCaption(photo.caption)}
+                      data-alt={photo.alt}
+                      data-avif={galleryImage(repair, photo, 1200, 'avif')}
+                      data-webp={galleryImage(repair, photo, 1200, 'webp')}
+                      data-jpg={galleryImage(repair, photo, 1200, 'jpg')}
+                    >
+                      <picture>
+                        <source type="image/avif" srcset={galleryImage(repair, photo, 720, 'avif')} />
+                        <source type="image/webp" srcset={galleryImage(repair, photo, 720, 'webp')} />
+                        <img src={galleryImage(repair, photo, 1200, 'jpg')} width={photo.width} height={photo.height} alt={photo.alt} loading="lazy" decoding="async" />
+                      </picture>
+                      <span class="pc-gallery-open__hint" aria-hidden="true">Open <span>↗</span></span>
+                    </button>
+                    <figcaption>
+                      <strong>{evidenceLabel}</strong>
+                      <span>View {String(photo.angle).padStart(2, '0')} · {cleanCaption(photo.caption)}</span>
+                    </figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </section>
         </div>
       </article>
     ))}
   </div>
+
+  <dialog class="pc-gallery-lightbox" aria-labelledby="pc-gallery-lightbox-project" aria-describedby="pc-gallery-lightbox-caption">
+    <div class="pc-gallery-lightbox__panel">
+      <header class="pc-gallery-lightbox__header">
+        <div>
+          <p class="pc-gallery-lightbox__state" data-lightbox-state></p>
+          <h2 id="pc-gallery-lightbox-project" data-lightbox-project></h2>
+          <p class="pc-gallery-lightbox__view" data-lightbox-view></p>
+        </div>
+        <button class="pc-gallery-lightbox__close" type="button" aria-label="Close large image viewer" data-lightbox-close>Close <span aria-hidden="true">×</span></button>
+      </header>
+      <figure class="pc-gallery-lightbox__figure">
+        <picture>
+          <source type="image/avif" data-lightbox-avif />
+          <source type="image/webp" data-lightbox-webp />
+          <img src="" alt="" width="1200" height="900" data-lightbox-image />
+        </picture>
+        <figcaption id="pc-gallery-lightbox-caption" data-lightbox-caption></figcaption>
+      </figure>
+      <footer class="pc-gallery-lightbox__controls">
+        <button type="button" aria-label="Show previous image in this repair project" data-lightbox-previous><span aria-hidden="true">←</span> Previous</button>
+        <p aria-live="polite" data-lightbox-count></p>
+        <button type="button" aria-label="Show next image in this repair project" data-lightbox-next>Next <span aria-hidden="true">→</span></button>
+      </footer>
+    </div>
+  </dialog>
 
   <section class="pc-gallery-close pc-contour-surface" aria-labelledby="pc-gallery-close-heading">
     <div class="pc-shell-width pc-gallery-close__inner">
@@ -98,3 +222,90 @@ const projectDescriptions: Record<string, string> = {
     </div>
   </section>
 </PreviewLayout>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.pc-gallery-lightbox');
+  const triggers = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-gallery-open]'));
+  const closeButton = dialog?.querySelector<HTMLButtonElement>('[data-lightbox-close]');
+  const previousButton = dialog?.querySelector<HTMLButtonElement>('[data-lightbox-previous]');
+  const nextButton = dialog?.querySelector<HTMLButtonElement>('[data-lightbox-next]');
+  const project = dialog?.querySelector<HTMLElement>('[data-lightbox-project]');
+  const state = dialog?.querySelector<HTMLElement>('[data-lightbox-state]');
+  const view = dialog?.querySelector<HTMLElement>('[data-lightbox-view]');
+  const caption = dialog?.querySelector<HTMLElement>('[data-lightbox-caption]');
+  const count = dialog?.querySelector<HTMLElement>('[data-lightbox-count]');
+  const image = dialog?.querySelector<HTMLImageElement>('[data-lightbox-image]');
+  const avif = dialog?.querySelector<HTMLSourceElement>('[data-lightbox-avif]');
+  const webp = dialog?.querySelector<HTMLSourceElement>('[data-lightbox-webp]');
+  let activeTrigger: HTMLButtonElement | null = null;
+
+  const projectTriggers = () => activeTrigger
+    ? triggers.filter((trigger) => trigger.dataset.projectIndex === activeTrigger?.dataset.projectIndex)
+    : [];
+
+  const updateLightbox = (trigger: HTMLButtonElement) => {
+    activeTrigger = trigger;
+    const sequence = projectTriggers();
+    const currentIndex = sequence.indexOf(trigger);
+
+    if (project) project.textContent = trigger.dataset.project ?? '';
+    if (state) state.textContent = trigger.dataset.stateLabel ?? '';
+    if (view) view.textContent = trigger.dataset.viewLabel ?? '';
+    if (caption) caption.textContent = trigger.dataset.caption ?? '';
+    if (count) count.textContent = `${currentIndex + 1} / ${sequence.length}`;
+    if (avif) avif.srcset = trigger.dataset.avif ?? '';
+    if (webp) webp.srcset = trigger.dataset.webp ?? '';
+    if (image) {
+      image.src = trigger.dataset.jpg ?? '';
+      image.alt = trigger.dataset.alt ?? '';
+    }
+  };
+
+  const openLightbox = (trigger: HTMLButtonElement) => {
+    if (!dialog) return;
+    updateLightbox(trigger);
+    dialog.showModal();
+    document.documentElement.classList.add('pc-lightbox-open');
+    closeButton?.focus();
+  };
+
+  const closeLightbox = () => {
+    if (!dialog?.open) return;
+    dialog.close();
+  };
+
+  const moveLightbox = (direction: -1 | 1) => {
+    const sequence = projectTriggers();
+    const currentIndex = activeTrigger ? sequence.indexOf(activeTrigger) : -1;
+    if (currentIndex < 0 || sequence.length === 0) return;
+    const nextIndex = (currentIndex + direction + sequence.length) % sequence.length;
+    updateLightbox(sequence[nextIndex]);
+  };
+
+  triggers.forEach((trigger) => trigger.addEventListener('click', () => openLightbox(trigger)));
+  closeButton?.addEventListener('click', closeLightbox);
+  previousButton?.addEventListener('click', () => moveLightbox(-1));
+  nextButton?.addEventListener('click', () => moveLightbox(1));
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) closeLightbox();
+  });
+  dialog?.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeLightbox();
+  });
+  dialog?.addEventListener('close', () => {
+    document.documentElement.classList.remove('pc-lightbox-open');
+    activeTrigger?.focus();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (!dialog?.open) return;
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      moveLightbox(-1);
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      moveLightbox(1);
+    }
+  });
+</script>
