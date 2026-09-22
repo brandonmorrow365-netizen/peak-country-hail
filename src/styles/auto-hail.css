@@ -27,6 +27,12 @@
 :is(.service-head--auto-hail, .auto-hail-article, .service-cta--auto-hail) .button:hover { background: var(--pc-blue-bright); border-color: var(--pc-blue-bright); transform: none; }
 .service-head--auto-hail { padding-block: clamp(4.75rem, 9vw, 8rem); border-bottom: 1px solid rgb(85 189 237 / 42%); }
 .service-head--auto-hail { background-image: linear-gradient(90deg, rgb(6 24 45 / 78%), rgb(8 38 65 / 56%) 60%, rgb(6 24 45 / 32%)), url('/brand/hero-storm-background-1942.webp'); }
+/* The approved vehicle is decorative and exclusive to the Auto Hail hero. */
+.service-head--auto-hail { isolation: isolate; }
+.service-head--auto-hail::before { position: absolute; z-index: -1; right: -2%; bottom: 0; width: 58%; height: 80%; content: ''; background: url('/images/auto-hail-approved-hero-truck.png') right bottom / contain no-repeat; pointer-events: none; }
+@media (max-width: 1100px) {
+  .service-head--auto-hail::before { display: none; }
+}
 .service-head--auto-hail h1 { max-width: 980px; font-family: var(--pc-font-display); font-size: clamp(3rem, 5.2vw, 5.15rem); font-weight: 670; letter-spacing: -.05em; line-height: .96; text-transform: none; }
 .service-head--auto-hail p { max-width: 720px; margin-top: 1.5rem; color: #c6d3da; line-height: 1.6; }
 .service-head--auto-hail .eyebrow { color: var(--pc-blue-bright); }
