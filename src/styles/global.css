@@ -513,7 +513,7 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
 .warranty-hero .about-actions { margin-top: 2rem; }
 
 .warranty-body { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(180deg, #071a28 0%, #091d2a 52%, #071722 100%); }
-.warranty-body::before { position: absolute; z-index: 0; inset: 0; content: ''; background: url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') center 42% / cover no-repeat; filter: grayscale(1) saturate(.1) contrast(.72); opacity: .075; mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 82%, transparent 100%); pointer-events: none; }
+.warranty-body::before { position: absolute; z-index: 0; inset: 0; content: ''; background: url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') center 42% / cover no-repeat; filter: grayscale(1) saturate(.1) contrast(.72); opacity: .125; mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 82%, transparent 100%); pointer-events: none; }
 .warranty-body__inner { position: relative; z-index: 1; width: min(100%, 1120px); margin-inline: auto; padding: clamp(4.5rem, 8vw, 7.5rem) 1.5rem; }
 .warranty-coverage { display: grid; grid-template-columns: minmax(180px, .35fr) minmax(0, 1fr); gap: clamp(2rem, 7vw, 6rem); align-items: start; padding-bottom: clamp(3.75rem, 7vw, 6rem); }
 .warranty-coverage > .eyebrow { margin: .45rem 0 0; color: #55bded; }
@@ -556,7 +556,7 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .warranty-close__actions { align-items: stretch; flex-direction: column; }
   .warranty-close__actions .button,
   .warranty-close__actions .text-link { width: 100%; text-align: center; }
-  .warranty-body::before { background-position: 44% center; opacity: .06; }
+  .warranty-body::before { background-position: 44% center; opacity: .11; }
   .warranty-mountain-finish { height: 92px; background-size: auto 100%; }
 }
 

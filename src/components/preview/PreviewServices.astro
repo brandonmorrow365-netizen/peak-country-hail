@@ -8,10 +8,11 @@ const details = [
     benefits: ['Insurance and out-of-pocket repairs', 'Comprehensive damage evaluations', 'Experience with all makes and models', 'Clear communication throughout the process'],
     href: '/auto-hail-repair/',
     link: 'Explore Hail Repair',
-    image: '/media/portfolio/2013-silverado/before-angle-2.jpg',
-    avif: '/media/portfolio/2013-silverado/before-angle-2-720.avif',
-    webp: '/media/portfolio/2013-silverado/before-angle-2-720.webp',
-    alt: 'Hail dents visible across a Chevrolet Silverado panel before repair',
+    image: '/images/auto-hail-damage-under-pdr-light.jpg',
+    mobile: '/images/auto-hail-damage-under-pdr-light-720.jpg',
+    avif: null,
+    webp: null,
+    alt: 'Multiple hail dents visible across a dark vehicle panel under PDR reflection lighting',
   },
   {
     id: 'paintless-dent-repair-detail',
@@ -22,6 +23,7 @@ const details = [
     href: '/paintless-dent-repair/',
     link: 'Explore PDR Services',
     image: '/media/portfolio/lexus-rx/before-angle-2.jpg',
+    mobile: null,
     avif: '/media/portfolio/lexus-rx/before-angle-2-720.avif',
     webp: '/media/portfolio/lexus-rx/before-angle-2-720.webp',
     alt: 'Localized dent on a Lexus RX panel before paintless dent repair',
@@ -35,6 +37,7 @@ const details = [
     href: '/service-area/',
     link: 'Learn About Mobile Service',
     image: '/media/portfolio/toyota-4runner/after-angle-1.jpg',
+    mobile: null,
     avif: '/media/portfolio/toyota-4runner/after-angle-1-720.avif',
     webp: '/media/portfolio/toyota-4runner/after-angle-1-720.webp',
     alt: 'Clean Toyota 4Runner panel after paintless dent repair',
@@ -99,8 +102,9 @@ const details = [
         <article id={service.id} class="pc-services__detail-item" aria-labelledby={`${service.id}-heading`}>
           <div class="pc-services__detail-top">
             <picture>
-              <source type="image/avif" srcset={service.avif} />
-              <source type="image/webp" srcset={service.webp} />
+              {service.mobile && <source media="(max-width: 680px)" srcset={service.mobile} />}
+              {service.avif && <source type="image/avif" srcset={service.avif} />}
+              {service.webp && <source type="image/webp" srcset={service.webp} />}
               <img src={service.image} width="720" height="540" alt={service.alt} loading="lazy" decoding="async" />
             </picture>
             <div><p>{service.label}</p><h3 id={`${service.id}-heading`}>{service.title}</h3></div>
