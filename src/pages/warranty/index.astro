@@ -6,16 +6,54 @@ const title = 'Limited Lifetime Workmanship Warranty | Peak Country';
 const description = 'A concise summary of Peak Country’s Limited Lifetime Workmanship Warranty for qualifying paintless dent repair work.';
 ---
 <Layout title={title} description={description} exactTitle>
-  <header class="page-head standards-head"><div class="eyebrow">Clear terms · Careful repair</div><h1>Limited Lifetime Workmanship Warranty</h1><p>Qualifying Peak Country Paintless Dent Repair work is backed by a Limited Lifetime Workmanship Warranty for as long as the original customer owns the vehicle.</p><div class="about-actions"><a class="button" href="/get-started/">Get Started →</a><a class="text-link" href="/faq/#insurance-questions">Insurance FAQ →</a></div></header>
-  <article class="section narrow prose">
-    <div class="callout"><strong>Workmanship coverage, stated clearly.</strong><p>The warranty is non-transferable and applies to Peak Country workmanship on the specific qualifying repair performed, including applicable Peak Country R&amp;I workmanship where relevant.</p></div>
-    <h2>What to do if you have a concern</h2>
-    <p>Please report a suspected workmanship concern within 30 calendar days after discovery, or when it reasonably should have been discovered. Give Peak Country a reasonable opportunity to inspect the concern before another party alters the affected repair area.</p>
-    <h2>What this summary does not cover</h2>
-    <p>The warranty does not cover new or unrelated damage, later hail damage, later collision damage, pre-existing conditions, previous repairs, factory or component failure, later alteration, or applicable incidental or consequential expenses to the extent permitted by law.</p>
-    <h2>Access and vehicle care</h2>
-    <p>PDR access may use existing factory openings or appropriate created access points where professionally appropriate. When repair access affects corrosion protection, Peak Country uses appropriate professional products and recognized repair practices for accessible affected areas.</p>
-    <p>This page is a useful customer summary, not the complete customer warranty document. Repair-specific questions can be discussed before work is authorized.</p>
-  </article>
-  <section class="section faq-links"><a href="/faq/#insurance-questions">Insurance &amp; Documentation FAQ →</a><a href="/repair-standards/">PDR Repair Standards →</a><a href="/auto-hail-repair/">Auto Hail Repair →</a><a href={`tel:${site.phone}`}>Call {site.phoneDisplay} →</a></section>
+  <div class="warranty-page">
+    <header class="page-head warranty-hero">
+      <div class="eyebrow">Clear terms · Careful repair</div>
+      <h1><span>Limited Lifetime</span><span>Workmanship Warranty</span></h1>
+      <p>Qualifying Peak Country Paintless Dent Repair work is backed by a Limited Lifetime Workmanship Warranty for as long as the original customer owns the vehicle.</p>
+      <div class="about-actions"><a class="button" href="/get-started/">Get Started →</a><a class="text-link" href="/faq/#insurance-questions">Insurance FAQ →</a></div>
+    </header>
+
+    <article class="warranty-body" aria-label="Workmanship warranty summary">
+      <div class="warranty-body__inner">
+        <section class="warranty-coverage" aria-labelledby="warranty-coverage-heading">
+          <div class="eyebrow">Workmanship coverage</div>
+          <div class="warranty-callout">
+            <h2 id="warranty-coverage-heading">Workmanship coverage, stated clearly.</h2>
+            <p>The warranty is non-transferable and applies to Peak Country workmanship on the specific qualifying repair performed, including applicable Peak Country R&amp;I workmanship where relevant.</p>
+          </div>
+        </section>
+
+        <section class="warranty-section" aria-labelledby="warranty-concern-heading">
+          <div><span aria-hidden="true">01</span><p>Reporting a concern</p></div>
+          <div><h2 id="warranty-concern-heading">What to do if you have a concern</h2><p>Please report a suspected workmanship concern within 30 calendar days after discovery, or when it reasonably should have been discovered. Give Peak Country a reasonable opportunity to inspect the concern before another party alters the affected repair area.</p></div>
+        </section>
+
+        <section class="warranty-section" aria-labelledby="warranty-exclusions-heading">
+          <div><span aria-hidden="true">02</span><p>Limitations</p></div>
+          <div><h2 id="warranty-exclusions-heading">What this summary does not cover</h2><p>The warranty does not cover new or unrelated damage, later hail damage, later collision damage, pre-existing conditions, previous repairs, factory or component failure, later alteration, or applicable incidental or consequential expenses to the extent permitted by law.</p></div>
+        </section>
+
+        <section class="warranty-section" aria-labelledby="warranty-access-heading">
+          <div><span aria-hidden="true">03</span><p>Repair access</p></div>
+          <div><h2 id="warranty-access-heading">Access and vehicle care</h2><p>PDR access may use existing factory openings or appropriate created access points where professionally appropriate. When repair access affects corrosion protection, Peak Country uses appropriate professional products and recognized repair practices for accessible affected areas.</p><p class="warranty-complete-terms">This page is a useful customer summary, not the complete customer warranty document. Repair-specific questions can be discussed before work is authorized.</p></div>
+        </section>
+
+        <nav class="warranty-resources" aria-label="Warranty resources">
+          <a href="/faq/#insurance-questions">Insurance &amp; Documentation FAQ →</a>
+          <a href="/repair-standards/">PDR Repair Standards →</a>
+          <a href="/auto-hail-repair/">Auto Hail Repair →</a>
+          <a href={`tel:${site.phone}`}>Call {site.phoneDisplay} →</a>
+        </nav>
+      </div>
+    </article>
+
+    <section class="warranty-close" aria-labelledby="warranty-close-heading">
+      <div class="warranty-close__inner">
+        <div><div class="eyebrow">Clear answers before repair</div><h2 id="warranty-close-heading">Questions about our workmanship warranty?</h2></div>
+        <div class="warranty-close__actions"><a class="button" href={`tel:${site.phone}`}>Call or Text</a><a class="text-link" href="/get-started/">Get Started →</a></div>
+      </div>
+      <div class="warranty-mountain-finish" aria-hidden="true"></div>
+    </section>
+  </div>
 </Layout>

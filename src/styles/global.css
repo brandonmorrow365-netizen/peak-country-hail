@@ -497,6 +497,66 @@ textarea { min-height: 130px; resize: vertical; }
 .site-footer__legal { display: flex; gap: var(--space-4); }
 .site-footer > .fine, .site-footer__inner > .fine { grid-column: 1 / -1; max-width: 900px; color: #9fb4c2; }
 
+/* Warranty: dark editorial presentation aligned with the approved preview system */
+main:has(.warranty-page) { color: #d6e0e5; background: #071522; }
+main:has(.warranty-page) > .breadcrumbs { width: 100%; max-width: none; margin: 0; padding: .75rem max(1.5rem, calc((100vw - var(--content)) / 2)); color: #94a8b5; background: #071522; border-bottom: 1px solid rgb(139 194 222 / 18%); }
+main:has(.warranty-page) > .breadcrumbs li + li::before { color: #55778c; }
+main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
+
+.warranty-page { --warranty-line: rgb(160 193 211 / 24%); color: #d6e0e5; background: #071522; }
+.warranty-hero { min-height: clamp(410px, 46vw, 600px); padding-block: clamp(4.75rem, 9vw, 8rem); background: linear-gradient(90deg, rgb(3 17 30 / 96%) 0%, rgb(4 22 37 / 83%) 48%, rgb(4 23 38 / 48%) 100%), linear-gradient(0deg, rgb(3 17 30 / 92%) 0%, transparent 42%), url('/brand/hero-storm-background-1942.webp') center 48% / cover no-repeat; border-bottom: 1px solid rgb(85 189 237 / 42%); }
+.warranty-hero::after { right: auto; left: max(1.5rem, calc((100vw - var(--content)) / 2)); width: min(180px, 24vw); height: 2px; background: #55bded; }
+.warranty-hero h1 { max-width: 900px; margin: 0; color: #fbfcf9; font-family: Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", var(--font-body); font-size: clamp(3rem, 6.3vw, 6rem); font-weight: 690; letter-spacing: -.055em; line-height: .94; text-shadow: 0 6px 28px rgb(0 0 0 / 48%); text-transform: none; }
+.warranty-hero h1 span { display: block; }
+.warranty-hero > p { max-width: 710px; margin-top: 1.5rem; color: #c6d3da; font-size: clamp(1rem, 1.45vw, 1.15rem); line-height: 1.6; }
+.warranty-hero .eyebrow { margin-bottom: 1.15rem; color: #67c6f1; }
+.warranty-hero .about-actions { margin-top: 2rem; }
+
+.warranty-body { background: linear-gradient(135deg, #071a28 0%, #091f30 48%, #071722 100%); }
+.warranty-body__inner { width: min(100%, 1120px); margin-inline: auto; padding: clamp(4.5rem, 8vw, 7.5rem) 1.5rem; }
+.warranty-coverage { display: grid; grid-template-columns: minmax(180px, .35fr) minmax(0, 1fr); gap: clamp(2rem, 7vw, 6rem); align-items: start; padding-bottom: clamp(3.75rem, 7vw, 6rem); }
+.warranty-coverage > .eyebrow { margin: .45rem 0 0; color: #55bded; }
+.warranty-callout { padding: clamp(1.5rem, 3vw, 2.25rem); background: #0d293d; border-left: 3px solid #55bded; }
+.warranty-callout h2 { margin: 0; color: #fbfcf9; font-family: Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", var(--font-body); font-size: clamp(1.65rem, 3vw, 2.45rem); font-weight: 650; letter-spacing: -.035em; line-height: 1.08; }
+.warranty-callout p { max-width: 730px; margin: 1rem 0 0; color: #becbd2; line-height: 1.7; }
+
+.warranty-section { display: grid; grid-template-columns: minmax(180px, .35fr) minmax(0, 1fr); gap: clamp(2rem, 7vw, 6rem); padding-block: clamp(2.75rem, 5vw, 4.5rem); border-top: 1px solid var(--warranty-line); }
+.warranty-section > div:first-child { display: grid; align-content: start; gap: .65rem; }
+.warranty-section > div:first-child span { color: rgb(85 189 237 / 72%); font-size: .75rem; font-weight: 800; letter-spacing: .16em; }
+.warranty-section > div:first-child p { margin: 0; color: #899ca7; font-size: .7rem; font-weight: 750; letter-spacing: .12em; line-height: 1.45; text-transform: uppercase; }
+.warranty-section h2 { margin: 0; color: #f4f7f6; font-family: Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", var(--font-body); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 650; letter-spacing: -.04em; line-height: 1.04; }
+.warranty-section > div:last-child > p { max-width: 760px; margin: 1.1rem 0 0; color: #b7c5cc; font-size: 1rem; line-height: 1.75; }
+.warranty-complete-terms { margin-top: 2rem !important; padding: 1.25rem 1.5rem; color: #d2dde2 !important; background: rgb(13 41 61 / 72%); border-top: 1px solid #55bded; }
+
+.warranty-resources { display: grid; grid-template-columns: repeat(2, 1fr); margin-top: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--warranty-line); border-left: 1px solid var(--warranty-line); }
+.warranty-resources a { min-height: 64px; padding: 1.15rem 1.25rem; color: #bcd9e8; border-right: 1px solid var(--warranty-line); border-bottom: 1px solid var(--warranty-line); font-size: .75rem; font-weight: 760; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+.warranty-resources a:hover { color: #86d6fa; background: rgb(85 189 237 / 6%); }
+
+.warranty-close { position: relative; min-height: 330px; padding: clamp(4rem, 7vw, 6rem) 1.5rem 8.5rem; overflow: hidden; background: #06121c; border-top: 1px solid rgb(85 189 237 / 35%); }
+.warranty-close__inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2.5rem 5rem; align-items: end; width: min(100%, 1120px); margin-inline: auto; }
+.warranty-close h2 { max-width: 720px; margin: 0; color: #fbfcf9; font-family: Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", var(--font-body); font-size: clamp(2.15rem, 4.4vw, 4.2rem); font-weight: 650; letter-spacing: -.045em; line-height: 1; }
+.warranty-close .eyebrow { color: #55bded; }
+.warranty-close__actions { display: flex; gap: 1.4rem; align-items: center; padding-bottom: .35rem; }
+.warranty-close__actions .text-link { color: #d9e7ed; white-space: nowrap; }
+.warranty-mountain-finish { position: absolute; z-index: 0; right: 0; bottom: 0; left: 0; height: 92px; background: url('/brand/hero-storm-background-1942.webp') center 72% / cover; opacity: .38; filter: grayscale(.2) contrast(1.2); pointer-events: none; }
+
+@media (max-width: 720px) {
+  .warranty-hero { min-height: 390px; padding-block: 4.5rem 5.25rem; padding-inline: 1.25rem; background-image: linear-gradient(90deg, rgb(3 17 30 / 94%), rgb(4 22 37 / 65%)), linear-gradient(0deg, rgb(3 17 30 / 94%), transparent 50%), url('/brand/hero-storm-background-960.webp'); }
+  .warranty-hero h1 { font-size: clamp(2.75rem, 13vw, 4.2rem); }
+  .warranty-hero .about-actions .button { width: auto; }
+  .warranty-body__inner { padding: 4rem 1.25rem; }
+  .warranty-coverage,
+  .warranty-section { grid-template-columns: 1fr; gap: 1.4rem; }
+  .warranty-coverage { padding-bottom: 3.5rem; }
+  .warranty-section > div:first-child { grid-template-columns: auto 1fr; gap: 1rem; align-items: center; }
+  .warranty-resources { grid-template-columns: 1fr; }
+  .warranty-close { padding-inline: 1.25rem; padding-bottom: 8.5rem; }
+  .warranty-close__inner { grid-template-columns: 1fr; gap: 2rem; }
+  .warranty-close__actions { align-items: stretch; flex-direction: column; }
+  .warranty-close__actions .button,
+  .warranty-close__actions .text-link { width: 100%; text-align: center; }
+}
+
 @media (max-width: 1024px) {
   .site-nav { gap: .8rem; }
   .site-nav > a:not(.button) { font-size: .8rem; }
