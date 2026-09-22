@@ -1,6 +1,7 @@
 interface ServiceLink { href:string; label:string }
+interface ServiceSectionImage { src:string; smallSrc:string; width:number; height:number; alt:string }
 interface EducationalFeature { eyebrow:string; heading:string; paragraphs:string[]; image:{src:string;smallSrc:string;width:number;height:number;alt:string;caption:string;name:string;description:string}; links:ServiceLink[]; cta:ServiceLink }
-export interface ServicePage { title:string; description:string; h1:string; intro:string; serviceType:string; educationalFeature?:EducationalFeature; sections:{heading:string;paragraphs:string[];links?:ServiceLink[]}[]; faqs:{question:string;answer:string}[]; related:ServiceLink[] }
+export interface ServicePage { title:string; description:string; h1:string; intro:string; serviceType:string; variant?:'auto-hail'; educationalFeature?:EducationalFeature; sections:{heading:string;paragraphs:string[];links?:ServiceLink[];image?:ServiceSectionImage}[]; faqs:{question:string;answer:string}[]; related:ServiceLink[] }
 
 export const servicePages:Record<string,ServicePage> = {
   'auto-hail-repair': {
@@ -9,11 +10,18 @@ export const servicePages:Record<string,ServicePage> = {
     h1:'Auto Hail Repair in Greeley and Northern Colorado',
     intro:'Hail damage is evaluated panel by panel and as a complete vehicle. Peak Country uses professional PDR lighting, considers the repair conditions and vehicle construction, and recommends paintless dent repair only where it is technically appropriate.',
     serviceType:'Auto Hail Repair',
+    variant:'auto-hail',
     sections:[
       {heading:'What automotive hail damage can look like',paragraphs:[
         'Automotive hail damage rarely appears as one uniform group of dents. A hood may show broad, shallow impressions while the roof has sharper impacts. Fender and door damage can be harder to see because reflections change across curved panels. Quarter-panel dents may sit near body lines or areas with limited access behind the metal. Moldings, roof rails, trim, lights, and glass also need attention during a complete inspection.',
         'Dent count is only part of the picture. Depth, diameter, location, panel material, paint condition, and metal stretch all influence repairability. A shallow dent in open steel may respond differently from a deep impact on a reinforced body line. Cracked paint or metal stretched beyond its workable range can change the recommended repair method.'
-      ],links:[{href:'/hail-size-guide/',label:'Understand reported hail sizes'},{href:'/after-a-hailstorm/',label:'What to do after a hailstorm'}]},
+      ],links:[{href:'/hail-size-guide/',label:'Understand reported hail sizes'},{href:'/after-a-hailstorm/',label:'What to do after a hailstorm'}],image:{
+        src:'/images/auto-hail-damage-before-after-peak-country-greeley-co.webp',
+        smallSrc:'/images/auto-hail-damage-before-after-peak-country-greeley-co-720.webp',
+        width:1088,
+        height:1446,
+        alt:'Before and after comparison of distributed hail dents repaired on a dark vehicle roof at Peak Country'
+      }},
       {heading:'Why a controlled hail evaluation matters',paragraphs:[
         'Purpose-built reflection lighting makes subtle changes in a panel easier to read. The reflected lines reveal low spots, crowns, waves, and distortion that ordinary garage or outdoor light can hide. A clean, dry vehicle and a controlled indoor environment make a more complete hail assessment possible; hail repairs generally benefit from those conditions.',
         'The inspection separates visible hail dents from unrelated scratches, chips, prior bodywork, and everyday door dings. Moving the light and viewing each panel from several angles helps establish dent count, severity, and pattern. Photographs can begin a conversation, but they often miss shallow damage and cannot show access behind the panel.'
