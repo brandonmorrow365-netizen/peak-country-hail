@@ -47,21 +47,14 @@
   overflow: hidden;
   padding-block: clamp(4.25rem, 7vw, 7rem);
   color: #d7e0e5;
-  background: #061724;
-  border-top: 1px solid rgb(85 189 237 / 42%);
+  background: #061722;
 }
 
 .pc-home-repairs::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 112px;
-  content: '';
-  background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat;
-  opacity: .72;
-  pointer-events: none;
+  content: none;
 }
+
+.pc-home-repairs.pc-contour-surface::before { content: none; }
 
 .pc-home-repairs__heading {
   display: grid;
@@ -295,11 +288,10 @@
 /* Task 9: restrained trust and workmanship warranty layer */
 .pc-home-trust {
   position: relative;
-  padding-block: clamp(4rem, 7vw, 6.5rem) 0;
+  padding-block: clamp(4rem, 7vw, 6.5rem) clamp(5rem, 8vw, 7rem);
   color: #d6e0e5;
-  background: #091b29;
-  border-top: 1px solid rgb(85 189 237 / 42%);
-  border-bottom: 1px solid var(--pc-line-dark);
+  background: #071a27;
+  border-top: 1px solid rgb(160 193 211 / 14%);
 }
 
 .pc-home-trust__layout {
@@ -497,6 +489,8 @@
   opacity: .34;
 }
 
+.pc-preview-body:has(#why-peak-country) .pc-preview-header__main::after { background: rgb(85 189 237 / 5%); border-bottom: 1px solid rgb(85 189 237 / 18%); opacity: 1; }
+
 .pc-preview-logo { flex: 0 0 144px; line-height: 0; }
 .pc-preview-logo img { display: block; width: 144px; height: auto; }
 
@@ -597,7 +591,7 @@
 .pc-preview-status dd { margin: 0; color: #e0e7e9; font-size: .85rem; font-weight: 640; }
 
 /* Preview homepage hero */
-.pc-home-hero { position: relative; color: var(--pc-paper); background: #061522; border-bottom: 1px solid var(--pc-line-dark); isolation: isolate; }
+.pc-home-hero { position: relative; color: var(--pc-paper); background: #061522; isolation: isolate; }
 .pc-home-hero__surface { position: relative; min-height: clamp(720px, 78vh, 850px); overflow: hidden; }
 .pc-home-hero__landscape { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #0b1b2b; }
 .pc-home-hero__picture { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
@@ -687,9 +681,9 @@
 }
 
 /* Why Peak Country */
-.pc-why { position: relative; color: var(--pc-paper); background: #081a27; border-bottom: 1px solid var(--pc-line-dark); overflow: hidden; }
-.pc-why__credibility { position: relative; z-index: 3; background: rgb(6 22 34 / 95%); border-block: 1px solid rgb(85 189 237 / 32%); }
-.pc-why__credibility::before { position: absolute; right: 0; bottom: 100%; left: 0; height: 88px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .58; pointer-events: none; }
+.pc-why { position: relative; color: var(--pc-paper); background: #071824; overflow: hidden; }
+.pc-why__credibility { position: relative; z-index: 3; background: rgb(6 22 34 / 92%); border-bottom: 1px solid rgb(85 189 237 / 20%); }
+.pc-why__credibility::before { content: none; }
 .pc-why__credibility-inner { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: 1.1rem; }
 .pc-why__credibility-inner > div { display: grid; gap: .05rem; justify-items: center; padding-inline: 1.5rem; text-align: center; border-right: 1px solid rgb(85 189 237 / 55%); }
 .pc-why__credibility-inner > div:last-child { border-right: 0; }
@@ -703,7 +697,7 @@
 .pc-why__photo img { position: absolute; inset: 0; object-fit: cover; object-position: 48% 43%; filter: saturate(.84) contrast(1.07); }
 .pc-why__photo figcaption { position: absolute; z-index: 3; bottom: 4.7rem; left: clamp(2rem, 5vw, 4.8rem); display: grid; gap: .28rem; color: #c7d2d8; font-size: .68rem; font-weight: 520; letter-spacing: .2em; line-height: 1.45; text-transform: uppercase; }
 .pc-why__photo figcaption::after { width: 2.6rem; height: 2px; margin-top: .85rem; content: ''; background: var(--pc-blue); }
-.pc-why__panel { display: flex; min-width: 0; flex-direction: column; justify-content: center; padding-block: clamp(3rem, 5.2vw, 5.25rem); padding-inline: clamp(2.25rem, 3vw, 3rem); background: linear-gradient(115deg, #0a202f, #071a27); }
+.pc-why__panel { display: flex; min-width: 0; flex-direction: column; justify-content: center; padding-block: clamp(3rem, 5.2vw, 5.25rem); padding-inline: clamp(2.25rem, 3vw, 3rem); background: rgb(7 24 36 / 96%); }
 .pc-why__copy h2 { max-width: 680px; margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(2.5rem, 3.45vw, 3.45rem); font-weight: 610; letter-spacing: -.03em; line-height: 1.06; }
 .pc-why__copy h2 span { display: block; }
 .pc-why__copy > p:not(.pc-kicker) { max-width: 650px; margin: 1.35rem 0 0; color: #b8c6ce; font-size: .98rem; line-height: 1.55; }
@@ -713,10 +707,10 @@
 .pc-why__number { color: rgb(85 189 237 / 58%); font-family: var(--pc-font-display); font-size: 2.7rem; font-weight: 520; letter-spacing: -.04em; line-height: .9; }
 .pc-why__principles h3 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: .82rem; font-weight: 650; letter-spacing: .06em; line-height: 1.45; text-transform: uppercase; }
 .pc-why__principles p { margin: .7rem 0 0; color: #b0bec6; font-size: .78rem; line-height: 1.5; }
-.pc-why__mountains { position: absolute; z-index: 4; right: 0; bottom: 0; left: 0; height: 112px; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .78; pointer-events: none; }
+.pc-why__mountains { display: none; }
 
 /* What We Repair + detailed services */
-.pc-services { color: var(--pc-paper); background: #071824; border-bottom: 1px solid var(--pc-line-dark); }
+.pc-services { color: var(--pc-paper); background: #071824; }
 .pc-services__overview { position: relative; min-height: 480px; overflow: hidden; }
 .pc-services__overview-photo { position: absolute; inset: 0; }
 .pc-services__overview-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 42%; filter: saturate(.76) contrast(1.12); }
@@ -728,20 +722,22 @@
 .pc-button--outline-light { min-height: 42px; color: var(--pc-blue-bright); background: rgb(3 18 29 / 22%); border-color: var(--pc-blue); font-weight: 620; }
 .pc-button--outline-light:hover { color: var(--pc-white); background: rgb(3 18 29 / 82%); }
 .pc-services__regional-mark { display: flex; gap: 1.1rem; align-items: center; margin-top: 2.2rem; color: #81a8bd; }
-.pc-services__regional-mark > span { width: 78px; height: 32px; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .7; }
+.pc-services__regional-mark > span { position: relative; width: 78px; height: 1px; background: currentColor; opacity: .7; }
+.pc-services__regional-mark > span::after { position: absolute; top: -2px; right: 0; width: 5px; height: 5px; content: ''; background: var(--pc-blue); }
 .pc-services__regional-mark p { margin: 0; font-size: .61rem; letter-spacing: .18em; line-height: 1.65; text-transform: uppercase; }
-.pc-services__categories { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; }
-.pc-services__categories li { min-width: 0; border-right: 1px solid rgb(85 189 237 / 62%); }
+.pc-services__categories { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; counter-reset: pc-service; }
+.pc-services__categories li { min-width: 0; border-right: 1px solid rgb(85 189 237 / 32%); counter-increment: pc-service; }
 .pc-services__categories li:last-child { border-right: 0; }
 .pc-services__categories a { display: grid; align-content: end; min-height: 260px; padding: 1rem clamp(1rem, 2vw, 2rem); color: inherit; text-decoration: none; }
-.pc-services__categories svg { width: 3.2rem; height: 3.2rem; margin-bottom: .75rem; fill: none; stroke: var(--pc-blue); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.pc-services__categories a::before { margin-bottom: .7rem; content: '0' counter(pc-service); color: var(--pc-blue); font-family: var(--pc-font-display); font-size: 1.25rem; font-weight: 540; letter-spacing: .04em; }
+.pc-services__categories svg { display: none; }
 .pc-services__categories h3 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(.92rem, 1.25vw, 1.15rem); font-weight: 650; letter-spacing: .02em; line-height: 1.15; text-transform: uppercase; }
 .pc-services__categories p { margin: .55rem 0 0; color: #d0d8dd; font-size: .73rem; line-height: 1.45; }
 .pc-services__categories a > span { margin-top: .75rem; color: var(--pc-blue); font-size: .65rem; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; }
 .pc-services__categories a:hover h3 { color: var(--pc-blue-bright); }
 
-.pc-services__detail { position: relative; padding-top: 2.6rem; background: #082033; border-top: 1px solid rgb(85 189 237 / 38%); }
-.pc-services__detail::before { position: absolute; inset: 0; content: ''; background-image: radial-gradient(circle at 70% 20%, rgb(85 189 237 / 8%), transparent 34%), url("data:image/svg+xml,%3Csvg width='620' height='360' viewBox='0 0 620 360' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2388c7e5' stroke-opacity='.09' stroke-width='1'%3E%3Cpath d='M-45 332c86-13 94-83 173-91 86-9 98 70 187 59 90-11 109-88 198-79 75 7 91 65 171 51'/%3E%3Cpath d='M-56 304c91-14 102-90 183-99 93-10 106 74 200 61 91-12 114-94 205-84 78 8 97 69 177 54'/%3E%3C/g%3E%3C/svg%3E"); opacity: .55; pointer-events: none; }
+.pc-services__detail { position: relative; padding-top: 3rem; background: #071824; }
+.pc-services__detail::before { position: absolute; inset: 0; content: ''; background: radial-gradient(circle at 72% 14%, rgb(85 189 237 / 5%), transparent 42%); pointer-events: none; }
 .pc-services__detail-heading { position: relative; z-index: 1; display: block; }
 .pc-services__detail-heading .pc-kicker { margin-bottom: .45rem; }
 .pc-services__detail-heading h2 { margin: 0; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(2.35rem, 3.6vw, 3.6rem); font-weight: 610; letter-spacing: -.03em; line-height: 1.05; }
@@ -761,8 +757,8 @@
 .pc-services__detail-item li { position: relative; padding: .18rem 0 .18rem 1.25rem; color: #d1dbe0; font-size: .68rem; line-height: 1.35; }
 .pc-services__detail-item li::before { position: absolute; top: .28rem; left: 0; display: grid; place-items: center; width: .85rem; height: .85rem; content: '✓'; color: #062033; background: var(--pc-blue); border-radius: 50%; font-size: .58rem; font-weight: 850; }
 .pc-services__detail-item > a { display: inline-flex; min-height: 34px; align-items: center; margin-top: .85rem; padding: .5rem 1rem; color: var(--pc-blue-bright); border: 1px solid var(--pc-blue); font-size: .65rem; font-weight: 650; letter-spacing: .09em; text-decoration: none; text-transform: uppercase; }
-.pc-services__fit { position: relative; z-index: 1; margin-top: .6rem; padding-block: 1rem 6.5rem; border-top: 1px solid rgb(85 189 237 / 40%); background: linear-gradient(0deg, rgb(2 15 25 / 88%), transparent); }
-.pc-services__fit::after { position: absolute; right: 0; bottom: 0; left: 0; height: 104px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .74; pointer-events: none; }
+.pc-services__fit { position: relative; z-index: 1; margin-top: .6rem; padding-block: 1.5rem 5.6rem; border-top: 1px solid rgb(85 189 237 / 20%); background: #071824; }
+.pc-services__fit::after { position: absolute; right: 0; bottom: -18px; left: 0; height: 92px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .48; pointer-events: none; }
 .pc-services__fit-inner { display: grid; grid-template-columns: 44px 230px minmax(0, 1fr) minmax(170px, 205px); gap: 1rem 1.6rem; align-items: center; }
 .pc-services__fit svg { width: 44px; height: 52px; fill: none; stroke: var(--pc-blue); stroke-width: 2.4; }
 .pc-services__fit .pc-label { margin: 0; color: var(--pc-white); font-weight: 650; }
@@ -770,7 +766,7 @@
 .pc-services__signature { display: block; width: min(100%, 205px); height: auto; justify-self: end; }
 
 /* Customer process */
-.pc-process { position: relative; color: var(--pc-paper); background: #061722; border-top: 1px solid var(--pc-line-dark); scroll-margin-top: 2rem; overflow: hidden; }
+.pc-process { position: relative; color: var(--pc-paper); background: #061722; scroll-margin-top: 2rem; overflow: hidden; }
 .pc-process__photo { position: absolute; z-index: 0; top: 0; right: 0; left: 40%; height: 340px; overflow: hidden; }
 .pc-process__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 39%; filter: saturate(.72) contrast(1.1); }
 .pc-process__shade { position: absolute; z-index: 1; top: 0; right: 0; left: 0; height: 410px; background: linear-gradient(90deg, #061722 0%, rgb(6 23 34 / 96%) 38%, rgb(6 23 34 / 42%) 68%, rgb(6 23 34 / 74%) 100%), linear-gradient(0deg, #061722 2%, transparent 74%); }
@@ -783,8 +779,8 @@
 .pc-process__regional p { margin: 0; color: #b8c9d2; font-size: .62rem; letter-spacing: .2em; line-height: 1.8; text-transform: uppercase; }
 .pc-process__regional span { display: block; width: 3.2rem; height: 2px; margin-top: 1rem; background: var(--pc-blue); }
 
-.pc-process__steps { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(5, 1fr); margin: 0 auto; padding-top: .5rem; padding-bottom: 1.2rem; list-style: none; }
-.pc-process__steps li { min-width: 0; padding: 0 clamp(.75rem, 1.5vw, 1.4rem); border-right: 1px solid rgb(85 189 237 / 58%); }
+.pc-process__steps { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(.4rem, 1vw, 1rem); margin: 0 auto; padding-top: .5rem; padding-bottom: 1.8rem; list-style: none; }
+.pc-process__steps li { min-width: 0; padding: 0 clamp(.65rem, 1.15vw, 1.15rem); border-right: 1px solid rgb(160 193 211 / 18%); }
 .pc-process__steps li:first-child { padding-left: 0; }
 .pc-process__steps li:last-child { padding-right: 0; border-right: 0; }
 .pc-process__steps header { display: grid; grid-template-columns: 3.4rem 1fr; gap: .8rem; align-items: center; min-height: 62px; }
@@ -809,8 +805,8 @@
 .pc-process__approval-sheet strong { padding-bottom: .35rem; border-bottom: 1px solid #82909a; font-size: .6rem; }
 .pc-process__approval-sheet span { font-size: .47rem; }
 
-.pc-process__base { position: relative; z-index: 3; padding-block: 1.8rem 8.7rem; background: linear-gradient(0deg, #071c2c, #0b2638); border-top: 1px solid rgb(85 189 237 / 42%); }
-.pc-process__base::after { position: absolute; right: 0; bottom: 0; left: 0; height: 120px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .8; pointer-events: none; }
+.pc-process__base { position: relative; z-index: 3; padding-block: 1.8rem 4.75rem; background: #071b29; border-top: 1px solid rgb(85 189 237 / 22%); }
+.pc-process__base::after { content: none; }
 .pc-process__base-inner { display: grid; grid-template-columns: minmax(260px, .85fr) minmax(340px, 1.35fr) auto; gap: 2rem 3rem; align-items: center; }
 .pc-process__promise-mark { display: grid; grid-template-columns: 50px 1fr; gap: 1rem; align-items: center; }
 .pc-process__promise-mark svg { width: 48px; height: 56px; fill: none; stroke: var(--pc-blue); stroke-width: 2.4; }
@@ -901,6 +897,8 @@
 /* Preview footer shell */
 .pc-preview-footer { position: relative; color: #c7d2d8; background: #06121c; border-top: 1px solid var(--pc-line-dark); }
 .pc-preview-footer__mountains { position: absolute; z-index: 0; right: 0; bottom: 0; left: 0; height: 116px; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .64; pointer-events: none; }
+.pc-preview-body:has(#why-peak-country) .pc-preview-footer { isolation: isolate; border-top: 0; }
+.pc-preview-body:has(#why-peak-country) .pc-preview-footer__mountains { top: -72px; bottom: auto; height: 128px; opacity: .82; }
 .pc-preview-footer__inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); gap: clamp(3rem, 9vw, 9rem); width: min(100%, var(--pc-shell)); margin-inline: auto; padding: clamp(4rem, 8vw, 7rem) var(--pc-gutter); }
 .pc-preview-footer__identity { max-width: 470px; }
 .pc-preview-footer__identity > strong { display: block; color: var(--pc-white); font-family: var(--pc-font-display); font-size: clamp(1.35rem, 2.4vw, 2.15rem); font-weight: 670; letter-spacing: -.025em; line-height: 1.1; }
@@ -1073,6 +1071,7 @@
   .pc-services__detail-top { grid-template-columns: 1fr; }
   .pc-services__detail-top img { height: 220px; }
   .pc-services__fit { margin-top: 1rem; }
+  .pc-services__fit::after { bottom: -14px; height: 76px; opacity: .4; }
   .pc-process__intro { gap: 2.8rem; }
   .pc-process__intro h2 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
   .pc-process__photo { left: 28%; height: 390px; }
@@ -1088,6 +1087,7 @@
   .pc-process__illustration { height: 230px; }
   .pc-process__steps p { font-size: .84rem; }
   .pc-process__base .pc-button { width: 100%; }
+  .pc-preview-body:has(#why-peak-country) .pc-preview-footer__mountains { top: -48px; height: 92px; opacity: .72; }
 }
 
 @media (max-width: 420px) {
