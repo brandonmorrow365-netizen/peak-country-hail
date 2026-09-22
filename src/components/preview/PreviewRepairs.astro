@@ -1,0 +1,100 @@
+---
+const supportingRepairs = [
+  {
+    vehicle: 'Nissan Murano',
+    repair: 'Quarter-panel PDR',
+    before: '/media/portfolio/nissan-murano/before-angle-2',
+    after: '/media/portfolio/nissan-murano/after-angle-2',
+    beforeAlt: 'Nissan Murano rear quarter-panel dent before paintless dent repair',
+    afterAlt: 'Nissan Murano rear quarter panel after paintless dent repair',
+  },
+  {
+    vehicle: 'Toyota 4Runner',
+    repair: 'Liftgate PDR',
+    before: '/media/portfolio/toyota-4runner/before-angle-2',
+    after: '/media/portfolio/toyota-4runner/after-angle-2',
+    beforeAlt: 'Toyota 4Runner liftgate dent before paintless dent repair',
+    afterAlt: 'Toyota 4Runner liftgate after paintless dent repair',
+  },
+  {
+    vehicle: 'Lexus RX',
+    repair: 'Rear-hatch PDR',
+    before: '/media/portfolio/lexus-rx/before-angle-1',
+    after: '/media/portfolio/lexus-rx/after-angle-1',
+    beforeAlt: 'Lexus RX rear-hatch dent before paintless dent repair',
+    afterAlt: 'Lexus RX rear hatch after paintless dent repair',
+  },
+] as const;
+---
+
+<section id="real-repairs" class="pc-home-repairs pc-contour-surface" aria-labelledby="pc-home-repairs-heading">
+  <div class="pc-shell-width">
+    <header class="pc-home-repairs__heading">
+      <div>
+        <p class="pc-kicker">Real repairs</p>
+        <h2 id="pc-home-repairs-heading">Real Repairs. Real Results.</h2>
+      </div>
+      <div>
+        <p>Every vehicle shown here documents actual paintless dent repair work. Comparable before-and-after views make the damage and the finished panel visible without generated repair imagery or altered results.</p>
+        <a class="pc-text-link" href="/__preview/gallery/">See the full gallery <span aria-hidden="true">→</span></a>
+      </div>
+    </header>
+
+    <article class="pc-home-repairs__flagship" aria-labelledby="pc-silverado-title">
+      <header>
+        <p class="pc-label">Flagship repair · paired view</p>
+        <h3 id="pc-silverado-title">2013 Chevrolet Silverado</h3>
+        <p>Door and side-panel dent damage documented before repair and from the corresponding angle after PDR.</p>
+      </header>
+      <div class="pc-repair-pair pc-repair-pair--flagship">
+        <figure>
+          <span>Before</span>
+          <picture>
+            <source type="image/avif" srcset="/media/portfolio/2013-silverado/before-angle-1-720.avif 720w, /media/portfolio/2013-silverado/before-angle-1.avif 1200w" sizes="(max-width: 720px) calc(50vw - 24px), 430px" />
+            <source type="image/webp" srcset="/media/portfolio/2013-silverado/before-angle-1-720.webp 720w, /media/portfolio/2013-silverado/before-angle-1.webp 1200w" sizes="(max-width: 720px) calc(50vw - 24px), 430px" />
+            <img src="/media/portfolio/2013-silverado/before-angle-1.jpg" width="1200" height="900" alt="Dent damage on a 2013 Chevrolet Silverado door before paintless dent repair" loading="lazy" decoding="async" />
+          </picture>
+        </figure>
+        <figure>
+          <span>After</span>
+          <picture>
+            <source type="image/avif" srcset="/media/portfolio/2013-silverado/after-angle-1-720.avif 720w, /media/portfolio/2013-silverado/after-angle-1.avif 1200w" sizes="(max-width: 720px) calc(50vw - 24px), 430px" />
+            <source type="image/webp" srcset="/media/portfolio/2013-silverado/after-angle-1-720.webp 720w, /media/portfolio/2013-silverado/after-angle-1.webp 1200w" sizes="(max-width: 720px) calc(50vw - 24px), 430px" />
+            <img src="/media/portfolio/2013-silverado/after-angle-1.jpg" width="1200" height="900" alt="The same 2013 Chevrolet Silverado door area after paintless dent repair" loading="lazy" decoding="async" />
+          </picture>
+        </figure>
+      </div>
+    </article>
+
+    <div class="pc-home-repairs__support" aria-label="Additional documented repair results">
+      {supportingRepairs.map((repair) => (
+        <article>
+          <header><h3>{repair.vehicle}</h3><p>{repair.repair}</p></header>
+          <div class="pc-repair-pair pc-repair-pair--support">
+            <figure>
+              <span>Before</span>
+              <picture>
+                <source type="image/avif" srcset={`${repair.before}-720.avif 720w, ${repair.before}.avif 1200w`} sizes="(max-width: 720px) calc(50vw - 28px), 205px" />
+                <source type="image/webp" srcset={`${repair.before}-720.webp 720w, ${repair.before}.webp 1200w`} sizes="(max-width: 720px) calc(50vw - 28px), 205px" />
+                <img src={`${repair.before}.jpg`} width="1200" height="900" alt={repair.beforeAlt} loading="lazy" decoding="async" />
+              </picture>
+            </figure>
+            <figure>
+              <span>After</span>
+              <picture>
+                <source type="image/avif" srcset={`${repair.after}-720.avif 720w, ${repair.after}.avif 1200w`} sizes="(max-width: 720px) calc(50vw - 28px), 205px" />
+                <source type="image/webp" srcset={`${repair.after}-720.webp 720w, ${repair.after}.webp 1200w`} sizes="(max-width: 720px) calc(50vw - 28px), 205px" />
+                <img src={`${repair.after}.jpg`} width="1200" height="900" alt={repair.afterAlt} loading="lazy" decoding="async" />
+              </picture>
+            </figure>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="pc-home-repairs__base">
+      <p>Portfolio includes current Peak Country repairs and selected work personally completed by the owner throughout his professional PDR career.</p>
+      <a class="pc-button pc-button--outline-light" href="/__preview/gallery/">See the full gallery <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>

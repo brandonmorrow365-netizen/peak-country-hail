@@ -427,8 +427,69 @@ The live homepage also exposes `/privacy/`, `/terms/`, and `/feed.xml`. The live
 - Earlier loopback preview processes can become stale when `dist` is rebuilt. The fresh Task 7 preview is the verified instance on `http://127.0.0.1:4331`.
 - All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
 
+## TASK 8 — REAL REPAIRS / GALLERY
+
+**Status:** COMPLETED — 2026-09-21
+
+### Task completed
+
+- Added a compact `Real Repairs. Real Results.` section immediately after the locked Process section at `/__preview/home/#real-repairs`.
+- Used four verified repair groups: 2013 Chevrolet Silverado, Nissan Murano, Toyota 4Runner, and Lexus RX. The Silverado is the flagship before/after pair; the other three provide supporting proof without turning the homepage into the full gallery.
+- Added the isolated `/__preview/gallery/` portfolio preview, organized by vehicle and documented viewing angle with explicit Before/After labels, concise factual descriptions, and honest unmatched-before context where no corresponding after photograph exists.
+- Included all 18 approved photographs from the Google Drive folder `Historical Portfolio - Ready for Website` and did not access or publish either folder marked `Do Not Auto Publish`.
+- Reused the repository's existing responsive 720/1200-pixel AVIF, WebP, and JPEG derivatives of those exact approved sources. Originals remain untouched; derivatives carry the already-reviewed plate-only privacy blurs for Toyota and Lexus imagery.
+- Included the approved single portfolio disclosure once on the homepage section and once in the full-gallery introduction, without splitting projects into current versus historical work.
+- Extended the locked navy/cyan/editorial system with square image geometry, restrained labels, thin technical rules, contour texture, and mountain finishing treatments. No generated/stock repair evidence, sliders, masonry grid, glass effects, rounded card field, or new visual language was introduced.
+- Connected the preview gallery from desktop navigation, mobile navigation, footer, homepage, and the preview index. Existing Hail Repair and Paintless Dent Repair pages already retain their crawlable Gallery links, and the gallery includes links to both services and Get Started.
+- Preserved all Task 4–7 components, layouts, text, storm treatment, handwritten assets, and styling unchanged. Only the preview homepage composition now appends the new Task 8 section after Process.
+- Made no production route, production component, public metadata, schema, sitemap, redirect, deployment, or live-service change.
+
+### Files added
+
+- `src/components/preview/PreviewRepairs.astro`
+- `src/pages/[preview]/gallery/index.astro`
+
+### Files modified
+
+- `src/components/preview/PreviewHeader.astro`
+- `src/components/preview/PreviewFooter.astro`
+- `src/pages/[preview]/home/index.astro`
+- `src/pages/[preview]/index.astro`
+- `src/styles/preview.css`
+- `PREVIEW_PROGRESS.md`
+
+### Tests performed
+
+- Google Drive source verification: PASS — the approved folder was accessible and contained exactly 18 image files across the four known repair groups; every source was downloaded to a temporary local review directory and visually matched by vehicle, repair area, and angle.
+- Privacy/source-integrity review: PASS — no personal paperwork, VIN, address, customer name, or readable identifier remains in the public derivatives; Toyota and Lexus plates are blurred locally without touching damage, finished panels, or reflection lines.
+- Astro project check: PASS — 87 files, 0 errors, 0 warnings, 0 hints.
+- Astro production build: PASS — `/__preview/gallery/`, `/__preview/home/`, and `/__preview/` prerendered successfully; the existing JavaScript chunk-size warning remains.
+- Automated Node test suite: PASS — 39 passed, 0 failed.
+- Fresh production-route smoke test against `http://127.0.0.1:4343`: PASS — all 34 existing pages and their metadata, canonicals, schema, internal links, sitemap behavior, 404 behavior, and disabled forms validated.
+- Preview validation: PASS — index, homepage, and gallery return 200; contain one H1 and one main landmark; carry `noindex, nofollow`; omit canonical and JSON-LD; remain outside the sitemap; and contain no broken internal links.
+- Responsive visual QA: PASS — inspected at 1440×1200 and 390×844. Both gallery layouts have no horizontal overflow; images remain large enough to evaluate; before/after labels and supporting context remain clear.
+- Screenshot QA: PASS — exported one homepage section PNG, nine overlapping desktop gallery PNGs, and seventeen overlapping mobile gallery PNGs to `/Users/rexmorrow/Documents/Codex/Peak-Country-Visual-Review-PNGs/task-8/`.
+- Measured output: homepage Real Repairs section 1407.66px at 1440px wide; gallery 10077px at 1440px wide; gallery 12901px at 390px wide.
+- Markdown/Git whitespace validation: PASS — `git diff --check` reported no errors.
+- Production checkout verification: PASS — original branch `peak-country-seo-hail-upgrade`, HEAD `5f4dce4f487736053d1a4ab99c52cf95cc5025da`, and the same two modified plus one untracked warranty-related paths remain unchanged.
+
+### Decisions made
+
+- Use every verified group in the approved folder because all four have a truthful before/after relationship and collectively demonstrate different panels, dent shapes, viewing conditions, and repair evidence.
+- Preserve unmatched before views as explicitly labeled context instead of discarding them or implying a false comparison.
+- Use the existing source-backed portfolio data and optimized derivatives rather than create duplicate media files or generatively alter evidence.
+- Keep `/gallery/` untouched and expose the redesigned gallery only at `/__preview/gallery/` so Task 8 remains fully isolated and noncanonical.
+- Keep homepage evidence compact through one large flagship pair and three smaller supporting pairs; reserve all 18 documented views for the full gallery.
+
+### Known issues
+
+- The production build continues to report the pre-existing MapLibre-related JavaScript chunk warning above 500 kB.
+- The public portfolio folder contains no verified Porsche, Toyota Tundra, bedside, Honda, or other repair groups beyond the four used here, so none were substituted or invented.
+- Earlier loopback preview processes can become stale when `dist` is rebuilt. The verified production-style Task 8 preview is running locally at `http://127.0.0.1:4343`.
+- All unresolved source-content and warranty decisions recorded in Task 2 remain unchanged.
+
 ## NEXT TASK
 
-**TASK 8 — REAL REPAIRS / GALLERY**
+**TASK 9 — RESULTS / TRUST / WARRANTY**
 
-Do not begin Task 8 until the owner says `continue`.
+Do not begin Task 9 until the owner says `continue`.

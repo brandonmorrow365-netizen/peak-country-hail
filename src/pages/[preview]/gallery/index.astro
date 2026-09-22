@@ -1,0 +1,100 @@
+---
+import { galleryImage, portfolioPairs, portfolioRepairs } from '../../../data/gallery';
+import PreviewLayout from '../../../layouts/PreviewLayout.astro';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [{ params: { preview: '__preview' } }];
+}
+
+const projectDescriptions: Record<string, string> = {
+  '2013-silverado': 'Three corresponding views document the door and side-panel damage before repair and the panel appearance afterward. The changes in viewpoint are labeled rather than presented as exact overlays.',
+  'nissan-murano': 'Two paired views show the rear quarter-panel distortion under workshop lighting and the same repair area after PDR. A third before photograph remains as additional context.',
+  'toyota-4runner': 'Two paired views document a dent across the rear liftgate and the repaired panel from corresponding viewpoints.',
+  'lexus-rx': 'One paired view documents rear-hatch dent damage and the repaired panel. A PDR-light view is retained as supporting evidence of the original panel distortion.',
+};
+---
+
+<PreviewLayout
+  title="Real Repairs Gallery"
+  description="Isolated noindex preview of the Peak Country real-repair portfolio and paintless dent repair gallery."
+  taskLabel="Task 8 · Real Repairs / Gallery"
+>
+  <header class="pc-gallery-hero pc-contour-surface">
+    <div class="pc-shell-width pc-gallery-hero__inner">
+      <div>
+        <p class="pc-kicker">Real repairs · documented work</p>
+        <h1>Repair evidence,<br />shown clearly.</h1>
+      </div>
+      <div class="pc-gallery-hero__copy">
+        <p class="pc-gallery-hero__lede">Before-and-after photographs from real paintless dent repairs, organized by vehicle and viewing angle.</p>
+        <p>Portfolio includes current Peak Country repairs and selected work personally completed by the owner throughout his professional PDR career.</p>
+        <div class="pc-actions">
+          <a class="pc-button" href="/get-started/">Get Started</a>
+          <a class="pc-text-link" href="/paintless-dent-repair/">Explore Paintless Dent Repair <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <nav class="pc-shell-width pc-gallery-jump" aria-label="Jump to a repair project">
+      <span>View a repair</span>
+      {portfolioRepairs.map((repair, index) => <a href={`#${repair.slug}`}>{String(index + 1).padStart(2, '0')} {repair.vehicle}</a>)}
+    </nav>
+  </header>
+
+  <div class="pc-gallery-projects" aria-label="Paintless dent repair portfolio">
+    {portfolioRepairs.map((repair, projectIndex) => (
+      <article class="pc-gallery-project" id={repair.slug}>
+        <header class="pc-shell-width pc-gallery-project__header">
+          <p class="pc-gallery-project__number" aria-hidden="true">{String(projectIndex + 1).padStart(2, '0')}</p>
+          <div>
+            <p class="pc-kicker">Real repair · {repair.photos.length} documented views</p>
+            <h2>{repair.title}</h2>
+          </div>
+          <p>{projectDescriptions[repair.repairId]}</p>
+        </header>
+
+        <div class="pc-shell-width pc-gallery-views">
+          {portfolioPairs(repair).map((pair, pairIndex) => (
+            <section class:list={['pc-gallery-view', { 'pc-gallery-view--primary': pairIndex === 0 }]} aria-labelledby={`${repair.slug}-view-${pair.angle}`}>
+              <header>
+                <h3 id={`${repair.slug}-view-${pair.angle}`}>View {String(pair.angle).padStart(2, '0')}</h3>
+                <p>{pair.after ? 'Corresponding before and after angles' : 'Additional before context; no matching after view'}</p>
+              </header>
+              <div class:list={['pc-gallery-pair', { 'pc-gallery-pair--single': !pair.after }] }>
+                {[pair.before, pair.after].filter(Boolean).map((photo) => photo && (
+                  <figure class:list={['pc-gallery-photo', { 'is-portrait': photo.height > photo.width }]}>
+                    <figcaption><strong>{photo.state === 'before' ? 'Before' : 'After'}</strong><span>{photo.caption.replace(/^(Before|After) · Angle \d — /, '')}</span></figcaption>
+                    <picture>
+                      <source type="image/avif" srcset={`${galleryImage(repair, photo, 720, 'avif')} 720w, ${galleryImage(repair, photo, 1200, 'avif')} 1200w`} sizes="(max-width: 760px) calc(100vw - 40px), 620px" />
+                      <source type="image/webp" srcset={`${galleryImage(repair, photo, 720, 'webp')} 720w, ${galleryImage(repair, photo, 1200, 'webp')} 1200w`} sizes="(max-width: 760px) calc(100vw - 40px), 620px" />
+                      <img src={galleryImage(repair, photo, 1200, 'jpg')} width={photo.width} height={photo.height} alt={photo.alt} loading={projectIndex === 0 && pairIndex === 0 ? 'eager' : 'lazy'} decoding="async" />
+                    </picture>
+                  </figure>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <section class="pc-gallery-close pc-contour-surface" aria-labelledby="pc-gallery-close-heading">
+    <div class="pc-shell-width pc-gallery-close__inner">
+      <div>
+        <p class="pc-kicker">The right repair for the vehicle</p>
+        <h2 id="pc-gallery-close-heading">A photograph can show a result. An evaluation determines the plan.</h2>
+      </div>
+      <div>
+        <p>Every dent is different. Panel location, paint condition, metal stretch, access, body lines, and the vehicle owner’s goals all affect whether PDR is the appropriate repair method.</p>
+        <p>Customer privacy is protected in these public derivatives. Plates are blurred where needed; no dent, repaired panel, or reflection line has been digitally changed.</p>
+        <nav aria-label="Continue from the repair gallery">
+          <a href="/auto-hail-repair/">Auto Hail Repair <span aria-hidden="true">→</span></a>
+          <a href="/paintless-dent-repair/">Paintless Dent Repair <span aria-hidden="true">→</span></a>
+          <a href="/get-started/">Get Started <span aria-hidden="true">→</span></a>
+        </nav>
+      </div>
+    </div>
+  </section>
+</PreviewLayout>
