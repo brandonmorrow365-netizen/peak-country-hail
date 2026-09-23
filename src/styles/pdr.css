@@ -19,52 +19,55 @@
 :is(.service-head--pdr, .pdr-article, .service-cta--pdr) .button { min-height: 48px; padding: .85rem 1.35rem; color: #04131e; background: var(--pc-blue); border: 1px solid var(--pc-blue); border-radius: 2px; box-shadow: none; font-size: .76rem; font-weight: 820; letter-spacing: .09em; }
 :is(.service-head--pdr, .pdr-article, .service-cta--pdr) .button:hover { background: var(--pc-blue-bright); border-color: var(--pc-blue-bright); transform: none; }
 .service-head--pdr { isolation: isolate; min-height: 650px; padding-block: clamp(4.5rem, 7vw, 6.5rem); border-bottom: 1px solid rgb(85 189 237 / 42%); background-image: linear-gradient(90deg, rgb(6 24 45 / 82%), rgb(8 38 65 / 56%) 60%, rgb(6 24 45 / 32%)), url('/brand/hero-storm-background-1942.webp'); }
-.service-head--pdr::before { position: absolute; z-index: -1; top: 0; right: 0; bottom: 0; width: 48%; content: ''; background: linear-gradient(0deg, rgb(7 21 34 / 20%), transparent 65%), url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') center 48% / cover no-repeat; mask-image: linear-gradient(90deg, transparent, #000 24%); pointer-events: none; }
+.service-head--pdr::before { position: absolute; z-index: -1; top: 0; right: 0; bottom: 0; width: 50%; content: ''; background: linear-gradient(0deg, rgb(7 21 34 / 28%), transparent 65%), url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') center 48% / cover no-repeat; mask-image: linear-gradient(90deg, transparent, #000 30%); pointer-events: none; }
 .service-head--pdr h1 { max-width: 640px; font-family: var(--pc-font-display); font-size: clamp(3rem, 4.7vw, 4.75rem); font-weight: 670; letter-spacing: -.05em; line-height: .96; text-transform: none; }
 .service-head--pdr p { max-width: 570px; margin-top: 1.5rem; color: #d2dde3; line-height: 1.65; }
 .service-head--pdr .eyebrow { color: var(--pc-blue-bright); }
 .service-head--pdr .service-head-actions > a:not(.button) { color: var(--pc-blue-bright); font-size: .86rem; font-weight: 720; text-underline-offset: .38rem; }
 .pdr-chapter { position: relative; isolation: isolate; color: var(--pc-charcoal); background: var(--pc-paper); }
 .pdr-inner { width: min(100%, 1284px); margin-inline: auto; padding: clamp(4.25rem, 7vw, 6.5rem) clamp(1.25rem, 4vw, 3.25rem); }
-.pdr-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 5.5rem); align-items: center; }
+.pdr-split { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center; }
 .pdr-copy { min-width: 0; }
 .pdr-copy > p { margin: 1.2rem 0 0; font-size: 1rem; line-height: 1.75; }
 .pdr-copy > .direct-answer { color: inherit; font-weight: 500; }
-.pdr-photo { margin: 0; overflow: hidden; border-radius: 2px; }
+.pdr-photo { width: 100%; min-width: 0; margin: 0; overflow: hidden; border-radius: 2px; }
 .pdr-photo img { display: block; width: 100%; height: auto; }
 .pdr-photo figcaption { padding: 1rem 0 0; font-size: .8rem; line-height: 1.6; color: #415360; }
 .pdr-article .service-context-links { gap: .8rem 1.6rem; margin-top: 1.8rem; }
 .pdr-article .service-context-links a, .pdr-inspection nav a { color: var(--pc-blue-ink); font-size: .86rem; font-weight: 720; text-underline-offset: .38rem; }
 .pdr-chapter--dark { color: #d0dbe1; background: linear-gradient(180deg, #071a28, #091d2a 52%, #071722); }
-.pdr-chapter--dark::before { position: absolute; z-index: -1; inset: 0; content: ''; background: url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') center 58% / cover no-repeat; filter: grayscale(1) saturate(.1) contrast(.72); opacity: .15; pointer-events: none; }
+.pdr-chapter--dark::before { position: absolute; z-index: -1; inset: 0; content: ''; background: url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') center 58% / cover no-repeat; filter: grayscale(1) saturate(.1) contrast(.72); opacity: .22; mask-image: linear-gradient(90deg, rgb(0 0 0 / 65%), #000); pointer-events: none; }
 .pdr-chapter--limits::before { background-image: url('/media/portfolio/nissan-murano/before-angle-1.webp'); background-position: center 30%; }
 .pdr-chapter--dark h2 { color: var(--pc-white); }
 .pdr-chapter--dark .direct-answer { color: #d6e0e5; }
 .pdr-chapter--dark .eyebrow { color: var(--pc-blue); }
 .pdr-chapter--dark .service-context-links a, .pdr-chapter--dark .service-education-links a { color: var(--pc-blue-bright); }
-.pdr-technical-intro { align-items: start; }
-.pdr-technical-intro > .pdr-copy:last-child { padding-left: 2.5rem; border-left: 1px solid var(--pc-line-dark); }
-.pdr-technical-intro > .pdr-copy:last-child h2 { font-size: clamp(1.9rem, 2.5vw, 2.65rem); }
+.pdr-technical-intro { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); align-items: start; gap: clamp(3rem, 6vw, 5.5rem); }
+.pdr-technical-intro > .pdr-copy:last-child { margin-top: 3rem; padding: 2.5rem 0 0 2.5rem; border-left: 1px solid var(--pc-line-dark); }
+.pdr-technical-intro > .pdr-copy:last-child h2 { font-size: clamp(1.75rem, 2.2vw, 2.35rem); }
 .pdr-education-cta { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--pc-line-dark); }
 .pdr-education-cta p { margin: 0 0 1.25rem; }
-.pdr-technical-methods { margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--pc-line-dark); }
+.pdr-technical-methods { margin-top: 4.5rem; padding-top: 4rem; border-top: 1px solid var(--pc-line-dark); }
 .pdr-technical-methods .pdr-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
 .pdr-technical-methods h2 { grid-column: 1 / -1; font-size: clamp(1.9rem, 2.7vw, 2.8rem); }
-.pdr-chapter--limits .pdr-split { align-items: start; }
+.pdr-chapter--limits .pdr-split { grid-template-columns: 1fr 1fr; align-items: start; gap: clamp(3rem, 6vw, 5.5rem); }
 .pdr-chapter--limits h2 { font-size: clamp(2.1rem, 3vw, 3rem); }
-.pdr-inspection { padding-left: 2.5rem; border-left: 1px solid var(--pc-line-light); }
+.pdr-chapter--light:last-child .pdr-split { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; }
+.pdr-inspection { padding: 2.5rem 0 2.5rem 3rem; border-left: 1px solid var(--pc-line-light); }
 .pdr-inspection h2 { font-size: clamp(1.9rem, 2.7vw, 2.8rem); }
 .pdr-inspection p { margin: 1rem 0 1.75rem; }
 .pdr-inspection nav { display: grid; gap: .75rem; margin-top: 1.6rem; }
 .service-faq--pdr.section, .service-related--pdr.section { width: 100%; max-width: none; padding: clamp(4.25rem, 7vw, 6.5rem) max(1.25rem, calc((100vw - 1180px) / 2)); color: var(--pc-charcoal); background: var(--pc-paper); border: 0; }
-.service-faq--pdr .section-head { margin-bottom: 2.5rem; }
+.service-faq--pdr .section-head { align-items: end; margin-bottom: 3rem; }
+.service-faq--pdr .section-head h2 { margin-bottom: 0; }
 .service-faq--pdr .section-head > a { color: var(--pc-blue-ink); }
 .service-faq--pdr .faq-list { gap: 0 3.25rem; }
 .service-faq--pdr .faq-list details { padding: 1.35rem 0; background: transparent; border: 0; border-bottom: 1px solid var(--pc-line-light); border-radius: 0; }
 .service-faq--pdr .faq-list details[open] { box-shadow: none; }
 .service-faq--pdr .faq-list summary { color: var(--pc-navy); font-weight: 650; }
 .service-faq--pdr .faq-list p { color: var(--pc-charcoal); }
-.service-related--pdr.section { padding-top: 0; }
+.service-related--pdr.section { padding-top: 1rem; align-items: start; }
+.service-related--pdr h2 { max-width: 420px; font-size: clamp(2rem, 3vw, 3rem); }
 .service-related--pdr nav { gap: 0 2.25rem; }
 .service-related--pdr nav a { padding: 1.2rem 0; color: var(--pc-navy); background: transparent; border: 0; border-bottom: 1px solid var(--pc-line-light); border-radius: 0; font-size: .9rem; font-weight: 650; }
 .service-related--pdr nav a:hover { color: var(--pc-blue-ink); }
@@ -79,9 +82,9 @@
   .service-head--pdr::before { display: none; }
   .service-head--pdr { min-height: 0; }
   .service-head--pdr p { max-width: 640px; }
-  .pdr-split, .pdr-technical-methods .pdr-copy, .service-related--pdr.section { grid-template-columns: 1fr; }
+  .pdr-split, .pdr-chapter--limits .pdr-split, .pdr-chapter--light:last-child .pdr-split, .pdr-technical-methods .pdr-copy, .service-related--pdr.section { grid-template-columns: 1fr; }
   .pdr-photo { width: 100%; max-width: 560px; margin-inline: auto; }
-  .pdr-inspection, .pdr-technical-intro > .pdr-copy:last-child { padding: 2rem 0 0; border-left: 0; border-top: 1px solid var(--pc-line-light); }
+  .pdr-inspection, .pdr-technical-intro > .pdr-copy:last-child { margin-top: 0; padding: 2rem 0 0; border-left: 0; border-top: 1px solid var(--pc-line-light); }
   .pdr-technical-intro > .pdr-copy:last-child { border-color: var(--pc-line-dark); }
 }
 @media (max-width: 640px) {
