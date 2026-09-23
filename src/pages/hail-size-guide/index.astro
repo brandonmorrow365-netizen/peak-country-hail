@@ -1,7 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import summary from '../../../data/hail-history/hail-history-summary.json';
+import reportsJson from '../../../data/hail-history/hail-reports-2016-2025.json';
+import {PUBLIC_HISTORY_RANGE,publicHistory,subsetSummary,type HistoricalHailReport} from '../../lib/hailHistory';
 import { articleNode } from '../../lib/schema';
+const summary=subsetSummary(publicHistory(reportsJson as HistoricalHailReport[]));
 const title='Hail Size Guide for Vehicle Owners | Peak Country';
 const description='Compare official hail diameters and learn how wind, exposure, panel material and impact conditions affect vehicle damage risk in Northern Colorado.';
 const pageSchema=articleNode('/hail-size-guide/',title,description,'2026-09-05','2026-09-08');
@@ -22,7 +24,7 @@ const sizes=[['Pea','0.25 inch','Small hail can still arrive in large numbers or
 <p>Panel orientation, shape, bracing, and material influence how metal responds. A broad roof or hood surface behaves differently from a curved body line or an area supported by reinforcement. Steel and aluminum panels have different working characteristics, but neither material makes a vehicle immune to hail. Existing paint condition, prior body repairs, refinishing, and previous dents can also affect what an inspection finds and whether Paintless Dent Repair is appropriate.</p>
 <p>A shallow dent may be hard to see in flat daylight. Professional PDR lighting creates controlled reflections across a panel, making subtle lows and interrupted reflection lines easier to identify. That is why an official report or a quick outdoor look should not replace a vehicle-specific inspection.</p>
 <h2>Northern Colorado historical context</h2>
-<p>The verified Peak Country archive contains <strong>{summary.overall.report_count.toLocaleString()} NOAA/NCEI hail observations across {summary.overall.hail_day_count} hail days</strong> within 50 statute miles of the Greeley geographic anchor for 2016–2025. The largest supplied magnitude in that completed dataset is <strong>{summary.overall.largest_reported_hail_inches.toFixed(2)} inches</strong>. Those figures are derived from the published dataset, but they still do not prove damage to any individual vehicle.</p>
+<p>The verified public history contains <strong>{summary.report_count.toLocaleString()} NOAA/NCEI hail observations across {summary.hail_day_count} hail days</strong> within 50 statute miles of the Greeley geographic anchor for the {PUBLIC_HISTORY_RANGE} five-calendar-year window. Completed archive records currently cover 2022–2025; 2026 remains provisional in the live tracker. The largest supplied magnitude in the displayed historical records is <strong>{summary.largest_reported_hail_inches?.toFixed(2)} inches</strong>. Those figures are derived from the published dataset, but they still do not prove damage to any individual vehicle.</p>
 <h2>Why object comparisons need care</h2><p>Common names are useful shorthand, but they should not be treated as exact measurements unless the observer supplied a measured diameter. A stone can be irregular rather than perfectly round, can melt before it is examined, and can differ from nearby stones in the same storm. When comparing a report with a vehicle, keep the official time, location, source, and stated precision together instead of relying on the object name alone.</p>
 <h2>Use reports as context, then inspect the vehicle</h2>
 <p>Use the <a href="/hail-tracker/">Live Hail Tracker</a> for current official-source context and the <a href="/northern-colorado-hail-history/">Northern Colorado Hail History</a> for completed historical records. After conditions are safe, follow the <a href="/after-a-hailstorm/">steps to check a vehicle after a hailstorm</a>. If you see dents or remain unsure, learn about <a href="/auto-hail-repair/">auto hail repair</a> or <a href="/free-hail-inspection/">start with a Free Initial Assessment</a>.</p>

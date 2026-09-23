@@ -1,14 +1,22 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {subsetSummary,type HistoricalHailReport} from '../src/lib/hailHistory.ts';
+import {PUBLIC_HISTORY_END_YEAR,PUBLIC_HISTORY_START_YEAR,PUBLIC_HISTORY_YEARS,publicHistory,subsetSummary,type HistoricalHailReport} from '../src/lib/hailHistory.ts';
 
 const reports=JSON.parse(readFileSync('data/hail-history/hail-reports-2016-2025.json','utf8')) as HistoricalHailReport[];
 const summary=JSON.parse(readFileSync('data/hail-history/hail-history-summary.json','utf8'));
 
-test('public archive source records match every displayed decade metric',()=>{
+test('retained source archive matches its generated metrics',()=>{
  const calculated=subsetSummary(reports);
  for(const field of ['report_count','hail_day_count','largest_reported_hail_inches','hail_report_count_1in_plus','hail_report_count_2in_plus','closest_report_distance','most_active_month'] as const)assert.equal(calculated[field],summary.overall[field]);
+});
+
+test('public history is limited to the current five-calendar-year window',()=>{
+ const publicReports=publicHistory(reports);
+ assert.deepEqual(PUBLIC_HISTORY_YEARS,[2026,2025,2024,2023,2022]);
+ assert.equal(publicReports.length,411);
+ assert.ok(publicReports.every(report=>report.year>=PUBLIC_HISTORY_START_YEAR&&report.year<=PUBLIC_HISTORY_END_YEAR));
+ assert.equal(publicReports.filter(report=>report.year===2026).length,0);
 });
 
 test('year, month, size, distance, and location filters produce source-backed subsets',()=>{

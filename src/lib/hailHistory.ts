@@ -1,5 +1,10 @@
 export interface HistoricalHailReport {year:number;month_name:string|null;begin_date_time:string|null;state:string|null;cz_name:string|null;begin_location:string|null;magnitude:number|null;source:string|null;begin_lat:number;begin_lon:number;episode_id:string|null;event_id:string;event_narrative:string|null;distance_from_greeley_miles:number;noaa_event_url:string}
 export const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'] as const;
+export const PUBLIC_HISTORY_END_YEAR=2026;
+export const PUBLIC_HISTORY_START_YEAR=PUBLIC_HISTORY_END_YEAR-4;
+export const PUBLIC_HISTORY_YEARS=Object.freeze(Array.from({length:5},(_,index)=>PUBLIC_HISTORY_END_YEAR-index));
+export const PUBLIC_HISTORY_RANGE=`${PUBLIC_HISTORY_START_YEAR}–${PUBLIC_HISTORY_END_YEAR}`;
+export function publicHistory(records:HistoricalHailReport[]){return records.filter(report=>report.year>=PUBLIC_HISTORY_START_YEAR&&report.year<=PUBLIC_HISTORY_END_YEAR);}
 export function reportDate(report:HistoricalHailReport){const match=String(report.begin_date_time).match(/^(\d{2})-([A-Z]{3})-(\d{2})/i);if(!match)return '';const month=MONTHS.findIndex(value=>value.slice(0,3).toLowerCase()===match[2].toLowerCase())+1;return `${report.year}-${String(month).padStart(2,'0')}-${match[1]}`;}
 export function subsetSummary(records:HistoricalHailReport[]){
  const days=new Set(records.map(reportDate)),sizes=records.map(r=>r.magnitude).filter((v):v is number=>v!==null),months=Object.fromEntries(MONTHS.map(month=>[month,records.filter(r=>r.month_name===month).length]));

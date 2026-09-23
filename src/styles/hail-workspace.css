@@ -1,0 +1,184 @@
+/* Task 12: scoped visual system for the weather/data workspace. */
+main:has(.hail-workspace) {
+  --hail-font-display: "Inter Tight", Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  background: #f5f7f8;
+}
+
+main:has(.hail-workspace) :is(h1, h2, h3) {
+  font-family: var(--hail-font-display);
+  font-weight: 630;
+  letter-spacing: -.035em;
+  text-transform: none;
+}
+
+main:has(.hail-workspace) .page-head {
+  min-height: clamp(360px, 38vw, 500px);
+  background: linear-gradient(90deg, rgb(4 18 31 / 94%) 0%, rgb(6 29 48 / 79%) 54%, rgb(5 26 44 / 52%) 100%), linear-gradient(0deg, rgb(4 18 31 / 75%), transparent 55%), url('/brand/hero-storm-background-1942.webp') center 45% / cover no-repeat;
+  border-bottom-width: 1px;
+}
+
+main:has(.hail-workspace) .page-head::after {
+  right: auto;
+  left: max(1.5rem, calc((100vw - var(--content)) / 2));
+  width: min(180px, 24vw);
+  height: 2px;
+  background: #55bded;
+}
+
+main:has(.hail-workspace) .page-head h1 {
+  max-width: 950px;
+  margin-bottom: 1.25rem;
+  font-size: clamp(3rem, 5.6vw, 5.5rem);
+  font-weight: 670;
+  line-height: .96;
+  letter-spacing: -.055em;
+  text-transform: none;
+}
+
+main:has(.hail-workspace) .section h2 { font-weight: 620; }
+
+main:has(.hail-workspace) .tracker-summary {
+  position: relative;
+  z-index: 2;
+  margin-top: -1px;
+  background: #b9c9d3;
+  border: 0;
+}
+
+main:has(.hail-workspace) .tracker-summary > div { padding-block: 1.15rem; }
+main:has(.hail-workspace) .tracker-content { background: #f5f7f8; }
+main:has(.hail-workspace) .tracker-section { padding-block: clamp(3.25rem, 6vw, 5rem); }
+main:has(.hail-workspace) .tracker-section + .tracker-section { border-top-color: #d7e0e5; }
+
+main:has(.hail-workspace) :is(.tracker-topo, .history-topo) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+main:has(.hail-workspace) :is(.tracker-topo, .history-topo)::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: '';
+  background: #f7f8f8 url('/images/longs-peak-topographic-background-light.svg') center / 1800px auto repeat;
+  opacity: .065;
+  pointer-events: none;
+}
+
+main:has(.hail-workspace) .tracker-explain { gap: 0; border-top: 1px solid #bfcdd6; }
+main:has(.hail-workspace) .tracker-explain article {
+  padding: 1.4rem 1.5rem;
+  background: transparent;
+  border: 0;
+  border-right: 1px solid #cbd6dd;
+  border-bottom: 1px solid #cbd6dd;
+  border-radius: 0;
+  box-shadow: none;
+}
+main:has(.hail-workspace) .tracker-explain article:first-child { border-left: 1px solid #cbd6dd; }
+
+main:has(.hail-workspace) :is(.tracker-links, .history-links, .local-hail-links) {
+  gap: 0;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+main:has(.hail-workspace) :is(.tracker-links, .history-links, .local-hail-links) a {
+  min-height: 60px;
+  padding: 1rem 1.15rem;
+  color: #173d58;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid #b9c9d3;
+  border-left: 0;
+  border-radius: 0;
+}
+
+main:has(.hail-workspace) :is(.tracker-links, .history-links, .local-hail-links) a:hover {
+  color: #086594;
+  background: #edf3f6;
+}
+
+main:has(.hail-workspace) .history-definitions { padding-block: clamp(2.5rem, 5vw, 4rem); }
+main:has(.hail-workspace) .history-definitions article {
+  padding: 1.25rem 1.4rem;
+  background: transparent;
+  border: 0;
+  border-left: 2px solid #55bded;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+main:has(.hail-workspace) .history-summary {
+  background: linear-gradient(135deg, #071a2a 0%, #0a263a 56%, #071927 100%);
+  border-block-width: 1px;
+}
+
+main:has(.hail-workspace) .history-stat-grid { gap: 1px; background: rgb(139 194 222 / 26%); }
+main:has(.hail-workspace) .history-stat-grid article {
+  min-height: 122px;
+  background: #0a273a;
+  border: 0;
+  border-radius: 0;
+}
+
+main:has(.hail-workspace) .year-card-grid { gap: 0; border-top: 1px solid #c6d2da; border-left: 1px solid #c6d2da; }
+main:has(.hail-workspace) .year-card-grid details {
+  background: rgb(255 255 255 / 82%);
+  border: 0;
+  border-right: 1px solid #c6d2da;
+  border-bottom: 1px solid #c6d2da;
+  border-radius: 0;
+}
+
+main:has(.hail-workspace) .history-map-section { background: #e8eef1; }
+main:has(.hail-workspace) .history-map { border-radius: 0; box-shadow: 0 18px 45px rgb(4 18 31 / 12%); }
+.history-map-legend { display: flex; gap: 1rem 1.5rem; flex-wrap: wrap; margin: 0 0 1rem; color: #365267; font-size: .82rem; }
+.history-map-legend span { display: inline-flex; gap: .5rem; align-items: center; }
+.plot-dot { display: inline-block; width: .72rem; height: .72rem; border-radius: 50%; box-shadow: 0 0 0 1px rgb(6 24 45 / 18%); }
+.plot-dot--small { background: #d9e8f5; }
+.plot-dot--medium { background: #5cbcff; }
+.plot-dot--large { background: #f2b84b; }
+
+main:has(.hail-workspace) .history-filters { background: #edf2f4; border: 0; border-top: 1px solid #bdcbd4; border-bottom: 1px solid #bdcbd4; }
+main:has(.hail-workspace) .history-table { border-radius: 0; box-shadow: none; }
+.table-scroll-hint { display: none; margin: 0 0 .75rem; color: #365267; font-size: .8rem; font-weight: 700; }
+
+main:has(.hail-workspace) .history-method { background: linear-gradient(135deg, #071a2a, #0a273a); }
+main:has(.hail-workspace) .local-hail-live { padding-block: 1.2rem; }
+main:has(.hail-workspace) .local-hail-live > div { padding: .85rem 1rem; }
+main:has(.hail-workspace) .local-hail-context aside { background: rgb(232 239 242 / 86%); border-top: 2px solid #55bded; }
+main:has(.hail-workspace) .local-hail-detail section + section { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid #cbd6dc; }
+main:has(.hail-workspace) .home-final-cta { position: relative; z-index: 1; background: #0a273a; border-top-width: 1px; }
+
+.hail-mountain-transition {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 126px;
+  margin: 0;
+  background: #071522 url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat;
+  opacity: .88;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  main:has(.hail-workspace) .tracker-explain article { border-left: 1px solid #cbd6dd; }
+}
+
+@media (max-width: 720px) {
+  main:has(.hail-workspace) .page-head {
+    min-height: 380px;
+    background-image: linear-gradient(90deg, rgb(4 18 31 / 94%), rgb(6 29 48 / 66%)), linear-gradient(0deg, rgb(4 18 31 / 86%), transparent 52%), url('/brand/hero-storm-background-960.webp');
+  }
+  main:has(.hail-workspace) .page-head h1 { font-size: clamp(2.75rem, 13vw, 4.25rem); }
+  main:has(.hail-workspace) .tracker-section { padding-block: 3.15rem; }
+  main:has(.hail-workspace) .history-stat-grid article { min-height: 0; }
+  .history-map-legend { display: grid; gap: .5rem; }
+  .history-map .map-status { position: static; padding: .65rem 1rem; background: #0a273a; }
+  .history-map canvas { min-height: 360px; }
+  .table-scroll-hint { display: block; }
+  .table-wrap[tabindex] { position: relative; border-right: 3px solid #55bded; }
+  .hail-mountain-transition { height: 96px; background-size: auto 100%; }
+}

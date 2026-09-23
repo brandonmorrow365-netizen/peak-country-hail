@@ -48,6 +48,14 @@
 - Desktop/mobile full-page and requested detail captures are inline in the task. Local PNG export remains restricted; no export workaround attempted.
 - Preview: `http://localhost:4362/door-ding-repair/`. Pending owner Task 12 visual approval; no next task started. Nothing pushed, merged, or deployed.
 
+## Task 12 Hail Tracker and five-year history — 2026-09-23
+
+- The live tracker, Northern Colorado history, and Greeley/Weld County/Northern Colorado local tracker pages now use the approved editorial typography, restrained Longs Peak contour treatment, simplified resource presentation, and approved mountain/footer transition while preserving weather states, source attribution, disclosures, filters, dates, units, links, and local scopes.
+- Public history is limited to the current five-calendar-year window, 2022–2026. The retained 2016–2025 NOAA/NCEI source archive is unchanged; 411 qualifying 2022–2025 completed records are filtered before rendering. The current 2026 season remains explicitly provisional in the live tracker and is not mixed into completed historical totals.
+- The coordinate plot and report table now share active year, month, size, distance, and location filters. The plot includes a size legend and larger mobile points; tables include a mobile horizontal-scroll cue and keyboard-focusable scroll container.
+- Desktop 1440 × 1200 and mobile 390 × 844 QA passed with no page-level horizontal overflow. Live unavailable/empty states, filter/reset synchronization, one local tracker page, mountain/footer transition, and PDR regression were reviewed.
+- Astro check: 91 files, zero diagnostics. Production build passed with the existing chunk-size warning. All 40 tests, hail-history validation, and diff whitespace validation passed. Local preview only; nothing pushed, merged, or deployed.
+
 ## Deployment rule
 
 Major workflow and visual changes should be previewed and verified before production deployment unless the user explicitly authorizes direct deployment for that specific phase.

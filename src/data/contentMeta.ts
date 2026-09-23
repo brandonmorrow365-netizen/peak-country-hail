@@ -33,7 +33,7 @@ export const contentMeta: ContentMeta[] = [
   { path: '/hail-tracker/northern-colorado/', lastmod: '2026-09-08' },
   { path: '/hail-tracker/weld-county/', lastmod: '2026-09-08' },
   { path: '/insurance-claims/', lastmod: '2026-09-14' },
-  { path: '/northern-colorado-hail-history/', lastmod: '2026-09-08', feed: { title: 'Northern Colorado Hail History: 2016–2025', description: 'A verified NOAA/NCEI archive of hail observations within 50 miles of Greeley.', published: '2026-09-05' } },
+  { path: '/northern-colorado-hail-history/', lastmod: '2026-09-23', feed: { title: 'Northern Colorado Hail History: 2022–2026', description: 'A verified five-calendar-year NOAA/NCEI history window within 50 miles of Greeley.', published: '2026-09-05' } },
   { path: '/paintless-dent-repair/', lastmod: '2026-09-09' },
   { path: '/process/', lastmod: '2026-09-08' },
   { path: '/repair-standards/', lastmod: '2026-09-08' },

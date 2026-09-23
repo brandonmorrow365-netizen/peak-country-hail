@@ -5,6 +5,7 @@ import { pageGraph } from '../lib/schema';
 import SiteHeader from '../components/SiteHeader.astro';
 import StormHeader from '../components/StormHeader.astro';
 import '../styles/global.css';
+import '../styles/hail-workspace.css';
 interface Props { title: string; description: string; noindex?: boolean; exactTitle?: boolean; pageSchema?: Record<string, unknown>; }
 const { title, description, noindex = false, exactTitle = false, pageSchema } = Astro.props;
 const pathname = canonicalPath(Astro.url.pathname);
