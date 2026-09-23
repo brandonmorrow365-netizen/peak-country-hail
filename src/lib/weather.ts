@@ -29,6 +29,7 @@ export function geometryDistanceMiles(geometry:Geometry,origin=GREELEY):number|n
 }
 export function alertLocality(geometry:Geometry,area:string,radius=LOCAL_RADIUS_MILES){const distance=geometryDistanceMiles(geometry);return distance===null?{local:LOCAL_AREA.test(area),distance:null,basis:'area description' as const}:{local:distance<=radius,distance,basis:'official warning geometry' as const};}
 export function feedState(status:FeedStatus|null|undefined,lastSuccess:FeedStatus|null|undefined,minutes:number,now=Date.now()){if(!lastSuccess)return 'unavailable' as const;if(status?.status==='error')return 'cached-error' as const;if(now-Date.parse(lastSuccess.completed_at)>=minutes*60000)return 'stale' as const;return 'current' as const;}
+export function dashboardMode(hailReports:number,warnings:number,recentReports:number){return hailReports>0?'hail' as const:warnings>0?'warning' as const:recentReports>0?'recent' as const:'quiet' as const;}
 export function reportDay(now: number) { return new Date(now - 12 * 3600_000).toISOString().slice(0,10); }
 export function csvRows(text: string): string[][] {
   const rows: string[][] = []; let row: string[] = [], field = '', quoted = false;
@@ -88,22 +89,25 @@ export async function ingestWeather(db:D1Database,now:number){
  });
 }
 export type FeedStatus={completed_at:string;status:string};
-export type WeatherAlert={event:string;headline:string;area:string;expires_at:string;source_url:string;fetched_at:string;description:string;local:boolean;distance_miles:number|null;location_basis:'official warning geometry'|'area description'};
+export type WeatherAlert={event:string;headline:string;area:string;expires_at:string;source_url:string;fetched_at:string;description:string;geometry:Geometry;local:boolean;distance_miles:number|null;location_basis:'official warning geometry'|'area description'};
 export type HailReport={occurred_at:string;location:string;county:string;size_inches:number;latitude:number;longitude:number;comments:string;source_url:string;fetched_at:string;distance_miles:number};
 export async function readWeather(db?:D1Database){
  if(!db)return null;
  try{
-  const [nws,spc,nwsSuccess,spcSuccess,alerts,reports]=await Promise.all([
+  const recentCutoff=new Date(Date.now()-72*3600_000).toISOString();
+  const [nws,spc,nwsSuccess,spcSuccess,alerts,reports,recentReports]=await Promise.all([
    db.prepare("SELECT completed_at,status FROM ingestion_logs WHERE source='nws' ORDER BY completed_at DESC LIMIT 1").first<FeedStatus>(),
    db.prepare("SELECT completed_at,status FROM ingestion_logs WHERE source='spc' ORDER BY completed_at DESC LIMIT 1").first<FeedStatus>(),
    db.prepare("SELECT completed_at,status FROM ingestion_logs WHERE source='nws' AND status='success' ORDER BY completed_at DESC LIMIT 1").first<FeedStatus>(),
    db.prepare("SELECT completed_at,status FROM ingestion_logs WHERE source='spc' AND status='success' ORDER BY completed_at DESC LIMIT 1").first<FeedStatus>(),
    db.prepare('SELECT * FROM weather_alerts WHERE expires_at>? ORDER BY expires_at').bind(new Date().toISOString()).all<{event:string;headline:string;area:string;expires_at:string;source_url:string;fetched_at:string;raw_json:string}>(),
-   db.prepare("SELECT * FROM hail_reports WHERE report_day=? AND state='CO' ORDER BY occurred_at DESC").bind(reportDay(Date.now())).all<Omit<HailReport,'distance_miles'>>()
+   db.prepare("SELECT * FROM hail_reports WHERE report_day=? AND state='CO' ORDER BY occurred_at DESC").bind(reportDay(Date.now())).all<Omit<HailReport,'distance_miles'>>(),
+   db.prepare("SELECT * FROM hail_report_archive WHERE occurred_at>=? AND state='CO' ORDER BY occurred_at DESC").bind(recentCutoff).all<Omit<HailReport,'distance_miles'>>()
   ]);
-  const mappedAlerts=alerts.results.map(alert=>{let feature:{geometry?:Geometry;properties?:{description?:string}}={};try{feature=JSON.parse(alert.raw_json);}catch{}const locality=alertLocality(feature.geometry??null,alert.area);return {...alert,description:String(feature.properties?.description||''),local:locality.local,distance_miles:locality.distance,location_basis:locality.basis};});
+  const mappedAlerts=alerts.results.map(alert=>{let feature:{geometry?:Geometry;properties?:{description?:string}}={};try{feature=JSON.parse(alert.raw_json);}catch{}const geometry=feature.geometry??null,locality=alertLocality(geometry,alert.area);return {...alert,description:String(feature.properties?.description||''),geometry,local:locality.local,distance_miles:locality.distance,location_basis:locality.basis};});
   const mappedReports=reports.results.map(report=>({...report,distance_miles:distanceMiles(report.latitude,report.longitude)}));
-  return {nws,spc,nwsSuccess,spcSuccess,alerts:mappedAlerts,localAlerts:mappedAlerts.filter(a=>a.local),reports:mappedReports,localReports:mappedReports.filter(r=>r.distance_miles<=LOCAL_RADIUS_MILES)};
+  const mappedRecentReports=recentReports.results.map(report=>({...report,distance_miles:distanceMiles(report.latitude,report.longitude)}));
+  return {nws,spc,nwsSuccess,spcSuccess,alerts:mappedAlerts,localAlerts:mappedAlerts.filter(a=>a.local),reports:mappedReports,localReports:mappedReports.filter(r=>r.distance_miles<=LOCAL_RADIUS_MILES),recentReports:mappedRecentReports.filter(r=>r.distance_miles<=LOCAL_RADIUS_MILES)};
  }catch{return null;}
 }
 export function fresh(status:FeedStatus|null|undefined,minutes:number){return !!status&&status.status==='success'&&Date.now()-Date.parse(status.completed_at)<minutes*60000;}

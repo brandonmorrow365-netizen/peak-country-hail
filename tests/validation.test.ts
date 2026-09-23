@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {parseHail,reportDay,csvRows,fresh,distanceMiles,geometryDistanceMiles,alertLocality,feedState} from '../src/lib/weather.ts';
+import {parseHail,reportDay,csvRows,fresh,distanceMiles,geometryDistanceMiles,alertLocality,feedState,dashboardMode} from '../src/lib/weather.ts';
 import {validateLead,submitLead} from '../src/lib/leads.ts';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
@@ -43,6 +43,13 @@ test('feed states distinguish live, empty-cache, failed-cache and stale-cache',(
  assert.equal(feedState(null,null,15,now),'unavailable');
  assert.equal(feedState({status:'error',completed_at:'2026-09-05T19:59:00Z'},recent,15,now),'cached-error');
  assert.equal(feedState(old,old,15,now),'stale');
+});
+
+test('dashboard mode prioritizes hail, warning, recent event, then quiet',()=>{
+ assert.equal(dashboardMode(1,1,1),'hail');
+ assert.equal(dashboardMode(0,1,1),'warning');
+ assert.equal(dashboardMode(0,0,1),'recent');
+ assert.equal(dashboardMode(0,0,0),'quiet');
 });
 function form(overrides:Record<string,string>={}){const f=new FormData();for(const[k,v]of Object.entries({...{name:'Test',email:'test@example.com',phone:'',location:'Greeley',vehicle:'Test vehicle',damage_type:'hail',message:'',preferred_contact:'email',source_page:'/contact/',consent:'yes'},...overrides}))f.set(k,v);return f;}
 test('lead validation enforces consent, preferred contact, bounds and source',()=>{

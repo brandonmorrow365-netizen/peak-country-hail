@@ -1,0 +1,43 @@
+---
+import 'maplibre-gl/dist/maplibre-gl.css';
+import {site} from '../data/site';
+import {GREELEY,type HailReport,type WeatherAlert} from '../lib/weather';
+interface Props { alerts:WeatherAlert[]; reports:HailReport[] }
+const {alerts,reports}=Astro.props;
+const warningFeatures=alerts.filter(alert=>alert.geometry).map(alert=>({type:'Feature',properties:{headline:alert.headline,event:alert.event,expires:alert.expires_at,url:alert.source_url},geometry:alert.geometry}));
+const reportFeatures=reports.map(report=>({type:'Feature',properties:{location:report.location,county:report.county,size:report.size_inches,time:report.occurred_at,url:report.source_url},geometry:{type:'Point',coordinates:[report.longitude,report.latitude]}}));
+const mapData={type:'FeatureCollection',features:[...warningFeatures,...reportFeatures]};
+const service=site.mobileServiceArea;
+---
+<section class="section dashboard-map-section" aria-labelledby="live-map-heading">
+  <div class="dashboard-map-heading"><div><div class="eyebrow">Live Northern Colorado View</div><h2 id="live-map-heading">Radar, warnings, and reported hail—together.</h2></div><p>Current NOAA/NWS radar is shown with active warning geometry and preliminary SPC hail reports. Use official warnings for safety decisions.</p></div>
+  <div class="dashboard-map-legend" aria-label="Map legend"><span><i class="map-key map-key--radar"></i>Current radar</span><span><i class="map-key map-key--warning"></i>NWS warning</span><span><i class="map-key map-key--hail"></i>SPC hail report</span><span><i class="map-key map-key--service"></i>Service-area reference</span></div>
+  <div class="dashboard-map" data-hail-dashboard-map data-latitude={GREELEY.latitude} data-longitude={GREELEY.longitude} data-service-latitude={service.referencePoint.latitude} data-service-longitude={service.referencePoint.longitude} data-service-radius={service.radiusMiles} role="region" aria-label="Interactive Northern Colorado radar map with warnings, hail reports, Greeley, and the Peak Country service-area reference" aria-describedby="dashboard-map-description"><p class="dashboard-map-loading">Loading current radar and map layers…</p></div>
+  <p id="dashboard-map-description" class="dashboard-map-description">Radar shows precipitation reflectivity, not confirmed hail or vehicle damage. Warning polygons and preliminary reports can change. The service-area circle is a geographic reference, not a storefront location.</p>
+  <script is:inline id="hail-dashboard-map-data" type="application/json" set:html={JSON.stringify(mapData).replace(/</g,'\\u003c')} />
+</section>
+<script>
+  const earthRadiusMiles=3958.8,radians=(value:number)=>value*Math.PI/180,degrees=(value:number)=>value*180/Math.PI;
+  function circleCoordinates(latitude:number,longitude:number,radiusMiles:number){const coordinates:[number,number][]=[];const angularDistance=radiusMiles/earthRadiusMiles,originLatitude=radians(latitude),originLongitude=radians(longitude);for(let bearing=0;bearing<=360;bearing+=4){const b=radians(bearing),lat=Math.asin(Math.sin(originLatitude)*Math.cos(angularDistance)+Math.cos(originLatitude)*Math.sin(angularDistance)*Math.cos(b)),lon=originLongitude+Math.atan2(Math.sin(b)*Math.sin(angularDistance)*Math.cos(originLatitude),Math.cos(angularDistance)-Math.sin(originLatitude)*Math.sin(lat));coordinates.push([degrees(lon),degrees(lat)]);}return coordinates;}
+  async function initializeDashboardMap(container:HTMLElement){
+    const latitude=Number(container.dataset.latitude),longitude=Number(container.dataset.longitude),serviceLatitude=Number(container.dataset.serviceLatitude),serviceLongitude=Number(container.dataset.serviceLongitude),serviceRadius=Number(container.dataset.serviceRadius),raw=document.querySelector<HTMLScriptElement>('#hail-dashboard-map-data')?.textContent;
+    if(!raw||![latitude,longitude,serviceLatitude,serviceLongitude,serviceRadius].every(Number.isFinite))return;
+    const weather=JSON.parse(raw),{default:maplibregl}=await import('maplibre-gl');
+    const map=new maplibregl.Map({container,center:[longitude,latitude],zoom:7.65,minZoom:6.2,maxZoom:14,cooperativeGestures:true,style:'https://tiles.openfreemap.org/styles/positron'});
+    map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');map.addControl(new maplibregl.ScaleControl({unit:'imperial'}),'bottom-left');
+    map.on('load',()=>{
+      map.addSource('noaa-radar',{type:'raster',tiles:['https://mapservices.weather.noaa.gov/eventdriven/rest/services/radar/radar_base_reflectivity/MapServer/export?bbox={bbox-epsg-3857}&bboxSR=3857&imageSR=3857&size=256,256&format=png32&transparent=true&f=image'],tileSize:256,attribution:'Radar: NOAA/NWS MRMS'});
+      map.addLayer({id:'noaa-radar',type:'raster',source:'noaa-radar',paint:{'raster-opacity':.58,'raster-fade-duration':0}});
+      map.addSource('service-area',{type:'geojson',data:{type:'Feature',properties:{},geometry:{type:'Polygon',coordinates:[circleCoordinates(serviceLatitude,serviceLongitude,serviceRadius)]}}});
+      map.addLayer({id:'service-area-fill',type:'fill',source:'service-area',paint:{'fill-color':'#55bded','fill-opacity':.06}});map.addLayer({id:'service-area-line',type:'line',source:'service-area',paint:{'line-color':'#1675b8','line-width':2,'line-dasharray':[3,2]}});
+      map.addSource('weather-context',{type:'geojson',data:weather});
+      map.addLayer({id:'warnings-fill',type:'fill',source:'weather-context',filter:['!=',['geometry-type'],'Point'],paint:{'fill-color':'#f2b84b','fill-opacity':.19}});map.addLayer({id:'warnings-line',type:'line',source:'weather-context',filter:['!=',['geometry-type'],'Point'],paint:{'line-color':'#c45c23','line-width':3}});
+      map.addLayer({id:'hail-reports',type:'circle',source:'weather-context',filter:['==',['geometry-type'],'Point'],paint:{'circle-radius':['interpolate',['linear'],['coalesce',['get','size'],.75],.75,6,2,12,3,16],'circle-color':'#55bded','circle-stroke-color':'#071a2a','circle-stroke-width':2,'circle-opacity':.92}});
+      new maplibregl.Marker({color:'#071a2a'}).setLngLat([longitude,latitude]).setPopup(new maplibregl.Popup({offset:18}).setText('Greeley geographic reference')).addTo(map);
+      for(const layer of ['warnings-fill','hail-reports']){map.on('click',layer,(event)=>{const feature=event.features?.[0];if(!feature)return;const p=feature.properties??{},coordinates=feature.geometry.type==='Point'?(feature.geometry.coordinates.slice() as [number,number]):event.lngLat.toArray() as [number,number];const description=feature.geometry.type==='Point'?`${p.location}, ${p.county} County · ${Number(p.size).toFixed(2)} in.`:`${p.event}: ${p.headline}`;new maplibregl.Popup().setLngLat(coordinates).setText(description).addTo(map);});map.on('mouseenter',layer,()=>map.getCanvas().style.cursor='pointer');map.on('mouseleave',layer,()=>map.getCanvas().style.cursor='');}
+      container.querySelector('.dashboard-map-loading')?.remove();
+    });
+    map.on('error',event=>{if(String(event.error?.message||'').includes('noaa-radar'))return;const loading=container.querySelector<HTMLElement>('.dashboard-map-loading');if(loading)loading.textContent='Some live map layers could not be loaded. Official alert and report details remain available below.';});
+  }
+  const mapContainer=document.querySelector<HTMLElement>('[data-hail-dashboard-map]');if(mapContainer){if('IntersectionObserver'in window)new IntersectionObserver(([entry],observer)=>{if(entry.isIntersecting){observer.disconnect();initializeDashboardMap(mapContainer).catch(()=>{const loading=mapContainer.querySelector<HTMLElement>('.dashboard-map-loading');if(loading)loading.textContent='The interactive map could not be loaded. Official alert and report details remain available below.';});}},{rootMargin:'300px'}).observe(mapContainer);else initializeDashboardMap(mapContainer);}
+</script>
