@@ -32,6 +32,7 @@
 .pdr-copy > .direct-answer { color: inherit; font-weight: 500; }
 .pdr-photo { width: 100%; min-width: 0; margin: 0; overflow: hidden; border-radius: 2px; }
 .pdr-photo img { display: block; width: 100%; height: auto; }
+.pdr-photo .pdr-intro-photo { aspect-ratio: 977 / 1139; object-fit: cover; }
 .pdr-photo figcaption { padding: 1rem 0 0; font-size: .8rem; line-height: 1.6; color: #415360; }
 .pdr-article .service-context-links { gap: .8rem 1.6rem; margin-top: 1.8rem; }
 .pdr-article .service-context-links a, .pdr-inspection nav a { color: var(--pc-blue-ink); font-size: .86rem; font-weight: 720; text-underline-offset: .38rem; }
@@ -66,13 +67,14 @@
 .service-faq--pdr .faq-list details[open] { box-shadow: none; }
 .service-faq--pdr .faq-list summary { color: var(--pc-navy); font-weight: 650; }
 .service-faq--pdr .faq-list p { color: var(--pc-charcoal); }
-.service-related--pdr.section { padding-top: 1rem; align-items: start; }
+.service-faq--pdr.section { background: var(--surface-muted); }
+.service-related--pdr.section { padding-top: clamp(3rem, 5vw, 4.5rem); align-items: start; border-top: 1px solid var(--pc-line-light); }
 .service-related--pdr h2 { max-width: 420px; font-size: clamp(2rem, 3vw, 3rem); }
 .service-related--pdr nav { gap: 0 2.25rem; }
 .service-related--pdr nav a { padding: 1.2rem 0; color: var(--pc-navy); background: transparent; border: 0; border-bottom: 1px solid var(--pc-line-light); border-radius: 0; font-size: .9rem; font-weight: 650; }
 .service-related--pdr nav a:hover { color: var(--pc-blue-ink); }
 :is(.pdr-chapter--light, .service-faq--pdr, .service-related--pdr) { position: relative; isolation: isolate; }
-:is(.pdr-chapter--light, .service-faq--pdr, .service-related--pdr)::before { position: absolute; z-index: -1; inset: 0; content: ''; background: url('/images/longs-peak-topographic-background-light.svg') center / 1800px auto repeat; opacity: .065; pointer-events: none; }
+:is(.pdr-chapter--light, .service-related--pdr)::before { position: absolute; z-index: -1; inset: 0; content: ''; background: url('/images/longs-peak-topographic-background-light.svg') center / 1800px auto repeat; opacity: .065; pointer-events: none; }
 .service-cta--pdr { position: relative; isolation: isolate; padding: clamp(4.5rem, 8vw, 7.5rem) max(1.25rem, calc((100vw - 1180px) / 2)); background: var(--pc-night); border-top: 1px solid var(--pc-line-dark); }
 .service-cta--pdr h2 { max-width: 800px; color: var(--pc-white); font-size: clamp(2.15rem, 4.4vw, 4.2rem); font-weight: 650; letter-spacing: -.045em; line-height: 1; }
 .service-cta--pdr .eyebrow { color: var(--pc-blue); }
@@ -93,6 +95,6 @@
   .pdr-inner { padding-block: 4.25rem; }
   .pdr-split { gap: 2.25rem; }
   .service-faq--pdr .faq-list, .service-related--pdr nav { grid-template-columns: 1fr; }
-  :is(.pdr-chapter--light, .service-faq--pdr, .service-related--pdr)::before { background-size: 2000px auto; opacity: .045; }
+  :is(.pdr-chapter--light, .service-related--pdr)::before { background-size: 2000px auto; opacity: .045; }
   .service-cta--pdr::after { height: 92px; opacity: .72; }
 }

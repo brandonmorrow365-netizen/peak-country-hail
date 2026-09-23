@@ -9,7 +9,7 @@ const { sections, feature } = Astro.props;
     <div class="pdr-inner pdr-split">
       <PdrCopy section={sections[0]} id="pdr-introduction" />
       <figure class="pdr-photo">
-        <img src={feature.image.src} srcset={`${feature.image.smallSrc} 640w, ${feature.image.src} ${feature.image.width}w`} sizes="(max-width: 900px) calc(100vw - 40px), 530px" width={feature.image.width} height={feature.image.height} alt={feature.image.alt} loading="eager" decoding="async" />
+        <img class="pdr-intro-photo" src="/images/auto-hail-damage-under-pdr-light.jpg" srcset="/images/auto-hail-damage-under-pdr-light-720.jpg 720w, /images/auto-hail-damage-under-pdr-light.jpg 1600w" sizes="(max-width: 900px) calc(100vw - 40px), 610px" width="1600" height="1200" alt="Close-up of vehicle-panel dents revealed by PDR reflection lighting" loading="eager" decoding="async" />
         <figcaption>{feature.image.caption}</figcaption>
       </figure>
     </div>
