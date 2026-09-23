@@ -38,6 +38,16 @@
 - Desktop/mobile full-page and detail screenshots captured inline. Local PNG export remains restricted; no workaround attempted.
 - Preview: `http://localhost:4362/paintless-dent-repair/`. Pending owner visual approval. Nothing pushed, merged, or deployed.
 
+## Task 12 Door Ding visual realignment — 2026-09-23
+
+- Door Ding-specific presentation reuses approved typography, palette, Longs Peak contours, image-backed navy chapters, and the mountain ridge. All six substantive sections remain in their original order; copy, links, six FAQs, CTAs, metadata/schema, and breadcrumbs are preserved.
+- Existing Lexus RX localized rear-hatch dent photograph supports the introduction; authentic PDR reflection-light imagery supports the hero/assessment chapter; hail imagery is confined to the hail-context chapter. No new image assets, stock, or generated repair photography.
+- Original inspection aside is integrated into the inspection chapter, with calm conventional-repair limitations and restrained FAQ/resources.
+- Desktop 1440 × 1200 and mobile 390 × 844 reviewed with no horizontal overflow; FAQ interaction passed. Auto Hail and PDR regression reviews passed at both sizes. Other page implementations remain unchanged.
+- Astro check: 91 files, zero diagnostics. Production build passed with the existing chunk-size warning. All 39 tests and diff whitespace validation passed. Additional content checks confirmed six headings in order, twelve paragraphs, section/resource links, description, and FAQ answers/schema.
+- Desktop/mobile full-page and requested detail captures are inline in the task. Local PNG export remains restricted; no export workaround attempted.
+- Preview: `http://localhost:4362/door-ding-repair/`. Pending owner Task 12 visual approval; no next task started. Nothing pushed, merged, or deployed.
+
 ## Deployment rule
 
 Major workflow and visual changes should be previewed and verified before production deployment unless the user explicitly authorizes direct deployment for that specific phase.

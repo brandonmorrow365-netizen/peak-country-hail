@@ -1,0 +1,32 @@
+---
+import type { ServicePage } from '../data/servicePages';
+import DoorDingCopy from './DoorDingCopy.astro';
+interface Props { sections: ServicePage['sections'] }
+const { sections } = Astro.props;
+---
+<article class="door-ding-article">
+  <div class="door-ding-chapter door-ding-topo">
+    <div class="door-ding-inner door-ding-split">
+      <DoorDingCopy section={sections[0]} id="door-ding-introduction" />
+      <figure class="door-ding-photo"><img src="/media/portfolio/lexus-rx/before-angle-2.webp" srcset="/media/portfolio/lexus-rx/before-angle-2-720.webp 720w, /media/portfolio/lexus-rx/before-angle-2.webp 1200w" sizes="(max-width: 900px) calc(100vw - 40px), 530px" width="1200" height="1492" alt="Localized dent on a Lexus RX rear hatch viewed under reflection lighting before PDR" loading="lazy" decoding="async" /></figure>
+    </div>
+  </div>
+  <div class="door-ding-chapter door-ding-chapter--dark door-ding-assessment">
+    <div class="door-ding-inner">
+      <DoorDingCopy section={sections[1]} id="door-ding-assessment" />
+      <DoorDingCopy section={sections[2]} id="door-ding-suitability" />
+    </div>
+  </div>
+  <div class="door-ding-chapter door-ding-limitations">
+    <div class="door-ding-inner"><DoorDingCopy section={sections[3]} id="door-ding-limitations" /></div>
+  </div>
+  <div class="door-ding-chapter door-ding-topo">
+    <div class="door-ding-inner door-ding-inspection-grid">
+      <DoorDingCopy section={sections[4]} id="door-ding-inspection" />
+      <aside class="door-ding-inspection"><div class="eyebrow">Peak Country Service</div><h2>A careful inspection comes first.</h2><p>Repairability depends on the vehicle, panel, paint, and damage—not a photograph or nearby weather report alone.</p><a class="button" href="/get-started/">Get Started →</a><nav aria-label="Inspection resources"><a href="/about/">About Peak Country</a><a href="/repair-standards/">Repair Evaluation</a><a href="/process/">What to expect</a></nav></aside>
+    </div>
+  </div>
+  <div class="door-ding-chapter door-ding-chapter--dark door-ding-hail">
+    <div class="door-ding-inner"><DoorDingCopy section={sections[5]} id="door-ding-hail" /></div>
+  </div>
+</article>

@@ -1,0 +1,91 @@
+/* Door Ding only. Approved homepage/PDR tokens and existing contour/ridge assets. */
+:is(.service-head--door-ding, .door-ding-article, .service-faq--door-ding, .service-related--door-ding, .service-cta--door-ding) {
+  --pc-night: #071522;
+  --pc-navy: #0b2236;
+  --pc-blue: #55bded;
+  --pc-blue-bright: #86d6fa;
+  --pc-blue-ink: #0a6e97;
+  --pc-paper: #f2f3ef;
+  --pc-white: #fbfcf9;
+  --pc-charcoal: #17232c;
+  --pc-line-light: #c9d0d1;
+  --pc-line-dark: rgb(160 193 211 / 24%);
+  --pc-font-body: Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --pc-font-display: "Inter Tight", Inter, "Avenir Next", "Segoe UI Variable", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--pc-font-body); line-height: 1.65;
+}
+:is(.service-head--door-ding, .door-ding-article, .service-faq--door-ding, .service-related--door-ding, .service-cta--door-ding) .eyebrow { margin: 0 0 1.15rem; color: var(--pc-blue-ink); font-size: .7rem; font-weight: 750; letter-spacing: .14em; line-height: 1.45; }
+:is(.door-ding-article, .service-faq--door-ding, .service-related--door-ding, .service-cta--door-ding) h2 { margin: 0 0 1.5rem; color: var(--pc-navy); font-family: var(--pc-font-display); font-size: clamp(2.15rem, 3.5vw, 3.45rem); font-weight: 610; letter-spacing: -.03em; line-height: 1.06; }
+:is(.service-head--door-ding, .door-ding-article, .service-cta--door-ding) .button { min-height: 48px; padding: .85rem 1.35rem; color: #04131e; background: var(--pc-blue); border: 1px solid var(--pc-blue); border-radius: 2px; box-shadow: none; font-size: .76rem; font-weight: 820; letter-spacing: .09em; }
+:is(.service-head--door-ding, .door-ding-article, .service-cta--door-ding) .button:hover { background: var(--pc-blue-bright); border-color: var(--pc-blue-bright); transform: none; }
+.service-head--door-ding { isolation: isolate; min-height: 650px; padding-block: clamp(4.5rem, 7vw, 6.5rem); border-bottom: 1px solid rgb(85 189 237 / 42%); background-image: linear-gradient(90deg, rgb(6 24 45 / 82%), rgb(8 38 65 / 56%) 60%, rgb(6 24 45 / 32%)), url('/brand/hero-storm-background-1942.webp'); }
+.service-head--door-ding::before { position: absolute; z-index: -1; inset: 0 0 0 auto; width: 43%; content: ''; background: linear-gradient(0deg, rgb(7 21 34 / 28%), transparent 65%), url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') center 48% / cover no-repeat; mask-image: linear-gradient(90deg, transparent, #000 30%); pointer-events: none; }
+.service-head--door-ding h1 { max-width: 680px; font-family: var(--pc-font-display); font-size: clamp(3rem, 4.7vw, 4.75rem); font-weight: 670; letter-spacing: -.05em; line-height: .96; text-transform: none; }
+.service-head--door-ding p { max-width: 590px; margin-top: 1.5rem; color: #d2dde3; line-height: 1.65; }
+.service-head--door-ding .eyebrow, .service-head--door-ding .service-head-actions > a:not(.button) { color: var(--pc-blue-bright); }
+.service-head--door-ding .service-head-actions > a:not(.button) { font-size: .86rem; font-weight: 720; text-underline-offset: .38rem; }
+.door-ding-chapter { position: relative; isolation: isolate; color: var(--pc-charcoal); background: var(--pc-paper); }
+.door-ding-inner { width: min(100%, 1284px); margin-inline: auto; padding: clamp(4.25rem, 7vw, 6.5rem) clamp(1.25rem, 4vw, 3.25rem); }
+.door-ding-split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center; }
+.door-ding-copy { min-width: 0; }
+.door-ding-copy > p { margin: 1.2rem 0 0; font-size: 1rem; line-height: 1.75; }
+.door-ding-copy > .direct-answer { color: inherit; font-weight: 500; }
+.door-ding-photo { margin: 0; min-width: 0; }
+.door-ding-photo img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.door-ding-article .service-context-links { gap: .8rem 1.6rem; margin-top: 1.8rem; }
+.door-ding-article .service-context-links a, .door-ding-inspection nav a { color: var(--pc-blue-ink); font-size: .86rem; font-weight: 720; text-underline-offset: .38rem; }
+.door-ding-chapter--dark { color: #d0dbe1; background: linear-gradient(180deg, #071a28, #091d2a 52%, #071722); }
+.door-ding-chapter--dark::before { position: absolute; z-index: -1; inset: 0; content: ''; background: url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') center 58% / cover no-repeat; filter: grayscale(1) saturate(.1) contrast(.72); opacity: .22; mask-image: linear-gradient(90deg, rgb(0 0 0 / 65%), #000); pointer-events: none; }
+.door-ding-hail::before { background-image: url('/images/auto-hail-damage-under-pdr-light.jpg'); background-position: center 62%; }
+.door-ding-chapter--dark h2 { color: var(--pc-white); }
+.door-ding-chapter--dark .service-context-links a { color: var(--pc-blue-bright); }
+.door-ding-assessment .door-ding-copy, .door-ding-limitations .door-ding-copy, .door-ding-hail .door-ding-copy { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); column-gap: clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
+.door-ding-assessment h2, .door-ding-limitations h2, .door-ding-hail h2 { grid-column: 1; grid-row: 1 / span 3; }
+.door-ding-assessment .door-ding-copy > p, .door-ding-limitations .door-ding-copy > p, .door-ding-hail .door-ding-copy > p, .door-ding-assessment .service-context-links, .door-ding-hail .service-context-links { grid-column: 2; }
+.door-ding-assessment .door-ding-copy > p:first-of-type, .door-ding-limitations .door-ding-copy > p:first-of-type, .door-ding-hail .door-ding-copy > p:first-of-type { margin-top: 0; }
+.door-ding-assessment .door-ding-copy + .door-ding-copy { margin-top: 4.5rem; padding-top: 4.5rem; border-top: 1px solid var(--pc-line-dark); }
+.door-ding-limitations { background: var(--pc-white); }
+.door-ding-inspection-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center; }
+.door-ding-inspection { padding: 2.5rem 0 2.5rem 3rem; border-left: 1px solid var(--pc-line-light); }
+.door-ding-inspection h2 { font-size: clamp(1.9rem, 2.7vw, 2.8rem); }
+.door-ding-inspection p { margin: 1rem 0 1.75rem; }
+.door-ding-inspection nav { display: grid; gap: .75rem; margin-top: 1.6rem; }
+.service-faq--door-ding.section, .service-related--door-ding.section { width: 100%; max-width: none; padding: clamp(4.25rem, 7vw, 6.5rem) max(1.25rem, calc((100vw - 1180px) / 2)); color: var(--pc-charcoal); background: var(--pc-paper); border: 0; }
+.service-faq--door-ding.section { background: color-mix(in srgb, var(--pc-navy) 15%, var(--pc-white)); }
+.service-faq--door-ding .section-head { align-items: end; margin-bottom: 3rem; }
+.service-faq--door-ding .section-head h2 { margin-bottom: 0; }
+.service-faq--door-ding .section-head > a { color: var(--pc-blue-ink); }
+.service-faq--door-ding .faq-list { gap: 0 3.25rem; }
+.service-faq--door-ding .faq-list details { padding: 1.35rem 0; background: transparent; border: 0; border-bottom: 1px solid var(--pc-line-light); border-radius: 0; }
+.service-faq--door-ding .faq-list details[open] { box-shadow: none; }
+.service-faq--door-ding .faq-list summary { color: var(--pc-navy); font-weight: 650; }
+.service-faq--door-ding .faq-list p { color: var(--pc-charcoal); }
+.service-related--door-ding.section { align-items: start; border-top: 1px solid var(--pc-line-light); }
+.service-related--door-ding h2 { max-width: 420px; font-size: clamp(2rem, 3vw, 3rem); }
+.service-related--door-ding nav { gap: 0 2.25rem; }
+.service-related--door-ding nav a { padding: 1.2rem 0; color: var(--pc-navy); background: transparent; border: 0; border-bottom: 1px solid var(--pc-line-light); border-radius: 0; font-size: .9rem; font-weight: 650; }
+.service-related--door-ding nav a:hover { color: var(--pc-blue-ink); }
+.door-ding-topo, .service-related--door-ding { position: relative; isolation: isolate; }
+.door-ding-topo::before, .service-related--door-ding::before { position: absolute; z-index: -1; inset: 0; content: ''; background: url('/images/longs-peak-topographic-background-light.svg') center / 1800px auto repeat; opacity: .065; pointer-events: none; }
+.service-cta--door-ding { position: relative; isolation: isolate; padding: clamp(4.5rem, 8vw, 7.5rem) max(1.25rem, calc((100vw - 1180px) / 2)); background: var(--pc-night); border-top: 1px solid var(--pc-line-dark); }
+.service-cta--door-ding h2 { max-width: 800px; color: var(--pc-white); font-size: clamp(2.15rem, 4.4vw, 4.2rem); font-weight: 650; letter-spacing: -.045em; line-height: 1; }
+.service-cta--door-ding .eyebrow { color: var(--pc-blue); }
+.service-cta--door-ding::after { position: absolute; z-index: -1; right: 0; bottom: 0; left: 0; height: 128px; content: ''; background: url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .82; pointer-events: none; }
+@media (max-width: 1100px) { .service-head--door-ding::before { opacity: .5; } .service-head--door-ding p { max-width: 55%; } }
+@media (max-width: 900px) {
+  .service-head--door-ding::before { display: none; }
+  .service-head--door-ding { min-height: 0; }
+  .service-head--door-ding p { max-width: 640px; }
+  .door-ding-split, .door-ding-inspection-grid, .door-ding-assessment .door-ding-copy, .door-ding-limitations .door-ding-copy, .door-ding-hail .door-ding-copy, .service-related--door-ding.section { display: block; }
+  .door-ding-photo { max-width: 530px; margin: 2.5rem auto 0; }
+  .door-ding-inspection { margin-top: 2.5rem; padding: 2rem 0 0; border-left: 0; border-top: 1px solid var(--pc-line-light); }
+  .service-related--door-ding nav { margin-top: 2.5rem; }
+}
+@media (max-width: 640px) {
+  .service-head--door-ding { padding-block: 4.5rem 5.25rem; }
+  .service-head--door-ding h1 { font-size: clamp(2.75rem, 12vw, 4.2rem); }
+  .door-ding-inner { padding-block: 4.25rem; }
+  .service-faq--door-ding .faq-list, .service-related--door-ding nav { grid-template-columns: 1fr; }
+  .door-ding-topo::before, .service-related--door-ding::before { background-size: 2000px auto; opacity: .045; }
+  .service-cta--door-ding::after { height: 92px; opacity: .72; }
+}
