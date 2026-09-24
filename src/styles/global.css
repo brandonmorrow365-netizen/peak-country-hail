@@ -97,6 +97,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .page-head .eyebrow { color: #7bcafa; }
 .actions, .about-actions, .service-head-actions, .workflow-next { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-5); }
 .page-head .text-link, .about-cta .text-link { color: #fff; font-weight: 750; }
+.workflow-head { isolation: isolate; background: #06182d; }
+.workflow-head::before { position: absolute; z-index: -1; inset: -3%; content: ''; background: linear-gradient(90deg, rgb(6 24 45 / 88%) 0%, rgb(8 38 65 / 66%) 58%, rgb(6 24 45 / 43%) 100%), linear-gradient(0deg, rgb(5 20 37 / 76%) 0%, transparent 62%), url('/brand/hero-storm-background-1942.webp') center 45% / cover no-repeat; animation: workflow-hero-drift 24s cubic-bezier(.4,0,.2,1) infinite alternate; transform: scale(1.025); }
 .text-link { font-weight: 750; }
 .button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: .82rem 1.35rem; color: #041525; background: #63bff1; border: 1px solid #93d7fa; border-radius: var(--radius-sm); box-shadow: 0 8px 20px rgb(3 18 34 / 20%); cursor: pointer; font-size: .84rem; font-weight: 850; letter-spacing: .04em; line-height: 1.2; text-decoration: none; text-transform: uppercase; transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease; }
 .button:hover { color: #041525; background: #8fd3f6; border-color: #b4e5fc; transform: translateY(-1px); }
@@ -556,15 +558,21 @@ textarea { min-height: 130px; resize: vertical; }
 .workflow-talk { display: flex; gap: 1rem 1.5rem; align-items: center; margin-top: var(--space-4); padding: 1rem 0; border-top: 1px solid #c3d2db; }
 .workflow-talk span { color: var(--ink-soft); }
 .workflow-talk a { font-weight: 800; }
-.workflow-unavailable { display: grid; grid-template-columns: 1fr auto; gap: var(--space-5); align-items: center; margin-bottom: var(--space-5); padding: var(--space-5); color: #e8f2f8; background: var(--navy-raised); border-top: 3px solid var(--blue); }
+.workflow-unavailable { position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr auto; gap: var(--space-5); align-items: center; margin-bottom: var(--space-5); padding: var(--space-5); overflow: hidden; color: #e8f2f8; background: #092640; border-block: 1px solid rgb(94 193 239 / 45%); animation: workflow-utility-enter .48s cubic-bezier(.2,.7,.2,1) both; }
+.workflow-unavailable::before { position: absolute; z-index: -2; inset: 0; content: ''; background: url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') 82% 48% / cover no-repeat; filter: saturate(.42) contrast(.9) brightness(.58); opacity: .27; }
+.workflow-unavailable::after { position: absolute; z-index: -1; inset: 0; content: ''; background: linear-gradient(90deg, #071d33 0%, rgb(7 29 51 / 97%) 45%, rgb(7 29 51 / 72%) 73%, rgb(7 29 51 / 82%) 100%); }
 .workflow-unavailable h2 { margin: .3rem 0; color: #fff; }
 .workflow-unavailable p { margin-bottom: 0; color: #cfdee8; }
 .workflow-unavailable__actions { display: grid; gap: .8rem; min-width: 220px; text-align: center; }
 .workflow-unavailable__actions .text-link { color: #fff; }
+.workflow-unavailable__actions a { transition: color .18s ease, transform .18s ease; }
+.workflow-unavailable__actions a:hover, .workflow-unavailable__actions a:focus-visible { transform: translateY(-2px); }
 .workflow-form--preview { opacity: .46; }
 .workflow-form--preview::before { display: block; padding: .8rem var(--space-5); color: #143c58; background: #dceaf2; content: 'Preview only · Online fields are disabled'; font-size: .76rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
 .workflow-mountain-transition { width: 100%; height: 126px; background: #071522 url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .88; pointer-events: none; }
 @keyframes workflow-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes workflow-hero-drift { from { transform: scale(1.025) translate3d(-.35%, 0, 0); } to { transform: scale(1.055) translate3d(.35%, -.35%, 0); } }
+@keyframes workflow-utility-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Breadcrumbs and footer */
 .breadcrumbs { width: min(100%, var(--content)); margin: auto; padding: .7rem 1.5rem; color: var(--ink-soft); }
@@ -683,6 +691,8 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .site-logo { flex-basis: 112px; }
   .site-menu nav { padding-inline: 1rem; }
   .page-head { min-height: 250px; padding-inline: 1.25rem; background-image: linear-gradient(90deg, rgb(6 24 45 / 97%), rgb(8 38 65 / 86%)), url('/brand/hero-storm-background-960.webp'); }
+  .workflow-head { background-image: none; }
+  .workflow-head::before { background-image: linear-gradient(90deg, rgb(6 24 45 / 90%), rgb(8 38 65 / 67%)), linear-gradient(0deg, rgb(5 20 37 / 82%), transparent 56%), url('/brand/hero-storm-background-960.webp'); background-position: 58% 48%; }
   .section { padding-inline: 1.25rem; }
   .button { width: 100%; text-align: center; }
   .actions, .about-actions, .service-head-actions, .workflow-next { align-items: stretch; flex-direction: column; }
@@ -723,6 +733,8 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .workflow-reassurance { gap: 1rem; }
   .workflow-progress { padding-inline: 1.25rem; }
   .workflow-unavailable__actions { min-width: 0; }
+  .workflow-unavailable::before { background-position: 67% center; opacity: .21; }
+  .workflow-unavailable::after { background: linear-gradient(180deg, rgb(7 29 51 / 96%) 0%, rgb(7 29 51 / 88%) 62%, rgb(7 29 51 / 72%) 100%); }
   .workflow-talk { align-items: flex-start; flex-direction: column; }
   .workflow-mountain-transition { height: 96px; background-size: auto 100%; }
   .workflow-privacy { flex-direction: column; padding: var(--space-3) 1.25rem; }
