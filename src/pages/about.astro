@@ -42,30 +42,27 @@ const pageSchema = site.ownerName ? {
   </div>
 
   <section class="section about-intro" aria-labelledby="experience-heading">
-    <div>
+    <div class="about-intro__copy">
       <div class="eyebrow">Experience at the center of every repair</div>
       <h2 id="experience-heading">More Than 20 Years of Professional Paintless Dent Repair Experience</h2>
       <p class="lead">{site.experience} and {site.collisionExperience.toLowerCase()} shape how Peak Country evaluates and plans repairs.</p>
       <p>Peak Country specializes in <a href="/auto-hail-repair/">auto hail damage repair</a>, <a href="/paintless-dent-repair/">paintless dent repair (PDR)</a>, door dings, creases and minor dents for vehicle owners in Greeley, Weld County and throughout Northern Colorado.</p>
       <p>The owner/technician built Peak Country around a simple idea: do the repair correctly, take care of the vehicle and give the customer straight answers.</p>
     </div>
-    <aside class="technician-card" aria-label="Peak Country technician profile">
-      {site.ownerPhoto ? <img class="technician-photo technician-photo--real" src={site.ownerPhoto} alt={`${site.ownerName ?? 'Peak Country owner'} performing paintless dent repair`} /> : <div class="technician-photo technician-photo--prepared" role="img" aria-label="Decorative paintless dent repair reflection-line graphic"><span aria-hidden="true">PDR</span></div>}
-      <div class="technician-details">
-        <span class="profile-label">Technician-led service</span>
-        <h3>Owner / Paintless Dent Repair Technician</h3>
-        <dl>
-          <div><dt>PDR experience</dt><dd>More than 20 years professionally</dd></div>
-          <div><dt>Collision industry</dt><dd>More than 25 years</dd></div>
-          <div><dt>Location</dt><dd>Greeley / Northern Colorado</dd></div>
-          <div><dt>Service</dt><dd>Mobile, by appointment</dd></div>
-          <div><dt>Specialties</dt><dd>Auto Hail Repair · Paintless Dent Repair · Door Dings · Creases</dd></div>
-        </dl>
+    <aside class="about-experience" aria-label="Peak Country technician experience">
+      <figure>
+        <img src="/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg" srcset="/images/pdr-light-reflection-paintless-dent-repair-greeley-co-640.jpg 640w, /images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg 977w" sizes="(max-width: 900px) calc(100vw - 40px), 440px" width="977" height="1139" alt="PDR reflection light revealing distortion in a vehicle panel during paintless dent repair" loading="eager" decoding="async" />
+        <figcaption>Professional reflection lighting makes subtle panel distortion visible during PDR evaluation and repair.</figcaption>
+      </figure>
+      <div class="about-experience__proof">
+        <div><strong>20+</strong><span>Years of professional PDR experience</span></div>
+        <div><strong>25+</strong><span>Years in the collision industry</span></div>
       </div>
+      <p><strong>Owner / Paintless Dent Repair Technician</strong><br />Greeley / Northern Colorado · Mobile, by appointment</p>
     </aside>
   </section>
 
-  <section class="about-dark">
+  <section class="about-dark about-workmanship">
     <div class="section about-split">
       <div>
         <div class="eyebrow">Workmanship over sales tactics</div>
@@ -81,7 +78,8 @@ const pageSchema = site.ownerName ? {
     </div>
   </section>
 
-  <section class="section about-principles" aria-label="Peak Country repair principles">
+  <section class="about-principles-wrap" aria-label="Peak Country repair principles">
+   <div class="section about-principles">
     <article class="principle-card">
       <span class="principle-number">01</span>
       <h2>The Entire Vehicle Matters</h2>
@@ -96,6 +94,7 @@ const pageSchema = site.ownerName ? {
       <p>Peak Country provides straightforward estimates and realistic recommendations about what paintless dent repair can accomplish. I also believe in communicating with customers during the repair rather than leaving them wondering what is happening with their vehicle.</p>
       <p><strong>No confusing sales pitch. No unnecessary promises. Just clear information about the repair.</strong></p>
     </article>
+   </div>
   </section>
 
   <section class="service-region">
@@ -164,4 +163,18 @@ const pageSchema = site.ownerName ? {
       </div>
     </div>
   </section>
+  <div class="about-mountain-transition" aria-hidden="true"></div>
+
+  <script>
+    const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+    const revealTargets=[...document.querySelectorAll<HTMLElement>('.about-intro,.about-workmanship .about-split,.about-principles,.service-region-grid,.experience-close,.narrow.prose,.about-faq .section')];
+    const revealAll=()=>revealTargets.forEach(target=>target.classList.add('is-visible'));
+    if(reducedMotion.matches||!('IntersectionObserver'in window))revealAll();
+    else{
+      document.documentElement.classList.add('about-motion-ready');
+      const observer=new IntersectionObserver((entries)=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{rootMargin:'0px 0px -7%'});
+      revealTargets.forEach(target=>{target.dataset.aboutReveal='';observer.observe(target);});
+      reducedMotion.addEventListener('change',event=>{if(event.matches){observer.disconnect();revealAll();}});
+    }
+  </script>
 </Layout>

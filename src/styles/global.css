@@ -196,8 +196,20 @@ textarea { min-height: 130px; resize: vertical; }
 .mobile-conversion { display: none; }
 
 /* About and service pages */
-.about-intro { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); gap: var(--space-7); align-items: center; }
+.about-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .82fr); gap: clamp(3rem, 7vw, 7rem); align-items: center; }
 .about-intro .lead { color: #183c55; font-size: 1.18rem; }
+.about-intro__copy { max-width: 650px; }
+.about-experience { margin: 0; }
+.about-experience figure { position: relative; margin: 0; overflow: hidden; background: var(--navy); }
+.about-experience figure::after { position: absolute; inset: 0; content: ''; background: linear-gradient(180deg, transparent 55%, rgb(3 17 30 / 82%)); pointer-events: none; }
+.about-experience img { display: block; width: 100%; height: clamp(360px, 40vw, 520px); object-fit: cover; object-position: center; filter: saturate(.82) contrast(1.06); }
+.about-experience figcaption { position: absolute; z-index: 1; right: 1.4rem; bottom: 1.25rem; left: 1.4rem; color: #e7f1f7; font-size: .82rem; line-height: 1.5; }
+.about-experience__proof { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+.about-experience__proof > div { display: grid; grid-template-columns: auto 1fr; gap: .8rem; align-items: center; padding: 1.25rem 0; }
+.about-experience__proof > div + div { padding-left: 1.25rem; border-left: 1px solid var(--line); }
+.about-experience__proof strong { color: var(--navy); font-family: var(--font-display); font-size: 2.65rem; line-height: 1; }
+.about-experience__proof span { color: var(--ink-soft); font-size: .78rem; font-weight: 750; line-height: 1.35; text-transform: uppercase; }
+.about-experience > p { margin: 1.15rem 0 0; color: var(--ink-soft); font-size: .9rem; }
 .technician-card { overflow: hidden; background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--blue); border-radius: var(--radius-md); box-shadow: var(--shadow-md); }
 .technician-photo { position: relative; display: grid; min-height: 260px; place-items: center; overflow: hidden; color: #e8f4fb; background: repeating-linear-gradient(105deg, transparent 0 23px, rgb(143 215 255 / 18%) 24px 26px, transparent 27px 49px), var(--navy-raised); }
 .technician-photo--prepared span { position: relative; font-size: 3rem; font-weight: 900; letter-spacing: .12em; }
@@ -215,23 +227,30 @@ textarea { min-height: 130px; resize: vertical; }
 .about-split { display: grid; grid-template-columns: .9fr 1.1fr; gap: var(--space-7); }
 .about-copy p { color: #cfdee8; }
 .about-copy strong { color: #fff; }
-.about-principles { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-.principle-card { padding: var(--space-5); }
+.about-workmanship { position: relative; overflow: hidden; background-image: linear-gradient(90deg, rgb(3 17 30 / 98%) 0 43%, rgb(3 17 30 / 89%) 70%, rgb(3 17 30 / 76%)), url('/images/auto-hail-damage-under-pdr-light.jpg'); background-position: center, right center; background-size: cover; }
+.about-workmanship::after { position: absolute; right: 0; bottom: 0; left: 0; height: 1px; content: ''; background: rgb(117 200 247 / 42%); }
+.about-workmanship .about-split { position: relative; z-index: 1; min-height: 520px; align-items: center; }
+.about-principles-wrap { position: relative; background: #fafcfd; }
+.about-principles-wrap::before { position: absolute; inset: 0; content: ''; background: url('/images/longs-peak-topographic-background-light.svg') center / 1800px auto repeat; opacity: .055; pointer-events: none; }
+.about-principles { position: relative; display: block; max-width: 1040px; }
+.principle-card { display: grid; grid-template-columns: 70px minmax(0, 1fr); column-gap: var(--space-5); padding: var(--space-6) 0; background: transparent; border: 0; border-top: 1px solid #b9cbd7; border-radius: 0; box-shadow: none; }
+.principle-card:last-child { border-bottom: 1px solid #b9cbd7; }
+.principle-card > :not(.principle-number) { grid-column: 2; }
 .principle-number { display: block; margin-bottom: var(--space-4); color: var(--blue); font-weight: 900; letter-spacing: .12em; }
-.service-region { background: var(--surface-muted); border-block: 1px solid var(--line); }
+.service-region { background: #e7eff4; border-block: 1px solid #cbd9e2; }
 .service-region-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: var(--space-7); align-items: start; }
-.service-list { padding: var(--space-5); color: #eaf3f9; background: var(--navy-raised); border-top: 3px solid var(--blue-bright); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); }
-.service-list h3 { margin-top: 0; color: #fff; }
+.service-list { padding: 0 0 0 var(--space-5); color: var(--ink); background: transparent; border-left: 1px solid #a9bfcd; }
+.service-list h3 { margin-top: 0; color: var(--navy); }
 .service-list ul { margin: 0; padding: 0; list-style: none; }
-.service-list li { position: relative; padding: .6rem 0 .6rem 1.5rem; border-top: 1px solid rgb(255 255 255 / 13%); }
+.service-list li { position: relative; padding: .6rem 0 .6rem 1.5rem; border-top: 1px solid #b9ccd8; }
 .service-list li::before { position: absolute; left: .1rem; color: #58b6ea; content: "◆"; font-size: .6rem; }
-.experience-close { display: grid; grid-template-columns: 220px 1fr; gap: var(--space-6); align-items: center; max-width: 1080px; }
+.experience-close { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: var(--space-7); align-items: start; max-width: 1000px; }
 .experience-mark { color: var(--navy); font-size: clamp(5rem, 10vw, 8rem); font-weight: 900; line-height: 1; text-shadow: 5px 5px 0 #c8e7f5; }
 .experience-mark span { color: var(--blue); font-size: .48em; vertical-align: top; }
 .about-faq { background: #fff; border-top: 1px solid var(--line); }
-.faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
-.faq-list details { padding: var(--space-4); background: #f2f6f8; border: 1px solid var(--line); border-radius: var(--radius-sm); }
-.faq-list details[open] { border-color: #4c93bd; box-shadow: var(--shadow-sm); }
+.about-faq .faq-list { display: block; border-top: 1px solid #b9cbd7; }
+.about-faq .faq-list details { padding: 1.35rem 0; background: transparent; border: 0; border-bottom: 1px solid #b9cbd7; border-radius: 0; }
+.about-faq .faq-list details[open] { border-color: #7fa8bf; box-shadow: none; }
 .faq-list summary { color: #0a2946; cursor: pointer; font-weight: 750; }
 .faq-list p { margin-bottom: 0; color: var(--ink-soft); }
 .about-cta { padding: var(--section-pad) max(1.5rem, calc((100vw - 1120px) / 2)); color: #fff; background: var(--navy-raised); border-top: 3px solid var(--blue); }
@@ -239,6 +258,9 @@ textarea { min-height: 130px; resize: vertical; }
 .about-cta h2 { margin-bottom: var(--space-3); color: #fff; }
 .about-cta p { color: #d7e5ee; font-size: 1.06rem; }
 .about-cta p a { color: #8bd3f8; font-weight: 800; }
+.about-mountain-transition { width: 100%; height: 126px; background: #071522 url('/brand/peak-country-approved-mountain-ridge.png') center bottom / auto 100% no-repeat; opacity: .88; pointer-events: none; }
+.about-motion-ready [data-about-reveal] { transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1); }
+.about-motion-ready [data-about-reveal]:not(.is-visible) { opacity: 0; transform: translateY(18px); }
 .contact-direct { margin-bottom: var(--space-5); padding: var(--space-4); background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); }
 .contact-direct .eyebrow { margin: 0; }
 .contact-direct h2 { margin: .4rem 0; }
@@ -601,6 +623,8 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .local-hail-live { grid-template-columns: 1fr 1fr; }
   .local-hail-live > p { grid-column: 1 / -1; }
   .home-final-cta { align-items: flex-start; flex-direction: column; }
+  .about-principles, .experience-close { grid-template-columns: 1fr; }
+  .service-list { padding: var(--space-4) 0 0; border-top: 1px solid #a9bfcd; border-left: 0; }
 }
 
 @media (max-width: 720px) {
@@ -630,6 +654,14 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .service-map-key { display: grid; gap: .6rem; }
   .mobile-standard-cards article { grid-template-columns: 2.7rem 1fr; }
   .area-mountain-transition { height: 96px; background-size: auto 100%; }
+  .about-principles { display: block; }
+  .principle-card { grid-template-columns: 42px minmax(0, 1fr); column-gap: 1rem; padding: 2.2rem 0; }
+  .about-experience__proof { grid-template-columns: 1fr; }
+  .about-experience__proof > div + div { padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
+  .experience-close { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  .experience-mark { font-size: 5rem; }
+  .about-workmanship .about-split { min-height: 0; }
+  .about-mountain-transition { height: 96px; background-size: auto 100%; }
   .history-filters { grid-template-columns: 1fr; }
   .history-method dl div { grid-template-columns: 1fr; gap: .2rem; }
   .year-card-grid summary { align-items: flex-start; flex-direction: column; }
