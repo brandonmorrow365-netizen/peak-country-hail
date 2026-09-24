@@ -4,6 +4,7 @@ import {env} from 'cloudflare:workers';
 import {readWeather,feedState} from '../lib/weather';
 import {site} from '../data/site';
 import {PUBLIC_HISTORY_END_YEAR,PUBLIC_HISTORY_RANGE,PUBLIC_HISTORY_START_YEAR,reportDate,subsetSummary,type HistoricalHailReport} from '../lib/hailHistory';
+import '../styles/hail-workspace.css';
 interface Props {title:string;description:string;h1:string;eyebrow:string;intro:string;scopeNote:string;records:HistoricalHailReport[];interpretation:string;liveContext:string;details:[string,string][]}
 const {title,description,h1,eyebrow,intro,scopeNote,records,interpretation,liveContext,details}=Astro.props;
 const summary=subsetSummary(records),live=await readWeather(env.DB),nwsState=feedState(live?.nws,live?.nwsSuccess,15),spcState=feedState(live?.spc,live?.spcSuccess,25);

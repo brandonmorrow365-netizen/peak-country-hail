@@ -15,7 +15,7 @@ export const servicePages:Record<string,ServicePage> = {
       {heading:'What automotive hail damage can look like',paragraphs:[
         'Automotive hail damage rarely appears as one uniform group of dents. A hood may show broad, shallow impressions while the roof has sharper impacts. Fender and door damage can be harder to see because reflections change across curved panels. Quarter-panel dents may sit near body lines or areas with limited access behind the metal. Moldings, roof rails, trim, lights, and glass also need attention during a complete inspection.',
         'Dent count is only part of the picture. Depth, diameter, location, panel material, paint condition, and metal stretch all influence repairability. A shallow dent in open steel may respond differently from a deep impact on a reinforced body line. Cracked paint or metal stretched beyond its workable range can change the recommended repair method.'
-      ],links:[{href:'/hail-size-guide/',label:'Understand reported hail sizes'},{href:'/after-a-hailstorm/',label:'What to do after a hailstorm'}],image:{
+      ],links:[{href:'/hail-damage-guide/',label:'How to identify possible vehicle hail damage'},{href:'/hail-size-guide/',label:'Understand reported hail sizes'},{href:'/after-a-hailstorm/',label:'What to do after a hailstorm'}],image:{
         src:'/images/auto-hail-damage-before-after-peak-country-greeley-co.webp',
         smallSrc:'/images/auto-hail-damage-before-after-peak-country-greeley-co-720.webp',
         width:1088,
@@ -37,7 +37,7 @@ export const servicePages:Record<string,ServicePage> = {
       {heading:'Documentation, insurance context, and repair economics',paragraphs:[
         'Insurance use does not change the workmanship standard. Whether a customer pays directly or uses insurance, the repair recommendation should be based on the vehicle’s condition, the appropriate method, and the agreed repair goal. Coverage, deductibles, authorization, and payment decisions remain controlled by the policy and insurer.',
         'Complex hail or insurance-related work may require professional estimating and documentation: detailed panel inspection, repair planning, required R&I, photographs, technical information, and supported revisions when authorized access reveals additional needs. Repair economics can also affect whether PDR, a hybrid plan, conventional repair, or replacement makes more sense for a particular panel. Peak Country explains the appropriate next step before any paid documentation service is performed.'
-      ],links:[{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'}]},
+      ],links:[{href:'/insurance-claims/',label:'Preparing for an insurance-related hail repair'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'}]},
       {heading:'What happens during a Peak Country hail inspection',paragraphs:[
         'The inspection starts with the vehicle’s year, make, model, storm context, location, and any concerns you have noticed. Under appropriate lighting, the visible exterior panels are reviewed for dent patterns, paint damage, prior repairs, access constraints, and other conditions that could affect the approach. Peak Country then explains which areas appear suitable for PDR, which may need another method, and what additional access may be necessary.',
         'Weather data can help establish regional context, but a nearby NOAA or Storm Prediction Center report does not prove that a specific vehicle was struck. Reports describe observations at a place and time, with varying coverage and precision. The vehicle itself must be inspected before damage or repairability is determined.'
@@ -51,7 +51,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Does a hail report near Greeley prove my car was hit?',answer:'No. A report confirms an observation near a location, not exposure or damage to a particular vehicle. Inspection lighting and a direct vehicle assessment are needed.'},
       {question:'Do you provide mobile hail inspections?',answer:'Yes. Peak Country provides mobile service by appointment in Greeley, Weld County, and nearby Northern Colorado communities, subject to location and working conditions.'}
     ],
-    related:[{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/get-started/',label:'Get Started'}]
+    related:[{href:'/hail-damage-guide/',label:'Vehicle Hail Damage Guide'},{href:'/insurance-claims/',label:'Preparing for a Hail Claim'},{href:'/paintless-dent-repair/',label:'Paintless Dent Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/get-started/',label:'Get Started'}]
   },
   'paintless-dent-repair': {
     title:'Paintless Dent Repair Greeley, CO | Peak Country',

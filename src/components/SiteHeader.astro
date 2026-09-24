@@ -20,7 +20,7 @@ const links = [
   </div>
   <div class="site-header__main">
     <a class="site-logo" href="/" aria-label="Peak Country home">
-      <img src="/brand/peak-country-logo-604.png" srcset="/brand/peak-country-logo-604.png 604w, /brand/peak-country-logo.png 1448w" sizes="156px" width="604" height="453" alt={site.name} fetchpriority="high" decoding="async" />
+      <img src="/brand/peak-country-logo-604.png" width="604" height="453" alt={site.name} fetchpriority="high" decoding="async" />
     </a>
     <nav class="site-nav" aria-label="Main navigation">
       {links.map(([href, label]) => <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>)}

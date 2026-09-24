@@ -1,10 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import manifest from '../../../data/hail-history/source-manifest.json';
+import reportsJson from '../../../data/hail-history/hail-reports-2016-2025.json';
 import { articleNode } from '../../lib/schema';
+import {publicHistory,subsetSummary,type HistoricalHailReport} from '../../lib/hailHistory';
+import HailDataCitation from '../../components/HailDataCitation.astro';
 const title='Hail Data Sources & Methodology | Peak Country';
 const description='How Peak Country uses NOAA/NCEI, NWS and SPC data, geographic filtering, source timestamps and limitations for Northern Colorado hail information.';
 const pageSchema=articleNode('/data-sources/',title,description,'2026-09-05','2026-09-08');
+const publicSummary=subsetSummary(publicHistory(reportsJson as HistoricalHailReport[]));
 ---
 <Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
 <header class="page-head"><div class="eyebrow">Official sources, defined methods</div><h1>Hail Data Sources and Methodology</h1><p>Peak Country identifies each weather source, separates current information from historical records, and explains what the data can and cannot establish.</p></header>
@@ -16,6 +20,7 @@ const pageSchema=articleNode('/data-sources/',title,description,'2026-09-05','20
 <h2>Reports, hail days, and storm episodes</h2><p>A hail report is one qualifying official observation. A hail day is one calendar date with at least one qualifying observation. Several reports can occur on the same day, and several observations can belong to one NOAA episode. Peak Country therefore does not present report count as storm count. Annual and five-year public summaries are calculated from the same source-backed records used by the plot and report table.</p>
 <h2>How cached and unavailable data is handled</h2><p>Official feeds can fail temporarily. When retained data is shown, the tracker labels its timestamp and stale condition rather than presenting it as current. A source failure produces an unavailable state instead of simulated observations. Meaningful page text and source explanations remain available even when a live request cannot be completed.</p>
 <h2>Freshness and limitations</h2><p>Live pages display source status and distinguish current, stale cached, and unavailable data. Reports can be delayed or incomplete, and location accuracy varies by observer and source. An empty feed does not prove that no hail occurred. A nearby hail report confirms only that hail was reported in the area; it does not prove that a specific vehicle was exposed or damaged. A direct vehicle inspection is required.</p><p>Explore the <a href="/hail-tracker/">Live Hail Tracker</a>, search the <a href="/northern-colorado-hail-history/">verified historical archive</a>, or review the <a href="/hail-size-guide/">Hail Size Guide</a>. Technical details are preserved in the archive source manifest and repository validation tests.</p>
+<HailDataCitation reportCount={publicSummary.report_count} hailDayCount={publicSummary.hail_day_count} generatedAt={manifest.generated_at} />
 <p class="content-review">Published September 5, 2026 · Last reviewed September 8, 2026 · Historical dataset generated {new Date(manifest.generated_at).toLocaleDateString('en-US',{dateStyle:'long'})}</p>
 </article>
 </Layout>

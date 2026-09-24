@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { contentMeta } from '../src/data/contentMeta.ts';
-import { pageGraph, schemaIds } from '../src/lib/schema.ts';
+import { pageGraph, schemaIds, serviceNode } from '../src/lib/schema.ts';
 import { canonicalPath, canonicalUrl, robotsText } from '../src/lib/seo.ts';
 import { site } from '../src/data/site.ts';
 import { canonicalIndexNowUrls } from '../scripts/indexnow-lib.mjs';
@@ -42,6 +42,15 @@ test('canonical URLs normalize document routes without changing file endpoints',
   assert.equal(canonicalUrl('/'), `${site.url}/`);
 });
 
+test('service schema uses the canonical business and mobile service relationships', () => {
+  const service = serviceNode('/paintless-dent-repair/','Paintless Dent Repair','Description');
+  assert.equal(service['@id'], `${site.url}/paintless-dent-repair/#service`);
+  assert.equal(service.serviceType, 'Paintless Dent Repair');
+  assert.deepEqual(service.provider, { '@id': schemaIds.business });
+  assert.equal((service.availableChannel as Record<string, unknown>).servicePhone, site.phone);
+  assert.deepEqual((service.areaServed as Array<Record<string, unknown>>).map((area) => area.name), ['Greeley, Colorado','Weld County, Colorado','Northern Colorado']);
+});
+
 test('content metadata contains unique canonical paths and stable ISO dates', () => {
   assert.equal(new Set(contentMeta.map((entry) => entry.path)).size, contentMeta.length);
   for (const entry of contentMeta) {
@@ -55,6 +64,7 @@ test('production robots names retrieval crawlers and protects utility paths', ()
   const text = robotsText('production');
   for (const agent of ['Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot','*']) assert.match(text, new RegExp(`User-agent: ${agent.replace('*','\\*')}`));
   assert.match(text, /Disallow: \/api\//);
+  assert.match(text, /Disallow: \/__preview\//);
   assert.match(text, /Sitemap: https:\/\/peakcountryhail\.com\/sitemap\.xml/);
   assert.equal(robotsText('preview'), 'User-agent: *\nDisallow: /\n');
 });

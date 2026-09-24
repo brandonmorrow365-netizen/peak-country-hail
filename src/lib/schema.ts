@@ -9,6 +9,21 @@ export const schemaIds = {
   website: `${site.url}/#website`,
 };
 
+export const standardServiceArea: SchemaNode[] = [
+  { '@type': 'City', name: 'Greeley, Colorado' },
+  { '@type': 'AdministrativeArea', name: 'Weld County, Colorado' },
+  { '@type': 'Place', name: 'Northern Colorado' },
+];
+
+export function serviceNode(pathname: string, name: string, description: string, areaServed: SchemaNode[] = standardServiceArea): SchemaNode {
+  const url = canonicalUrl(pathname);
+  return {
+    '@type': 'Service', '@id': `${url}#service`, name, serviceType: name, description, url,
+    mainEntityOfPage: { '@id': `${url}#webpage` }, provider: { '@id': schemaIds.business }, areaServed,
+    availableChannel: { '@type': 'ServiceChannel', serviceUrl: url, servicePhone: site.phone, availableLanguage: 'English' },
+  };
+}
+
 const absolute = (path: string) => new URL(path, `${site.url}/`).href;
 
 function titleCase(segment: string) {

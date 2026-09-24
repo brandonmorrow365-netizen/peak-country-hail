@@ -7,7 +7,7 @@ const result=Astro.request.method==='POST'?await submitLead(Astro.request,env):n
 if(result) Astro.response.status=result.status;
 Astro.response.headers.set('Cache-Control','no-store');
 ---
-<Layout title="Get Started with Peak Country PDR | Greeley, CO" description="Start a no-obligation conversation about hail damage, dents, and Paintless Dent Repair with Peak Country." exactTitle>
+<Layout title="Get Started with Peak Country PDR | Greeley, CO" description="Start a no-obligation conversation about hail damage, dents, and Paintless Dent Repair with Peak Country." exactTitle socialImage={{src:'/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg',width:977,height:1139,alt:'Professional PDR reflection lighting on a vehicle panel',type:'image/jpeg'}}>
   <header class="page-head workflow-head"><div class="eyebrow">Free Initial Assessment · $0</div><h1>Get Started</h1><p>Start with a conversation—not a commitment. A few simple details help Peak Country understand your vehicle and guide you toward the right next step.</p></header>
   <section class="workflow-stage"><div class="section narrow workflow-shell"><GetStartedWorkflow {result} /></div></section>
   <div class="workflow-mountain-transition" aria-hidden="true"></div>

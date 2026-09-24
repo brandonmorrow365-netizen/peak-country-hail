@@ -1,19 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { site } from '../../data/site';
+import { serviceNode } from '../../lib/schema';
 
 const title = 'PDR Repair Evaluation | Peak Country Greeley, CO';
 const description = 'How Peak Country evaluates PDR repairability, factory-paint preservation, vehicle access, material, repair goals, and safe repair methods.';
-const pageSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': `${site.url}/repair-standards/#service`,
-  name: 'Peak Country Paintless Dent Repair Evaluation',
-  description,
-  url: `${site.url}/repair-standards/`,
-  provider: { '@id': `${site.url}/#business` },
-  areaServed: ['Greeley, Colorado', 'Weld County, Colorado', 'Northern Colorado']
-};
+const pageSchema = serviceNode('/repair-standards/','Peak Country Paintless Dent Repair Evaluation',description);
 ---
 <Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
   <header class="page-head standards-head">

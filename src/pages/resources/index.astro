@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const groups = [
+  ['Hail and weather', 'Understand current official-source context and verified historical reports before drawing conclusions about a particular vehicle.', [['/hail-tracker/','Live Northern Colorado Hail Tracker'],['/northern-colorado-hail-history/','Five-Year Northern Colorado Hail History'],['/hail-size-guide/','Hail Size Guide'],['/data-sources/','Data Sources and Methodology']]],
+  ['Vehicle inspection', 'Learn what to check after a storm and why controlled lighting and a direct vehicle inspection matter.', [['/after-a-hailstorm/','What to Do After a Hailstorm'],['/hail-damage-guide/','Understanding Vehicle Hail Damage'],['/free-hail-inspection/','Free Initial Assessment']]],
+  ['PDR and repairability', 'See how paint, metal, dent shape, panel construction, access, and technician judgment affect the repair recommendation.', [['/paintless-dent-repair/','How Paintless Dent Repair Works'],['/why-pdr/','Why Consider PDR'],['/auto-hail-repair/','Auto Hail Repair'],['/door-ding-repair/','Door Ding Repair'],['/gallery/','Real Repair Gallery']]],
+  ['Insurance and documentation', 'Keep vehicle evaluation, repair documentation, policy decisions, and customer authorization clearly separated.', [['/insurance-claims/','Preparing for a Hail Claim'],['/estimating-documentation/','Professional Estimating and Documentation'],['/faq/#insurance-questions','Insurance and Documentation FAQ']]],
+  ['Standards, warranty, and service', 'Review how Peak Country approaches repair evaluation, workmanship, mobile service, and the first contact.', [['/repair-standards/','PDR Repair Evaluation'],['/warranty/','Workmanship Warranty'],['/process/','Inspection and Repair Process'],['/service-area/','Mobile Service Area'],['/about/','Experience and Trust'],['/get-started/','Get Started']]],
+] as const;
+---
+<Layout title="Hail & Repair Resources | Peak Country" description="Explore Peak Country resources about Northern Colorado hail, vehicle inspection, PDR repairability, insurance documentation, repair standards, and mobile service." exactTitle>
+  <header class="page-head"><div class="eyebrow">Practical repair and weather information</div><h1>Hail &amp; Repair Resources</h1><p>Use these source-backed guides to understand regional hail information, evaluate possible vehicle damage, and prepare for a clear repair conversation.</p></header>
+  <section class="section narrow prose">
+    {groups.map(([heading,intro,links])=><section><h2>{heading}</h2><p>{intro}</p><ul>{links.map(([href,label])=><li><a href={href}>{label} →</a></li>)}</ul></section>)}
+  </section>
+</Layout>

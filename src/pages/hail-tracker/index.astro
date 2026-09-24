@@ -4,6 +4,7 @@ import HailDashboardMap from '../../components/HailDashboardMap.astro';
 import {env} from 'cloudflare:workers';
 import {readWeather,feedState,dashboardMode,NWS,SPC,GREELEY,LOCAL_RADIUS_MILES} from '../../lib/weather';
 import {site} from '../../data/site';
+import '../../styles/hail-workspace.css';
 const data=await readWeather(env.DB);
 const nwsState=feedState(data?.nws,data?.nwsSuccess,15);
 const spcState=feedState(data?.spc,data?.spcSuccess,25);
@@ -22,7 +23,7 @@ const datasetModified=successfulUpdates.toSorted().at(-1)??'2026-09-08';
 const pageSchema={'@context':'https://schema.org','@type':'Dataset','@id':`${site.url}/hail-tracker/#dataset`,name:'Live Northern Colorado Hail Tracker Near Greeley',description:'Official active National Weather Service alerts and preliminary Storm Prediction Center hail reports prioritized within 50 statute miles of Greeley.',url:`${site.url}/hail-tracker/`,mainEntityOfPage:{'@id':`${site.url}/hail-tracker/#webpage`},dateModified:datasetModified,spatialCoverage:{'@type':'Place',name:'Approximately 50 statute miles from the Greeley, Colorado city reference point'},creator:[{'@type':'Organization',name:'National Weather Service',url:'https://www.weather.gov/'},{'@type':'Organization',name:'NOAA Storm Prediction Center',url:'https://www.spc.noaa.gov/'}],publisher:{'@id':`${site.url}/#business`},isBasedOn:[NWS,SPC]};
 Astro.response.headers.set('Cache-Control','public, max-age=60, s-maxage=300, stale-if-error=900');
 ---
-<Layout title="Northern Colorado Hail Tracker Near Greeley" description="Official NWS alerts and preliminary SPC hail reports prioritized within 50 miles of Greeley, with distances, timestamps, freshness, and source limitations." pageSchema={pageSchema}>
+<Layout title="Northern Colorado Hail Tracker Near Greeley" description="Official NWS alerts and preliminary SPC hail reports prioritized within 50 miles of Greeley, with distances, timestamps, freshness, and source limitations." pageSchema={pageSchema} socialImage={{src:'/brand/hero-storm-background-1942.webp',width:1942,height:809,alt:'Storm clouds over Northern Colorado mountains',type:'image/webp'}}>
   <header class={`page-head tracker-head hail-workspace dashboard-hero dashboard-hero--${dashboardState}`} data-storm-header>
     <div class="dashboard-hero__surface" data-storm-surface>
       <div class="dashboard-hero__landscape" aria-hidden="true">
@@ -89,11 +90,11 @@ Astro.response.headers.set('Cache-Control','public, max-age=60, s-maxage=300, st
 
     <section class="section home-final-cta dashboard-inspection-cta"><div><div class="eyebrow">Vehicle-specific answers</div><h2>Not sure whether your vehicle was affected?</h2><p>Hail damage can be difficult to see without clean panels, controlled reflection lighting, and a direct inspection. Start with a free, no-obligation conversation.</p></div><div class="actions"><a class="button" href="/free-hail-inspection/">Free Initial Assessment</a><a href="/get-started/">Get Started →</a><a href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a></div></section>
 
-    <section class="section tracker-section tracker-history" aria-labelledby="history-heading"><div><div class="eyebrow">Separate from the Live Feed</div><h2 id="history-heading">Five-Year Hail History</h2><p>Verified NOAA/NCEI Storm Events observations are presented in the current 2022–2026 five-calendar-year window. The 2026 live season remains preliminary and separate from completed historical records.</p></div><a href="/northern-colorado-hail-history/">Explore Northern Colorado Historical Hail →</a></section>
+    <section class="section tracker-section tracker-history" aria-labelledby="history-heading"><div><div class="eyebrow">Separate from the Live Feed</div><h2 id="history-heading">Five-Year Hail History</h2><p>Verified NOAA/NCEI Storm Events observations are presented in the current 2022–2026 five-calendar-year window. The 2026 live season remains preliminary and separate from completed historical records.</p><p><a href="/data-sources/">Review the source methodology</a> or use the historical page’s stable citation summary.</p></div><a href="/northern-colorado-hail-history/">Explore Northern Colorado Historical Hail →</a></section>
 
     <section class="section tracker-section sources-panel" aria-labelledby="sources-heading"><div><div class="eyebrow">Source Transparency</div><h2 id="sources-heading">Official Data Sources</h2></div><div><p><strong>Active alerts:</strong> <a href={NWS}>National Weather Service API</a></p><p><strong>Preliminary hail reports:</strong> <a href={SPC}>NOAA Storm Prediction Center</a></p><p><strong>Server cache:</strong> Cloudflare D1 retains the last successfully ingested official records. Refresh status and timestamps above identify stale or failed-source states.</p><a href="/data-sources/">Read methodology and limitations →</a></div></section>
 
-    <nav class="section tracker-links" aria-label="Related hail and repair resources"><a href="/hail-size-guide/">Understand Hail Size →</a><a href="/after-a-hailstorm/">What to Do After a Hailstorm →</a><a href="/auto-hail-repair/">Auto Hail Repair →</a><a href="/paintless-dent-repair/">Paintless Dent Repair →</a><a href="/service-area/">Mobile Service Area →</a><a href="/about/">About Peak Country →</a><a href="/free-hail-inspection/">Free Initial Assessment →</a></nav>
+    <nav class="section tracker-links" aria-label="Related hail and repair resources"><a href="/hail-tracker/greeley/">Greeley Hail Reports →</a><a href="/hail-tracker/weld-county/">Weld County Hail Reports →</a><a href="/hail-tracker/northern-colorado/">Northern Colorado Reports →</a><a href="/hail-damage-guide/">Vehicle Hail Damage Guide →</a><a href="/hail-size-guide/">Understand Hail Size →</a><a href="/after-a-hailstorm/">What to Do After a Hailstorm →</a><a href="/auto-hail-repair/">Auto Hail Repair →</a><a href="/service-area/">Mobile Service Area →</a><a href="/free-hail-inspection/">Free Initial Assessment →</a></nav>
     <div class="hail-mountain-transition" aria-hidden="true"></div>
   </div>
   <script>

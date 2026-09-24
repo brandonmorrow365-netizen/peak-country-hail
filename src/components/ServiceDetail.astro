@@ -6,6 +6,7 @@ import DoorDingArticle from './DoorDingArticle.astro';
 import '../styles/auto-hail.css';
 import '../styles/pdr.css';
 import { site } from '../data/site';
+import { serviceNode } from '../lib/schema';
 
 interface Link { href: string; label: string }
 interface SectionImage { src: string; smallSrc: string; width: number; height: number; alt: string }
@@ -24,16 +25,23 @@ const { title, description, h1, intro, serviceType, sections, faqs, related, edu
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const serviceId = `${canonical}#service`;
 const featureImageId = educationalFeature ? `${canonical}#reflection-light-image` : null;
+const socialImage = variant === 'auto-hail'
+  ? { src:'/images/auto-hail-damage-before-after-peak-country-greeley-co.webp', width:1088, height:1446, alt:'Before and after Peak Country auto hail repair on a vehicle roof', type:'image/webp' }
+  : variant === 'pdr' && educationalFeature
+    ? { src:educationalFeature.image.src, width:educationalFeature.image.width, height:educationalFeature.image.height, alt:educationalFeature.image.alt, type:'image/jpeg' }
+    : variant === 'door-ding'
+      ? { src:'/media/portfolio/lexus-rx/before-angle-2.webp', width:1200, height:1492, alt:'Localized vehicle dent viewed under reflection lighting before paintless dent repair', type:'image/webp' }
+      : undefined;
 const pageSchema = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'Service', '@id': serviceId, name: serviceType, description, url: canonical, mainEntityOfPage: { '@id': `${canonical}#webpage` }, provider: { '@id': `${site.url}/#business` }, areaServed: [{ '@type':'City', name:'Greeley, Colorado' }, { '@type':'AdministrativeArea', name:'Weld County, Colorado' }, { '@type':'Place', name:'Northern Colorado' }], ...(featureImageId ? { image: { '@id': featureImageId } } : {}) },
+    { ...serviceNode(Astro.url.pathname, serviceType, description), ...(featureImageId ? { image: { '@id': featureImageId } } : {}) },
     { '@type': 'FAQPage', '@id': `${canonical}#faq`, mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
     ...(educationalFeature && featureImageId ? [{ '@type':'ImageObject', '@id':featureImageId, contentUrl:new URL(educationalFeature.image.src,site.url).href, url:new URL(educationalFeature.image.src,site.url).href, name:educationalFeature.image.name, caption:educationalFeature.image.caption, description:educationalFeature.image.description, width:educationalFeature.image.width, height:educationalFeature.image.height, about:{ '@id':serviceId }, isPartOf:{ '@id':`${canonical}#webpage` } }] : [])
   ]
 };
 ---
-<Layout title={title} description={description} exactTitle pageSchema={pageSchema}>
+<Layout title={title} description={description} exactTitle pageSchema={pageSchema} socialImage={socialImage}>
   <header class:list={['page-head', 'service-head', variant && `service-head--${variant}`]}><div class="eyebrow">Peak Country · Greeley · Northern Colorado</div><h1>{h1}</h1><p>{intro}</p><div class="service-head-actions"><a class="button" href="/get-started/">Get Started →</a><a href="/repair-standards/">Repair Evaluation →</a></div></header>
   {educationalFeature && variant !== 'pdr' && <section class="section service-education" aria-labelledby="service-education-heading">
     <figure class="service-education-media">

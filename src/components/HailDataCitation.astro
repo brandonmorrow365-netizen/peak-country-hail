@@ -1,0 +1,9 @@
+---
+interface Props { reportCount:number; hailDayCount:number; generatedAt:string }
+const {reportCount,hailDayCount,generatedAt}=Astro.props;
+---
+<aside class="callout" aria-labelledby="hail-data-citation-heading">
+  <h2 id="hail-data-citation-heading">How to cite the Peak Country hail-history summary</h2>
+  <p><strong>Peak Country Auto Hail Repair &amp; Paintless Dent Repair, “Northern Colorado Hail History: 2022–2026.”</strong> Derived from NOAA/NCEI Storm Events records within 50 statute miles of the Greeley geographic anchor. The current public subset contains {reportCount.toLocaleString()} qualifying reports across {hailDayCount} hail days and was generated {new Date(generatedAt).toLocaleDateString('en-US',{dateStyle:'long'})}.</p>
+  <p>Canonical dataset page: <a href="https://peakcountryhail.com/northern-colorado-hail-history/">peakcountryhail.com/northern-colorado-hail-history/</a>. Cite NOAA/NCEI as the underlying source. Reports are observations, not storm counts or proof that a particular vehicle was exposed or damaged.</p>
+</aside>
