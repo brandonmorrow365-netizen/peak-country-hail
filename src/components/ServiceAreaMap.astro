@@ -2,11 +2,20 @@
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { site } from '../data/site';
 const { radiusMiles, referencePoint } = site.mobileServiceArea;
+const communities = [
+  ['Greeley', -104.7091, 40.4233, true], ['Evans', -104.6922, 40.3764, false],
+  ['Windsor', -104.9014, 40.4775, false], ['Severance', -104.8511, 40.5242, false],
+  ['Eaton', -104.7113, 40.5303, false], ['Milliken', -104.8553, 40.3294, false],
+  ['Johnstown', -104.9122, 40.3369, false], ['LaSalle', -104.7019, 40.3483, false],
+  ['Kersey', -104.5616, 40.3875, false], ['Loveland', -105.075, 40.3978, false],
+  ['Fort Collins', -105.0844, 40.5853, false], ['Platteville', -104.8228, 40.215, false],
+] as const;
 ---
 <section class="service-map-section" aria-labelledby="service-map-heading">
   <div class="section service-map-heading"><div><div class="eyebrow">Standard mobile-service area</div><h2 id="service-map-heading">A 25-mile geographic radius from downtown Greeley</h2></div><p>The blue circle shows the standard area where mobile travel is included where applicable. It is a straight-line geographic radius—not a driving-distance estimate and not a hard boundary for service.</p></div>
-  <div class="section service-map-wrap"><div class="service-map" data-service-area-map data-latitude={referencePoint.latitude} data-longitude={referencePoint.longitude} data-radius-miles={radiusMiles} role="region" aria-label={`Interactive map of the standard ${radiusMiles}-mile mobile-service radius around downtown Greeley, Colorado`} aria-describedby="service-map-description"><p class="service-map-loading">Loading the interactive service-area map…</p></div><p id="service-map-description" class="service-map-description">Use the map controls to zoom and pan. The map uses a neutral downtown Greeley reference point only to calculate the radius; it does not identify a storefront, office, or residential address.</p><noscript><p class="service-map-noscript">The interactive map requires JavaScript. The standard mobile-service area is approximately 25 straight-line miles from a neutral downtown Greeley reference point; service may still be available outside the circle.</p></noscript></div>
+  <div class="section service-map-wrap"><div class="service-map-frame"><div class="service-map" data-service-area-map data-latitude={referencePoint.latitude} data-longitude={referencePoint.longitude} data-radius-miles={radiusMiles} role="region" aria-label={`Interactive map of the standard ${radiusMiles}-mile mobile-service radius around downtown Greeley, Colorado`} aria-describedby="service-map-description"><p class="service-map-loading">Loading the interactive service-area map…</p></div><div class="service-map-key" aria-label="Map legend"><span><i class="service-map-key__reference"></i>Downtown Greeley reference</span><span><i class="service-map-key__area"></i>Standard 25-mile mobile area</span><span><i class="service-map-key__outside"></i>Service may still be available outside</span></div></div><p id="service-map-description" class="service-map-description">Use the map controls to zoom and pan. The map uses a neutral downtown Greeley reference point only to calculate the radius; it does not identify a storefront, office, or residential address.</p><noscript><p class="service-map-noscript">The interactive map requires JavaScript. The standard mobile-service area is approximately 25 straight-line miles from a neutral downtown Greeley reference point; service may still be available outside the circle.</p></noscript></div>
 </section>
+<script is:inline id="service-area-community-data" type="application/json" set:html={JSON.stringify(communities)}></script>
 <script>
   const earthRadiusMiles = 3958.8;
   const radians = (value: number) => value * Math.PI / 180;
@@ -27,15 +36,38 @@ const { radiusMiles, referencePoint } = site.mobileServiceArea;
   async function initializeMap(container: HTMLElement) {
     const latitude = Number(container.dataset.latitude), longitude = Number(container.dataset.longitude), radiusMiles = Number(container.dataset.radiusMiles);
     if (!Number.isFinite(latitude) || !Number.isFinite(longitude) || !Number.isFinite(radiusMiles)) return;
+    const communityData = JSON.parse(document.querySelector<HTMLScriptElement>('#service-area-community-data')?.textContent ?? '[]') as [string, number, number, boolean][];
     const { default: maplibregl } = await import('maplibre-gl');
-    const map = new maplibregl.Map({ container, center: [longitude, latitude], zoom: 8.65, minZoom: 6.5, maxZoom: 15, cooperativeGestures: true, style: 'https://tiles.openfreemap.org/styles/positron' });
+    const map = new maplibregl.Map({ container, center: [longitude, latitude], zoom: 8.2, minZoom: 6.5, maxZoom: 15, cooperativeGestures: true, style: 'https://tiles.openfreemap.org/styles/positron', attributionControl: false });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     map.addControl(new maplibregl.ScaleControl({ unit: 'imperial' }), 'bottom-left');
+    map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
     map.on('load', () => {
       const ring = circleCoordinates(latitude, longitude, radiusMiles);
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const duration = reducedMotion ? 0 : 850;
+      for (const layer of map.getStyle().layers ?? []) {
+        if (layer.type === 'symbol') map.setLayoutProperty(layer.id, 'visibility', 'none');
+        if (layer.type === 'line' && /road|street|highway/i.test(layer.id)) map.setPaintProperty(layer.id, 'line-opacity', .48);
+      }
       map.addSource('standard-mobile-service-area', { type: 'geojson', data: { type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [ring] } } });
-      map.addLayer({ id: 'standard-mobile-service-area-fill', type: 'fill', source: 'standard-mobile-service-area', paint: { 'fill-color': '#1675b8', 'fill-opacity': 0.14 } });
-      map.addLayer({ id: 'standard-mobile-service-area-outline', type: 'line', source: 'standard-mobile-service-area', paint: { 'line-color': '#075e9e', 'line-width': 3, 'line-opacity': 0.92 } });
+      map.addLayer({ id: 'standard-mobile-service-area-fill', type: 'fill', source: 'standard-mobile-service-area', paint: { 'fill-color': '#2d91c7', 'fill-opacity': 0, 'fill-opacity-transition': { duration } } });
+      map.addLayer({ id: 'standard-mobile-service-area-outline', type: 'line', source: 'standard-mobile-service-area', paint: { 'line-color': '#075e9e', 'line-width': 3, 'line-opacity': 0, 'line-opacity-transition': { duration } } });
+      map.addSource('service-area-communities', { type: 'geojson', data: { type: 'FeatureCollection', features: communityData.map(([name, lng, lat, primary]) => ({ type: 'Feature', properties: { name, primary }, geometry: { type: 'Point', coordinates: [lng, lat] } })) } });
+      map.addLayer({ id: 'service-area-community-dots', type: 'circle', source: 'service-area-communities', paint: { 'circle-radius': ['case', ['get', 'primary'], 5, 3], 'circle-color': ['case', ['get', 'primary'], '#06182d', '#1979bb'], 'circle-stroke-color': '#f7fbfd', 'circle-stroke-width': 1.5, 'circle-opacity': 0, 'circle-opacity-transition': { duration } } });
+      map.addLayer({ id: 'service-area-community-labels', type: 'symbol', source: 'service-area-communities', layout: { 'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': ['case', ['get', 'primary'], 13, 11], 'text-offset': [0, 1.15], 'text-anchor': 'top', 'text-variable-anchor': ['top', 'bottom', 'left', 'right'], 'text-radial-offset': .85, 'text-allow-overlap': false, 'text-optional': true }, paint: { 'text-color': ['case', ['get', 'primary'], '#06182d', '#234b63'], 'text-halo-color': 'rgba(247,251,253,.94)', 'text-halo-width': 1.5, 'text-opacity': 0, 'text-opacity-transition': { duration } } });
+      const bounds = ring.reduce((box, point) => box.extend(point), new maplibregl.LngLatBounds(ring[0], ring[0]));
+      const fitArea = () => map.fitBounds(bounds, { padding: container.clientWidth < 600 ? 28 : 58, duration: 0, maxZoom: 9.15 });
+      fitArea();
+      let compact = container.clientWidth < 600;
+      new ResizeObserver(() => { map.resize(); const nextCompact = container.clientWidth < 600; if (nextCompact !== compact) { compact = nextCompact; fitArea(); } }).observe(container);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        map.setPaintProperty('standard-mobile-service-area-fill', 'fill-opacity', .14);
+        map.setPaintProperty('standard-mobile-service-area-outline', 'line-opacity', .94);
+        map.setPaintProperty('service-area-community-dots', 'circle-opacity', 1);
+        map.setPaintProperty('service-area-community-labels', 'text-opacity', 1);
+        container.classList.add('is-loaded');
+      }));
       container.querySelector('.service-map-loading')?.remove();
     });
     map.on('error', () => { const loading = container.querySelector<HTMLElement>('.service-map-loading'); if (loading) loading.textContent = 'Map tiles could not be loaded. The standard mobile-service area remains approximately 25 straight-line miles from a neutral downtown Greeley reference point.'; });
