@@ -23,7 +23,20 @@ const pageSchema={'@context':'https://schema.org','@type':'Dataset','@id':`${sit
 Astro.response.headers.set('Cache-Control','public, max-age=60, s-maxage=300, stale-if-error=900');
 ---
 <Layout title="Northern Colorado Hail Tracker Near Greeley" description="Official NWS alerts and preliminary SPC hail reports prioritized within 50 miles of Greeley, with distances, timestamps, freshness, and source limitations." pageSchema={pageSchema}>
-  <header class={`page-head tracker-head hail-workspace dashboard-hero dashboard-hero--${dashboardState}`}><div class="dashboard-hero__content"><div class="eyebrow">Northern Colorado Hail Dashboard · Official-source context</div><div class="dashboard-status"><span class="dashboard-status__pulse" aria-hidden="true"></span><span>Current status</span><strong>{dashboardStatus.label}</strong></div><h1>Know what the storm is doing—and what to check next.</h1><p>{dashboardStatus.summary} Radar, warning geometry, and preliminary hail observations are presented together without claiming damage to any specific vehicle.</p><div class="dashboard-hero__links"><a class="button" href="#live-map-heading">View Live Map ↓</a><a href="https://www.weather.gov/" class="text-link">Official NWS warnings ↗</a></div><div class="tracker-scope"><span>Geographic calculation anchor</span><strong>{GREELEY.latitude.toFixed(5)}, {GREELEY.longitude.toFixed(7)}</strong><small>City reference point only—not a business, shop, or owner address.</small></div></div></header>
+  <header class={`page-head tracker-head hail-workspace dashboard-hero dashboard-hero--${dashboardState}`} data-storm-header>
+    <div class="dashboard-hero__surface" data-storm-surface>
+      <div class="dashboard-hero__landscape" aria-hidden="true">
+        <picture class="dashboard-hero__picture">
+          <source type="image/webp" srcset="/brand/hero-storm-background-960.webp 960w, /brand/hero-storm-background-1942.webp 1942w" sizes="100vw" />
+          <img src="/brand/hero-storm-background.png" width="1942" height="809" alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <div class="dashboard-hero__clouds"></div>
+        <div class="dashboard-hero__shade"></div>
+        <canvas data-storm-canvas></canvas>
+      </div>
+      <div class="dashboard-hero__content"><div class="eyebrow">Northern Colorado Hail Dashboard · Official-source context</div><div class="dashboard-status"><span class="dashboard-status__pulse" aria-hidden="true"></span><span>Current status</span><strong>{dashboardStatus.label}</strong></div><h1>Know what the storm is doing—and what to check next.</h1><p>{dashboardStatus.summary} Radar, warning geometry, and preliminary hail observations are presented together without claiming damage to any specific vehicle.</p><div class="dashboard-hero__links"><a class="button" href="#live-map-heading">View Live Map ↓</a><a href="https://www.weather.gov/" class="text-link">Official NWS warnings ↗</a></div><div class="tracker-scope"><span>Geographic calculation anchor</span><strong>{GREELEY.latitude.toFixed(5)}, {GREELEY.longitude.toFixed(7)}</strong><small>City reference point only—not a business, shop, or owner address.</small></div></div>
+    </div>
+  </header>
 
   <HailDashboardMap alerts={data?.localAlerts??[]} reports={currentReports} />
 
@@ -84,6 +97,9 @@ Astro.response.headers.set('Cache-Control','public, max-age=60, s-maxage=300, st
     <div class="hail-mountain-transition" aria-hidden="true"></div>
   </div>
   <script>
+    import { initHeaderStorm } from '../../scripts/header-storm';
+    document.querySelectorAll<HTMLElement>('.dashboard-hero[data-storm-header]').forEach(initHeaderStorm);
+
     const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
     const revealTargets=[...document.querySelectorAll<HTMLElement>('.dashboard-map-section,.dashboard-strip,.tracker-content > .section')];
     const revealAll=()=>revealTargets.forEach(target=>target.classList.add('is-visible'));
