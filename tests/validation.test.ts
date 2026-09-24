@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {parseHail,reportDay,csvRows,fresh,distanceMiles,geometryDistanceMiles,alertLocality,feedState,dashboardMode} from '../src/lib/weather.ts';
+import {hailWidgetSnapshot,parseWidgetTheme,sanitizeWidgetSource,widgetTrackerUrl} from '../src/lib/hailWidget.ts';
 import {validateLead,submitLead} from '../src/lib/leads.ts';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
@@ -50,6 +51,21 @@ test('dashboard mode prioritizes hail, warning, recent event, then quiet',()=>{
  assert.equal(dashboardMode(0,1,1),'warning');
  assert.equal(dashboardMode(0,0,1),'recent');
  assert.equal(dashboardMode(0,0,0),'quiet');
+});
+test('widget themes, source attribution, and UTM values fail closed',()=>{
+ assert.equal(parseWidgetTheme('light'),'light');assert.equal(parseWidgetTheme('LIGHT'),'dark');assert.equal(parseWidgetTheme(null),'dark');
+ assert.equal(sanitizeWidgetSource('dealer-name_2'),'dealer-name_2');assert.equal(sanitizeWidgetSource('../bad'),'embedded-widget');assert.equal(sanitizeWidgetSource('x'.repeat(49)),'embedded-widget');
+ const url=new URL(widgetTrackerUrl('dealer-name'));assert.equal(url.searchParams.get('utm_source'),'dealer-name');assert.equal(url.searchParams.get('utm_medium'),'embedded-widget');assert.equal(url.searchParams.get('utm_campaign'),'hail-status');
+});
+test('widget supports approved states and never infers quiet from failed feeds',()=>{
+ const now=Date.parse('2026-09-24T18:00:00Z'),success={status:'success',completed_at:'2026-09-24T17:55:00Z'};
+ const base={nws:success,spc:success,nwsSuccess:success,spcSuccess:success,localAlerts:[],localReports:[],recentReports:[]};
+ assert.equal(hailWidgetSnapshot(base,now).mode,'quiet');
+ assert.equal(hailWidgetSnapshot({...base,localReports:[{size_inches:1,location:'Greeley'} as never]},now).mode,'hail');
+ assert.equal(hailWidgetSnapshot({...base,localAlerts:[{headline:'Severe Thunderstorm Warning'} as never]},now).mode,'warning');
+ assert.equal(hailWidgetSnapshot({...base,recentReports:[{} as never]},now).mode,'recent');
+ assert.equal(hailWidgetSnapshot({...base,nws:{status:'error',completed_at:'2026-09-24T17:59:00Z'}},now).mode,'unavailable');
+ assert.equal(hailWidgetSnapshot(null,now).mode,'unavailable');
 });
 function form(overrides:Record<string,string>={}){const f=new FormData();for(const[k,v]of Object.entries({...{name:'Test',email:'test@example.com',phone:'',location:'Greeley',vehicle:'Test vehicle',damage_type:'hail',message:'',preferred_contact:'email',source_page:'/contact/',consent:'yes'},...overrides}))f.set(k,v);return f;}
 test('lead validation enforces consent, preferred contact, bounds and source',()=>{

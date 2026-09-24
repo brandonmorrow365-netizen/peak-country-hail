@@ -46,7 +46,14 @@ export default {
     if (env.SITE_STAGE !== 'production') headers.set('X-Robots-Tag', 'noindex, nofollow');
     headers.set('X-Content-Type-Options', 'nosniff');
     headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-    headers.set('X-Frame-Options', 'DENY');
+    const isPublicHailEmbed = requestUrl.pathname === '/embed/hail-status/' || requestUrl.pathname === '/embed/hail-status/status.json';
+    if (isPublicHailEmbed) {
+      headers.delete('X-Frame-Options');
+      headers.set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; font-src 'self'; frame-ancestors *; base-uri 'none'; form-action 'none'; object-src 'none'");
+    } else {
+      headers.set('X-Frame-Options', 'DENY');
+      headers.set('Content-Security-Policy', "frame-ancestors 'none'");
+    }
     headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
     return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
   },

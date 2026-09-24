@@ -1,0 +1,39 @@
+---
+import { env } from 'cloudflare:workers';
+import { readWeather } from '../../../lib/weather';
+import { formatWidgetUpdate, hailWidgetSnapshot, parseWidgetTheme, sanitizeWidgetSource, widgetTrackerUrl, WIDGET_REFRESH_MS } from '../../../lib/hailWidget';
+
+const theme = parseWidgetTheme(Astro.url.searchParams.get('theme'));
+const source = sanitizeWidgetSource(Astro.url.searchParams.get('source'));
+const trackerUrl = widgetTrackerUrl(source);
+const snapshot = hailWidgetSnapshot(await readWeather(env.DB));
+Astro.response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-if-error=900');
+Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+---
+<!doctype html>
+<html lang="en" data-theme={theme}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Northern Colorado Hail Status</title>
+  <style is:inline>
+    :root{color-scheme:dark;--bg:#071b2b;--surface:#0d2a3e;--text:#f5f8fa;--muted:#b9cbd5;--accent:#79cef1;--rule:rgb(121 206 241/.28);--button:#8fd3f6;--button-text:#071b2b}html[data-theme=light]{color-scheme:light;--bg:#f4f7f8;--surface:#fff;--text:#102b3e;--muted:#516b7b;--accent:#0879ad;--rule:rgb(12 96 137/.22);--button:#0a638d;--button-text:#fff}*{box-sizing:border-box}html,body{min-width:0;margin:0;background:transparent}body{padding:0;font:15px/1.45 Arial,Helvetica,sans-serif;color:var(--text)}.widget{position:relative;min-height:300px;overflow:hidden;padding:25px 28px 22px;background:var(--bg);border:1px solid var(--rule)}.widget:after{position:absolute;right:-60px;bottom:-100px;width:280px;height:250px;border:1px solid var(--rule);border-radius:48% 52% 45% 55%;content:"";transform:rotate(-16deg);pointer-events:none}.eyebrow{margin:0 0 14px;color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}.status{display:flex;gap:12px;align-items:flex-start}.dot{flex:0 0 11px;width:11px;height:11px;margin-top:9px;background:#75c893;border:2px solid var(--surface);border-radius:50%;box-shadow:0 0 0 3px var(--rule)}[data-mode=warning] .dot{background:#f2b84b}[data-mode=hail] .dot{background:#ed7b43}[data-mode=recent] .dot{background:#55bded}[data-mode=unavailable] .dot{background:#aebbc3}.status h1{max-width:620px;margin:0;font:700 clamp(24px,5vw,34px)/1.04 Georgia,serif;letter-spacing:-.025em}.context{max-width:620px;margin:13px 0 0;color:var(--muted)}.meta{display:flex;gap:9px 18px;flex-wrap:wrap;margin:18px 0 0;padding-top:13px;border-top:1px solid var(--rule);color:var(--muted);font-size:12px}.meta strong{color:var(--text)}.footer{position:relative;z-index:1;display:flex;gap:12px 18px;align-items:center;justify-content:space-between;margin-top:18px}.attribution{margin:0;color:var(--muted);font-size:11px}.cta{display:inline-flex;min-height:42px;align-items:center;padding:10px 15px;color:var(--button-text);background:var(--button);font-size:11px;font-weight:800;letter-spacing:.1em;text-decoration:none;text-transform:uppercase}.cta:focus-visible{outline:3px solid var(--accent);outline-offset:3px}@media(max-width:440px){body{font-size:14px;line-height:1.35}.widget{min-height:320px;padding:16px 17px}.eyebrow{margin-bottom:8px;font-size:10px}.status{gap:9px}.status h1{font-size:25px}.context{margin-top:8px;font-size:13px}.meta{gap:4px 12px;margin-top:10px;padding-top:8px;font-size:10.5px}.footer{gap:7px;align-items:flex-start;flex-direction:column;margin-top:10px}.attribution{font-size:9.5px;line-height:1.25}.cta{width:100%;min-height:38px;justify-content:center;padding:8px 12px}}@media(prefers-reduced-motion:no-preference){.dot{animation:breathe 3.8s ease-in-out infinite}@keyframes breathe{50%{box-shadow:0 0 0 7px transparent}}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="widget" data-widget data-mode={snapshot.mode} data-refresh={WIDGET_REFRESH_MS} aria-labelledby="status-heading">
+    <p class="eyebrow">Northern Colorado Hail Status</p>
+    <div class="status"><span class="dot" aria-hidden="true"></span><h1 id="status-heading" data-status aria-live="polite">{snapshot.label}</h1></div>
+    <p class="context" data-context>{snapshot.context}</p>
+    <div class="meta"><span><strong>Area:</strong> Greeley / Northern Colorado</span><span><strong>Updated:</strong> <time data-updated>{formatWidgetUpdate(snapshot.updatedAt)}</time></span></div>
+    <div class="footer"><p class="attribution">Local hail information by Peak Country · NWS/SPC public data · Automated and informational, not an emergency-warning replacement.</p><a class="cta" href={trackerUrl} target="_blank" rel="noopener">View Live Hail Tracker</a></div>
+  </main>
+  <script is:inline>
+    const root=document.querySelector('[data-widget]'),status=document.querySelector('[data-status]'),context=document.querySelector('[data-context]'),updated=document.querySelector('[data-updated]');
+    const format=value=>value?new Intl.DateTimeFormat('en-US',{dateStyle:'medium',timeStyle:'short',timeZone:'America/Denver'}).format(new Date(value))+' MT':'No successful update available';
+    const refresh=async()=>{try{const response=await fetch('./status.json',{headers:{Accept:'application/json'},cache:'no-cache'});if(!response.ok)throw new Error();const data=await response.json();root.dataset.mode=data.mode;status.textContent=data.label;context.textContent=data.context;updated.textContent=format(data.updatedAt);}catch{root.dataset.mode='unavailable';status.textContent='Live Data Temporarily Unavailable';context.textContent='Current source data could not be refreshed. Open the full Hail Tracker and follow official warnings for safety decisions.';}};
+    window.setInterval(refresh,Number(root.dataset.refresh));
+  </script>
+</body>
+</html>

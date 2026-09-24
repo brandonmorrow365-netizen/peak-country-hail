@@ -9,7 +9,7 @@ import { publishedCaseStudies } from '../src/data/caseStudies.ts';
 import { locationPages } from '../src/data/locationPages.ts';
 import { portfolioPairs, portfolioRepairs } from '../src/data/gallery.ts';
 import { GET as getPortfolioFeed } from '../src/pages/automation/repair-portfolio-feed.json.ts';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 test('entity graph uses stable references without private location data', () => {
   const graph = pageGraph('/paintless-dent-repair/', 'Paintless Dent Repair', 'Description');
@@ -58,6 +58,8 @@ test('content metadata contains unique canonical paths and stable ISO dates', ()
     assert.match(entry.lastmod, /^\d{4}-\d{2}-\d{2}$/);
   }
   assert.ok(!contentMeta.some((entry) => entry.path === '/hail-history/'));
+  assert.ok(contentMeta.some((entry) => entry.path === '/hail-status-widget/'));
+  assert.ok(!contentMeta.some((entry) => entry.path.startsWith('/embed/')));
 });
 
 test('production robots names retrieval crawlers and protects utility paths', () => {
@@ -67,6 +69,20 @@ test('production robots names retrieval crawlers and protects utility paths', ()
   assert.match(text, /Disallow: \/__preview\//);
   assert.match(text, /Sitemap: https:\/\/peakcountryhail\.com\/sitemap\.xml/);
   assert.equal(robotsText('preview'), 'User-agent: *\nDisallow: /\n');
+});
+
+test('hail widget is noindex, map-free, partner-attributed, and narrowly frameable', () => {
+  const embed = readFileSync(new URL('../src/pages/embed/hail-status/index.astro', import.meta.url), 'utf8');
+  const docs = readFileSync(new URL('../src/pages/hail-status-widget/index.astro', import.meta.url), 'utf8');
+  const worker = readFileSync(new URL('../src/worker.ts', import.meta.url), 'utf8');
+  assert.match(embed, /noindex, nofollow/);
+  assert.doesNotMatch(embed, /MapLibre|maplibre/);
+  assert.match(embed, /utm_campaign=hail-status|widgetTrackerUrl/);
+  assert.match(docs, /title="Northern Colorado Hail Status"/);
+  assert.match(docs, /loading="lazy"/);
+  assert.match(worker, /isPublicHailEmbed/);
+  assert.match(worker, /frame-ancestors \*/);
+  assert.match(worker, /X-Frame-Options', 'DENY'/);
 });
 
 test('IndexNow accepts only registered clean production URLs', () => {
