@@ -559,8 +559,8 @@ textarea { min-height: 130px; resize: vertical; }
 .workflow-talk span { color: var(--ink-soft); }
 .workflow-talk a { font-weight: 800; }
 .workflow-unavailable { position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr auto; gap: var(--space-5); align-items: center; margin-bottom: var(--space-5); padding: var(--space-5); overflow: hidden; color: #e8f2f8; background: #092640; border-block: 1px solid rgb(94 193 239 / 45%); animation: workflow-utility-enter .48s cubic-bezier(.2,.7,.2,1) both; }
-.workflow-unavailable::before { position: absolute; z-index: -2; inset: 0; content: ''; background: url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') 82% 48% / cover no-repeat; filter: saturate(.42) contrast(.9) brightness(.58); opacity: .27; }
-.workflow-unavailable::after { position: absolute; z-index: -1; inset: 0; content: ''; background: linear-gradient(90deg, #071d33 0%, rgb(7 29 51 / 97%) 45%, rgb(7 29 51 / 72%) 73%, rgb(7 29 51 / 82%) 100%); }
+.workflow-unavailable::before { position: absolute; z-index: -2; inset: 0; content: ''; background: url('/images/pdr-light-reflection-paintless-dent-repair-greeley-co.jpg') 82% 48% / cover no-repeat; filter: saturate(.48) contrast(1.04) brightness(.68); opacity: .72; }
+.workflow-unavailable::after { position: absolute; z-index: -1; inset: 0; content: ''; background: linear-gradient(90deg, #071d33 0%, rgb(7 29 51 / 98%) 43%, rgb(7 29 51 / 72%) 58%, rgb(7 29 51 / 24%) 100%); }
 .workflow-unavailable h2 { margin: .3rem 0; color: #fff; }
 .workflow-unavailable p { margin-bottom: 0; color: #cfdee8; }
 .workflow-unavailable__actions { display: grid; gap: .8rem; min-width: 220px; text-align: center; }
@@ -733,8 +733,8 @@ main:has(.warranty-page) > .breadcrumbs a { color: #8fd3f6; }
   .workflow-reassurance { gap: 1rem; }
   .workflow-progress { padding-inline: 1.25rem; }
   .workflow-unavailable__actions { min-width: 0; }
-  .workflow-unavailable::before { background-position: 67% center; opacity: .21; }
-  .workflow-unavailable::after { background: linear-gradient(180deg, rgb(7 29 51 / 96%) 0%, rgb(7 29 51 / 88%) 62%, rgb(7 29 51 / 72%) 100%); }
+  .workflow-unavailable::before { background-position: 63% center; opacity: .64; }
+  .workflow-unavailable::after { background: linear-gradient(180deg, rgb(7 29 51 / 94%) 0%, rgb(7 29 51 / 78%) 56%, rgb(7 29 51 / 40%) 100%); }
   .workflow-talk { align-items: flex-start; flex-direction: column; }
   .workflow-mountain-transition { height: 96px; background-size: auto 100%; }
   .workflow-privacy { flex-direction: column; padding: var(--space-3) 1.25rem; }
