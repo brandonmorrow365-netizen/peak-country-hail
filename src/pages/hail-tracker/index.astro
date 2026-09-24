@@ -83,4 +83,16 @@ Astro.response.headers.set('Cache-Control','public, max-age=60, s-maxage=300, st
     <nav class="section tracker-links" aria-label="Related hail and repair resources"><a href="/hail-size-guide/">Understand Hail Size →</a><a href="/after-a-hailstorm/">What to Do After a Hailstorm →</a><a href="/auto-hail-repair/">Auto Hail Repair →</a><a href="/paintless-dent-repair/">Paintless Dent Repair →</a><a href="/service-area/">Mobile Service Area →</a><a href="/about/">About Peak Country →</a><a href="/free-hail-inspection/">Free Initial Assessment →</a></nav>
     <div class="hail-mountain-transition" aria-hidden="true"></div>
   </div>
+  <script>
+    const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+    const revealTargets=[...document.querySelectorAll<HTMLElement>('.dashboard-map-section,.dashboard-strip,.tracker-content > .section')];
+    const revealAll=()=>revealTargets.forEach(target=>target.classList.add('is-visible'));
+    if(reducedMotion.matches||!('IntersectionObserver'in window))revealAll();
+    else{
+      document.documentElement.classList.add('dashboard-motion-ready');
+      const observer=new IntersectionObserver((entries)=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{rootMargin:'0px 0px -8%'});
+      revealTargets.forEach(target=>{target.dataset.dashboardReveal='';observer.observe(target);});
+      reducedMotion.addEventListener('change',event=>{if(event.matches){observer.disconnect();revealAll();}});
+    }
+  </script>
 </Layout>

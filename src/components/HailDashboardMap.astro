@@ -18,6 +18,8 @@ const service=site.mobileServiceArea;
 </section>
 <script>
   const earthRadiusMiles=3958.8,radians=(value:number)=>value*Math.PI/180,degrees=(value:number)=>value*180/Math.PI;
+  const radarRefreshMilliseconds=5*60*1000,radarService='https://mapservices.weather.noaa.gov/eventdriven/rest/services/radar/radar_base_reflectivity/MapServer/export';
+  const radarTiles=(frame:number)=>[`${radarService}?bbox={bbox-epsg-3857}&bboxSR=3857&imageSR=3857&size=256,256&format=png32&transparent=true&f=image&_pcRadarFrame=${frame}`];
   function circleCoordinates(latitude:number,longitude:number,radiusMiles:number){const coordinates:[number,number][]=[];const angularDistance=radiusMiles/earthRadiusMiles,originLatitude=radians(latitude),originLongitude=radians(longitude);for(let bearing=0;bearing<=360;bearing+=4){const b=radians(bearing),lat=Math.asin(Math.sin(originLatitude)*Math.cos(angularDistance)+Math.cos(originLatitude)*Math.sin(angularDistance)*Math.cos(b)),lon=originLongitude+Math.atan2(Math.sin(b)*Math.sin(angularDistance)*Math.cos(originLatitude),Math.cos(angularDistance)-Math.sin(originLatitude)*Math.sin(lat));coordinates.push([degrees(lon),degrees(lat)]);}return coordinates;}
   async function initializeDashboardMap(container:HTMLElement){
     const latitude=Number(container.dataset.latitude),longitude=Number(container.dataset.longitude),serviceLatitude=Number(container.dataset.serviceLatitude),serviceLongitude=Number(container.dataset.serviceLongitude),serviceRadius=Number(container.dataset.serviceRadius),raw=document.querySelector<HTMLScriptElement>('#hail-dashboard-map-data')?.textContent;
@@ -26,16 +28,27 @@ const service=site.mobileServiceArea;
     const map=new maplibregl.Map({container,center:[longitude,latitude],zoom:7.65,minZoom:6.2,maxZoom:14,cooperativeGestures:true,style:'https://tiles.openfreemap.org/styles/positron'});
     map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');map.addControl(new maplibregl.ScaleControl({unit:'imperial'}),'bottom-left');
     map.on('load',()=>{
-      map.addSource('noaa-radar',{type:'raster',tiles:['https://mapservices.weather.noaa.gov/eventdriven/rest/services/radar/radar_base_reflectivity/MapServer/export?bbox={bbox-epsg-3857}&bboxSR=3857&imageSR=3857&size=256,256&format=png32&transparent=true&f=image'],tileSize:256,attribution:'Radar: NOAA/NWS MRMS'});
-      map.addLayer({id:'noaa-radar',type:'raster',source:'noaa-radar',paint:{'raster-opacity':.58,'raster-fade-duration':0}});
+      let radarFrame=Math.floor(Date.now()/radarRefreshMilliseconds),radarTimer=0,motionFrame=0;
+      const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+      map.addSource('noaa-radar',{type:'raster',tiles:radarTiles(radarFrame),tileSize:256,attribution:'Radar: NOAA/NWS MRMS'});
+      map.addLayer({id:'noaa-radar',type:'raster',source:'noaa-radar',paint:{'raster-opacity':.01,'raster-opacity-transition':{duration:450},'raster-fade-duration':450}});
       map.addSource('service-area',{type:'geojson',data:{type:'Feature',properties:{},geometry:{type:'Polygon',coordinates:[circleCoordinates(serviceLatitude,serviceLongitude,serviceRadius)]}}});
       map.addLayer({id:'service-area-fill',type:'fill',source:'service-area',paint:{'fill-color':'#55bded','fill-opacity':.06}});map.addLayer({id:'service-area-line',type:'line',source:'service-area',paint:{'line-color':'#1675b8','line-width':2,'line-dasharray':[3,2]}});
       map.addSource('weather-context',{type:'geojson',data:weather});
       map.addLayer({id:'warnings-fill',type:'fill',source:'weather-context',filter:['!=',['geometry-type'],'Point'],paint:{'fill-color':'#f2b84b','fill-opacity':.19}});map.addLayer({id:'warnings-line',type:'line',source:'weather-context',filter:['!=',['geometry-type'],'Point'],paint:{'line-color':'#c45c23','line-width':3}});
+      map.addLayer({id:'hail-reports-pulse',type:'circle',source:'weather-context',filter:['==',['geometry-type'],'Point'],paint:{'circle-radius':10,'circle-color':'#55bded','circle-opacity':0}});
       map.addLayer({id:'hail-reports',type:'circle',source:'weather-context',filter:['==',['geometry-type'],'Point'],paint:{'circle-radius':['interpolate',['linear'],['coalesce',['get','size'],.75],.75,6,2,12,3,16],'circle-color':'#55bded','circle-stroke-color':'#071a2a','circle-stroke-width':2,'circle-opacity':.92}});
       new maplibregl.Marker({color:'#071a2a'}).setLngLat([longitude,latitude]).setPopup(new maplibregl.Popup({offset:18}).setText('Greeley geographic reference')).addTo(map);
       for(const layer of ['warnings-fill','hail-reports']){map.on('click',layer,(event)=>{const feature=event.features?.[0];if(!feature)return;const p=feature.properties??{},coordinates=feature.geometry.type==='Point'?(feature.geometry.coordinates.slice() as [number,number]):event.lngLat.toArray() as [number,number];const description=feature.geometry.type==='Point'?`${p.location}, ${p.county} County · ${Number(p.size).toFixed(2)} in.`:`${p.event}: ${p.headline}`;new maplibregl.Popup().setLngLat(coordinates).setText(description).addTo(map);});map.on('mouseenter',layer,()=>map.getCanvas().style.cursor='pointer');map.on('mouseleave',layer,()=>map.getCanvas().style.cursor='');}
       container.querySelector('.dashboard-map-loading')?.remove();
+      requestAnimationFrame(()=>map.setPaintProperty('noaa-radar','raster-opacity',.58));
+      const refreshRadar=()=>{if(document.hidden)return;const nextFrame=Math.floor(Date.now()/radarRefreshMilliseconds);if(nextFrame===radarFrame)return;radarFrame=nextFrame;(map.getSource('noaa-radar') as {setTiles:(tiles:string[])=>void}|undefined)?.setTiles(radarTiles(radarFrame));};
+      const scheduleRadarRefresh=()=>{window.clearInterval(radarTimer);radarTimer=window.setInterval(refreshRadar,radarRefreshMilliseconds);};
+      const animateWeatherContext=(time:number)=>{if(reducedMotion.matches||document.hidden)return;const phase=(Math.sin(time/850)+1)/2;map.setPaintProperty('hail-reports-pulse','circle-radius',10+phase*6);map.setPaintProperty('hail-reports-pulse','circle-opacity',.2*(1-phase));map.setPaintProperty('warnings-line','line-opacity',.72+phase*.28);motionFrame=requestAnimationFrame(animateWeatherContext);};
+      const updateMotion=()=>{cancelAnimationFrame(motionFrame);map.setPaintProperty('hail-reports-pulse','circle-opacity',0);map.setPaintProperty('warnings-line','line-opacity',1);if(!reducedMotion.matches&&!document.hidden)motionFrame=requestAnimationFrame(animateWeatherContext);};
+      const onVisibilityChange=()=>{if(!document.hidden)refreshRadar();updateMotion();};
+      reducedMotion.addEventListener('change',updateMotion);document.addEventListener('visibilitychange',onVisibilityChange);window.addEventListener('pagehide',()=>{window.clearInterval(radarTimer);cancelAnimationFrame(motionFrame);reducedMotion.removeEventListener('change',updateMotion);document.removeEventListener('visibilitychange',onVisibilityChange);},{once:true});
+      scheduleRadarRefresh();updateMotion();
     });
     map.on('error',event=>{if(String(event.error?.message||'').includes('noaa-radar'))return;const loading=container.querySelector<HTMLElement>('.dashboard-map-loading');if(loading)loading.textContent='Some live map layers could not be loaded. Official alert and report details remain available below.';});
   }
