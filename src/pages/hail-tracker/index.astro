@@ -2,7 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import HailDashboardMap from '../../components/HailDashboardMap.astro';
 import {env} from 'cloudflare:workers';
-import {readWeather,feedState,dashboardMode,NWS,SPC,GREELEY,LOCAL_RADIUS_MILES} from '../../lib/weather';
+import {readWeather,feedState,NWS,SPC,GREELEY,LOCAL_RADIUS_MILES} from '../../lib/weather';
+import {hailWidgetSnapshot} from '../../lib/hailWidget';
 import {site} from '../../data/site';
 import '../../styles/hail-workspace.css';
 const data=await readWeather(env.DB);
@@ -15,9 +16,9 @@ const stateLabel=(state:string)=>state==='current'?'Current':state==='stale'?'Ca
 const severe=data?.localAlerts.filter(a=>/severe thunderstorm|tornado|special weather statement/i.test(a.event))??[];
 const broader=data?.alerts.filter(a=>!a.local)??[];
 const currentReports=data?.localReports??[];
-const recentReports=data?.recentReports??[];
-const dashboardState=dashboardMode(currentReports.length,data?.localAlerts.length??0,recentReports.length);
-const dashboardStatus={hail:{label:'Hail Reported Nearby',summary:`${currentReports.length} preliminary SPC ${currentReports.length===1?'report':'reports'} within ${LOCAL_RADIUS_MILES} miles.`},warning:{label:'Active Warning',summary:`${data?.localAlerts.length??0} active NWS ${data?.localAlerts.length===1?'alert intersects':'alerts intersect'} the regional view.`},recent:{label:'Recent Hail Event',summary:`Official hail was reported within ${LOCAL_RADIUS_MILES} miles during the past 72 hours.`},quiet:{label:'Quiet',summary:'No active local warning or nearby preliminary hail report is currently stored.'}}[dashboardState];
+const trackerStatus=hailWidgetSnapshot(data);
+const dashboardState=trackerStatus.mode;
+const dashboardStatus={label:trackerStatus.label,summary:trackerStatus.context};
 const successfulUpdates=[data?.nwsSuccess?.completed_at,data?.spcSuccess?.completed_at].filter(Boolean) as string[];
 const datasetModified=successfulUpdates.toSorted().at(-1)??'2026-09-08';
 const pageSchema={'@context':'https://schema.org','@type':'Dataset','@id':`${site.url}/hail-tracker/#dataset`,name:'Live Northern Colorado Hail Tracker Near Greeley',description:'Official active National Weather Service alerts and preliminary Storm Prediction Center hail reports prioritized within 50 statute miles of Greeley.',url:`${site.url}/hail-tracker/`,mainEntityOfPage:{'@id':`${site.url}/hail-tracker/#webpage`},dateModified:datasetModified,spatialCoverage:{'@type':'Place',name:'Approximately 50 statute miles from the Greeley, Colorado city reference point'},creator:[{'@type':'Organization',name:'National Weather Service',url:'https://www.weather.gov/'},{'@type':'Organization',name:'NOAA Storm Prediction Center',url:'https://www.spc.noaa.gov/'}],publisher:{'@id':`${site.url}/#business`},isBasedOn:[NWS,SPC]};

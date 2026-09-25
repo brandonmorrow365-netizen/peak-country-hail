@@ -64,6 +64,7 @@ main:has(.hail-workspace) .dashboard-hero { min-height: clamp(500px, 52vw, 690px
 .dashboard-hero--warning .dashboard-status__pulse { background: #f2b84b; }
 .dashboard-hero--hail .dashboard-status__pulse { background: #ed7b43; }
 .dashboard-hero--recent .dashboard-status__pulse { background: #55bded; }
+.dashboard-hero--unavailable .dashboard-status__pulse { background: #aebbc3; }
 .dashboard-hero__links { display: flex; gap: 1.25rem; align-items: center; margin: 1.75rem 0; }
 .dashboard-hero__links .text-link { color: #d7e8f1; }
 

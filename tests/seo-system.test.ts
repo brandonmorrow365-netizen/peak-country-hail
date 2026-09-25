@@ -85,6 +85,14 @@ test('hail widget is noindex, map-free, partner-attributed, and narrowly frameab
   assert.match(worker, /X-Frame-Options', 'DENY'/);
 });
 
+test('public header exposes no manual storm controls and tracker fails closed with shared status logic', () => {
+  const header = readFileSync(new URL('../src/components/StormHeader.astro', import.meta.url), 'utf8');
+  const tracker = readFileSync(new URL('../src/pages/hail-tracker/index.astro', import.meta.url), 'utf8');
+  assert.doesNotMatch(header, /data-storm-pause|data-lightning|Pause motion/);
+  assert.match(tracker, /hailWidgetSnapshot\(data\)/);
+  assert.doesNotMatch(tracker, /dashboardMode\(currentReports/);
+});
+
 test('IndexNow accepts only registered clean production URLs', () => {
   assert.deepEqual(canonicalIndexNowUrls(['/about/','https://peakcountryhail.com/about/','/hail-size-guide/']), [`${site.url}/about/`,`${site.url}/hail-size-guide/`]);
   for (const value of ['http://peakcountryhail.com/about/','https://example.com/about/','/draft/','/about/?preview=1']) assert.throws(() => canonicalIndexNowUrls([value]));
