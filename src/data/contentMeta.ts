@@ -15,7 +15,7 @@ export type ContentMeta = {
  */
 export const contentMeta: ContentMeta[] = [
   { path: '/', lastmod: '2026-09-06' },
-  { path: '/about/', lastmod: '2026-09-14' },
+  { path: '/about/', lastmod: '2026-10-06' },
   { path: '/after-a-hailstorm/', lastmod: '2026-09-08', feed: { title: 'What to Do After a Hailstorm', description: 'A practical sequence for safely checking, documenting, and inspecting possible vehicle hail damage.', published: '2026-09-05' } },
   { path: '/auto-hail-repair/', lastmod: '2026-09-24' },
   { path: '/contact/', lastmod: '2026-09-06' },
@@ -23,7 +23,7 @@ export const contentMeta: ContentMeta[] = [
   { path: '/door-ding-repair/', lastmod: '2026-09-08' },
   { path: '/estimating-documentation/', lastmod: '2026-09-24' },
   { path: '/faq/', lastmod: '2026-09-24' },
-  { path: '/free-hail-inspection/', lastmod: '2026-09-24' },
+  { path: '/free-hail-inspection/', lastmod: '2026-10-06' },
   { path: '/get-started/', lastmod: '2026-09-24' },
   { path: '/gallery/', lastmod: '2026-09-09' },
   { path: '/hail-damage-guide/', lastmod: '2026-09-24' },
@@ -40,7 +40,8 @@ export const contentMeta: ContentMeta[] = [
   { path: '/repair-standards/', lastmod: '2026-09-08' },
   { path: '/resources/', lastmod: '2026-09-24' },
   { path: '/service-area/', lastmod: '2026-09-24' },
-  { path: '/warranty/', lastmod: '2026-09-24' },
+  { path: '/warranty/', lastmod: '2026-10-06' },
+  { path: '/warranty/full-terms/', lastmod: '2026-10-06' },
   { path: '/why-pdr/', lastmod: '2026-09-24' },
 ];
 

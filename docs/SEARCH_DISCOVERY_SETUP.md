@@ -2,20 +2,19 @@
 
 ## IndexNow
 
-The repository includes `pnpm indexnow:submit` for manually submitting only materially changed canonical URLs. It validates every requested URL against `src/data/contentMeta.ts`; preview, localhost, parameterized, draft, API, and non-indexable URLs are rejected.
+`pnpm deploy:production` submits materially affected canonical URLs to IndexNow only after Cloudflare deploys successfully. Direct page changes map to that page; shared rendering, identity, schema, or site-data changes conservatively map to every path registered in `src/data/contentMeta.ts`. Tests, documentation, workflows, and deployment-tooling-only releases legitimately submit zero URLs. Preview, localhost, parameterized, draft, API, noncanonical, and non-indexable URLs remain rejected.
 
-1. Generate a random 32–64 character alphanumeric key.
-2. In Cloudflare Workers & Pages, open **peak-country-hail** → **Settings** → **Variables and Secrets**.
-3. Add an encrypted secret named `INDEXNOW_KEY` with that value and deploy the binding change.
-4. Set the same variable only in the terminal session used for submission. Do not commit it.
-5. Verify `https://peakcountryhail.com/{INDEXNOW_KEY}.txt` returns the key, replacing `{INDEXNOW_KEY}` with the configured value. This key-named root file follows the preferred IndexNow ownership pattern. The public response is the protocol's ownership-verification token; it is served from the encrypted binding and is not an account credential.
-6. Submit only pages that received meaningful public changes, for example:
+The last successful notification SHA is stored outside source control at the path returned by `git rev-parse --git-path indexnow-successful-baseline`. It advances after an accepted submission or a valid zero-URL deployment, never after a failed submission. Set `INDEXNOW_BASE_REF` to a commit SHA or ref when initializing a fresh clone or deliberately recovering the comparison range.
 
-   ```sh
-   INDEXNOW_KEY='the-configured-value' pnpm indexnow:submit -- /about/ /hail-size-guide/
-   ```
+The IndexNow key is read first from the `INDEXNOW_KEY` environment variable, then from the local file returned by `git rev-parse --git-path indexnow-key`. The local file is untracked and should use restrictive permissions; its value must match the encrypted Cloudflare `INDEXNOW_KEY` secret. The Worker serves the protocol verification token at `https://peakcountryhail.com/{INDEXNOW_KEY}.txt` without storing the key in tracked source or logs.
 
-Use `--dry-run` to validate URLs without a network request. The script is intentionally separate from every-build deployment so unchanged pages are not resubmitted.
+Manual, validated submissions remain available for recovery:
+
+```sh
+pnpm indexnow:submit -- /about/ /hail-size-guide/
+```
+
+Use `--dry-run` to validate URLs without a network request. IndexNow notifies participating search engines such as Bing; Google indexing remains separate and does not use IndexNow or Google's restricted Indexing API.
 
 ## Cloudflare crawler checks
 
@@ -25,7 +24,7 @@ In the Cloudflare dashboard, review **Security → Bots**, **Security → WAF �
 
 ## Public profiles
 
-No verified public social or business-profile URLs are currently configured. Add owner-approved profile URLs to `socialProfiles` in `src/data/site.ts`; the entity graph will then publish them as `sameAs`. Do not add guessed profile URLs.
+Owner-approved Google Business Profile, Facebook, Nextdoor, and NoCo Thrive URLs are configured in `socialProfiles` in `src/data/site.ts` and published by the entity graph as `sameAs`. Do not add guessed or unverified profile URLs.
 
 
 ## Preliminary hail archive
