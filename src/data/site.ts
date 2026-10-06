@@ -48,5 +48,10 @@ export const site = {
     },
   },
   serviceAreaConfirmed: true,
-  reviews: [], gallery: [], socialProfiles: [],
+  reviews: [], gallery: [], socialProfiles: [
+    'https://g.page/r/CeY8oGjuCPRWEBM',
+    'https://www.facebook.com/peakcountryhail/',
+    'https://nextdoor.com/pages/peak-country-auto-hail-repair-paintless-dent-repair-greeley-co/',
+    'https://nocothrive.com/biz/peak-country-auto-hail-repair-and-paintless-dent-repair',
+  ],
 };

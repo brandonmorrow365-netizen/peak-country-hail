@@ -20,7 +20,7 @@ export function serviceNode(pathname: string, name: string, description: string,
   return {
     '@type': 'Service', '@id': `${url}#service`, name, serviceType: name, description, url,
     mainEntityOfPage: { '@id': `${url}#webpage` }, provider: { '@id': schemaIds.business }, areaServed,
-    availableChannel: { '@type': 'ServiceChannel', serviceUrl: url, servicePhone: site.phone, availableLanguage: 'English' },
+    availableChannel: { '@type': 'ServiceChannel', serviceUrl: url, servicePhone: { '@type': 'ContactPoint', telephone: site.phone }, availableLanguage: 'English' },
   };
 }
 
