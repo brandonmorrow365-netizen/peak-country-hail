@@ -115,6 +115,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .prose { max-width: var(--measure); }
 .prose h2 { margin-top: var(--space-6); font-size: clamp(1.75rem, 3vw, 2.35rem); }
 .prose li { margin: .7rem 0; }
+.warranty-pdf-note { margin-top: var(--space-4); color: var(--muted); font-size: .94rem; }
+.warranty-terms > h2 { scroll-margin-top: 7rem; }
 
 table { width: 100%; border-collapse: collapse; background: #fff; text-align: left; font-size: .94rem; }
 caption { margin: 1rem 0; text-align: left; }
