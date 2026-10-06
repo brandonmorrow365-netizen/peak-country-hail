@@ -24,7 +24,13 @@ test('entity graph uses stable references without private location data', () => 
   assert.equal(ref(page.about), schemaIds.business);
   assert.equal(business.address, undefined);
   assert.equal(business.geo, undefined);
-  assert.equal(business.sameAs, undefined);
+  assert.deepEqual(site.socialProfiles, [
+    'https://g.page/r/CeY8oGjuCPRWEBM',
+    'https://www.facebook.com/peakcountryhail/',
+    'https://nextdoor.com/pages/peak-country-auto-hail-repair-paintless-dent-repair-greeley-co/',
+    'https://nocothrive.com/biz/peak-country-auto-hail-repair-and-paintless-dent-repair',
+  ]);
+  assert.deepEqual(business.sameAs, site.socialProfiles);
   assert.equal((business.contactPoint as Record<string, unknown>).telephone, site.phone);
   assert.equal((business.contactPoint as Record<string, unknown>).email, site.email);
   assert.match(business.description as string, /More than 20 years of professional Paintless Dent Repair experience/);
@@ -47,7 +53,10 @@ test('service schema uses the canonical business and mobile service relationship
   assert.equal(service['@id'], `${site.url}/paintless-dent-repair/#service`);
   assert.equal(service.serviceType, 'Paintless Dent Repair');
   assert.deepEqual(service.provider, { '@id': schemaIds.business });
-  assert.equal((service.availableChannel as Record<string, unknown>).servicePhone, site.phone);
+  assert.deepEqual((service.availableChannel as Record<string, unknown>).servicePhone, {
+    '@type': 'ContactPoint',
+    telephone: site.phone,
+  });
   assert.deepEqual((service.areaServed as Array<Record<string, unknown>>).map((area) => area.name), ['Greeley, Colorado','Weld County, Colorado','Northern Colorado']);
 });
 
