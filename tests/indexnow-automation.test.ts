@@ -26,6 +26,15 @@ test('direct public page changes map to their canonical IndexNow URL', () => {
   ]), [`${site.url}/warranty/full-terms/`]);
 });
 
+test('hail-history source updates notify the affected canonical human resources', () => {
+  assert.deepEqual(changedIndexNowUrls([
+    'data/hail-history/hail-reports-2016-2025.json',
+  ]), [
+    `${site.url}/northern-colorado-hail-history/`,
+    `${site.url}/data-sources/`,
+  ]);
+});
+
 test('tests, documentation, workflows, and deployment tooling produce no public URLs', () => {
   assert.deepEqual(changedIndexNowUrls([
     'tests/seo-system.test.ts',

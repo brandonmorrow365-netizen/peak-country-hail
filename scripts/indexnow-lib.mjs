@@ -36,6 +36,10 @@ export function changedIndexNowUrls(changedFiles, allowed = indexablePaths()) {
   let submitAll = false;
   for (const rawPath of changedFiles) {
     const sourcePath = rawPath.replaceAll('\\', '/');
+    if (sourcePath.startsWith('data/hail-history/')) {
+      pagePaths.push('/northern-colorado-hail-history/', '/data-sources/');
+      continue;
+    }
     const directPath = pagePath(sourcePath);
     if (directPath === '*') submitAll = true;
     else if (directPath && allowed.has(directPath)) pagePaths.push(directPath);
