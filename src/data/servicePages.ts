@@ -115,7 +115,7 @@ export const servicePages:Record<string,ServicePage> = {
       {question:'Can aluminum panels be repaired?',answer:'Many aluminum dents can be repaired with PDR, but aluminum behaves differently from steel. The panel and damage need an individual assessment.'},
       {question:'Is glue pulling safe for every vehicle?',answer:'No. Glue pulling depends on finish condition and repair history. It may be unsuitable on compromised or previously refinished paint.'},
       {question:'Can PDR repair a crease?',answer:'Some minor and more complex creases qualify. Length, sharpness, location, metal stretch, paint condition, material, access, and the repair goal determine whether a paintless approach makes sense.'},
-      {question:'Is a photo enough to approve a PDR repair?',answer:'A photo can start the conversation but often hides depth, crowns, finish issues, and access limitations. Direct inspection is needed for a reliable plan.'}
+      {question:'Is a photo enough to approve a PDR repair?',answer:'A photo can start the conversation but often hides depth, crowns, finish issues, and access limitations. It does not establish a final repair cost or authorize work. Direct inspection is needed for a reliable plan.'}
     ],
     related:[{href:'/auto-hail-repair/',label:'Auto Hail Repair'},{href:'/gallery/',label:'Before & After Gallery'},{href:'/repair-standards/',label:'Repair Evaluation'},{href:'/faq/#insurance-questions',label:'Insurance FAQ'},{href:'/estimating-documentation/',label:'Professional Estimating & Documentation'},{href:'/get-started/',label:'Get Started'}]
   },
