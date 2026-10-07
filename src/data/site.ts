@@ -53,5 +53,6 @@ export const site = {
     'https://www.facebook.com/peakcountryhail/',
     'https://nextdoor.com/pages/peak-country-auto-hail-repair-paintless-dent-repair-greeley-co/',
     'https://nocothrive.com/biz/peak-country-auto-hail-repair-and-paintless-dent-repair',
+    'https://www.yelp.com/biz/peak-country-auto-hail-repair-and-paintless-dent-repair-evans',
   ],
 };
